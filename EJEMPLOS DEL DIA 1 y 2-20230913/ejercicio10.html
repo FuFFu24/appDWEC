@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML5 y JavaScript</title>
+    <meta name="author" content="Juan Félix Mateos"/>
+    <meta name="description" content="Novedades en formularios de HTML5"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <style>      
+      :required {
+        background-color: red;
+        }
+      :optional {
+        background-color: lime;
+        }
+      :invalid {
+        background-color: red;
+        }
+      :valid {
+        background-color: lime;
+        }
+    </style>
+  </head>
+  <body>
+<script>
+var a = 5;
+var b = 10;
+ 
+if (a === 5) {
+  let a = 4; // El alcance es dentro del bloque if
+  var b = 1; // El alcance es dentro de la función
+ 
+  console.log(a);  // 4
+  console.log(b);  // 1
+} 
+ 
+console.log(a); // 5
+console.log(b); // 1
+</script>
+    </form>
+  </body>
+</html>

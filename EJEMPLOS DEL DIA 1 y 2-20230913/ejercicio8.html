@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <script>
+     var numero=prompt("Dime un numero del 1 al 10");
+     if (numero >0 && numero <11) {
+       document.write("<table bgcolor='blue' border=1 width=200>");
+
+       var posicion;
+       for (posicion=1;posicion<11;posicion++) {
+         document.write("<tr>");
+         document.write("<td>" + numero + "</td>");
+         document.write("<td> x </td>");
+         document.write("<td>" + posicion + "</td>");
+         document.write("<td> = </td>");
+         document.write("<td>" + (numero*posicion) + "</td>");
+         document.write("</tr>");  
+       }
+       document.write("</table>");
+     } else {
+       document.write("Numero invalido");
+     }
+  </script>
+</body>
+</html>
