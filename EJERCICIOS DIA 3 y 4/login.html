@@ -1,17 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+
+    <title> LOGIN </title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+    <style type="text/css"></style>
+    <script type="text/javascript"></script>
 </head>
 <body>
-    <div style="width: 300px; height: 300px; border: 2px solid black;">
-        <h1>LOGIN</h1>
-        <p>Usuario <input type="text" name="usuario" id="usuario"></p>
-        <p>Contraseña <input type="password" name="contraseña" id="contraseña"></p>
-        <input type="button" value="Enviar">
+
+    <div id="contenedor">
+        <div id="central">
+            <div id="login">
+                <div class="titulo">
+                    LOGIN
+                </div>
+                <form id="loginForm">
+                    <input type="text" name="usuario" id="usuario" placeholder="Usuario" required>
+
+                    <input type="password" placeholder="Contraseña" id="clave" name="password" required>
+
+                    <p id="mensajeError" style="color: #c00000;"></p>
+
+                    <button type="submit" title="Ingresar" name="Ingresar">Login</button>
+                </form>
+                <div class="pie-form">
+                    <a href="#">¿Perdiste tu contraseña?</a>
+                    <a href="#">¿No tienes Cuenta? Registrate</a>
+                </div>
+            </div>
+            <div class="inferior">
+                <a href="#">Volver</a>
+            </div>
+        </div>
     </div>
+
+    <script src="login.js"></script>
+
 </body>
+
 </html>
