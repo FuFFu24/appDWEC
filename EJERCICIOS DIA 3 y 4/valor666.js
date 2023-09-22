@@ -1,5 +1,3 @@
-// hola
-
 var sum=0,cont=0,num;
 
 num=prompt("Escribe un valor (666 para salir)")
