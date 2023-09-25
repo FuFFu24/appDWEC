@@ -6,6 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="arrays.js"></script>
+    <style type="text/css">
+        body {
+            font-family:sans-serif;
+           background-color: lightyellow;
+            }
+        h1 {
+           border-bottom: #FFCC66 5px solid;
+            text-align: center;
+            }
+        p {
+            color:#660000;
+            border: #FF9933 10px solid;
+            border-width: 0 0 2px 2px;
+            }
+        p.derecha {
+            text-align: right;
+            border-width: 0 2px 2px 0;
+            }
+        #Pepe {
+            color: red;
+            border-width: 0;
+            }
+        .destacado {
+            color: white;
+            background-color: red;
+            }
+        p.destacado span.destacado {
+            color: red;
+            background-color: white;
+            }
+      </style>
 </head>
 <body>
     <p>
@@ -13,10 +44,12 @@
         <input type="text" name="grupo" id="grupo">
     </p>
     <p>
-        <button type="button" onclick="anadir">Añadir</button>
-        <button type="button" onclick="eliminarUlt">Eliminar ultimo</button>ç
-        <button type="button" onclick="eliminarPri">Eliminar primero</button>
-        <button type="button" onclick="eliminar">Eliminar</button>
+        <button type="button" onclick="anadir()">Añadir</button>
+        <button type="button" onclick="eliminarUlt()">Eliminar ultimo</button>
+        <button type="button" onclick="eliminarPri()">Eliminar primero</button>
+        <button type="button" onclick="eliminar()">Eliminar</button>
+        <button type="button" onclick="ordenarDes()">Ordenar descendente</button>
+        <button type="button" onclick="ordenarAsc()">Ordenar ascendente</button>
     </p>
     <p>
         <label for="playlist">Playlist: </label>
