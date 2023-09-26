@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="">
+<style>
+th,td {
+border: 1px solid black;
+}
+</style>
+<script>
+var lista = ["JUAN","JAIME","JOSE","JAVIER","JORGE"];
+var otraCosa=2;
+
+//ejemplo del método reverse
+lista.reverse();
+console.log(lista.join("-"));
+
+//ejemplo del metodo isArray()
+console.log(Array.isArray(lista));
+console.log(Array.isArray(otraCosa));
+
+//ejemplo del método forEach
+function mostrarDato(valor,indice,array){
+	console.log(`El dato en la posicion ${indice} es ${valor}`);
+}
+lista.forEach(mostrarDato);
+//igual pero con expresión flecha
+lista.forEach( (valor,indice,array) => console.log(`El dato en la posicion ${indice} es ${valor}`));
+
+
+// ejemplo del método map
+function ponerTextoDelante(valor,indice,array){
+	return "Sr. " + valor 
+}
+
+var lista2=lista.map(ponerTextoDelante);
+console.log(lista2.join("-"));
+var lista2=lista.map( (valor,indice,array)=> "Sr. " + valor);
+console.log(lista2.join("-"));
+
+// ejemplo del método filter
+function esAcabadaEnE(valor,indice,array){
+	return valor.substr(-1,1)=="E"; 
+}
+var listaNombresAcabadosEnE=lista.filter(esAcabadaEnE);
+console.log(listaNombresAcabadosEnE.join("-"));
+var listaNombresAcabadosEnE=lista.filter((valor,indice,array)=> valor.substr(-1,1) =="E");
+console.log(listaNombresAcabadosEnE.join("-"));
+
+//ejemplo del método reduce
+var numeros = [45, 4, 9, 16, 9, 25];
+
+function acumulaElemento(total, valor) {
+  return total + valor;
+}
+var sumaTotal = numeros.reduce(acumulaElemento);
+console.log("El total es " + sumaTotal);
+var sumaTotal = numeros.reduce((total,valor)=>total+valor);
+console.log("El total es " + sumaTotal);
+
+
+// ejemplos de indexOf y lastIndexOf
+var posicion=numeros.indexOf(9);
+if (posicion == -1){
+	console.log("El numero 9 no esta");
+} else {
+	console.log("El numero 9 esta en la posicion " + posicion);
+}
+
+var posicion=numeros.lastIndexOf(9);
+if (posicion == -1){
+	console.log("El numero 9 no esta");
+} else {
+	console.log("El numero 9 esta en la posicion " + posicion);
+}
+
+// ejemplo del método every
+function esImpar(valor) {
+  return valor%2==0;
+}
+var sonTodosImpares = numeros.every(esImpar);
+console.log("Son todos impares es " + sonTodosImpares);
+var sonTodosImpares = numeros.every(valor=>valor%2==0);
+console.log("Son todos impares es " + sonTodosImpares);
+
+function esPar(valor,indice,array) {
+  return valor%2==0;
+}
+var primerPar = numeros.find(esPar);
+console.log("El primer par es " + primerPar);
+var primerPar = numeros.find((valor,indice,array)=>valor%2==0);
+console.log("El primer par es " + primerPar);
+
+
+var posicionPrimerPar = numeros.findIndex(esPar);
+console.log("El primer par esta en la posicion " + posicionPrimerPar);
+var posicionPrimerPar = numeros.findIndex((valor,indice,array)=>valor%2==0);
+console.log("El primer par esta en la posicion " + posicionPrimerPar);
+
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="">
+<style>
+th,td {
+border: 1px solid black;
+}
+</style>
+<script>
+var miFrase="El campo esta muy mojado";
+console.log("El numero de palabras es " + invertirPalabras(miFrase));
+
+function invertirPalabras(frase) {
+  var listaInversa=frase.toLowerCase().split(" ").reverse().join(" ");
+  if (listaInversa.length > 0) {
+    var letraInicial=listaInversa.charAt(0).toUpperCase();
+    listaInversa=letraInicial + listaInversa.substr(1);
+  }
+  return listaInversa       
+}
+
+</script>
+</head>
+<body>
+</body>
+</html>

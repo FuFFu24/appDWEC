@@ -1,0 +1,46 @@
+<!-- crea una función que solicite al usuario nombres de personas mientras no escriba el texto FIN. 
+Una vez recibidos todos los nombres debe escribirlos en la consola en el orden en que los ha recibido 
+y también en el orden contrario. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function solicitarNombres() {
+            let nombres = [];
+            
+            while (true) {
+                let nombre = prompt("Escribe un nombre o FIN para terminar:");
+                
+                if (nombre == "FIN") {
+                break; // Salir del bucle si se ingresa "FIN"
+                }
+                
+                nombres.push(nombre);
+            }
+            
+            console.log("Nombres ingresados:");
+            nombres.forEach((nombre)=>{
+                console.log(nombre);
+            })
+            
+            console.log("Nombres en orden inverso:");
+            nombres.reverse();
+            nombres.forEach((nombre)=>{
+                console.log(nombre);
+            })
+            }
+
+            // Llama a la función para solicitar nombres
+            solicitarNombres();
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

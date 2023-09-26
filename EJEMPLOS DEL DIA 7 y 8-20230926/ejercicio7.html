@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="">
+<style>
+th,td {
+border: 1px solid black;
+}
+</style>
+<script>
+var miFrase="La clase necesita que el alumno sea aplicado";
+console.log(palabrasOrdenadas(miFrase));
+
+function palabrasOrdenadas(frase) {
+var lista = frase.toLowerCase().split(" ").sort();
+return lista.join(" ");
+}
+
+</script>
+</head>
+<body>
+</body>
+</html>

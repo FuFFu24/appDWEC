@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" href="">
+</head>
+<script>
+    // Ejemplos de listas
+    var miPrimeraLista = [];
+    var miSegundaLista = new Array();
+    var miTerceraLista = [1, 88, "hola", 88.4];
+    var miTerceralista2 = miTerceraLista; // sólo hay una lista con dos apuntadores
+    var miCuartaLista = [...miTerceraLista]; // miCuartaLista es una lista nueva con el mismo contenido que miTerceraLista
+
+    console.log("El tamaño de miPrimeraLista es " + miPrimeraLista.length);
+    console.log("El tamaño de miSegundaLista es " + miSegundaLista.length);
+    console.log("El tamaño de miTerceraLista es " + miTerceraLista.length);
+
+    miPrimeraLista[0] = "dato1";
+    miPrimeraLista.push("dato2");
+
+    console.log("El tamaño de miPrimeraLista es " + miPrimeraLista.length);
+    console.log("En la posición 0 de miPrimeraLista es " + miPrimeraLista[0]);
+</script>
+
+<body>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" href="">
+    <style>
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        var listaSeries = new Array();
+
+        listaSeries.push("THE WIRE");
+        listaSeries.push("BREAKING BAD");
+        listaSeries.push("THE WITCHER");
+        listaSeries.push("JUEGO DE TRONOS");
+        listaSeries.push("THE HOUSE OF DRAGON");
+
+        function mostrar() {
+            let divCentral = document.getElementById("central");
+            divCentral.innerHTML = "<br>" +
+                listaSeries.join("<br>")
+        }
+
+        function add() {
+            let nombreSerie = prompt("Dime el nombre");
+            listaSeries.push(nombreSerie);
+            mostrar();
+        }
+
+        function ordenar() {
+            listaOriginal = listaSeries.concat();
+            listaSeries.sort();
+            mostrar();
+        }
+
+        function volverAtras() {
+            listaSeries = listaOriginal.concat();
+            mostrar();
+        }
+    </script>
+</head>
+
+<body>
+</body>
+<button type="button" onclick="mostrar()">Mostrar</button>
+<button type="button" onclick="add()">Añadir</button>
+<button type="button" onclick="ordenar()">Ordenar</button>
+<button type="button" onclick="volverAtras()">Volver</button>
+<div id="central">
+
+</div>
+
+</html>

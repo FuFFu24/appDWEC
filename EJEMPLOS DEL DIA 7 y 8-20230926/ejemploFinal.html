@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="">
+<script>
+var listaEquipos=[];
+listaEquipos.push([1,"BARCELONA",17,21]);
+listaEquipos.push([2,"ATLETICO",15,12]);
+listaEquipos.push([3,"BETIS",13,23]);
+listaEquipos.push([4,"REAL MADRID",10,20]);
+listaEquipos.push([5,"VALENCIA",10,21]);
+
+function ordenarPorPuntos(lista){
+  lista.sort(function(a,b){
+    if (a[2]>b[2]) return 1;
+    else return -1;
+  });
+  mostrarTabla(lista,"capa1");
+}
+function ordenarPorNombre(lista){
+  lista.sort(function(a,b){
+    if (a[1]>b[1]) return -1;
+    else return 1;
+  });
+  mostrarTabla(lista,"capa1");
+}
+function mostrarTabla(lista,capa){
+  texto="<table style='border: 2px solid;'>";
+  texto+="<tr>";
+  texto+="<th>PUESTO";
+  texto+="</th>";
+  texto+="<th><a href='javascript:ordenarPorNombre(listaEquipos)'>NOMBRE</a>";
+  texto+="</th>";
+  texto+="<th>PUNTOS";
+  texto+="</th>";
+  texto+="<th>GOLES A FAVOR";
+  texto+="</th>";
+  texto+="<tr>";
+
+  for(i=0;i<listaEquipos.length;i++){
+    texto+="<tr>";
+    for(j=0;j<listaEquipos[i].length;j++){
+      texto+="<td>"+listaEquipos[i][j];
+      texto+="</td>";
+    }
+    texto+="<tr>";
+  }onclick="ordenarPorNombre(listaEquipos)"
+
+  texto+="</table>";
+  document.getElementById(capa).innerHTML=texto;
+}
+function borrarUltimo(lista){
+  lista.pop();
+  mostrarTabla(listaEquipos,"capa1");
+}
+</script>
+</head>
+<body>
+  <div>
+    <button onclick="ordenarPorNombre(listaEquipos)">ORDENAR POR NOMBRE</button>
+    <button onclick="ordenarPorPuntos(listaEquipos)">ORDENAR POR PUNTOS</button>
+    <button onclick="borrarUltimo(listaEquipos)">BORRAR</button>
+    <button onclick="">X</button>
+  </div>
+  <div id="capa1"></div>
+<script>
+mostrarTabla(listaEquipos,"capa1");
+</script>
+</body>
+</html>

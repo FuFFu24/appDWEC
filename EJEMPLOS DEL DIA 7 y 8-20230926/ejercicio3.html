@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="">
+<style>
+th,td {
+border: 1px solid black;
+}
+</style>
+<script>
+escribirNombres();
+function escribirNombres() {
+  var listaInicial= [];
+  var nombre;
+  
+  // se piden y almacenan los nombres
+  do {
+    nombre=prompt("Dame un nombre de persona: ");
+    if (nombre != "FIN") {
+       listaInicial.push(nombre);
+    }
+  }  while (nombre != "FIN")
+       
+  //se imprime la lista en el orden recibido;
+  console.log("LISTA INICIAL : ");
+  for (i=0;i<listaInicial.length;i++) console.log(listaInicial[i]);
+
+  //se imprime la lista en el orden contrario recorriendo al reves la lista
+  console.log("LISTA EN ORDEN CONTRARIA :");
+  for (i=listaInicial.length-1;i>=0;i--) console.log(listaInicial[i]);
+
+  // se imprime la lista en el orden recibido
+  console.log("LISTA EN ORDEN RECIBIDDO:");
+  listaInicial.forEach(valor => console.log(valor));
+  //se imprime la lista en el orden contrario con el metodo reverse y forEach
+  listaInicial.reverse();
+  console.log("LISTA EN ORDEN CONTRARIO :");
+  listaInicial.forEach(valor => console.log(valor));
+}
+</script>
+</head>
+<body>
+</body>
+</html>

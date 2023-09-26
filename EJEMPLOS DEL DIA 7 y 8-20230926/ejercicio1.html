@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="">
+<style>
+th,td {
+border: 1px solid black;
+}
+</style>
+<script>
+var listaMusicalCompleta=new Array();
+var estaOrdenadoPorPuesto=false;
+var estaOrdenadoPorNombre=false;
+
+listaMusicalCompleta.push([1,"Eminen",1000000]);
+listaMusicalCompleta.push([2,"Vetusta Morla",150000]);
+listaMusicalCompleta.push([3,"ACDC",2000000]);
+listaMusicalCompleta.push([4,"Rosalia",150000]);
+listaMusicalCompleta.push([5,"Anthrax",3000]);
+
+var listaMusical= listaMusicalCompleta.concat();
+
+window.onload=function(){
+	cargarTabla(listaMusicalCompleta);
+}
+function cargarTabla(lista){
+  borrarFilasDeTabla();
+   
+  var tabla=document.getElementsByTagName("table")[0];
+  
+  lista.forEach(function(grupo,indice,arrayCompleto){
+	var fila=document.createElement("tr");
+	tabla.appendChild(fila);
+	grupo.forEach((dato,ind,lis)=>{
+		var celda=document.createElement("td");
+		fila.appendChild(celda);
+		celda.appendChild(document.createTextNode(dato); 
+               //celda.innerHTML=dato;
+        });
+  });
+
+/* Solución con 2 for
+  for(i=0;i<lista.length;i++){
+	var fila=document.createElement("tr");
+	tabla.appendChild(fila);
+	for(j=0;j<lista[i].length;j++){
+		var celda=document.createElement("td");
+		fila.appendChild(celda);
+		celda.appendChild(document.createTextNode(lista[i][j])); 
+                //celda.innerHTML=lista[i][j];
+	}
+  }
+*/
+}
+function ordenPorNombre(a,b){
+    if (a[1]>b[1]) return 1;
+    else return -1;
+}
+function ordenPorPuesto(a,b){
+    return a[0]-b[0];
+}
+
+function ordenarPorPuesto(){
+	if (estaOrdenadoPorPuesto) {
+		listaMusical.reverse();
+	} else {
+		listaMusical.sort((a,b)=> a[0]-b[0]);
+		//listaMusical.sort(ordenPorPuesto);
+		estaOrdenadoPorPuesto=true;
+		estaOrdenadoPorNombre=false;
+   }
+   cargarTabla(listaMusical);
+}
+
+function ordenarPorNombre(){
+	if (estaOrdenadoPorNombre) {
+		listaMusical.reverse();
+	} else {
+		listaMusical.sort((a,b) => {
+            if (a[1]>b[1]) return 1;
+            else return -1;
+		});
+		//listaMusical.sort(ordenPorNombre);
+	
+   	    estaOrdenadoPorNombre=true;
+		estaOrdenadoPorPuesto=false;
+    }
+   cargarTabla(listaMusical);
+}
+
+function borrarFilasDeTabla(){
+  var listaDeFilas=document.getElementsByTagName("tr");
+  while(listaDeFilas.length>1){
+	listaDeFilas[1].parentNode.removeChild(listaDeFilas[1]);
+  }
+}
+
+function filtrar(){
+   var textoDeCaja=document.getElementsByTagName("input")[0].value;
+
+   listaMusical=[];
+
+   for(i=0;i<listaMusicalCompleta.length;i++) {
+		if (listaMusicalCompleta[i][1].toUpperCase().indexOf(textoDeCaja.toUpperCase())!=-1) { 
+			listaMusical.push(listaMusicalCompleta[i]);
+        }
+   }
+   
+  // Hacer con forEach()
+ 
+   if  (listaMusical.length==0) {
+        borrarFilasDeTabla()
+		var tabla=document.getElementsByTagName("table")[0];
+		var fila=document.createElement("tr");
+		tabla.appendChild(fila);
+		var celda=document.createElement("td");
+		fila.appendChild(celda);
+		celda.colSpan=3;
+		celda.appendChild(document.createTextNode("NO HAY MUSICOS CON ESE NOMBRE"));
+   } else {
+		cargarTabla(listaMusical);
+   }
+}
+</script>
+</head>
+<body>
+<table>
+<tr><th><a href="javascript:ordenarPorPuesto()" id="lnkOrdenarPorPuesto">PUESTO</a></th>
+<th><a href="javascript:ordenarPorNombre()" id="lnkOrdenarPorNombre">NOMBRE</a></th><th>DISCOS VENDIDOS</th></tr>
+</table>
+<br>
+<input type="text"><button type="button" id="btnFiltrar" onclick="filtrar()">FILTRAR</button>
+</body>
+</html>

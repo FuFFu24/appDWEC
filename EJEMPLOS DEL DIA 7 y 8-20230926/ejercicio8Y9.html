@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="">
+<style>
+th,td {
+border: 1px solid black;
+}
+</style>
+<script>
+var lista = [];
+addNombres();
+
+function addNombres() {
+  var nombre;
+  for(var i=0;i<10;i++) {
+    nombre=prompt("Dime un nombre: ");
+    ret=prompt("¿Lo quieres al INICIO o al FINAL?");
+    if (ret == "INICIO") lista.unshift(nombre);
+    if (ret == "FIN") lista.push(nombre);
+  }
+  console.log("LA LISTA ES: " + lista);
+}
+
+function modificarLista(palabra) {
+   if (palabra=="INICIO") lista.shift();
+   if (palabra=="FIN") lista.pop();
+}
+
+</script>
+</head>
+<body>
+</body>
+</html>

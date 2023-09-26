@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function ejercicio1() {
+            var caja1 = document.getElementById("frase1");
+            if (caja1.value.length > 20) {
+                caja1.style.border = "1px solid red";
+            }
+        }
+
+        function ejercicio1() {
+            var caja2 = document.getElementById("frase2");
+            if (caja2.value.toLowerCase().indexOf("aprobado") == -1) {
+                alert("NO ENCONTRADO");
+            } else {
+                alert("ENCONTRADO");
+            }
+        }
+
+        function ejercicio3() {
+            var caja1 = document.getElementById("frase1");
+            let posicion = caja1.value.lastIndexOf("ado");
+            if (posicion == -1) {
+                alert("NO ENCONTRADO");
+            } else {
+                alert(`Encontrado en la posición ${posicion}`);
+            }
+        }
+
+        function ejercicio4() {
+            var caja1 = document.getElementById("frase1");
+            let posicion = 0;
+            let contador = 0;
+            while (caja1.value.indexOf("aprobado", posicion) != -1) {
+                contador++;
+                posicion = caja1.value.indexOf("aprobado", posicion) + 8;
+            }
+            alert(`Aparece ${contador} veces`)
+        }
+
+        function ejercicio4() {
+            var caja1 = document.getElementById("frase1");
+            var listaPalabras = caja1.value.split(" ");
+            let posicion = 0;
+            let contador = 0;
+            for (let i = 0; i < listaPalabras.length; i++) {
+                if (listaPalabras[i] == "aprobado") contador++;
+            }
+            alert(`Aparece ${contador} veces`)
+        }
+
+        function ejercicio5() {
+            let textoEntrada = prompt("dame un texto");
+            if (textoEntrada.length > 6) {
+                alert(textoEntrada.substr(3, 3));
+                alert(textoEntrada.substring(3, 6));
+                alert(textoEntrada.charAt(3) + textoEntrada.charAt(4) + textoEntrada.charAt(5))
+            }
+        }
+
+        function ejercicio6() {
+            let textoEntrada = prompt("dame un texto");
+            let posicion = textoEntrada.indexOf("XYZ");
+            if (posicion != -1 && textoEntrada.length > (posicion + 8)) {
+                alert(textoEntrada.substr(posicion + 3, 5))
+            }
+        }
+
+        function ejercicio7() {
+            let textoEntrada = prompt("dame un texto");
+            let nuevoTexto = textoEntrada.replace(/daw/g, "DAW")
+            alert(nuevoTexto);
+        }
+
+        function ejercicio8() {
+            let textoEntrada = prompt("dame un texto");
+            textoEntrada = textoEntrada.toLocaleLowerCase();
+            alert(textoEntrada);
+        }
+
+        function ejercicio9() {
+            let textoEntrada = prompt("dame un texto");
+            textoEntrada = textoEntrada.toLocaleUpperCase();
+            alert(textoEntrada);
+        }
+
+        function ejercicio10() {
+            let textoEntrada = prompt("dame un texto");
+            let texto = "";
+            for (let i = 0; i < textoEntrada.length; i++) {
+                texto += textoEntrada.charAt(i) + "/n";
+            }
+            alert(texto);
+        }
+
+        function ejercicio10() {
+            let textoEntrada = prompt("dame un texto");
+            let texto = "";
+            let listaCaracteres = textoEntrada.split("");
+            for (let i = 0; i < listaCaracteres.length; i++) {
+                texto += listaCaracteres[i] + "/n";
+            }
+            alert(texto);
+        }
+
+        function ejercicio11() {
+            let textoEntrada = prompt("dame un texto");
+            let texto = "";
+            let listaPersonas = textoEntrada.split(",");
+            for (let i = 0; i < listaPersonas.length; i++) {
+                texto += listaPersonas[i] + "\n";
+            }
+            alert(texto);
+        }
+    </script>
+</head>
+
+<body>
+    <H1> USO DE STRINGS</H1>
+    <span>FRASE1: </span><input type="Text" id="frase1"><br/>
+    <span>FRASE2: </span><textarea id="frase2"></textarea><br/>
+    <input type="button" onclick="ejercicio1()" value="Ejercicio 1"><br>
+    <input type="button" onclick="ejercicio2()" value="Ejercicio 2">
+    <input type="button" onclick="ejercicio3()" value="Ejercicio 3">
+    <input type="button" onclick="ejercicio4()" value="Ejercicio 4">
+    <input type="button" onclick="ejercicio5()" value="Ejercicio 5">
+    <input type="button" onclick="ejercicio6()" value="Ejercicio 6">
+    <input type="button" onclick="ejercicio7()" value="Ejercicio 7">
+    <input type="button" onclick="ejercicio8()" value="Ejercicio 8">
+    <input type="button" onclick="ejercicio9()" value="Ejercicio 9">
+    <input type="button" onclick="ejercicio10()" value="Ejercicio 10">
+    <input type="button" onclick="ejercicio11()" value="Ejercicio 11">
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="">
+<style>
+th,td {
+border: 1px solid black;
+}
+</style>
+<script>
+var miFrase="La clase necesita que el alumno sea aplicado";
+console.log("La posicion es  " + posicionPalabra(miFrase));
+
+function posicionPalabra(frase) {
+var posicion = frase.split(" ").indexOf("alumno");
+if (posicion != -1) posicion++;
+else posicion="NO SE ENCUENTRA";
+return posicion;
+}
+</script>
+</head>
+<body>
+</body>
+</html>
