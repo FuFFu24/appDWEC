@@ -36,6 +36,9 @@
             color: red;
             background-color: white;
             }
+        div {
+            display:inline-block;
+        }
       </style>
 </head>
 <body>
@@ -51,13 +54,19 @@
         <button type="button" onclick="anadir()">Añadir</button>
         <button type="button" onclick="eliminarUlt()">Eliminar ultimo</button>
         <button type="button" onclick="eliminarPri()">Eliminar primero</button>
-        <button type="button" onclick="eliminar()">Eliminar</button>
+        <button type="button" onclick="eliminar()">Eliminar</button><br>
         <button type="button" onclick="ordenarPorNombreDes()">Ordenar descendente (Nombre)</button>
-        <button type="button" onclick="ordenarPorNombreAsc()">Ordenar ascendente (Nombre)</button>
+        <button type="button" onclick="ordenarPorNombreAsc()">Ordenar ascendente (Nombre)</button><br>
         <button type="button" onclick="ordenarPorPaisDes()">Ordenar descendente (Pais)</button>
-        <button type="button" onclick="ordenarPorPaisAsc()">Ordenar ascendente (Pais)</button>
+        <button type="button" onclick="ordenarPorPaisAsc()">Ordenar ascendente (Pais)</button><br>
         <button type="button" onclick="ordenarPorTipoDes()">Ordenar descendente (Tipo)</button>
-        <button type="button" onclick="ordenarPorTipoAsc()">Ordenar ascendente (Tipo)</button>
+        <button type="button" onclick="ordenarPorTipoAsc()">Ordenar ascendente (Tipo)</button><br>
+        <button type="button" onclick="mostrarEspanoles()">Mostrar español</button>
+        <button type="button" onclick="mostrarTresPrimeros()">Mostrar tres primeros</button>
+        <button type="button" onclick="mostrarDosPrimerosEspanoles()">Mostrar dos primeros ESP</button>
+        <button type="button" onclick="mostrarPrimerEspanolAlf()">Mostrar primer ESP por orden alf</button><br>
+        <button type="button" onclick="emitirFactura()">Emitir factura</button>
+        <button type="button" onclick="incrementarVentas()">Incrementar ventas</button>
     </p>
     <p>
         <label for="playlist">Playlist: </label>

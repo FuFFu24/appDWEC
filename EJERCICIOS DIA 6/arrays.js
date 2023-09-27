@@ -17,15 +17,15 @@ listaUsuarios.splice(2,0,"Juanito") */
 
 var listaGrupos = [];
 
-listaGrupos.push(["Quevedo","Español","Regueton"]);
-listaGrupos.push(["Melendri","Canario","Pop"]);
-listaGrupos.push(["Don Omar","Latino","Bals"]);
-listaGrupos.push(["Plex","Guiri","Rock"]);
-listaGrupos.push(["Conejo Malo","Filipino","Romantico"]);
-listaGrupos.push(["Maluma","Mejicano","Regueton"]);
+listaGrupos.push(["Quevedo","Español","Regueton",1264]);
+listaGrupos.push(["Melendri","Canario","Pop",2246]);
+listaGrupos.push(["Don Omar","Español","Bals",2344]);
+listaGrupos.push(["Plex","Guiri","Rock",1285]);
+listaGrupos.push(["Conejo Malo","Español","Romantico",1234]);
+listaGrupos.push(["Maluma","Mejicano","Regueton",2346]);
 
 onload = function () {
-    pintarSelect();
+    pintarSelect(listaGrupos);
 }
 
 function anadir() {
@@ -33,19 +33,19 @@ function anadir() {
     let paisGrupo = document.getElementById("pais").value.trim();
     let tipoGrupo = document.getElementById("tipo").value.trim();
     listaGrupos.push([nombreGrupo,paisGrupo,tipoGrupo])
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
 function eliminarUlt() {
     let nombreGrupo = document.getElementById("grupo").value.trim();
     listaGrupos.pop();
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
 function eliminarPri() {
     let nombreGrupo = document.getElementById("grupo").value.trim();
     listaGrupos.shift();
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
 function eliminar() {
@@ -57,7 +57,7 @@ function eliminar() {
     if (posicion != -1) {
         listaGrupos.splice(posicion,1)
     }
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
 function ordenarPorNombreDes() {
@@ -68,7 +68,7 @@ function ordenarPorNombreDes() {
             return 1
         }
     })
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
 function ordenarPorNombreAsc() {
@@ -79,7 +79,7 @@ function ordenarPorNombreAsc() {
             return -1
         }
     })
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
 function ordenarPorPaisDes() {
@@ -90,7 +90,7 @@ function ordenarPorPaisDes() {
             return 1
         }
     })
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
 function ordenarPorPaisAsc() {
@@ -101,7 +101,7 @@ function ordenarPorPaisAsc() {
             return -1
         }
     })
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
 function ordenarPorTipoDes() {
@@ -112,7 +112,7 @@ function ordenarPorTipoDes() {
             return 1
         }
     })
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
 function ordenarPorTipoAsc() {
@@ -123,13 +123,68 @@ function ordenarPorTipoAsc() {
             return -1
         }
     })
-    pintarSelect()
+    pintarSelect(listaGrupos)
 }
 
-function pintarSelect() {
+function mostrarEspanoles() {
+    let listaFiltrada = listaGrupos.filter((grupo)=>grupo[1].toLowerCase()=='español')
+    pintarSelect(listaFiltrada);
+}
+
+function pintarSelect(lista) {
     let selectPlaylist = document.getElementById("playlist")
     selectPlaylist.innerHTML = "";
-    listaGrupos.forEach((grupo)=>{
+    lista.forEach((grupo)=>{
         selectPlaylist.innerHTML += `<option>${grupo.join("-")}</option>`
     })
+}
+
+function mostrarTresPrimeros() {
+    let listaTroceada = listaGrupos.slice(0,3);
+    pintarSelect(listaTroceada);
+}
+
+function mostrarDosPrimerosEspanoles() {
+    let listaTroceada = listaGrupos
+        .filter((grupo)=>grupo[1]
+        .toLowerCase()=='español')
+        .slice(0,2);
+    pintarSelect(listaTroceada);
+}
+
+function mostrarPrimerEspanolAlf() {
+    let listaTroceada = listaGrupos
+        .filter((grupo)=>grupo[1]
+        .toLowerCase()=='español')
+        .sort((a,b)=>{
+            if (a[0]>b[0]) {
+                return 1
+            } else {
+                return -1
+            }
+        })
+        .slice(0,1);
+    pintarSelect(listaTroceada);
+}
+
+function emitirFactura() {
+    contenido="<table bgcolor='#FFCC66' style='border:1px solid #FF9933' width=200>";
+
+    listaGrupos.forEach((grupo)=>{
+        contenido+="<tr>";
+        contenido+=`<td style='border:1px solid #FF9933'> ${grupo[0]} </td>`;
+        contenido+=`<td style='border:1px solid #FF9933' align="center"> ${grupo[3]} </td>`;
+        contenido+="</tr>";
+    })
+
+    contenido+="</table>";
+
+    document.body.innerHTML+=contenido;
+}
+
+function incrementarVentas() {
+    listaGrupos.map(element => {
+        element[3]+=1000;
+    });
+    emitirFactura();
 }
