@@ -42,14 +42,22 @@
     <p>
         <label for="grupo">Grupo/Cantante</label>
         <input type="text" name="grupo" id="grupo">
+        <label for="pais">Pais</label>
+        <input type="text" name="pais" id="pais">
+        <label for="tipo">Tipo</label>
+        <input type="text" name="tipo" id="tipo">
     </p>
     <p>
         <button type="button" onclick="anadir()">Añadir</button>
         <button type="button" onclick="eliminarUlt()">Eliminar ultimo</button>
         <button type="button" onclick="eliminarPri()">Eliminar primero</button>
         <button type="button" onclick="eliminar()">Eliminar</button>
-        <button type="button" onclick="ordenarDes()">Ordenar descendente</button>
-        <button type="button" onclick="ordenarAsc()">Ordenar ascendente</button>
+        <button type="button" onclick="ordenarPorNombreDes()">Ordenar descendente (Nombre)</button>
+        <button type="button" onclick="ordenarPorNombreAsc()">Ordenar ascendente (Nombre)</button>
+        <button type="button" onclick="ordenarPorPaisDes()">Ordenar descendente (Pais)</button>
+        <button type="button" onclick="ordenarPorPaisAsc()">Ordenar ascendente (Pais)</button>
+        <button type="button" onclick="ordenarPorTipoDes()">Ordenar descendente (Tipo)</button>
+        <button type="button" onclick="ordenarPorTipoAsc()">Ordenar ascendente (Tipo)</button>
     </p>
     <p>
         <label for="playlist">Playlist: </label>

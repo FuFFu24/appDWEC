@@ -17,9 +17,22 @@ listaUsuarios.splice(2,0,"Juanito") */
 
 var listaGrupos = [];
 
+listaGrupos.push(["Quevedo","Español","Regueton"]);
+listaGrupos.push(["Melendri","Canario","Pop"]);
+listaGrupos.push(["Don Omar","Latino","Bals"]);
+listaGrupos.push(["Plex","Guiri","Rock"]);
+listaGrupos.push(["Conejo Malo","Filipino","Romantico"]);
+listaGrupos.push(["Maluma","Mejicano","Regueton"]);
+
+onload = function () {
+    pintarSelect();
+}
+
 function anadir() {
     let nombreGrupo = document.getElementById("grupo").value.trim();
-    listaGrupos.push(nombreGrupo)
+    let paisGrupo = document.getElementById("pais").value.trim();
+    let tipoGrupo = document.getElementById("tipo").value.trim();
+    listaGrupos.push([nombreGrupo,paisGrupo,tipoGrupo])
     pintarSelect()
 }
 
@@ -47,9 +60,9 @@ function eliminar() {
     pintarSelect()
 }
 
-function ordenarDes() {
+function ordenarPorNombreDes() {
     listaGrupos.sort((a,b)=>{
-        if (a>b) {
+        if (a[0]>b[0]) {
             return -1
         } else {
             return 1
@@ -58,8 +71,58 @@ function ordenarDes() {
     pintarSelect()
 }
 
-function ordenarAsc() {
-    listaGrupos.sort()
+function ordenarPorNombreAsc() {
+    listaGrupos.sort((a,b)=>{
+        if (a[0]>b[0]) {
+            return 1
+        } else {
+            return -1
+        }
+    })
+    pintarSelect()
+}
+
+function ordenarPorPaisDes() {
+    listaGrupos.sort((a,b)=>{
+        if (a[1]>b[1]) {
+            return -1
+        } else {
+            return 1
+        }
+    })
+    pintarSelect()
+}
+
+function ordenarPorPaisAsc() {
+    listaGrupos.sort((a,b)=>{
+        if (a[1]>b[1]) {
+            return 1
+        } else {
+            return -1
+        }
+    })
+    pintarSelect()
+}
+
+function ordenarPorTipoDes() {
+    listaGrupos.sort((a,b)=>{
+        if (a[2]>b[2]) {
+            return -1
+        } else {
+            return 1
+        }
+    })
+    pintarSelect()
+}
+
+function ordenarPorTipoAsc() {
+    listaGrupos.sort((a,b)=>{
+        if (a[2]>b[2]) {
+            return 1
+        } else {
+            return -1
+        }
+    })
     pintarSelect()
 }
 
@@ -67,6 +130,6 @@ function pintarSelect() {
     let selectPlaylist = document.getElementById("playlist")
     selectPlaylist.innerHTML = "";
     listaGrupos.forEach((grupo)=>{
-        selectPlaylist.innerHTML += `<option>${grupo}</option>`
+        selectPlaylist.innerHTML += `<option>${grupo.join("-")}</option>`
     })
 }
