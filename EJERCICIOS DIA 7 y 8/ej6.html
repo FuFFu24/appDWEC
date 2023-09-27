@@ -1,0 +1,27 @@
+<!-- crea una función que reciba como parámetro una frase y devuelva en que posición esta la palabra "alumno". 
+Ejemplo: "La clase necesita que el alumno sea aplicado" devolverá 6 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function posicionAlumno() {
+            var frase = prompt("Introduce una frase con la palabra alumno");
+            var palabras = frase.split(/\s+/);
+            for (let index = 0; index < palabras.length; index++) {
+                if (palabras[index] == 'alumno') {
+                    console.log(index+1);
+                }
+            }
+        }
+
+        posicionAlumno();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

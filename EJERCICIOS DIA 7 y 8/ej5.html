@@ -1,0 +1,26 @@
+<!-- crea una función que reciba como parámetro una frase y devuelva la frase con las palabras al revés. 
+Ejemplo: "El campo esta muy mojado"  devolverá  "Mojado muy esta campo el" -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function alReves() {
+            var frase = prompt("Escribe una frase para darle la vuelta");
+            var palabras = frase.split(/\s+/);
+            var resultadoReverso = palabras.reverse().join(' '); // Revertir y unir las palabras
+
+            console.log(resultadoReverso);
+            document.getElementById('resultado').innerHTML = resultadoReverso;
+        }
+
+        alReves();
+    </script>
+</head>
+<body>
+    <p id="resultado"></p>
+</body>
+</html>

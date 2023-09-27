@@ -1,0 +1,32 @@
+<!-- crea una función que reciba como parámetro una frase y devuelva las palabras ordenadas alfabéticamente. 
+Ejemplo: "La clase necesita que el alumno sea aplicado" devolverá "alumno aplicado clase el la necesita que sea" -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function ordenarAlfabeticamente() {
+            var frase = prompt("Escribe una frase para ordenar alfabeticamente");
+            var palabras = frase.split(/\s+/);
+            palabras.sort((a,b)=>{
+                if (a>b) {
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            var resultadoReverso = palabras.join(' '); // Revertir y unir las palabras
+
+            console.log(resultadoReverso);
+        }
+
+        ordenarAlfabeticamente();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

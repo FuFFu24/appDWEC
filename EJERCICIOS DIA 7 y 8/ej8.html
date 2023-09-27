@@ -1,0 +1,57 @@
+<!-- crea una lista de nombres y una función que solicite al usuario 10 nombres y si quiere añadirlo 
+al inicio de la lista o al final de la lista. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var listaNombres = [];
+
+        function agregarNombre() {
+            var nombre = prompt("Introduce un nombre:");
+
+                if (nombre) {
+                    var opcion = prompt("Donde lo ponemos? Inicio (I) Final (F):");
+                    if (opcion == "I") {
+                        listaNombres.unshift(nombre);
+                    } else if (opcion == "F") {
+                        listaNombres.push(nombre);
+                    } else {
+                        alert("Valor incorrecto. Por defecto se pone al final.");
+                        listaNombres.push(nombre);
+                    }          
+                }
+
+        }
+
+        // Función para mostrar la lista de nombres
+        function mostrarLista() {
+            var lista = document.getElementById("lista");
+            lista.innerHTML = ""; // Limpiar la lista anterior
+
+            for (var i = 0; i < listaNombres.length; i++) {
+                // Crear una nueva opción
+                var nuevaOpcion = document.createElement("option");
+                nuevaOpcion.value = listaNombres[i]; // Valor de la opción
+                nuevaOpcion.textContent = listaNombres[i]; // Texto visible de la opción
+
+                // Agregar la nueva opción al select
+                lista.appendChild(nuevaOpcion);
+            }
+        }
+
+        for (let index = 0; index < 4; index++) {
+            agregarNombre();
+        }
+
+        mostrarLista();
+    </script>
+</head>
+<body>
+    <select name="lista" id="lista">
+    </select>
+</body>
+</html>
