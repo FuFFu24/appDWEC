@@ -57,5 +57,16 @@
 
         </select>
     </p>
+    <script>
+        var listaParrafos=document.getElementsByTagName("p");
+        console.log(listaParrafos.length);
+        console.log(listaParrafos[0].innerHTML);
+        var lista2=[...listaParrafos];
+        lista2.sort();
+        console.log(lista2);
+        var lista3=lista2.concat();
+        lista3.pop();
+        console.log(lista3);
+    </script>
 </body>
 </html>
