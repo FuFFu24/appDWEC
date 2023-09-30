@@ -8,7 +8,6 @@ function cargarProyectos() {
         "REPSOL",
         "BP 1",
         "BP 2",
-        "BP 3",
         "PLENOIL"
     );
 }
@@ -37,6 +36,17 @@ function volver() {
     location.href = "aterrizaje.html";
 }
 
-function ordenarTablaProyectos() {
-    
+function ordenarTablaProyectosAlf() {
+    listaProyectos.sort((a,b)=>{
+        if (a[0]>b[0]) {
+            return 1
+        } else {
+            return -1
+        }
+    })
+    crearTablaProyectos();
+}
+
+function imprimirPantallaAct() {
+    window.print();
 }

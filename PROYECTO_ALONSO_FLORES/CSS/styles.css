@@ -1,0 +1,159 @@
+/* Reset de estilos y estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Fondo: Gris claro */
+}
+
+/* Encabezado */
+header {
+    background-color: #455A64; /* Encabezado: Color personalizado */
+    color: #fff; /* Texto del encabezado: Blanco */
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas más pequeñas */
+}
+
+.logo a {
+    flex-wrap: wrap; /* Permite que los elementos del menú se ajusten en pantallas más pequeñas */
+    justify-content: center; /* Centra los elementos del menú en dispositivos pequeños */
+    text-decoration: none;
+    color: #fff; /* Enlaces: Azul */
+    font-weight: bold;
+    display: inline-block; /* Hace que el enlace (logotipo) se comporte como un bloque en línea */
+}
+
+.logo img {
+    max-width: 144px;
+    height: auto;
+}
+
+/* Estilos para los elementos del menú en dispositivos pequeños */
+nav ul.menu {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos del menú se ajusten en pantallas más pequeñas */
+    justify-content: center; /* Centra los elementos del menú en dispositivos pequeños */
+}
+
+nav ul.menu li {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+nav ul.menu li a {
+    text-decoration: none;
+    color: #fff; /* Enlaces: Azul */
+    font-weight: bold;
+}
+
+/* Alineación de la barra de búsqueda y acciones del usuario en dispositivos pequeños */
+.user-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Alineación de la barra de búsqueda en dispositivos pequeños */
+.user-actions input[type="text"] {
+    width: 300px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    background-image: url(../IMG/search.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 20px 20px;
+}
+
+.user-actions input[type="text"] {
+    width: 300px;
+    flex-basis: 100%;
+    text-align: left; /* Alinea el campo de búsqueda a la izquierda */
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.user-actions a {
+    text-decoration: none;
+    color: #fff; /* Enlaces: Color personalizado */
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.user-icon {
+    margin-right: 2.5px;
+    margin-left: 5px;
+}
+
+.user-icon img {
+    width: 30px;
+    height: auto;
+    position: relative;
+}
+
+.cart-icon {
+    margin-right: 5px;
+    margin-left: 2.5px;
+}
+
+.cart-icon img {
+    width: 30px;
+    height: auto;
+    position: relative;
+}
+
+.cart-count {
+    background-color: #4ccbaf; /* Botones: Color personalizado */
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    padding: 2px 6px;
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+/* Estilo para el contador del carrito en dispositivos pequeños */
+.cart-count {
+    top: -10px; /* Alinea el contador arriba del icono del carrito en dispositivos pequeños */
+}
+
+/* Estilos para el contenido principal (lista de juegos) */
+.juegos-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los juegos se ajusten en pantallas más pequeñas */
+    justify-content: space-between; /* Espacio uniforme entre los juegos */
+    margin: 0 auto; /* Centra el contenido en dispositivos pequeños */
+    max-width: 1000px; /* Establece un ancho máximo para el contenido principal */
+    padding: 20px; /* Espacio alrededor del contenido principal */
+}
+
+/* Estilos para los juegos individuales */
+/* Ajusta el ancho de los juegos en dispositivos pequeños */
+.juego {
+    flex-basis: calc(33.33% - 20px); /* Aproximadamente 1/3 del ancho en dispositivos pequeños */
+    margin-bottom: 20px; /* Espacio entre los juegos */
+}
+
+/* Media query para ajustar el diseño en dispositivos pequeños */
+@media (max-width: 768px) {
+    .juegos-container {
+        flex-direction: column; /* Cambia a una sola columna en dispositivos pequeños */
+    }
+
+    .juego {
+        flex-basis: 100%; /* Ocupa todo el ancho en dispositivos pequeños */
+    }
+}
