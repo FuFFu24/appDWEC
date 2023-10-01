@@ -1,159 +1,144 @@
 /* Reset de estilos y estilos generales */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Fondo: Gris claro */
+  font-family: "PT Sans";
+  background-color: #f4f4f4;
 }
 
 /* Encabezado */
 header {
-    background-color: #455A64; /* Encabezado: Color personalizado */
-    color: #fff; /* Texto del encabezado: Blanco */
-    display: flex;
-    position: relative;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas más pequeñas */
-}
-
-.logo a {
-    flex-wrap: wrap; /* Permite que los elementos del menú se ajusten en pantallas más pequeñas */
-    justify-content: center; /* Centra los elementos del menú en dispositivos pequeños */
-    text-decoration: none;
-    color: #fff; /* Enlaces: Azul */
-    font-weight: bold;
-    display: inline-block; /* Hace que el enlace (logotipo) se comporte como un bloque en línea */
+  background-color: #f4f4f4;
+  color: #455a64;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  border-bottom: 1px solid #455a64;
 }
 
 .logo img {
-    max-width: 144px;
-    height: auto;
+  max-width: 144px;
 }
 
-/* Estilos para los elementos del menú en dispositivos pequeños */
 nav ul.menu {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos del menú se ajusten en pantallas más pequeñas */
-    justify-content: center; /* Centra los elementos del menú en dispositivos pequeños */
+  list-style: none;
+  display: flex;
 }
 
 nav ul.menu li {
-    margin-right: 10px;
-    margin-left: 10px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 nav ul.menu li a {
-    text-decoration: none;
-    color: #fff; /* Enlaces: Azul */
-    font-weight: bold;
+  text-decoration: none;
+  color: #455a64;
+  font-weight: bold;
 }
 
-/* Alineación de la barra de búsqueda y acciones del usuario en dispositivos pequeños */
+nav ul.menu li a:hover {
+  color: #4ccbaf; /* Cambia el color al hacer hover sobre los elementos del menú */
+}
+
 .user-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Alineación de la barra de búsqueda en dispositivos pequeños */
-.user-actions input[type="text"] {
-    width: 300px;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    margin-right: 5px;
-    margin-left: 5px;
-    background-image: url(../IMG/search.png);
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 20px 20px;
+  display: flex;
+  align-items: center;
 }
 
 .user-actions input[type="text"] {
-    width: 300px;
-    flex-basis: 100%;
-    text-align: left; /* Alinea el campo de búsqueda a la izquierda */
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
+  width: 300px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #455a64;
+  border-radius: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
+  background-image: url(../IMG/search-gris.png);
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+/* Estilo para el campo de búsqueda en estado de enfoque (clic) */
+.user-actions input[type="text"]:focus {
+  border: 1px solid #4ccbaf;
+  outline: none; /* Elimina el resaltado predeterminado al hacer clic */
+  background-image: url(../IMG/search-verde.png);
 }
 
 .user-actions a {
-    text-decoration: none;
-    color: #fff; /* Enlaces: Color personalizado */
-    margin-right: 5px;
-    margin-left: 5px;
-}
-
-.user-icon {
-    margin-right: 2.5px;
-    margin-left: 5px;
+  text-decoration: none;
+  color: #455a64;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .user-icon img {
-    width: 30px;
-    height: auto;
-    position: relative;
+  width: 30px;
+  height: auto;
+  position: relative;
 }
 
-.cart-icon {
-    margin-right: 5px;
-    margin-left: 2.5px;
+.user-icon:hover img {
+  content: url(../IMG/user-verde.png);
+}
+
+/* Estilos para el desplegable del usuario */
+.user-dropdown {
+  display: none;
+  position: absolute;
+  right: 80px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.user-dropdown ul {
+  list-style: none;
+  padding: 8px 8px 3px 8px;
+  border: 1px solid #455a64;
+  border-radius: 5px;
+}
+
+.user-dropdown li {
+  padding: 8px;
+  margin-bottom: 5px;
+  width: 144px;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+}
+
+.user-dropdown li:hover {
+  background-color: #4ccbaf;
+}
+
+/* Estilo para mostrar el desplegable cuando se agrega la clase 'show' */
+.user-dropdown.show {
+  display: block;
+  /* Agrega otros estilos como posición, fondo, etc., según tus preferencias */
 }
 
 .cart-icon img {
-    width: 30px;
-    height: auto;
-    position: relative;
+  width: 30px;
+  height: auto;
+  position: relative;
+}
+
+.cart-icon:hover img {
+  content: url(../IMG/cart-verde.png);
 }
 
 .cart-count {
-    background-color: #4ccbaf; /* Botones: Color personalizado */
-    color: #fff;
-    border-radius: 50%;
-    font-size: 12px;
-    padding: 2px 6px;
-    position: relative;
-    top: 0;
-    right: 0;
-}
-
-/* Estilo para el contador del carrito en dispositivos pequeños */
-.cart-count {
-    top: -10px; /* Alinea el contador arriba del icono del carrito en dispositivos pequeños */
-}
-
-/* Estilos para el contenido principal (lista de juegos) */
-.juegos-container {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los juegos se ajusten en pantallas más pequeñas */
-    justify-content: space-between; /* Espacio uniforme entre los juegos */
-    margin: 0 auto; /* Centra el contenido en dispositivos pequeños */
-    max-width: 1000px; /* Establece un ancho máximo para el contenido principal */
-    padding: 20px; /* Espacio alrededor del contenido principal */
-}
-
-/* Estilos para los juegos individuales */
-/* Ajusta el ancho de los juegos en dispositivos pequeños */
-.juego {
-    flex-basis: calc(33.33% - 20px); /* Aproximadamente 1/3 del ancho en dispositivos pequeños */
-    margin-bottom: 20px; /* Espacio entre los juegos */
-}
-
-/* Media query para ajustar el diseño en dispositivos pequeños */
-@media (max-width: 768px) {
-    .juegos-container {
-        flex-direction: column; /* Cambia a una sola columna en dispositivos pequeños */
-    }
-
-    .juego {
-        flex-basis: 100%; /* Ocupa todo el ancho en dispositivos pequeños */
-    }
+  background-color: #4ccbaf;
+  color: #455a64;
+  border-radius: 50%;
+  font-size: 12px;
+  padding: 2px 6px;
+  position: absolute;
 }
