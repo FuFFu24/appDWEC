@@ -12,7 +12,7 @@ body {
 
 /* Encabezado */
 header {
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   color: #455a64;
   display: flex;
   justify-content: space-between;
@@ -91,10 +91,10 @@ nav ul.menu li a:hover {
 }
 
 /* Estilos para el desplegable del usuario */
-.user-dropdown {
+/* .user-dropdown {
   display: none;
   position: absolute;
-  right: 80px;
+  right: 60px;
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -118,13 +118,12 @@ nav ul.menu li a:hover {
 
 .user-dropdown li:hover {
   background-color: #4ccbaf;
-}
+} */
 
 /* Estilo para mostrar el desplegable cuando se agrega la clase 'show' */
-.user-dropdown.show {
+/* .user-dropdown.show {
   display: block;
-  /* Agrega otros estilos como posición, fondo, etc., según tus preferencias */
-}
+} */
 
 .cart-icon img {
   width: 30px;
