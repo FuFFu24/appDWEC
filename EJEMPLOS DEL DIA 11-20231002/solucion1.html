@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" href="">
+    <script>
+        function ejercicio1() {
+            var operador1 = document.getElementById("operador1").value;
+            var operador2 = document.getElementById("operador2").value;
+
+            if (operador1 == "" || isNaN(operador1)) {
+                alert("Operador 1 no es numérico");
+            }
+            if (operador2 == "" || isNaN(operador2)) {
+                alert("Operador 2 no es numérico");
+            }
+        }
+
+        function ejercicio2(operacion) {
+            var operador1 = document.getElementById("operador1").value;
+            var operador2 = document.getElementById("operador2").value;
+            var resultado = document.getElementById("resultado");
+
+            if (operador1 == "" || isNaN(operador1)) {
+                alert("Operador 1 no es numérico");
+            }
+            if (operador2 == "" || isNaN(operador2)) {
+                alert("Operador 2 no es numérico");
+            }
+            if (!isNaN(operador1) && !isNaN(operador2)) {
+                if (operacion == "suma") {
+                    resultado.value = parseInt(operador1) + parseInt(operador2);
+                }
+            }
+        }
+
+        function eejrcicio3(operacion) {
+            var operador1 = document.getElementById("operador1").value;
+            var operador2 = document.getElementById("operador2").value;
+            var resultado = document.getElementById("resultado");
+
+            if (operador1 == "" || isNaN(operador1)) {
+                alert("Operador 1 no es numérico");
+            }
+            if (operador2 == "" || isNaN(operador2)) {
+                alert("Operador 2 no es numérico");
+            }
+            if (!isNaN(operador1) && !isNaN(operador2)) {
+                if (operacion == "suma") {
+                    resultado.value = parseInt(operador1) + parseInt(operador2);
+                }
+                if (operacion == "resta") {
+                    resultado.value = parseInt(operador1) - parseInt(operador2);
+                }
+                if (operacion == "multi") {
+                    resultado.value = parseInt(operador1) * parseInt(operador2);
+                }
+                if (operacion == "div") {
+                    resultado.value = parseInt(operador1) / parseInt(operador2);
+                }
+            }
+        }
+
+        function ejercicio4() {
+            var numeros = document.getElementById("listaNumeros").value;
+            var lista = numeros.split(",");
+            var maximo = 0;
+            var minimo = Number.MAX_VALUE;
+            var media = 0;
+
+            for (i = 0; i < lista.length; i++) {
+                valor = parseInt(lista[i]);
+                if (valor > maximo) maximo = valor;
+                if (valor < minimo) minimo = valor;
+                media += valor;
+            }
+            alert("MAXIMO: " + maximo + " MINIMO:" + minimo + " MEDIA:" + (media / lista.length));
+        }
+
+        function ejercicio5() {
+            var aleatorio = Math.floor(Math.random() * 100);
+            alert(aleatorio);
+            do {
+                entrada = prompt("Dame un numero entre 1 y 100");
+            } while (aleatorio != parseInt(entrada));
+            alert("Acertaste");
+        }
+
+
+        function ejercicio6() {
+            var aleatorio = Math.floor(Math.random() * 100);
+            var contador = 3;
+
+            do {
+                entrada = prompt("Dame un numero entre 1 y 100");
+                contador--;
+            } while (contador > 0 && aleatorio != parseInt(entrada));
+
+            if (aleatorio != parseInt(entrada)) alert("ERES UN TORPE");
+            else alert("Acertaste");
+        }
+    </script>
+</head>
+
+<body>
+    <H1> USO DE STRINGS</H1>
+    <span>OPERADOR 1: </span><input type="Text" id="operador1"><br/>
+    <span>OPERADOR 2: </span><textarea id="operador2"></textarea><br/>
+    <span>RESULTADO: </span><input type="Text" id="resultado"><br/>
+    <input type="button" value="SUMAR" onclick="operar('suma')">
+    <input type="button" value="RESTAR" onclick="operar('resta')">
+    <input type="button" value="MULTIPLICAR" onclick="operar('multi')">
+    <input type="button" value="DIVIDIR" onclick="operar('div')">
+    <span>LISTA NUMEROS: </span><input type="Text" id="listaNumeros"><br/>
+</body>
+
+</html>
