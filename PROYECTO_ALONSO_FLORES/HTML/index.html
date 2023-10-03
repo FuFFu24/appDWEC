@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans" />
-    <link rel="icon" type="image/x-icon" href="../IMG/prodigy-48.png">
-    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="icon" type="image/x-icon" href="../IMG/LOGOS/prodigy-48.png" />
+    <link rel="stylesheet" href="../CSS/styles.css" />
     <script src="../JS/scripts.js"></script>
     <title>PROYECTO_ALONSO_FLORES</title>
 </head>
+
 <body>
     <!-- Encabezado -->
     <header>
         <div class="logo">
             <a href="index.html">
-                <img src="../IMG/logo-gris.png" alt="Monstruo de los Juegos">
-            </a>            
+                <img src="../IMG/LOGOS/logo-gris.png" alt="Monstruo de los Juegos" />
+            </a>
         </div>
         <nav>
             <ul class="menu">
@@ -28,11 +30,11 @@
         </nav>
         <div class="user-actions">
             <div>
-                <input type="text" placeholder="¿Qué estás buscando?">
+                <input type="text" placeholder="¿Qué estás buscando?" />
             </div>
             <div class="user-icon" id="user-icon">
                 <a href="login.html">
-                    <img src="../IMG/user-gris.png" alt="Usuario">
+                    <img src="../IMG/LOGOS/user-gris.png" alt="Usuario" />
                 </a>
                 <!-- <div class="user-dropdown" id="user-dropdown">
                     <ul>
@@ -43,8 +45,8 @@
             </div>
             <div class="cart-icon">
                 <a href="#">
-                <img src="../IMG/cart-gris.png" alt="Carrito de compras">
-                <span class="cart-count">0</span>
+                    <img src="../IMG/LOGOS/cart-gris.png" alt="Carrito de compras" />
+                    <span class="cart-count">0</span>
                 </a>
             </div>
         </div>
@@ -52,12 +54,116 @@
 
     <!-- Contenido principal -->
     <main>
-        <!-- Aquí puedes agregar el contenido principal de tu página -->
+        <section class="destacados">
+            <h2>Juegos Destacados</h2>
+            <div class="juego-destacado">
+                <a href="https://mercurio.com.es/pelusas.html" class="web-page">
+                    <div class="img-juego">
+                        <img src="../IMG/IMG-JUEGOS/pelusas.jpg" width="200" height="260" alt="pelusas" />
+                    </div>
+                    <div class="datos-juego">
+                        <p>Pelusas</p>
+                        <h3>13,50 €</h3>
+                    </div>
+                </a>
+                <a href="#" class="btn-anadir-carrito">Añadir al carrito</a>
+            </div>
+            <div class="juego-destacado">
+                <a href="https://tranjisgames.com/tienda/virus-2-evolution" class="web-page">
+                    <div class="img-juego">
+                        <img src="../IMG/IMG-JUEGOS/virus_2.jpg" width="200" height="260" alt="virus2" />
+                    </div>
+                    <div class="datos-juego">
+                        <p>Virus 2</p>
+                        <h3>11,95 €</h3>
+                    </div>
+                </a>
+                <a href="#" class="btn-anadir-carrito">Añadir al carrito</a>
+            </div>
+            <div class="juego-destacado">
+                <a href="https://zacatrus.es/mision-cumplida.html" class="web-page">
+                    <div class="img-juego">
+                        <img src="../IMG/IMG-JUEGOS/misioncumplida.jpg" width="200" height="260" alt="misioncumplida" />
+                    </div>
+                    <div class="datos-juego">
+                        <p>Misión Cumplida</p>
+                        <h3>9,95 €</h3>
+                    </div>
+                </a>
+                <a href="#" class="btn-anadir-carrito">Añadir al carrito</a>
+            </div>
+            <div class="juego-destacado">
+                <a href="https://rocketlemongames.com/rocket-lemon-games/22-mal-trago.html" class="web-page">
+                    <div class="img-juego">
+                        <img src="../IMG/IMG-JUEGOS/maltrago.jpg" width="200" height="260" alt="maltrago" />
+                    </div>
+                    <div class="datos-juego">
+                        <p>Mal trago</p>
+                        <h3>14,99 €</h3>
+                    </div>
+                </a>
+                <a href="#" class="btn-anadir-carrito">Añadir al carrito</a>
+            </div>
+            <div class="juego-destacado">
+                <a href="https://devir.es/polilla-tramposa" class="web-page">
+                    <div class="img-juego">
+                        <img src="../IMG/IMG-JUEGOS/polillatramposa.jpg" width="200" height="260"
+                            alt="polillatramposa" />
+                    </div>
+                    <div class="datos-juego">
+                        <p>Polilla tramposa</p>
+                        <h3>14,00 €</h3>
+                    </div>
+                </a>
+                <a href="#" class="btn-anadir-carrito">Añadir al carrito</a>
+            </div>
+        </section>
     </main>
+
+    <div class="newsletter">
+        <img src="../IMG/LOGOS/email-gris.png" alt="Email">
+        <h2>Suscríbete a nuestro Newsletter</h2>
+        <form id="newsletter-form">
+            <input type="email" id="email" name="email" placeholder="Correo electrónico* " required>
+            <button type="submit">Suscribirse</button>
+            <br>
+            <input type="checkbox" id="acepto" name="acepto" required>
+            <label for="acepto">Acepto la <a href="">Política de Privacidad</a> y el <a href="">Aviso
+                    legal</a></label>
+        </form>
+    </div>
 
     <!-- Pie de página -->
     <footer>
-        <!-- Aquí puedes agregar información adicional, enlaces, etc. -->
+        <div class="footer-column">
+            <h3>Sobre Nosotros</h3>
+            <p>Somos una tienda de juegos de mesa comprometida con brindar la mejor selección de juegos para entusiastas
+                de todo tipo. Nuestra pasión es ofrecer experiencias divertidas y memorables a través de juegos de
+                calidad.</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Contacto</h3>
+            <p><strong>Correo Electrónico:</strong> info@monstruodelosjuegos.com</p>
+            <p><strong>Teléfono:</strong> +34 xxx xxx xxx</p>
+            <p><strong>WhatsApp:</strong> +34 xxx xxx xxx</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Síguenos</h3>
+            <a href="#" class="facebook-icon"><img src="../IMG/LOGOS/facebook-gris.png" alt="facebook"></a>
+            <a href="#" class="twitter-icon"><img src="../IMG/LOGOS/twitter-gris.png" alt="twitter"></a>
+            <a href="#" class="instagram-icon"><img src="../IMG/LOGOS/instagram-gris.png" alt="instagram"></a>
+            <a href="#" class="youtube-icon"><img src="../IMG/LOGOS/youtube-gris.png" alt="youtube"></a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Encuéntranos</h3>
+            <p><strong>Dirección:</strong> Calle Principal, Ciudad</p>
+            <p><strong>Horario:</strong> Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+            <p><strong>Sábados y Domingos:</strong> Cerrado</p>
+        </div>
     </footer>
 </body>
+
 </html>

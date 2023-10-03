@@ -8,6 +8,7 @@
 body {
   font-family: "PT Sans";
   background-color: #f4f4f4;
+  color: #455a64;
 }
 
 /* Encabezado */
@@ -60,7 +61,7 @@ nav ul.menu li a:hover {
   border-radius: 5px;
   margin-right: 5px;
   margin-left: 5px;
-  background-image: url(../IMG/search-gris.png);
+  background-image: url(../IMG/LOGOS/search-gris.png);
   background-size: 24px 24px;
   background-repeat: no-repeat;
   background-position: right center;
@@ -70,7 +71,7 @@ nav ul.menu li a:hover {
 .user-actions input[type="text"]:focus {
   border: 1px solid #4ccbaf;
   outline: none; /* Elimina el resaltado predeterminado al hacer clic */
-  background-image: url(../IMG/search-verde.png);
+  background-image: url(../IMG/LOGOS/search-verde.png);
 }
 
 .user-actions a {
@@ -87,7 +88,7 @@ nav ul.menu li a:hover {
 }
 
 .user-icon:hover img {
-  content: url(../IMG/user-verde.png);
+  content: url(../IMG/LOGOS/user-verde.png);
 }
 
 /* Estilos para el desplegable del usuario */
@@ -132,7 +133,7 @@ nav ul.menu li a:hover {
 }
 
 .cart-icon:hover img {
-  content: url(../IMG/cart-verde.png);
+  content: url(../IMG/LOGOS/cart-verde.png);
 }
 
 .cart-count {
@@ -142,4 +143,223 @@ nav ul.menu li a:hover {
   font-size: 12px;
   padding: 2px 6px;
   position: absolute;
+}
+
+/* Estilos para la sección de Destacados de Juegos */
+.destacados {
+  display: flex;
+  justify-content: space-between; /* Distribuye los juegos horizontalmente */
+  margin: 20px;
+  top: -100px;
+  padding-top: 60px;
+  background-color: #ffffff;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.destacados h2 {
+  display: flex;
+  position: absolute;
+  margin: -50px 0 0 20px;
+  color: #455a64;
+}
+
+/* Estilos para cada juego destacado */
+.juego-destacado {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente el contenido */
+  text-align: center;
+  width: 30%; /* Ajusta el ancho de cada juego según tus preferencias */
+  padding: 10px;
+  background-color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+/* Estilos cuando se coloca el cursor sobre el juego */
+.juego-destacado:hover {
+  transform: scale(1.05); /* Agranda el juego en el estado :hover */
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2); /* Añade una sombra al juego */
+  padding-bottom: 40px;
+  z-index: 1;
+}
+
+.juego-destacado .web-page {
+  color: #455a64;
+  text-decoration: none;
+}
+
+/* Estilos para la imagen de cada juego */
+.juego-destacado img {
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+/* Estilos para los datos del juego */
+.juego-destacado .datos-juego {
+  margin: 10px 0; /* Espacio entre la imagen y los datos del juego */
+}
+
+/* Estilos para el botón "Añadir al carrito" */
+.btn-anadir-carrito {
+  display: none; /* Oculta el botón de forma predeterminada */
+  padding: 5px 10px;
+  background-color: #455a64;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Estilos para mostrar el botón de "Añadir al carrito" cuando el cursor está encima */
+.juego-destacado:hover .btn-anadir-carrito {
+  display: inline-block;
+}
+
+.btn-anadir-carrito:hover {
+  background-color: #4ccbaf;
+}
+
+.newsletter {
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.newsletter h2 {
+  display: inline-block;
+  color: #455a64;
+}
+
+.newsletter img {
+  display: inline-block;
+  width: 28px;
+  height: auto;
+  bottom: -6px;
+  position: relative;
+}
+
+form {
+  flex-direction: column;
+  align-items: center;
+}
+
+label a {
+  color: #4ccbaf;
+  text-decoration: none;
+}
+
+input[type="email"] {
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 300px;
+  height: 30px;
+  border: 1px solid #455a64;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+/* Estilo para el campo de búsqueda en estado de enfoque (clic) */
+input[type="email"]:focus {
+  border: 1px solid #4ccbaf;
+  outline: none; /* Elimina el resaltado predeterminado al hacer clic */
+}
+
+input[type="checkbox"] {
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px;
+  width: 100%;
+  max-width: 100px;
+  height: 30px;
+  background-color: #455a64;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #4ccbaf;
+}
+
+/* Estilos para el footer */
+footer {
+  background-color: #ffffff;
+  color: #455a64;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #455a64;
+  border-top: 1px solid #455a64;
+}
+
+/* Estilos para cada columna del footer */
+.footer-column {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.footer-column h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.footer-column p {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.footer-column ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 5px;
+}
+
+.footer-column a img {
+  display: inline-block;
+  width: 28px;
+  height: auto;
+}
+
+.footer-column .facebook-icon:hover {
+  content: url(../IMG/LOGOS/facebook-verde.png);
+  display: inline-block;
+  width: 28px;
+  height: auto;
+}
+
+.footer-column .twitter-icon:hover {
+  content: url(../IMG/LOGOS/twitter-verde.png);
+  display: inline-block;
+  width: 28px;
+  height: auto;
+}
+
+.footer-column .instagram-icon:hover {
+  content: url(../IMG/LOGOS/instagram-verde.png);
+  display: inline-block;
+  width: 28px;
+  height: auto;
+}
+
+.footer-column .youtube-icon:hover {
+  content: url(../IMG/LOGOS/youtube-verde.png);
+  display: inline-block;
+  width: 28px;
+  height: auto;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
 }
