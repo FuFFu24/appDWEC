@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="">
     <script>
         var fechaHoy = new Date();
-        var fechaAnterior = new Date(2023,9,1);
+        var fechaAnterior = new Date(2023, 9, 1);
 
         if (fechaAnterior > fechaHoy) {
             // alert("Anterior es mayor");
@@ -13,9 +13,9 @@
             // alert("Anterior es menor");
         }
 
-        fechaAnterior.setDate(fechaAnterior.getDate()+1);
+        fechaAnterior.setDate(fechaAnterior.getDate() + 1);
         console.log(fechaAnterior.toLocaleDateString());
-        fechaAnterior.setDate(fechaAnterior.getDate()+4000);
+        fechaAnterior.setDate(fechaAnterior.getDate() + 4000);
         console.log(fechaAnterior.toLocaleDateString());
 
         function mostrarFechaSesenta() {
@@ -24,37 +24,154 @@
             // Divido por / los datos recogidos
             let datosFecha = fechaNacimiento.split("/");
             // Comprobar fecha 
-            if (datosFecha.length!=3) {
+            if (datosFecha.length != 3) {
                 alert("Fecha mal escrita")
             } else {
                 // Creo una nueva fecha
-                fechaNacimiento = new Date(datosFecha[2],datosFecha[1]-1,datosFecha[0]);
-                if (fechaNacimiento.getFullYear()!=datosFecha[2] ||
-                    fechaNacimiento.getMonth()!=datosFecha[1]-1 ||
-                    fechaNacimiento.getDate()!=datosFecha[0]) {
+                fechaNacimiento = new Date(datosFecha[2], datosFecha[1] - 1, datosFecha[0]);
+                if (fechaNacimiento.getFullYear() != datosFecha[2] ||
+                    fechaNacimiento.getMonth() != datosFecha[1] - 1 ||
+                    fechaNacimiento.getDate() != datosFecha[0]) {
                     alert("Datos no validos");
                 }
                 // Sumarle 60 años a la fecha
-                fechaNacimiento.setFullYear(fechaNacimiento.getFullYear()+60)
+                fechaNacimiento.setFullYear(fechaNacimiento.getFullYear() + 60)
                 // Saca el dia de la semana
                 console.log(fechaNacimiento.getDay());
                 // Dia de la semana en texto
-                let datosDiasSemana = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
+                let datosDiasSemana = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
                 console.log(datosDiasSemana[fechaNacimiento.getDay()]);
             }
         }
+
+        function comprobarSiHayNumero() {
+            let operador1 = document.getElementById("operador1").value.trim();
+            let operador2 = document.getElementById("operador2").value.trim();
+            if (operador1 == "" || operador2 == "") {
+                alert("Cadena vacia");
+            } else {
+                if (isNaN(operador1) || isNaN(operador2)) {
+                    alert("No es un numero");
+                } else {
+                    alert("Es un numero");
+                }
+            }
+        }
+
+        function sumarNumeros() {
+            let operador1 = document.getElementById("operador1").value.trim();
+            let operador2 = document.getElementById("operador2").value.trim();
+            let resultado = document.getElementById("resultado");
+            if (operador1 == "" || operador2 == "") {
+                alert("Cadena vacia");
+            } else {
+                if (isNaN(operador1) || isNaN(operador2)) {
+                    alert("No es un numero");
+                } else {
+                    resultado.value = parseFloat(operador1) + parseFloat(operador2);
+                }
+            }
+        }
+
+        function numeroMaximo() {
+            let listaNumeros = document.getElementById("listaNumeros").value.trim();
+            let lista = listaNumeros.split(",");
+            let max = lista[0];
+            if (lista == "") {
+                alert("Cadena vacia");
+            } else {
+                lista.forEach(element => {
+                    if (parseFloat(element) > max) {
+                        max = element;
+                    }
+                });
+            }
+            if (max != 0) {
+                alert(max);
+            }
+        }
+
+        function numeroMinimo() {
+            let listaNumeros = document.getElementById("listaNumeros").value.trim();
+            let lista = listaNumeros.split(",");
+            let min = lista[0];
+            if (lista == "") {
+                alert("Cadena vacia");
+            } else {
+                lista.forEach(element => {
+                    if (parseFloat(element) < min) {
+                        min = element;
+                    }
+                });
+            }
+            if (min != 0) {
+                alert(min);
+            }
+        }
+
+        function numeroMedia() {
+            let listaNumeros = document.getElementById("listaNumeros").value.trim();
+            let lista = listaNumeros.split(",");
+            let total = 0;
+            if (lista == "") {
+                alert("Cadena vacia");
+            } else {
+                lista.forEach(element => {
+                    total += parseFloat(element);
+                });
+            }
+            if (total != 0) {
+                alert(total / lista.length);
+            }
+        }
+
+        function adivinarNumero() {
+            const numeroAleatorio = Math.floor(Math.random() * 10) + 1;
+            let adivinado = false;
+            let intentos = 0;
+
+            // Bucle while para solicitar números hasta que se adivine
+            while (!adivinado && intentos!=3) {
+                const numeroUsuario = parseInt(prompt("Adivina el número (entre 1 y 10):"));
+
+                if (isNaN(numeroUsuario)) {
+                    alert("Por favor, ingresa un número válido.");
+                } else if (numeroUsuario === numeroAleatorio) {
+                    alert(`¡Felicidades! Adivinaste el número ${numeroAleatorio}.`);
+                    adivinado = true;
+                } else {
+                    alert("Intenta de nuevo.");
+                }
+
+                intentos++;
+                if (intentos==3) {
+                    alert("ERES UN TORPE");
+                }
+            }
+        }
+
     </script>
 </head>
 
 <body>
     <h1>USO DE FECHAS</h1>
-    <span>FECHA NACIMIENTO: </span><input type="Text" id="fechaNacimiento" placeholder="dd/mm/aaaa"><br/>
+    <span>FECHA NACIMIENTO: </span><input type="Text" id="fechaNacimiento" placeholder="dd/mm/aaaa"><br />
     <button type="button" onclick="mostrarFechaSesenta()">DIA DE LA SEMANA</button>
     <H1> USO DE STRINGS</H1>
-    <span>OPERADOR 1: </span><input type="Text" id="operador1"><br/>
-    <span>OPERADOR 2: </span><textarea id="operador2"></textarea><br/>
-    <span>RESULTADO: </span><input type="Text" id="resultado"><br/>
+    <span>OPERADOR 1: </span><input type="Text" id="operador1"><br />
+    <span>OPERADOR 2: </span><textarea id="operador2"></textarea><br />
+    <span>RESULTADO: </span><input type="Text" id="resultado"><br />
+    <span>LISTA DE NUMEROS SEPARADOS POR COMA: </span><input type="Text" id="listaNumeros"><br />
     <input type="button" value="SUMAR">
+    <button type="button" onclick="comprobarSiHayNumero()">Ej1</button><br>
+    <button type="button" onclick="sumarNumeros()">Sumar</button>
+    <button type="button" onclick="sumarNumeros()">Restar</button>
+    <button type="button" onclick="sumarNumeros()">Multiplicar</button>
+    <button type="button" onclick="sumarNumeros()">Dividir</button><br>
+    <button type="button" onclick="numeroMaximo()">Maximo</button>
+    <button type="button" onclick="numeroMinimo()">Minimo</button>
+    <button type="button" onclick="numeroMedia()">Media</button><br>
+    <button type="button" onclick="adivinarNumero()">Adivinar</button>
 </body>
 
 </html>
