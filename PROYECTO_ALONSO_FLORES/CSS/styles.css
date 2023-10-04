@@ -305,6 +305,7 @@ footer {
 .footer-column {
   flex: 1;
   margin-right: 20px;
+  position: relative;
 }
 
 .footer-column h3 {
@@ -326,10 +327,21 @@ footer {
   margin-bottom: 5px;
 }
 
-.footer-column a img {
+.footer-column img {
   display: inline-block;
   width: 28px;
   height: auto;
+}
+
+/* Estilos para la línea divisoria entre columnas */
+.footer-column:not(:last-child)::after {
+  /* Agregamos una línea después de cada columna excepto la última */
+  content: "";
+  position: absolute;
+  top: 20px; /* Ajusta la posición vertical según tus necesidades */
+  right: 0; /* Ajusta la posición horizontal según tus necesidades */
+  height: calc(100% - 40px); /* Altura que no llega hasta los márgenes */
+  border-right: 1px solid #455a64; /* Borde vertical como línea divisoria */
 }
 
 .footer-column .facebook-icon:hover {
@@ -358,8 +370,4 @@ footer {
   display: inline-block;
   width: 28px;
   height: auto;
-}
-
-.footer-column a:hover {
-  text-decoration: underline;
 }
