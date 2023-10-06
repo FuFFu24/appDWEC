@@ -12,12 +12,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Contenedor de la página de inicio de sesión */
 .login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
 
+/* Logo */
 .logo-480 img {
   position: relative;
   top: -40px;
@@ -37,6 +39,7 @@ body {
   color: #455a64;
 }
 
+/* Formulario */
 .form {
   position: relative;
   z-index: 1;
@@ -48,6 +51,7 @@ body {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
+/* Estilos para campos de entrada */
 .form input {
   outline: 0;
   background: #f4f4f4;
@@ -59,6 +63,7 @@ body {
   font-size: 14px;
 }
 
+/* Estilos para el botón */
 .form button {
   text-transform: uppercase;
   outline: 0;
@@ -68,38 +73,53 @@ body {
   padding: 15px;
   color: #ffffff;
   font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
+/* Estilos para el botón cuando se interactúa */
 .form button:hover,
 .form button:active,
 .form button:focus {
   background: #4ccbaf;
 }
 
-.form .message {
+/* Estilos para los mensajes y enlaces */
+.form .message-register {
   margin: 20px 0 -10px;
   color: #455a64;
   font-size: 12px;
 }
 
-.form .message a {
+.form .message-register a {
   color: #4ccbaf;
   text-decoration: none;
 }
 
+.form .message-login {
+  margin: 20px 0 -10px;
+  color: #455a64;
+  font-size: 12px;
+}
+
+.form .message-login a {
+  color: #4ccbaf;
+  text-decoration: none;
+}
+
+/* Estilos para el formulario de registro */
 .form .register-form {
   display: none;
 }
 
+/* Estilos para la parte inferior del formulario */
 .form .login-bottom {
   color: #455a64;
   font-size: 12px;
 }
 
-.login-bottom input[type="checkbox" i] {
+.login-bottom input[type="checkbox"] {
   width: auto;
   margin: 15px 0 0;
   position: relative;

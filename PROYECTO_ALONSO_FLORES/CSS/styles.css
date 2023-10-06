@@ -24,10 +24,12 @@ header {
   z-index: 1px;
 }
 
+/* Logo */
 .logo img {
   max-width: 144px;
 }
 
+/* Menú de navegación */
 nav ul.menu {
   list-style: none;
   display: flex;
@@ -45,9 +47,10 @@ nav ul.menu li a {
 }
 
 nav ul.menu li a:hover {
-  color: #4ccbaf; /* Cambia el color al hacer hover sobre los elementos del menú */
+  color: #4ccbaf;
 }
 
+/* User Actions */
 .user-actions {
   display: flex;
   align-items: center;
@@ -67,10 +70,9 @@ nav ul.menu li a:hover {
   background-position: right center;
 }
 
-/* Estilo para el campo de búsqueda en estado de enfoque (clic) */
 .user-actions input[type="text"]:focus {
   border: 1px solid #4ccbaf;
-  outline: none; /* Elimina el resaltado predeterminado al hacer clic */
+  outline: none;
   background-image: url(../IMG/LOGOS/search-verde.png);
 }
 
@@ -81,6 +83,7 @@ nav ul.menu li a:hover {
   margin-left: 5px;
 }
 
+/* User Icon */
 .user-icon img {
   width: 30px;
   height: auto;
@@ -91,41 +94,7 @@ nav ul.menu li a:hover {
   content: url(../IMG/LOGOS/user-verde.png);
 }
 
-/* Estilos para el desplegable del usuario */
-/* .user-dropdown {
-  display: none;
-  position: absolute;
-  right: 60px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-}
-
-.user-dropdown ul {
-  list-style: none;
-  padding: 8px 8px 3px 8px;
-  border: 1px solid #455a64;
-  border-radius: 5px;
-}
-
-.user-dropdown li {
-  padding: 8px;
-  margin-bottom: 5px;
-  width: 144px;
-  border-radius: 5px;
-  background-color: #f4f4f4;
-}
-
-.user-dropdown li:hover {
-  background-color: #4ccbaf;
-} */
-
-/* Estilo para mostrar el desplegable cuando se agrega la clase 'show' */
-/* .user-dropdown.show {
-  display: block;
-} */
-
+/* Carrito de Compras Icon */
 .cart-icon img {
   width: 30px;
   height: auto;
@@ -148,7 +117,7 @@ nav ul.menu li a:hover {
 /* Estilos para la sección de Destacados de Juegos */
 .destacados {
   display: flex;
-  justify-content: space-between; /* Distribuye los juegos horizontalmente */
+  justify-content: space-between;
   margin: 20px;
   top: -100px;
   padding-top: 60px;
@@ -167,19 +136,18 @@ nav ul.menu li a:hover {
 .juego-destacado {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra horizontalmente el contenido */
+  align-items: center;
   text-align: center;
-  width: 30%; /* Ajusta el ancho de cada juego según tus preferencias */
+  width: 30%;
   padding: 10px;
   background-color: #ffffff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
 }
 
-/* Estilos cuando se coloca el cursor sobre el juego */
 .juego-destacado:hover {
-  transform: scale(1.05); /* Agranda el juego en el estado :hover */
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2); /* Añade una sombra al juego */
+  transform: scale(1.05);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   padding-bottom: 40px;
   z-index: 1;
 }
@@ -189,19 +157,19 @@ nav ul.menu li a:hover {
   text-decoration: none;
 }
 
-/* Estilos para la imagen de cada juego */
 .juego-destacado img {
-  margin: 0 auto; /* Centra la imagen horizontalmente */
+  width: 80%;
+  aspect-ratio: 4/5;
+  object-fit: contain;
 }
 
-/* Estilos para los datos del juego */
 .juego-destacado .datos-juego {
-  margin: 10px 0; /* Espacio entre la imagen y los datos del juego */
+  margin: 10px 0;
 }
 
 /* Estilos para el botón "Añadir al carrito" */
 .btn-anadir-carrito {
-  display: none; /* Oculta el botón de forma predeterminada */
+  display: none;
   padding: 5px 10px;
   background-color: #455a64;
   color: #fff;
@@ -213,7 +181,6 @@ nav ul.menu li a:hover {
   transform: translateX(-50%);
 }
 
-/* Estilos para mostrar el botón de "Añadir al carrito" cuando el cursor está encima */
 .juego-destacado:hover .btn-anadir-carrito {
   display: inline-block;
 }
@@ -222,6 +189,7 @@ nav ul.menu li a:hover {
   background-color: #4ccbaf;
 }
 
+/* Estilos para la sección de Newsletter */
 .newsletter {
   text-align: center;
   margin: 20px;
@@ -263,10 +231,9 @@ input[type="email"] {
   margin-left: 5px;
 }
 
-/* Estilo para el campo de búsqueda en estado de enfoque (clic) */
 input[type="email"]:focus {
   border: 1px solid #4ccbaf;
-  outline: none; /* Elimina el resaltado predeterminado al hacer clic */
+  outline: none;
 }
 
 input[type="checkbox"] {
@@ -333,17 +300,17 @@ footer {
   height: auto;
 }
 
-/* Estilos para la línea divisoria entre columnas */
+/* Línea divisoria entre columnas */
 .footer-column:not(:last-child)::after {
-  /* Agregamos una línea después de cada columna excepto la última */
   content: "";
   position: absolute;
-  top: 20px; /* Ajusta la posición vertical según tus necesidades */
-  right: 0; /* Ajusta la posición horizontal según tus necesidades */
-  height: calc(100% - 40px); /* Altura que no llega hasta los márgenes */
-  border-right: 1px solid #455a64; /* Borde vertical como línea divisoria */
+  top: 20px;
+  right: 0;
+  height: calc(100% - 40px);
+  border-right: 1px solid #455a64;
 }
 
+/* Iconos de redes sociales en el footer */
 .footer-column .facebook-icon:hover {
   content: url(../IMG/LOGOS/facebook-verde.png);
   display: inline-block;
