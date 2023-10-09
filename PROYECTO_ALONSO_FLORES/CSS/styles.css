@@ -61,7 +61,6 @@ nav ul.menu li a:hover {
   height: 30px;
   padding: 5px;
   border: 1px solid #455a64;
-  border-radius: 5px;
   margin-right: 5px;
   margin-left: 5px;
   background-image: url(../IMG/LOGOS/search-gris.png);
@@ -122,7 +121,7 @@ nav ul.menu li a:hover {
   top: -100px;
   padding-top: 60px;
   background-color: #ffffff;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .destacados h2 {
@@ -215,6 +214,10 @@ form {
   align-items: center;
 }
 
+label {
+  font-size: 12px;
+}
+
 label a {
   color: #4ccbaf;
   text-decoration: none;
@@ -222,7 +225,6 @@ label a {
 
 input[type="email"] {
   padding: 5px;
-  border-radius: 5px;
   width: 100%;
   max-width: 300px;
   height: 30px;
@@ -249,7 +251,6 @@ button {
   background-color: #455a64;
   color: #fff;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
 }
 

@@ -14,6 +14,7 @@
 <body>
   <div class="login-page">
     <div class="form">
+      <!-- Formulario para registrarse -->
       <form class="register-form">
         <div class="logo-480">
           <a href="index.html">
@@ -21,12 +22,22 @@
             <h2>Monstruo de los Juegos</h2>
           </a>
         </div>
-        <input type="text" placeholder="Nombre" />
-        <input type="password" placeholder="Contraseña" />
-        <input type="text" placeholder="Correo electrónico" />
+        <div class="input-flotante">
+          <input type="text" id="register-nombre" />
+          <label for="register-nombre">Nombre</label>
+        </div>
+        <div class="input-flotante">
+          <input type="email" id="register-correo" />
+          <label for="register-correo">Correo electrónico</label>
+        </div>
+        <div class="input-flotante">
+          <input type="password" id="register-contrasena" />
+          <label for="register-contrasena">Contraseña</label>
+        </div>
         <button>Registrarse</button>
         <p class="message-register">¿Ya tienes cuenta? <a href="#">Inicia sesión</a></p>
       </form>
+      <!-- Formulario para iniciar sesion -->
       <form class="login-form">
         <div class="logo-480">
           <a href="index.html">
@@ -34,8 +45,14 @@
             <h2>Monstruo de los Juegos</h2>
           </a>
         </div>
-        <input type="text" placeholder="Correo electrónico" id="login-email" />
-        <input type="password" placeholder="Contraseña" id="login-password" />
+        <div class="input-flotante">
+          <input type="email" id="login-correo" />
+          <label for="login-correo">Correo electrónico</label>
+        </div>
+        <div class="input-flotante">
+          <input type="password" id="login-contrasena" />
+          <label for="login-contrasena">Contraseña</label>
+        </div>
         <button>Iniciar sesión</button>
         <div class="login-bottom">
           <input type="checkbox" id="recuerdame" name="recuerdame">

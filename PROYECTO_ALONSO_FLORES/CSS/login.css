@@ -48,26 +48,61 @@ body {
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos para campos de entrada */
-.form input {
-  outline: 0;
-  background: #f4f4f4;
-  width: 100%;
-  border: 0;
+.input-flotante {
+  position: relative;
+  line-height: 14px;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.input-flotante label {
+  color: #455a64;
+  font-size: 11px;
+  text-transform: uppercase;
+  position: absolute;
+  z-index: 2;
+  left: 20px;
+  top: 14px;
+  padding: 0 2px;
+  background-color: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+.input-flotante input {
+  font-size: 13px;
+  color: #455a64;
+  background-color: transparent;
+  outline: none;
+  width: 240px;
+  border: 1px solid #455a64;
+  padding: 12px;
   margin: 0 0 15px;
-  padding: 15px;
+  position: relative;
   box-sizing: border-box;
-  font-size: 14px;
+
+  &:invalid + label {
+    transform: translateY(0);
+  }
+
+  &:focus {
+    border-color: #4ccbaf;
+
+    & + label {
+      color: #455a64;
+      transform: translateY(-20px);
+    }
+  }
 }
 
 /* Estilos para el botón */
 .form button {
   text-transform: uppercase;
   outline: 0;
-  background: #4ccbaf;
+  background: #455a64;
   width: 100%;
   border: 0;
   padding: 15px;
