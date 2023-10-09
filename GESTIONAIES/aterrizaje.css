@@ -129,3 +129,15 @@ footer a, footer a:link {
 table,td,tr {
 	border: 2px solid white;
 }
+.divCentrado {
+	width: 400px;
+	height: 400px;
+	background-color: #fff;
+	border: 2px solid red;
+	color: #000000;
+	position: absolute;
+	display: grid;
+	place-items: center;
+	top: 50%;
+	left: 50%;
+}
