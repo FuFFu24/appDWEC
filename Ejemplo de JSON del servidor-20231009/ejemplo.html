@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="jquery.js"></script>
+    <script>
+        var listaPersonas = [];
+
+        function cargarPersonas() {
+            $.getJSON("ejemploJSON.txt", function(datos) {
+                listaPersonas = datos;
+                mostrarPersonas(listaPersonas);
+            });
+        }
+        onload = function() {
+            cargarPersonas();
+        }
+
+        function mostrarPersonas(lista) {
+            var divCentral = document.getElementById("central");
+            divCentral.innerHTML = "<h1>PERSONAS</h1><table><tbody></tbody></table>";
+            var tbody = divCentral.getElementsByTagName("tbody")[0];
+            lista.forEach((persona) => {
+                tbody.innerHTML += `<tr>
+                              <td>${persona.nombre}</td>
+                              <td>${persona.apellidos}</td>
+                            </tr>`;
+            });
+        }
+
+        function addPersona() {
+            let nombre = document.getElementById("nombre").value;
+            let apellidos = document.getElementById("apellidos").value;
+            let persona = {
+                "nombre": nombre,
+                "apelLidos": apellidos
+            }
+            $.post("addPersona.php", persona, function(respuesta) {
+                if (respuesta == "OK") {
+                    alert("persona grabada");
+                    cargarPersonas();
+                } else {
+                    alert("No se ha podido grabar");
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div id="central">
+    </div>
+    <div id="nuevaPersona">
+        Nombre:<input type="text" id="nombre"><br> Apellidos:
+        <input type="text" id="apellidos"><br>
+        <button type="button" onclick="addPersona()">Grabar</button>
+    </div>
+</body>
+
+</html>

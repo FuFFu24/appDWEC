@@ -1,0 +1,82 @@
+[
+    {
+        "idProducto":"1",
+        "nombre":"Pelusas",
+        "descripcion":"A las pelusas les encanta ir acumulándose, pero cualquier corriente de aire puede hacer que desaparezcan en un momento... Acumula pelusas para conseguir puntos, pero no cojas demasiadas o ¡puedes perder todas tus ganancias! Roba cartas para conseguir puntos y decide si parar... o seguir robando otra carta. Pero, ¡cuidado!, te arriesgas a tener que descartar todas las cartas acumuladas...",
+        "precio":13.50,
+        "imagenURL":"../IMG/IMG-JUEGOS/pelusas.jpg",
+        "stock":24
+    },
+    {
+        "idProducto":"2",
+        "nombre":"Virus 2",
+        "descripcion":"Justo cuando los esfuerzos de nuestros médicos empezaban a dar sus frutos, los problemas se complican. Las muestras almacenadas en el laboratorio para su estudio, revelan que los virus han mutado y se han vuelto mucho más resistentes y agresivos. Toda la diversión de Virus! ahora duplicada con las nuevas cartas de la expansión Virus 2! Evolution. Consigue cuatro órganos de cada color. Elimina los virus e inmuniza tus órganos para que no se puedan contagiar. Sabotea a tus rivales para ser la primera persona en tener los cuatro órganos sanos. ¡Contágiate con esta expansión y diviértete en familia o con amigos!",
+        "precio":11.95,
+        "imagenURL":"../IMG/IMG-JUEGOS/virus_2.jpg",
+        "stock":18
+    },
+    {
+        "idProducto":"3",
+        "nombre":"Misión Cumplida",
+        "descripcion":"En Misión Cumplida, vuestro objetivo será cumplir la mayor cantidad de retos posibles antes de que se os acaben las cartas. Cada partida se preparará con un máximo de objetivos y los jugadores, de forma cooperativa, deberán intentar cumplirlos con ciertas restricciones en la comunicación. Cumplid objetivos, aprended a comunicaros y... ¡no os quedéis sin cartas! Sólo así venceréis en este entretenido juego.",
+        "precio":9.95,
+        "imagenURL":"../IMG/IMG-JUEGOS/misioncumplida.jpg",
+        "stock":20
+    },
+    {
+        "idProducto":"4",
+        "nombre":"Mal Trago",
+        "descripcion":"La bruja necesita conejillos de indias para probar sus nuevas pociones y nosotros, sus leales esbirros goblins, hemos sido designados como voluntarios forzosos para esta ocasión. No es tan terrible como parece; vale, puede que algunas pociones tengan un efecto mortal, pero la jefa, siempre generosa, ha prometido que uno de nosotros saldrá ileso, como premio por su astucia, por su instinto y porque alguien tendrá que limpiarlo todo al final.",
+        "precio":14.99,
+        "imagenURL":"../IMG/IMG-JUEGOS/maltrago.jpg",
+        "stock":35
+    },
+    {
+        "idProducto":"5",
+        "nombre":"Polilla Tramposa",
+        "descripcion":"Normalmente en los juegos no se permite hacer trampas. ¡Pero en este juego sí! Se trata de ser el primer jugador en deshacerse de todas las cartas y por eso os hará falta ser ingeniosos a la hora de descartar y muy hábiles haciendo trampas. Se juegan tantas rondas como jugadores haya y gana el jugador que tenga menos puntos negativos al final de la partida.",
+        "precio":14.00,
+        "imagenURL":"../IMG/IMG-JUEGOS/polillatramposa.jpg",
+        "stock":13
+    },
+    {
+        "idProducto":"1",
+        "nombre":"Pelusas",
+        "descripcion":"A las pelusas les encanta ir acumulándose, pero cualquier corriente de aire puede hacer que desaparezcan en un momento... Acumula pelusas para conseguir puntos, pero no cojas demasiadas o ¡puedes perder todas tus ganancias! Roba cartas para conseguir puntos y decide si parar... o seguir robando otra carta. Pero, ¡cuidado!, te arriesgas a tener que descartar todas las cartas acumuladas...",
+        "precio":13.50,
+        "imagenURL":"../IMG/IMG-JUEGOS/pelusas.jpg",
+        "stock":24
+    },
+    {
+        "idProducto":"2",
+        "nombre":"Virus 2",
+        "descripcion":"Justo cuando los esfuerzos de nuestros médicos empezaban a dar sus frutos, los problemas se complican. Las muestras almacenadas en el laboratorio para su estudio, revelan que los virus han mutado y se han vuelto mucho más resistentes y agresivos. Toda la diversión de Virus! ahora duplicada con las nuevas cartas de la expansión Virus 2! Evolution. Consigue cuatro órganos de cada color. Elimina los virus e inmuniza tus órganos para que no se puedan contagiar. Sabotea a tus rivales para ser la primera persona en tener los cuatro órganos sanos. ¡Contágiate con esta expansión y diviértete en familia o con amigos!",
+        "precio":11.95,
+        "imagenURL":"../IMG/IMG-JUEGOS/virus_2.jpg",
+        "stock":18
+    },
+    {
+        "idProducto":"3",
+        "nombre":"Misión Cumplida",
+        "descripcion":"En Misión Cumplida, vuestro objetivo será cumplir la mayor cantidad de retos posibles antes de que se os acaben las cartas. Cada partida se preparará con un máximo de objetivos y los jugadores, de forma cooperativa, deberán intentar cumplirlos con ciertas restricciones en la comunicación. Cumplid objetivos, aprended a comunicaros y... ¡no os quedéis sin cartas! Sólo así venceréis en este entretenido juego.",
+        "precio":9.95,
+        "imagenURL":"../IMG/IMG-JUEGOS/misioncumplida.jpg",
+        "stock":20
+    },
+    {
+        "idProducto":"4",
+        "nombre":"Mal Trago",
+        "descripcion":"La bruja necesita conejillos de indias para probar sus nuevas pociones y nosotros, sus leales esbirros goblins, hemos sido designados como voluntarios forzosos para esta ocasión. No es tan terrible como parece; vale, puede que algunas pociones tengan un efecto mortal, pero la jefa, siempre generosa, ha prometido que uno de nosotros saldrá ileso, como premio por su astucia, por su instinto y porque alguien tendrá que limpiarlo todo al final.",
+        "precio":14.99,
+        "imagenURL":"../IMG/IMG-JUEGOS/maltrago.jpg",
+        "stock":35
+    },
+    {
+        "idProducto":"5",
+        "nombre":"Polilla Tramposa",
+        "descripcion":"Normalmente en los juegos no se permite hacer trampas. ¡Pero en este juego sí! Se trata de ser el primer jugador en deshacerse de todas las cartas y por eso os hará falta ser ingeniosos a la hora de descartar y muy hábiles haciendo trampas. Se juegan tantas rondas como jugadores haya y gana el jugador que tenga menos puntos negativos al final de la partida.",
+        "precio":14.00,
+        "imagenURL":"../IMG/IMG-JUEGOS/polillatramposa.jpg",
+        "stock":13
+    }
+]
