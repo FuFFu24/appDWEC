@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var listaJuegosMesa = [];
 
   function cargarJuegosMesa() {
-    $.getJSON("../JSON/productoJSON.txt", function (datos) {
+    $.getJSON("../JSON/productoJSON.json", function (datos) {
       listaJuegosMesa = datos;
       ordenarPorDescuento(listaJuegosMesa);
       mostrarJuegosMesa(listaJuegosMesa);

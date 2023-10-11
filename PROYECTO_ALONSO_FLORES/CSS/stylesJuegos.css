@@ -118,30 +118,40 @@ nav ul.menu li a:hover {
   display: flex;
   flex-direction: column;
   align-items: left;
-  margin: 20px;
+  margin: 0 20px 20px 20px;
   background-color: #ffffff;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   text-align: left;
 }
 
-.destacados .titulo {
+.destacados-header {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin: 20px 20px 0 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.destacados-header .titulo {
   margin: 10px 0 0 20px;
   color: #455a64;
 }
 
-.destacados .introduccion {
+.destacados-header .introduccion {
   margin: 10px 0 20px 20px;
   color: #455a64;
 }
 
 /* Estilos para el elemento select */
-.destacados .filtrar-ordenar {
+.destacados-header .filtrar-ordenar {
   position: absolute;
   right: 40px;
   margin-top: 38px;
 }
 
-.destacados select {
+.destacados-header select {
   background: #ffffff url(../IMG/LOGOS/down-arrow-gris-claro.png) no-repeat;
   background-size: 24px 24px;
   background-position: right center;
@@ -167,7 +177,7 @@ nav ul.menu li a:hover {
   }
 }
 
-.destacados select:focus {
+.destacados-header select:focus {
   border: 1px solid #4ccbaf;
   background: #ffffff url(../IMG/LOGOS/collapse-arrow-verde.png) no-repeat;
   background-size: 24px 24px;
@@ -175,7 +185,7 @@ nav ul.menu li a:hover {
 }
 
 /* Estilos para la etiqueta "label" */
-.destacados label {
+.destacados-header label {
   margin-right: 10px;
 }
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function ampliar() {
+            document.getElementsByTagName("img")[0].width=200;
+            /* let ancho = document.getElementsByTagName("img")[0].width;
+            document.getElementsByTagName("img")[0].width = ancho*2; */
+        }
+        function cambiarColor() {
+            document.getElementsByTagName("div")[0].style.backgroundColor="red";
+        }
+        function addEvento() {
+            document.getElementsByTagName("div")[0].addEventListener("mouseover",cambiarColor);
+            document.getElementsByTagName("img")[0].addEventListener("mouseover",ampliar);
+        }
+        onload=function(){
+            document.getElementById("campo1").addEventListener("blur",mostrarID);
+            document.getElementById("campo2").addEventListener("blur",mostrarID);
+            document.getElementById("campo3").addEventListener("blur",mostrarID);
+            document.getElementById("campo4").addEventListener("blur",mostrarID);
+            document.getElementById("campo5").addEventListener("blur",mostrarID);
+            document.getElementById("campo6").addEventListener("blur",mostrarID);
+        }
+        function mostrarID(evento){
+            alert("EL ID ES: "+evento.target.id)
+        }
+    </script>
+</head>
+<body>
+    <div style="background-color: blueviolet;">
+        <p>HOLA</p>
+        <img src="guillem-the-frutem-v0-qfq1fd14koaa1.jpg" alt="fruta">
+    </div>
+    <button type="button" onclick="addEvento()">AÑADIR EVENTO</button>
+    <p>
+        <span>Campo 1:</span><input type="text" name="" id="campo1">
+    </p>
+    <p>
+        <span>Campo 2:</span><input type="text" name="" id="campo2">
+    </p>
+    <p>
+        <span>Campo 3:</span><input type="text" name="" id="campo3">
+    </p>
+    <p>
+        <span>Campo 4:</span><input type="text" name="" id="campo4">
+    </p>
+    <p>
+        <span>Campo 5:</span><input type="text" name="" id="campo5">
+    </p>
+    <p>
+        <span>Campo 6:</span><input type="text" name="" id="campo6">
+    </p>
+</body>
+</html>
