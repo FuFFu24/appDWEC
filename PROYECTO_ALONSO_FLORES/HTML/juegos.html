@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans" />
+    <link rel="icon" type="image/x-icon" href="../IMG/LOGOS/prodigy-48.png" />
+    <link rel="stylesheet" href="../CSS/stylesJuegos.css" />
+    <script src="../JS/jquery.js"></script>
+    <script src="../JS/scriptsJuegos.js"></script>
+    <title>Monstruo de los Juegos</title>
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="../IMG/LOGOS/logo-gris.png" alt="Monstruo de los Juegos" />
+            </a>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="juegos.html">JUEGOS</a></li>
+                <li><a href="#">CARTAS</a></li>
+                <li><a href="#">MINIATURAS</a></li>
+                <li><a href="#">ACCESORIOS</a></li>
+                <li><a href="#">¡OFERTAS!</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <div>
+                <input type="text" placeholder="¿Qué estás buscando?" />
+            </div>
+            <div class="user-icon" id="user-icon">
+                <a href="login.html">
+                    <img src="../IMG/LOGOS/user-gris.png" alt="Usuario" />
+                </a>
+                <!-- Comentado por si se volviera a usar en un futuro -->
+                <!-- <div class="user-dropdown" id="user-dropdown">
+                    <ul>
+                        <li><a href="login.html">Iniciar sesión</a></li>
+                        <li><a href="#">Registrarse</a></li>
+                    </ul>
+                </div> -->
+            </div>
+            <div class="cart-icon">
+                <a href="#">
+                    <img src="../IMG/LOGOS/cart-gris.png" alt="Carrito de compras" />
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <section class="destacados">
+        </section>
+    </main>
+
+    <!-- Formulario de suscripción al Newsletter -->
+    <div class="newsletter">
+        <img src="../IMG/LOGOS/email-gris.png" alt="Email">
+        <h2>Suscríbete a nuestro Newsletter</h2>
+        <form id="newsletter-form">
+            <input type="email" id="email" name="email" placeholder="Correo electrónico*" required>
+            <button type="submit">Suscribirse</button>
+            <br>
+            <input type="checkbox" id="acepto" name="acepto" required>
+            <label for="acepto">Acepto la <a href="#">Política de Privacidad</a> y el <a href="#">Aviso
+                    Legal</a></label>
+        </form>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-column">
+            <h3>Sobre Nosotros</h3>
+            <p>Somos una tienda de juegos de mesa comprometida con brindar la mejor selección de juegos para entusiastas
+                de todo tipo. Nuestra pasión es ofrecer experiencias divertidas y memorables a través de juegos de
+                calidad.</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Contacto</h3>
+            <p><strong>Correo Electrónico:</strong> info@monstruodelosjuegos.com</p>
+            <p><strong>Teléfono:</strong> +34 xxx xxx xxx</p>
+            <p><strong>WhatsApp:</strong> +34 xxx xxx xxx</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Síguenos</h3>
+            <a href="#" class="facebook-icon"><img src="../IMG/LOGOS/facebook-gris.png" alt="facebook"></a>
+            <a href="#" class="twitter-icon"><img src="../IMG/LOGOS/twitter-gris.png" alt="twitter"></a>
+            <a href="#" class="instagram-icon"><img src="../IMG/LOGOS/instagram-gris.png" alt="instagram"></a>
+            <a href="#" class="youtube-icon"><img src="../IMG/LOGOS/youtube-gris.png" alt="youtube"></a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Encuéntranos</h3>
+            <p><strong>Dirección:</strong> Calle Principal, Ciudad</p>
+            <p><strong>Horario:</strong> Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+            <p><strong>Sábados y Domingos:</strong> Cerrado</p>
+        </div>
+    </footer>
+</body>
+
+</html>

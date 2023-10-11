@@ -114,7 +114,22 @@ nav ul.menu li a:hover {
 }
 
 /* Estilos para la sección de Destacados de Juegos */
-.destacados {
+.mesaje-main {
+  margin: 40px 0 40px 0;
+}
+
+.mesaje-main h2 {
+  margin-bottom: 20px;
+}
+
+.mesaje-main h2,
+.mesaje-main p {
+  text-align: center;
+}
+
+.mejor-valorados,
+.novedades,
+.en-oferta {
   display: flex;
   justify-content: space-between;
   margin: 20px;
@@ -124,7 +139,9 @@ nav ul.menu li a:hover {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
-.destacados h2 {
+.mejor-valorados h2,
+.novedades h2,
+.en-oferta h2 {
   display: flex;
   position: absolute;
   margin: -50px 0 0 20px;
@@ -137,7 +154,7 @@ nav ul.menu li a:hover {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 30%;
+  width: 100%; /* Aumenta este valor para hacer los productos más grandes */
   padding: 10px;
   background-color: #ffffff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -164,6 +181,12 @@ nav ul.menu li a:hover {
 
 .juego-destacado .datos-juego {
   margin: 10px 0;
+}
+
+/* Estilos para la cuadrícula de productos */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Muestra 5 columnas por fila */
 }
 
 /* Estilos para el botón "Añadir al carrito" */
@@ -212,10 +235,6 @@ nav ul.menu li a:hover {
 form {
   flex-direction: column;
   align-items: center;
-}
-
-label {
-  font-size: 12px;
 }
 
 label a {
