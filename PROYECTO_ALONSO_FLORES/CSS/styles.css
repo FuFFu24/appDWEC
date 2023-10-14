@@ -183,6 +183,16 @@ nav ul.menu li a:hover {
   margin: 10px 0;
 }
 
+.precio-con-descuento {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.precio-original {
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
 /* Estilos para la cuadrícula de productos */
 .product-grid {
   display: grid;

@@ -118,7 +118,7 @@ nav ul.menu li a:hover {
   display: flex;
   flex-direction: column;
   align-items: left;
-  margin: 0 20px 20px 20px;
+  margin: 0 20px 0 20px;
   background-color: #ffffff;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   text-align: left;
@@ -224,6 +224,16 @@ nav ul.menu li a:hover {
   margin: 10px 0;
 }
 
+.precio-con-descuento {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.precio-original {
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
 /* Estilos para la cuadrícula de productos */
 .product-grid {
   display: grid;
@@ -250,6 +260,92 @@ nav ul.menu li a:hover {
 
 .btn-anadir-carrito:hover {
   background-color: #4ccbaf;
+}
+
+.destacados-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px 20px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.page-selector {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.page-selector ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.page-selector li {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.page-selector li:hover {
+  color: #4ccbaf;
+}
+
+.page-selector .page-anterior:hover {
+  background-image: url(../IMG/LOGOS/left-arrow-verde.png);
+}
+
+.page-selector .page-siguiente:hover {
+  background-image: url(../IMG/LOGOS/right-arrow-verde.png);
+}
+
+.page-selector li img {
+  width: 24px;
+  height: 24px;
+}
+
+.page-numero.current-page {
+  color: #4ccbaf;
+}
+
+.productos-por-page {
+  text-align: right;
+  padding: 20px;
+}
+
+.productos-por-page select {
+  background: #ffffff url(../IMG/LOGOS/down-arrow-gris-claro.png) no-repeat;
+  background-size: 24px 24px;
+  background-position: right center;
+  color: #757575;
+  font-size: 14px;
+  height: 30px;
+  width: 50px;
+  padding-left: 5px;
+  margin-top: 10px;
+  border: 1px solid #f4f4f4;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  -webkit-appearance: none; /* Propiedad específica de WebKit (Chrome, Safari) */
+  -moz-appearance: none; /* Propiedad específica de Mozilla (Firefox) */
+  appearance: none;
+  outline: none;
+
+  &:hover {
+    background: #ffffff url(../IMG/LOGOS/down-arrow-verde.png) no-repeat;
+    background-size: 24px 24px;
+    background-position: right center;
+    border: 1px solid #4ccbaf;
+  }
+}
+
+.productos-por-page select:focus {
+  border: 1px solid #4ccbaf;
+  background: #ffffff url(../IMG/LOGOS/collapse-arrow-verde.png) no-repeat;
+  background-size: 24px 24px;
+  background-position: right center;
 }
 
 /* Estilos para la sección de Newsletter */

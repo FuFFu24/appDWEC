@@ -48,19 +48,32 @@ document.addEventListener("DOMContentLoaded", function () {
       const juegoDestacado = document.createElement("div");
       juegoDestacado.className = "juego-destacado";
 
+      if (producto.descuento) {
+        // Calcula el precio con descuento
+        valorDescuento = (producto.precio * producto.porcentajeDescuento) / 100;
+        precioVenta = (producto.precio - valorDescuento).toFixed(2);
+      }
+
       // Crea el contenido del juego destacado
       const contenidoHTML = `
-        <a href="#" class="web-page">
-          <div class="img-juego">
-            <img src="${producto.imagenURL}" alt="${producto.nombre}" />
-          </div>
-          <div class="datos-juego">
-            <p>${producto.nombre}</p>
-            <h3>${producto.precio} €</h3>
-          </div>
-        </a>
-        <a href="#" class="btn-anadir-carrito">Añadir al carrito</a>
-      `;
+      <a href="#" class="web-page">
+        <div class="img-juego">
+          <img src="${producto.imagenURL}" alt="${producto.nombre}" />
+        </div>
+        <div class="datos-juego">
+          <p>${producto.nombre}</p>
+          <p>
+            <span class="precio-con-descuento">${
+              producto.descuento ? precioVenta : producto.precio
+            } €</span>
+            <span class="precio-original">${
+              producto.descuento ? " Antes " + producto.precio + " €" : ""
+            }</span>
+          </p>
+        </div>
+      </a>
+      <a href="#" class="btn-anadir-carrito">Añadir al carrito</a>
+    `;
 
       // Agrega el contenido al juego destacado
       juegoDestacado.innerHTML = contenidoHTML;
