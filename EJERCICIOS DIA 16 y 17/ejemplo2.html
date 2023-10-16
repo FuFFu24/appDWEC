@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var listaFotos = ["insect.jpg", "insect(1).jpg", "insect(2).jpg"];
+        var listaBichos = [
+            {
+                "nombre":"perro1",
+                "raza":"pastor aleman",
+                "foto": "insect.jpg"
+            },
+            {
+                "nombre":"perro2",
+                "raza":"golden",
+                "foto": "insect(1).jpg"
+            },
+            {
+                "nombre":"perro3",
+                "raza":"manolo",
+                "foto": "insect(2).jpg"
+            }
+        ]
+
+        function crearImagen() {
+            var nuevaImagen = document.createElement("img");
+            nuevaImagen.src = listaFotos[0];
+            document.body.appendChild(nuevaImagen);
+        }
+
+        function cambiarImagen(evento) {
+            var imagen = document.querySelector("img");
+            imagen.src = listaFotos[evento.target.value];
+        }
+
+        window.onload = function() {
+            document.getElementById("boton1").addEventListener("click", crearImagen);
+            document.getElementById("fotos").addEventListener("change", cambiarImagen);
+            function mostrarDatos() {
+                var parrafo = document.getElementsByTagName("p")[2];
+                listaBichos.forEach(element => {
+                    var contenedor = document.createElement("div");
+                    var datos = `<p>${element.nombre}</p>
+                    <button type="button" onclick="pintarFotoPerro('${element.foto}', 'foto_${element.nombre}')">Foto</button>
+                    <div id="foto_${element.nombre}"></div>`;
+                    contenedor.innerHTML = datos;
+                    parrafo.appendChild(contenedor);
+                });
+            }
+            mostrarDatos();
+        }
+        function pintarFotoPerro(foto, divId) {
+            document.getElementById(divId).innerHTML = `<img src="${foto}">`;
+        }
+    </script>
+</head>
+<body>
+    <p>
+        <button type="button" id="boton1">PARTE 1</button>
+    </p>
+    <p>
+        <select name="fotos" id="fotos">
+            <option value="0">1</option>
+            <option value="1">2</option>
+            <option value="2">3</option>
+        </select>
+    </p>
+    <p>
+
+    </p>
+</body>
+</html>
+
