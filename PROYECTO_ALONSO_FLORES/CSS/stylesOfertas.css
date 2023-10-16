@@ -113,7 +113,7 @@ nav ul.menu li a:hover {
   position: absolute;
 }
 
-/* Estilos para la sección de Destacados de Juegos */
+/* Estilos para la sección de Destacados de ofertas */
 .destacados {
   display: flex;
   flex-direction: column;
@@ -189,8 +189,8 @@ nav ul.menu li a:hover {
   margin-right: 10px;
 }
 
-/* Estilos para cada juego destacado */
-.juego-destacado {
+/* Estilos para cada oferta destacado */
+.oferta-destacado {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -202,25 +202,25 @@ nav ul.menu li a:hover {
   position: relative;
 }
 
-.juego-destacado:hover {
+.oferta-destacado:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   padding-bottom: 40px;
   z-index: 1;
 }
 
-.juego-destacado .web-page {
+.oferta-destacado .web-page {
   color: #455a64;
   text-decoration: none;
 }
 
-.juego-destacado img {
+.oferta-destacado img {
   width: 80%;
   aspect-ratio: 4/5;
   object-fit: contain;
 }
 
-.juego-destacado .datos-juego {
+.oferta-destacado .datos-oferta {
   margin: 10px 0;
 }
 
@@ -254,7 +254,7 @@ nav ul.menu li a:hover {
   transform: translateX(-50%);
 }
 
-.juego-destacado:hover .btn-anadir-carrito {
+.oferta-destacado:hover .btn-anadir-carrito {
   display: inline-block;
 }
 
