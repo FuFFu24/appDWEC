@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var listaEmpleados = [];
+        listaEmpleados[0] = {
+            "nombre": "Fernando",
+            "apellidos": "García Jiménez",
+            "edad": "40"
+        };
+        listaEmpleados[1] = {
+            "nombre": "Juan",
+            "apellidos": "García Jiménez",
+            "edad": "45"
+        };
+
+        function mostrarDatosEmpleado(event) {
+            alert(event.target.datoEmpleado.nombre);
+        }
+        window.onload = function() {
+            for (var i = 0; i < listaEmpleados.length; i++) {
+                let boton1 = document.createElement("button");
+                boton1.type = "button";
+                boton1.id = "boton1";
+                boton1.innerHTML = "Empleado " + i;
+                boton1.datoEmpleado = listaEmpleados[i];
+                document.body.appendChild(boton1);
+                boton1.addEventListener("click", () => mostrarDatosEmpleado(event));
+                /*boton1.addEventListener("click", 
+                (function(a){ 
+                     return ()=>mostrarDatosEmpleado(a)
+                })(listaEmpleados[i]));*/
+            }
+        }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

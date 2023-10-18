@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+  <script>
+    function mostrar(event) {
+      var mensaje = 'currentTarget:' + event.currentTarget.nodeName;
+      alert(mensaje);
+      var mensaje = 'this:' + this.nodeName;
+      alert(mensaje);
+    }
+  </script>
+</head>
+<body>
+  <DIV STYLE="background-color:red;position:relative;width=200;heigth=100" onmouseover="mostrar()" onclick="mostrar()"
+    id="capa1">&nbsp;</div><br>
+  <div onclick="mostrar()">
+    <input type="text" onkeypress="mostrar()" id="caja1"><br>
+    <button type='button' onclick="mostrar()" id="boton1">PULSAR</button><br>
+  </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+    <script>
+        function mostrarEvento() {
+            alert("currentTarget:" + event.currentTarget.id + " target:" + event.target.id);
+        }
+    </script>
+</head>
+<body>
+    <DIV STYLE="background-color:red;position:relative;width=200;heigth=100" id="capa1">&nbsp;
+    </div>
+    <br>
+    <div STYLE="background-color:green;position:relative;width=200;heigth=100" id="capa2" onclick="mostrarEvento()">
+        <br>
+        <input type="text" id="caja1" onclick="mostrarEvento()">
+        <br><br>
+    </div>
+</body>
+</html>

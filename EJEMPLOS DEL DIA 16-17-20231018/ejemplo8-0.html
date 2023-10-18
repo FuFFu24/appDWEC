@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <script>
+    window.onload = function () {
+      listaBotones = document.getElementsByTagName("button");
+      listaBotones[0].addEventListener("click", () => mostrar(20));
+      listaBotones[1].addEventListener("click", () => mostrar(11));
+      listaBotones[2].addEventListener("click", () => mostrar(24));
+      listaBotones[3].addEventListener("click", () => mostrar(35));
+    }
+    function mostrar(texto) {
+      alert(texto);
+    }
+  </script>
+</head>
+<body>
+  <button type="button">Botón 1</button>
+  <button type="button">Botón 2</button>
+  <button type="button">Botón 3</button>
+  <button type="button">Botón 4</button>
+</body>
+</html>

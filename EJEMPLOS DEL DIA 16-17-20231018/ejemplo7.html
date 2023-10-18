@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<head>
+    <script>
+        function resalta() {
+            alert("evento lanzado");
+        }
+        window.onload = function() {
+            var formulario = document.getElementById("formulario");
+            var camposInput = formulario.getElementsByTagName("input");
+            for (var i = 0; i < camposInput.length; i++) {
+                if (camposInput[i].type == "text") {
+                    camposInput[i].addEventListener("click", resalta);
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="formulario">
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+    </div>
+</body>
+
+</html>

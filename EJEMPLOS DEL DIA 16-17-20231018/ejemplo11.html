@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        onload = () => {
+        document.getElementsByTagName("img")[0]
+            .addEventListener("click",f1);
+        document.getElementsByTagName("button")[0]
+            .addEventListener("click",f2);
+        document.getElementsByTagName("div")[0]
+            .addEventListener("click",f3);
+        document.getElementsByTagName("a")[0]
+            .addEventListener("click",f4);
+        }
+
+        function f1(evento) {
+            alert(1);
+            evento.stopPropagation();
+        }
+
+        function f2(evento) {
+            document.getElementById("caja1").value = "HOLA";
+            evento.stopPropagation();
+        }
+
+        function f3() {
+            alert(3);
+        }
+
+        function f4(evento) {
+            alert(4);
+            evento.preventDefault();
+        }
+    </script>
+    <style>
+        img {
+            width: 192px;
+            height: 192px;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 300px; height: 300px; background-color: red;">
+        <img src="../PROYECTO_ALONSO_FLORES/IMG/LOGOS/prodigy-480.png" alt=""><br>
+        <button type="button">PULSAME</button>
+    </div>
+    <input type="text" name="caja1" id="caja1">
+    <a href="">PULSAME</a>
+</body>
+</html>

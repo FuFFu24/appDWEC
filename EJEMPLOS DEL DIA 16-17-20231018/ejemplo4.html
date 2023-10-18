@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<head>
+    <script>
+        function mostrar(event) {
+            var mensaje = 'currentTarget:' + event.currentTarget.nodeName;
+            mensaje += ' - target:' + event.target.nodeName;
+            mensaje += ' - eventPhase:' + event.eventPhase;
+            mensaje += ' - timestamp:' + event.timeStamp;
+            mensaje += ' - type:' + event.type;
+            alert(mensaje);
+            if (event.target.tagName == "INPUT") {
+                alert("tecla pulsada: " + String.fromCharCode(event.charCode || event.keyCode));
+                event.preventDefault(); // el evento no ha ocurrido
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <DIV STYLE="background-color:red;position:relative;width=200;heigth=100" onmouseover="mostrar(event)" onclick="mostrar(event)" id="capa1">&nbsp;</div><br>
+    <div onclick="mostrar(event)">
+        <input type="text" onkeypress="mostrar(event)" id="caja1"><br>
+        <button type='button' onclick="mostrar(event)" id="boton1">PULSAR</button><br>
+    </div>
+</body>
+
+</html>

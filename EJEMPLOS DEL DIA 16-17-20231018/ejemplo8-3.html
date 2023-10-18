@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <style>
+    td {
+      border: 2px solid black;
+      width: 100px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      listaBotones = document.getElementsByTagName("button");
+      for (i = 0; i < listaBotones.length; i++) {
+        listaBotones[i].addEventListener("click", (function (a) {
+          return () => operar(a, "SUMAR", "SUMA=");
+		    )(i));
+      }
+    }
+    function operar(fila, operacion, texto) {
+      listaCeldas = document.getElementsByTagName("td");
+      if (operacion == "SUMAR") {
+        resultado = parseInt(listaCeldas[fila * 4].innerHTML) + parseInt(listaCeldas[fila * 4 + 1].innerHTML)
+      } else {
+        resultado = parseInt(listaCeldas[fila * 4 + 1].innerHTML) - parseInt(listaCeldas[fila * 4].innerHTML)
+      }
+      listaCeldas[fila * 4 + 3].innerHTML = texto + " " + resultado;
+    }
+  </script>
+</head>
+<body>
+  <table>
+    <tr>
+      <td>1</td>
+      <td>10</td>
+      <td><button>+</button></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>10</td>
+      <td><button>+</button></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>10</td>
+      <td><button>+</button></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>10</td>
+      <td><button>+</button></td>
+      <td></td>
+    </tr>
+  </table>
+</body>
+</html>

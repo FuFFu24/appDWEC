@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <script>
+        window.onload = function() {
+            var i = 0;
+            listaBotones = document.getElementsByTagName("button");
+            listaBotones[0].dato = i;
+            listaBotones[0].addEventListener("click", (event) => mostrar(event.target.dato));
+            i = 22;
+            listaBotones[1].addEventListener("click", () => mostrar(i));
+            i = 222;
+            listaBotones[2].addEventListener("click", () => mostrar(i));
+            i = 2222;
+            listaBotones[3].addEventListener("click", () => mostrar(i));
+            i = 2222222;
+        }
+
+        function mostrar(texto) {
+            alert(texto);
+        }
+    </script>
+</head>
+
+<body>
+    <button type="button">Botón 1</button>
+    <button type="button">Botón 2</button>
+    <button type="button">Botón 3</button>
+    <button type="button">Botón 4</button>
+</body>
+
+</html>

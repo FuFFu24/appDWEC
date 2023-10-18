@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const botonPaginaAnterior = document.createElement("li");
       botonPaginaAnterior.className = "page-anterior";
       botonPaginaAnterior.innerHTML =
-        '<img src="../IMG/LOGOS/left-arrow-gris.png" alt="">';
+        '<img src="../IMG/LOGOS/left-arrow-verde.png" alt="">';
       botonPaginaAnterior.addEventListener("click", function () {
         paginaActual--;
         actualizarVista();
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const botonPaginaSiguiente = document.createElement("li");
       botonPaginaSiguiente.className = "page-siguiente";
       botonPaginaSiguiente.innerHTML =
-        '<img src="../IMG/LOGOS/right-arrow-gris.png" alt="">';
+        '<img src="../IMG/LOGOS/right-arrow-verde.png" alt="">';
       botonPaginaSiguiente.addEventListener("click", function () {
         paginaActual++;
         actualizarVista();
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cargarYMostrarJuegosMesa();
 
-  // Utiliza event delegation para manejar los eventos de mouseover y mouseout
+  /* // Utiliza event delegation para manejar los eventos de mouseover y mouseout
   document.addEventListener("mouseover", function (e) {
     if (e.target.classList.contains("page-anterior")) {
       e.target.querySelector("img").src = "../IMG/LOGOS/left-arrow-verde.png";
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (e.target.classList.contains("page-siguiente")) {
       e.target.querySelector("img").src = "../IMG/LOGOS/right-arrow-gris.png";
     }
-  });
+  }); */
 
   /* // Agrega los eventos para las flechas de navegación aquí
   const imgFlechaIzquierda = document.querySelector(".page-anterior img");
