@@ -25,7 +25,7 @@ function pintarTabla(lista) {
                 celda.innerHTML = empleado[propiedad];
             } else {
                 celda.innerHTML = `<img src="${empleado[propiedad]}">`
-                celda.addEventListener("click", () => editar(empleado.DNI))
+                celda.addEventListener("click", () => editar(empleado))
             }
         }
         var celda = document.createElement("td");
@@ -47,37 +47,41 @@ function editar(empleadoAEditar) {
     divNuevoEmpleado.innerHTML = `<table>
                         <tr>
                         <td>Nombre: </td>
-                        <td><input type="text" id="nombreEmpleado" value=""></td>
+                        <td><input type="text" id="nombreEmpleado" value="${empleadoAEditar.nombre}"></td>
                         </tr>
                         <tr>
                         <td>Apellidos: </td>
-                        <td><input type="text" id="apellidosEmpleado"></td>
+                        <td><input type="text" id="apellidosEmpleado" value="${empleadoAEditar.apellidos}"></td>
                         </tr>
                         <tr>
                         <td>Edad: </td>
-                        <td><input type="text" id="edadEmpleado"></td>
+                        <td><input type="text" id="edadEmpleado" value="${empleadoAEditar.edad}"></td>
                         </tr>
                         <tr>
                         <td>Antiguedad: </td>
-                        <td><input type="text" id="antiguedadEmpleado"></td>
+                        <td><input type="text" id="antiguedadEmpleado" value="${empleadoAEditar.antiguedad}"></td>
                         </tr>
                         <tr>
                         <td>Puesto: </td>
-                        <td><input type="text" id="puestoEmpleado"></td>
+                        <td><input type="text" id="puestoEmpleado" value="${empleadoAEditar.puesto}"></td>
                         </tr>
                         </table>
-                        <button type="button" onclick="editarEmpleado(empleadoAEditar)">Editar</button>
+                        <button type="button" onclick="editarEmpleado(${empleadoAEditar})">Editar</button>
                         <button type="button" onclick="borrarDivNuevoEmpleado()">Cancelar</button>
                         `
 }
 
 function editarEmpleado(empleadoAEditar) {
-    listaEmpleados[empleadoAEditar].nombre = document.getElementById("nombreEmpleado").value;
-    listaEmpleados[empleadoAEditar].apellidos = document.getElementById("apellidosEmpleado").value;
-    listaEmpleados[empleadoAEditar].edad = document.getElementById("edadEmpleado").value;
-    listaEmpleados[empleadoAEditar].antiguedad = document.getElementById("antiguedadEmpleado").value;
-    listaEmpleados[empleadoAEditar].puesto = document.getElementById("puestoEmpleado").value;
-    pintarTabla(listaEmpleados);
+    var posicion = listaEmpleados.findIndex(empleado => empleado.DNI == empleadoAEditar.DNI);
+    if (posicion != -1) {
+        listaEmpleados[posicion].nombre = document.getElementById("nombreEmpleado").value;
+        listaEmpleados[posicion].apellidos = document.getElementById("apellidosEmpleado").value;
+        listaEmpleados[posicion].edad = document.getElementById("edadEmpleado").value;
+        listaEmpleados[posicion].antiguedad = document.getElementById("antiguedadEmpleado").value;
+        listaEmpleados[posicion].puesto = document.getElementById("puestoEmpleado").value;
+        alert("DATOS MODIFICADOS");
+        pintarTabla(listaEmpleados);
+    }
 }
 
 function borrarDivNuevoEmpleado() {
@@ -86,10 +90,7 @@ function borrarDivNuevoEmpleado() {
 
 function eliminar(empleadoABorrar) {
     var posicion = listaEmpleados.findIndex(empleado => empleado.DNI == empleadoABorrar.DNI);
-    if (posicion != -1) {
-        listaEmpleados.splice(posicion, 1);
-        pintarTabla(listaEmpleados);
-    }
+    
 }
 
 function ordenar() {
