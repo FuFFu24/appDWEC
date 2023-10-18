@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Botón de página anterior (si no estamos en la primera página)
     if (paginaActual > 1) {
       const botonPaginaAnterior = document.createElement("li");
+      botonPaginaAnterior.className = "page-anterior";
       botonPaginaAnterior.innerHTML =
         '<img src="../IMG/LOGOS/left-arrow-gris.png" alt="">';
       botonPaginaAnterior.addEventListener("click", function () {
@@ -146,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Botón de página siguiente (si no estamos en la última página)
     if (paginaActual < numPaginas) {
       const botonPaginaSiguiente = document.createElement("li");
+      botonPaginaAnterior.className = "page-siguiente";
       botonPaginaSiguiente.innerHTML =
         '<img src="../IMG/LOGOS/right-arrow-gris.png" alt="">';
       botonPaginaSiguiente.addEventListener("click", function () {
@@ -168,7 +170,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cargarYMostrarAccesorios();
 
-  // Obtiene las imágenes de flecha izquierda y derecha
+  // Utiliza event delegation para manejar los eventos de mouseover y mouseout
+  document.addEventListener("mouseover", function (e) {
+    if (e.target.classList.contains("page-anterior")) {
+      e.target.querySelector("img").src = "../IMG/LOGOS/left-arrow-verde.png";
+    } else if (e.target.classList.contains("page-siguiente")) {
+      e.target.querySelector("img").src = "../IMG/LOGOS/right-arrow-verde.png";
+    }
+  });
+
+  document.addEventListener("mouseout", function (e) {
+    if (e.target.classList.contains("page-anterior")) {
+      e.target.querySelector("img").src = "../IMG/LOGOS/left-arrow-gris.png";
+    } else if (e.target.classList.contains("page-siguiente")) {
+      e.target.querySelector("img").src = "../IMG/LOGOS/right-arrow-gris.png";
+    }
+  });
+
+  /* // Obtiene las imágenes de flecha izquierda y derecha
   const imgFlechaIzquierda = document.querySelector(".page-anterior img");
   const imgFlechaDerecha = document.querySelector(".page-siguiente img");
 
@@ -190,5 +209,5 @@ document.addEventListener("DOMContentLoaded", function () {
   // Cuando se quita el hover de la flecha derecha
   imgFlechaDerecha.addEventListener("mouseout", function () {
     imgFlechaDerecha.src = "../IMG/LOGOS/right-arrow-gris.png";
-  });
+  }); */
 });
