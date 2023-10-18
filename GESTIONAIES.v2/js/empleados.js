@@ -66,13 +66,13 @@ function editar(empleadoAEditar) {
                         <td><input type="text" id="puestoEmpleado" value="${empleadoAEditar.puesto}"></td>
                         </tr>
                         </table>
-                        <button type="button" onclick="editarEmpleado(${empleadoAEditar})">Editar</button>
+                        <button type="button" onclick="editarEmpleado('${empleadoAEditar.DNI}')">Editar</button>
                         <button type="button" onclick="borrarDivNuevoEmpleado()">Cancelar</button>
                         `
 }
 
 function editarEmpleado(empleadoAEditar) {
-    var posicion = listaEmpleados.findIndex(empleado => empleado.DNI == empleadoAEditar.DNI);
+    var posicion = listaEmpleados.findIndex(empleado => empleado.DNI == empleadoAEditar);
     if (posicion != -1) {
         listaEmpleados[posicion].nombre = document.getElementById("nombreEmpleado").value;
         listaEmpleados[posicion].apellidos = document.getElementById("apellidosEmpleado").value;
