@@ -96,6 +96,16 @@ nav ul.menu li a:hover {
   margin-left: 5px;
 }
 
+.resultados-busqueda {
+  position: absolute;
+  top: 80px; /* Ajusta la posición vertical según tu diseño */
+  left: 0;
+  width: 100%;
+  background-color: #fff; /* Fondo blanco o el color que desees */
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  z-index: 999; /* Asegura que esté por encima de otros elementos */
+}
+
 /* User Icon */
 .user-icon img {
   width: 30px;

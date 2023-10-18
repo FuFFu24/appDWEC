@@ -1,29 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-  /* // Obtén el icono de usuario y el desplegable
-  const userIcon = document.getElementById("user-icon");
-  const userDropdown = document.getElementById("user-dropdown");
-
-  // Agrega un evento de clic al icono de usuario
-  userIcon.addEventListener("click", function () {
-    // Alternar la visibilidad del desplegable al hacer clic
-    userDropdown.classList.toggle("show");
-  });
-
-  // Cierra el desplegable si se hace clic en cualquier otro lugar de la página
-  window.addEventListener("click", function (event) {
-    if (
-      !userIcon.contains(event.target) &&
-      !userDropdown.contains(event.target)
-    ) {
-      userDropdown.classList.remove("show");
-    }
-  }); */
-
   var listaJuegosMesa = [];
+  var listaAccesorios = [];
 
   function cargarJuegosMesa() {
+    // Cargar datos de productoJSON.json
     $.getJSON("../JSON/productoJSON.json", function (datos) {
       listaJuegosMesa = datos;
+      // Ordenar y mostrar productos de juegos de mesa
       ordenarPorDescuento(listaJuegosMesa);
       mostrarJuegosMesa(listaJuegosMesa);
       ordenarPorFecha(listaJuegosMesa);
@@ -31,9 +14,38 @@ document.addEventListener("DOMContentLoaded", function () {
       ordenarPorNota(listaJuegosMesa);
       mostrarJuegosMesa(listaJuegosMesa);
     });
+
+    // Cargar datos de accesorioJSON.json
+    $.getJSON("../JSON/accesorioJSON.json", function (datos) {
+      listaAccesorios = datos;
+    });
   }
 
   cargarJuegosMesa();
+
+  const busquedaInput = document.querySelector("input[type='text']");
+
+  // Función para buscar productos en ambas listas
+  function buscarProductos(termino) {
+    const resultadosJuegosMesa = buscarEnLista(termino, listaJuegosMesa);
+    const resultadosAccesorios = buscarEnLista(termino, listaAccesorios);
+
+    // Combinar los resultados de ambas listas
+    const resultadosCombinados =
+      resultadosJuegosMesa.concat(resultadosAccesorios);
+
+    const destacados = document.querySelector(".resultados-busqueda");
+    destacados.innerHTML = '<div class="product-grid"></div>';
+
+    return resultadosCombinados.slice(0, 5); // Limitamos a mostrar un máximo de 5 resultados.
+  }
+
+  // Función para buscar en una lista
+  function buscarEnLista(termino, lista) {
+    return lista.filter((producto) =>
+      producto.nombre.toLowerCase().includes(termino.toLowerCase())
+    );
+  }
 
   // Función para crear el HTML de un producto
   function mostrarJuegosMesa(lista) {
@@ -82,6 +94,37 @@ document.addEventListener("DOMContentLoaded", function () {
       productGrid.appendChild(juegoDestacado);
     });
   }
+
+  // Escuchar el evento "input" en el campo de búsqueda
+  busquedaInput.addEventListener("input", function () {
+    const terminoBusqueda = busquedaInput.value;
+
+    // Realiza la búsqueda y muestra los resultados
+    const resultados = buscarProductos(terminoBusqueda);
+    mostrarJuegosMesa(resultados);
+  });
+
+  // Escuchar el evento "blur" para ocultar el desplegable cuando el campo pierde el foco
+  busquedaInput.addEventListener("blur", function () {
+    const resultadosDesplegable = document.querySelector(
+      ".resultados-busqueda"
+    );
+    resultadosDesplegable.innerHTML = ""; // Elimina el contenido del desplegable
+  });
+
+  const searchInput = document.getElementById("search-input");
+
+  searchInput.addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+      const query = searchInput.value;
+      if (query.trim() !== "") {
+        // Redirigir a la página de resultados con la consulta en los parámetros de la URL
+        window.location.href = `resultados.html?query=${encodeURIComponent(
+          query
+        )}`;
+      }
+    }
+  });
 
   // Función para ordenar la lista por la propiedad "nota"
   function ordenarPorNota(lista) {
