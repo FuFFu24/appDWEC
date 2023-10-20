@@ -22,7 +22,7 @@
         </div>
         <nav>
             <ul class="menu">
-                <li><a href="juegos.html">JUEGOS</a></li>
+                <li><a href="juegos.html"><span style="color: #4ccbaf;">JUEGOS</span></a></li>
                 <li><a href="#">CARTAS</a></li>
                 <li><a href="#">MINIATURAS</a></li>
                 <li><a href="accesorios.html">ACCESORIOS</a></li>
@@ -31,19 +31,12 @@
         </nav>
         <div class="user-actions">
             <div>
-                <input type="text" placeholder="¿Qué estás buscando?" />
+                <input type="text" id="search-input" placeholder="¿Qué estás buscando?" />
             </div>
             <div class="user-icon" id="user-icon">
                 <a href="login.html">
                     <img src="../IMG/LOGOS/user-gris.png" alt="Usuario" />
                 </a>
-                <!-- Comentado por si se volviera a usar en un futuro -->
-                <!-- <div class="user-dropdown" id="user-dropdown">
-                    <ul>
-                        <li><a href="login.html">Iniciar sesión</a></li>
-                        <li><a href="#">Registrarse</a></li>
-                    </ul>
-                </div> -->
             </div>
             <div class="cart-icon">
                 <a href="#">
@@ -51,6 +44,9 @@
                     <span class="cart-count">0</span>
                 </a>
             </div>
+        </div>
+        <div class="resultados-busqueda">
+            <!-- Aquí se mostrarán los resultados de búsqueda -->
         </div>
     </header>
 
@@ -72,12 +68,13 @@
             </p>
         </div>
         <section class="destacados">
-
+            <!-- El contenido de los juegos de mesa se mostrará aquí -->
         </section>
         <div class="destacados-footer">
             <!-- Selector de Página -->
             <div class="page-selector">
                 <ul>
+                    <!-- Aquí se mostrará la paginación -->
                 </ul>
             </div>
 
@@ -98,7 +95,7 @@
         <img src="../IMG/LOGOS/email-gris.png" alt="Email">
         <h2>Suscríbete a nuestro Newsletter</h2>
         <form id="newsletter-form">
-            <input type="email" id="email" name="email" placeholder="Correo electrónico*" required>
+            <input type="email" id="email" name="email" autocomplete="off" placeholder="Correo electrónico*" required>
             <button type="submit">Suscribirse</button>
             <br>
             <input type="checkbox" id="acepto" name="acepto" required>

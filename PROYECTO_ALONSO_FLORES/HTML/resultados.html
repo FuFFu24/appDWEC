@@ -31,7 +31,7 @@
         </nav>
         <div class="user-actions">
             <div>
-                <input type="text" placeholder="¿Qué estás buscando?" />
+                <input type="text" id="search-input" placeholder="¿Qué estás buscando?" />
             </div>
             <div class="user-icon" id="user-icon">
                 <a href="login.html">
@@ -51,6 +51,9 @@
                     <span class="cart-count">0</span>
                 </a>
             </div>
+        </div>
+        <div class="resultados-busqueda-header">
+            <!-- Aquí se mostrarán los resultados de búsqueda -->
         </div>
     </header>
 
@@ -98,7 +101,7 @@
         <img src="../IMG/LOGOS/email-gris.png" alt="Email">
         <h2>Suscríbete a nuestro Newsletter</h2>
         <form id="newsletter-form">
-            <input type="email" id="email" name="email" placeholder="Correo electrónico*" required>
+            <input type="email" id="email" name="email" autocomplete="off" placeholder="Correo electrónico*" required>
             <button type="submit">Suscribirse</button>
             <br>
             <input type="checkbox" id="acepto" name="acepto" required>

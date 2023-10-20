@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans" />
   <link rel="icon" type="image/x-icon" href="../IMG/LOGOS/prodigy-48.png" />
   <link rel="stylesheet" href="../CSS/login.css">
+  <script src="../JS/jquery.js"></script>
   <script src="../JS/login.js"></script>
   <title>Monstruo de los Juegos</title>
 </head>
@@ -14,7 +15,7 @@
 <body>
   <div class="login-page">
     <div class="form">
-      <!-- Formulario para registrarse -->
+      <!-- Formulario de registro -->
       <form class="register-form">
         <div class="logo-480">
           <a href="index.html">
@@ -22,6 +23,7 @@
             <h2>Monstruo de los Juegos</h2>
           </a>
         </div>
+        <!-- Campos de registro -->
         <div class="input-flotante">
           <input type="text" id="register-nombre" />
           <label for="register-nombre">Nombre</label>
@@ -37,7 +39,8 @@
         <button>Registrarse</button>
         <p class="message-register">¿Ya tienes cuenta? <a href="#">Inicia sesión</a></p>
       </form>
-      <!-- Formulario para iniciar sesion -->
+
+      <!-- Formulario de inicio de sesión -->
       <form class="login-form">
         <div class="logo-480">
           <a href="index.html">
@@ -45,6 +48,7 @@
             <h2>Monstruo de los Juegos</h2>
           </a>
         </div>
+        <!-- Campos de inicio de sesión -->
         <div class="input-flotante">
           <input type="email" id="login-correo" />
           <label for="login-correo">Correo electrónico</label>
@@ -54,6 +58,7 @@
           <label for="login-contrasena">Contraseña</label>
         </div>
         <button>Iniciar sesión</button>
+        <!-- Opciones de inicio de sesión -->
         <div class="login-bottom">
           <input type="checkbox" id="recuerdame" name="recuerdame">
           <label for="recuerdame"> Recuérdame</label>

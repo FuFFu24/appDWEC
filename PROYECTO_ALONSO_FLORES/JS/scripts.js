@@ -2,8 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var listaJuegosMesa = [];
   var listaAccesorios = [];
 
+  // Función para cargar los datos de juegos de mesa y accesorios
   function cargarJuegosMesa() {
-    // Cargar datos de productoJSON.json
+    // Cargar datos de juegos de mesa desde productoJSON.json
     $.getJSON("../JSON/productoJSON.json", function (datos) {
       listaJuegosMesa = datos;
       // Ordenar y mostrar productos de juegos de mesa
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
       mostrarJuegosMesa(listaJuegosMesa);
     });
 
-    // Cargar datos de accesorioJSON.json
+    // Cargar datos de accesorios desde accesorioJSON.json
     $.getJSON("../JSON/accesorioJSON.json", function (datos) {
       listaAccesorios = datos;
     });
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cargarJuegosMesa();
 
+  // Obtener el campo de búsqueda por su selector
   const busquedaInput = document.querySelector("input[type='text']");
 
   // Función para buscar productos en ambas listas
@@ -34,10 +36,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultadosCombinados =
       resultadosJuegosMesa.concat(resultadosAccesorios);
 
-    const destacados = document.querySelector(".resultados-busqueda");
-    destacados.innerHTML = '<div class="product-grid"></div>';
+    const resultadosDesplegable = document.querySelector(
+      ".resultados-busqueda"
+    );
+    resultadosDesplegable.innerHTML = `
+      <p class="sin-resultados"></p>
+      <div class="product-grid"></div>`;
 
-    return resultadosCombinados.slice(0, 5); // Limitamos a mostrar un máximo de 5 resultados.
+    return resultadosCombinados.slice(0, 5); // Limitar a mostrar un máximo de 5 resultados.
   }
 
   // Función para buscar en una lista
@@ -47,27 +53,36 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  // Función para crear el HTML de un producto
+  // Función para mostrar los juegos de mesa
   function mostrarJuegosMesa(lista) {
+    const mensaje = document.querySelector(".sin-resultados");
     const productGrid = document.querySelector(".product-grid");
 
-    lista.forEach((producto, index) => {
-      if (index >= 5) {
-        return; // Sal del bucle si se han procesado 5 elementos
-      }
+    // Limpiar el contenido actual
+    productGrid.innerHTML = "";
 
-      // Crea un nuevo juego destacado
-      const juegoDestacado = document.createElement("div");
-      juegoDestacado.className = "juego-destacado";
+    if (lista.length === 0) {
+      // Si la lista está vacía, mostrar un mensaje
+      mensaje.innerHTML = `😔 No hemos encontrado nada para <strong>"${busquedaInput.value}"</strong>`;
+    } else {
+      lista.forEach((producto, index) => {
+        if (index >= 5) {
+          return; // Sal del bucle si se han procesado 5 elementos
+        }
 
-      if (producto.descuento) {
-        // Calcula el precio con descuento
-        valorDescuento = (producto.precio * producto.porcentajeDescuento) / 100;
-        precioVenta = (producto.precio - valorDescuento).toFixed(2);
-      }
+        // Crea un nuevo juego destacado
+        const juegoDestacado = document.createElement("div");
+        juegoDestacado.className = "juego-destacado";
 
-      // Crea el contenido del juego destacado
-      const contenidoHTML = `
+        if (producto.descuento) {
+          // Calcula el precio con descuento
+          valorDescuento =
+            (producto.precio * producto.porcentajeDescuento) / 100;
+          precioVenta = (producto.precio - valorDescuento).toFixed(2);
+        }
+
+        // Crea el contenido del juego destacado
+        const contenidoHTML = `
       <a href="#" class="web-page">
         <div class="img-juego">
           <img src="${producto.imagenURL}" alt="${producto.nombre}" />
@@ -87,12 +102,13 @@ document.addEventListener("DOMContentLoaded", function () {
       <a href="#" class="btn-anadir-carrito">Añadir al carrito</a>
     `;
 
-      // Agrega el contenido al juego destacado
-      juegoDestacado.innerHTML = contenidoHTML;
+        // Agrega el contenido al juego destacado
+        juegoDestacado.innerHTML = contenidoHTML;
 
-      // Agrega el juego destacado al contenedor .product-grid
-      productGrid.appendChild(juegoDestacado);
-    });
+        // Agrega el juego destacado al contenedor .product-grid
+        productGrid.appendChild(juegoDestacado);
+      });
+    }
   }
 
   // Escuchar el evento "input" en el campo de búsqueda
@@ -112,11 +128,10 @@ document.addEventListener("DOMContentLoaded", function () {
     resultadosDesplegable.innerHTML = ""; // Elimina el contenido del desplegable
   });
 
-  const searchInput = document.getElementById("search-input");
-
-  searchInput.addEventListener("keyup", function (event) {
+  // Escuchar el evento "keyup" para redirigir a la página de resultados
+  busquedaInput.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-      const query = searchInput.value;
+      const query = busquedaInput.value;
       if (query.trim() !== "") {
         // Redirigir a la página de resultados con la consulta en los parámetros de la URL
         window.location.href = `resultados.html?query=${encodeURIComponent(

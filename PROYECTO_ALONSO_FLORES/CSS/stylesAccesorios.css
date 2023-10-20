@@ -7,19 +7,19 @@
 
 body {
   font-family: "PT Sans";
-  background-color: #f4f4f4;
-  color: #455a64;
+  background-color: #f1fcf8;
+  color: #184941;
 }
 
 /* Encabezado */
 header {
   background-color: #ffffff;
-  color: #455a64;
+  color: #184941;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 40px;
-  border-bottom: 1px solid #455a64;
+  border-bottom: 1px solid #082b28;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   z-index: 1px;
 }
@@ -42,12 +42,13 @@ nav ul.menu li {
 
 nav ul.menu li a {
   text-decoration: none;
-  color: #455a64;
+  color: #184941;
   font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 nav ul.menu li a:hover {
-  color: #4ccbaf;
+  color: #4bcbaf;
 }
 
 /* User Actions */
@@ -60,7 +61,7 @@ nav ul.menu li a:hover {
   width: 300px;
   height: 30px;
   padding: 5px;
-  border: 1px solid #f4f4f4;
+  border: 1px solid #082b28;
   margin-right: 5px;
   margin-left: 5px;
   background-image: url(../IMG/LOGOS/search-gris-claro.png);
@@ -70,16 +71,32 @@ nav ul.menu li a:hover {
 }
 
 .user-actions input[type="text"]:focus {
-  border: 1px solid #4ccbaf;
+  border: 1px solid #4bcbaf;
   outline: none;
   background-image: url(../IMG/LOGOS/search-verde.png);
 }
 
 .user-actions a {
   text-decoration: none;
-  color: #455a64;
+  color: #184941;
   margin-right: 5px;
   margin-left: 5px;
+}
+
+.resultados-busqueda {
+  position: absolute;
+  top: 80px; /* Ajusta la posición vertical según tu diseño */
+  left: 0;
+  width: 100%;
+  background-color: #ffffff; /* Fondo blanco o el color que desees */
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  z-index: 999; /* Asegura que esté por encima de otros elementos */
+}
+
+.sin-resultados {
+  padding: 20px;
+  text-align: center;
+  font-size: 18px;
 }
 
 /* User Icon */
@@ -87,6 +104,7 @@ nav ul.menu li a:hover {
   width: 30px;
   height: auto;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 .user-icon:hover img {
@@ -98,6 +116,7 @@ nav ul.menu li a:hover {
   width: 30px;
   height: auto;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 .cart-icon:hover img {
@@ -105,8 +124,8 @@ nav ul.menu li a:hover {
 }
 
 .cart-count {
-  background-color: #4ccbaf;
-  color: #455a64;
+  background-color: #4bcbaf;
+  color: #184941;
   border-radius: 50%;
   font-size: 12px;
   padding: 2px 6px;
@@ -136,12 +155,12 @@ nav ul.menu li a:hover {
 
 .destacados-header .titulo {
   margin: 10px 0 0 20px;
-  color: #455a64;
+  color: #184941;
 }
 
 .destacados-header .introduccion {
   margin: 10px 0 20px 20px;
-  color: #455a64;
+  color: #184941;
 }
 
 /* Estilos para el elemento select */
@@ -161,24 +180,24 @@ nav ul.menu li a:hover {
   width: 140px;
   padding-left: 5px;
   margin-top: 10px;
-  border: 1px solid #f4f4f4;
+  border: 1px solid #082b28;
   cursor: pointer;
-  transition: border-color 0.3s, box-shadow 0.3s;
   -webkit-appearance: none; /* Propiedad específica de WebKit (Chrome, Safari) */
   -moz-appearance: none; /* Propiedad específica de Mozilla (Firefox) */
   appearance: none;
   outline: none;
+  transition: all 0.3s ease;
 
   &:hover {
     background: #ffffff url(../IMG/LOGOS/down-arrow-verde.png) no-repeat;
     background-size: 24px 24px;
     background-position: right center;
-    border: 1px solid #4ccbaf;
+    border: 1px solid #4bcbaf;
   }
 }
 
 .destacados-header select:focus {
-  border: 1px solid #4ccbaf;
+  border: 1px solid #4bcbaf;
   background: #ffffff url(../IMG/LOGOS/collapse-arrow-verde.png) no-repeat;
   background-size: 24px 24px;
   background-position: right center;
@@ -210,7 +229,7 @@ nav ul.menu li a:hover {
 }
 
 .accesorio-destacado .web-page {
-  color: #455a64;
+  color: #184941;
   text-decoration: none;
 }
 
@@ -240,18 +259,23 @@ nav ul.menu li a:hover {
   grid-template-columns: repeat(4, 1fr); /* Muestra 5 columnas por fila */
 }
 
+.product-grid-desplegable {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Muestra 5 columnas por fila */
+}
+
 /* Estilos para el botón "Añadir al carrito" */
 .btn-anadir-carrito {
   display: none;
   padding: 5px 10px;
-  background-color: #455a64;
+  background-color: #184941;
   color: #fff;
   text-decoration: none;
-  border-radius: 5px;
   position: absolute;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
+  transition: all 0.3s ease;
 }
 
 .accesorio-destacado:hover .btn-anadir-carrito {
@@ -259,7 +283,7 @@ nav ul.menu li a:hover {
 }
 
 .btn-anadir-carrito:hover {
-  background-color: #4ccbaf;
+  background-color: #4bcbaf;
 }
 
 .destacados-footer {
@@ -287,10 +311,11 @@ nav ul.menu li a:hover {
 .page-selector li {
   margin: 0 5px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .page-selector li:hover {
-  color: #4ccbaf;
+  color: #4bcbaf;
 }
 
 .page-selector li img {
@@ -299,7 +324,7 @@ nav ul.menu li a:hover {
 }
 
 .page-numero.current-page {
-  color: #4ccbaf;
+  color: #4bcbaf;
 }
 
 .productos-por-page {
@@ -317,9 +342,9 @@ nav ul.menu li a:hover {
   width: 50px;
   padding-left: 5px;
   margin-top: 10px;
-  border: 1px solid #f4f4f4;
+  border: 1px solid #082b28;
   cursor: pointer;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
   -webkit-appearance: none; /* Propiedad específica de WebKit (Chrome, Safari) */
   -moz-appearance: none; /* Propiedad específica de Mozilla (Firefox) */
   appearance: none;
@@ -329,12 +354,12 @@ nav ul.menu li a:hover {
     background: #ffffff url(../IMG/LOGOS/down-arrow-verde.png) no-repeat;
     background-size: 24px 24px;
     background-position: right center;
-    border: 1px solid #4ccbaf;
+    border: 1px solid #4bcbaf;
   }
 }
 
 .productos-por-page select:focus {
-  border: 1px solid #4ccbaf;
+  border: 1px solid #4bcbaf;
   background: #ffffff url(../IMG/LOGOS/collapse-arrow-verde.png) no-repeat;
   background-size: 24px 24px;
   background-position: right center;
@@ -345,12 +370,12 @@ nav ul.menu li a:hover {
   text-align: center;
   margin: 20px;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #f1fcf8;
 }
 
 .newsletter h2 {
   display: inline-block;
-  color: #455a64;
+  color: #184941;
 }
 
 .newsletter img {
@@ -367,7 +392,7 @@ form {
 }
 
 label a {
-  color: #4ccbaf;
+  color: #4bcbaf;
   text-decoration: none;
 }
 
@@ -376,13 +401,13 @@ input[type="email"] {
   width: 100%;
   max-width: 300px;
   height: 30px;
-  border: 1px solid #455a64;
+  border: 1px solid #082b28;
   margin-right: 5px;
   margin-left: 5px;
 }
 
 input[type="email"]:focus {
-  border: 1px solid #4ccbaf;
+  border: 1px solid #4bcbaf;
   outline: none;
 }
 
@@ -396,25 +421,26 @@ button {
   width: 100%;
   max-width: 100px;
   height: 30px;
-  background-color: #455a64;
+  background-color: #184941;
   color: #fff;
   border: none;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #4ccbaf;
+  background-color: #4bcbaf;
 }
 
 /* Estilos para el footer */
 footer {
   background-color: #ffffff;
-  color: #455a64;
+  color: #184941;
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #455a64;
-  border-top: 1px solid #455a64;
+  border-bottom: 1px solid #082b28;
+  border-top: 1px solid #082b28;
 }
 
 /* Estilos para cada columna del footer */
@@ -447,6 +473,7 @@ footer {
   display: inline-block;
   width: 28px;
   height: auto;
+  transition: all 0.3s ease;
 }
 
 /* Línea divisoria entre columnas */
@@ -456,7 +483,7 @@ footer {
   top: 20px;
   right: 0;
   height: calc(100% - 40px);
-  border-right: 1px solid #455a64;
+  border-right: 1px solid #082b28;
 }
 
 /* Iconos de redes sociales en el footer */
