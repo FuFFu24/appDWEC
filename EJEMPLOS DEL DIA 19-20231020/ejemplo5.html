@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function mostrarDetalleNavegador() {
+            var tabla = document.createElement("table");
+            document.body.appendChild(tabla);
+            var fila = document.createElement("tr");
+            tabla.appendChild(fila);
+            var celda = document.createElement("td");
+            celda.appendChild(document.createTextNode(" Nombre: " + navigator.appName));
+            fila.appendChild(celda);
+            var fila = document.createElement("tr");
+            tabla.appendChild(fila);
+            var celda = document.createElement("td");
+            celda.appendChild(document.createTextNode("Versión: " + navigator.appVersion));
+            fila.appendChild(celda);
+            var fila = document.createElement("tr");
+            tabla.appendChild(fila);
+            var celda = document.createElement("td");
+            celda.appendChild(document.createTextNode("Idioma:" + navigator.language));
+            fila.appendChild(celda);
+            var fila = document.createElement("tr");
+            tabla.appendChild(fila);
+            var celda = document.createElement("td");
+            celda.appendChild(document.createTextNode("Plataforma: " + navigator.platform));
+            fila.appendChild(celda);
+            var fila = document.createElement("tr");
+            tabla.appendChild(fila);
+            var celda = document.createElement("td");
+            celda.appendChild(document.createTextNode("Producto: " + navigator.product));
+            fila.appendChild(celda);
+            var fila = document.createElement("tr");
+            tabla.appendChild(fila);
+            var celda = document.createElement("td");
+            celda.appendChild(document.createTextNode("Agente: " + navigator.userAgent));
+            fila.appendChild(celda);
+        }
+    </script>
+</head>
+
+<body>
+    <button type="button" onclick="mostrarDetalleNavegador()">VOLVER</button>
+</body>
+
+</html>

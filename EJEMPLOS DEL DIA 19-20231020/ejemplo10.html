@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var otraVentana;
+        onload = () => {
+        document.getElementsByTagName("button")[0]
+            .addEventListener("click",abrirVentana);
+        document.getElementsByTagName("button")[1]
+            .addEventListener("click",cerrarVentana);
+        }
+        function cerrarVentana() {
+            window.close();
+        }
+        function abrirVentana() {
+            otraVentana = window.open("");
+            otraVentana.document.body.innerHTML = '<h1>HOLA</h1>';
+        }
+    </script>
+</head>
+<body>
+    <button type="button">ABRIR VENTANA</button>
+    <button type="button">CERRAR VENTANA</button>
+</body>
+</html>

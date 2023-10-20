@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript">
+      function recargarVentana() {
+        var opcion = parseInt(
+          prompt('Escoge que ventana quieres recargar (1/2/3/4):'),
+        )
+        if (opcion == 1 || opcion == 2 || opcion == 3 || opcion == 4)
+          listaVentanas[opcion].location.href = 'http://www.madrid.org'
+        else alert('Opción invalida')
+      }
+      var listaVentanas=[];
+      listaVentanas[0] = window.open("https://site.educa.madrid.org/ies.elcanaveral.mostoles/");
+      listaVentanas[1] = window.open("https://site.educa.madrid.org/ies.elcanaveral.mostoles/");
+      listaVentanas[2] = window.open("https://site.educa.madrid.org/ies.elcanaveral.mostoles/");
+      listaVentanas[3] = window.open("https://site.educa.madrid.org/ies.elcanaveral.mostoles/");
+      recargarVentana()
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript">
+      function modificarVentana(ventana, opcion) {
+        if (opcion == 'MOVER') {
+          ventana.moveTo(ventana1.top, ventana1.left)
+        }
+        if (opcion == 'AGRANDAR') {
+          ventana.resizeTo(ventana.width * 2, ventana.height * 2)
+        }
+        if (opcion == 'REDUCIR') {
+          ventana.resizeTo(ventana.width / 2, ventana.height / 2)
+        }
+      }
+      modificarVentana(ventana3, 'REDUCIR')
+    </script>
+  </head>
+  <body></body>
+</html>

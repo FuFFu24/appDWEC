@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* var parametro = prompt("Escribe NUEVO, RECARGAR o OTRA.");
+        var web;
+        if (parametro == "NUEVO") {
+            web = window.open("http://www.madrid.org", "_self");
+        } else if (parametro == "RECARGAR") {
+            window.location.reload;
+            document.getElementsByTagName("p")[0].innerHTML = "ADIOS";
+        } else if (parametro =="OTRA") {
+            web = window.open("http://www.madrid.org");
+        } else {  
+            alert("No has introducido NUEVO, RECARGAR o OTRA.");
+        } */
+        var parametro = prompt("Escribe NUEVO, RECARGAR o OTRA.");
+        var web;
+        if (parametro == "NUEVO") {
+            web = location.assign("http://www.madrid.org", "_self");
+        } else if (parametro == "RECARGAR") {
+            location.reload;
+            document.getElementsByTagName("p")[0].innerHTML = "ADIOS";
+        } else if (parametro =="OTRA") {
+            web = location.replace("http://www.madrid.org");
+        } else {  
+            alert("No has introducido NUEVO, RECARGAR o OTRA.");
+        }
+        onload = () => {
+            document.getElementsByTagName("button")[0].addEventListener("click",imagen)
+        }
+        function imagen() {
+            document.body.innerHTML = `
+                <img src="../PROYECTO_ALONSO_FLORES/IMG/IMG-JUEGOS/mindbug.jpg" alt="" width="${screen.width}">
+            `;
+        }
+    </script>
+</head>
+<body>
+    <p>HOLA</p>
+    <button type="button">IMG</button>
+</body>
+</html>

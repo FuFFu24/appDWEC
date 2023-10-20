@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Formulario HTML5</h1>
+    <fieldset>
+        <legend>Nuevos controles</legend>
+        <label for="controlConDataList">Datalist:
+          <input id="controlConDataList" type="text" list="listaDeDatos">
+          <datalist id="listaDeDatos">
+            <option value="HTML5">HTML5</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="CSS">CSS</option>
+          </datalist>          
+        </label>
+        <br>
+        <label for="controlMeter">Temperatura:
+          <meter id="controlMeter" min="16" max="30" low="19" high="27" value="22">          
+        </meter></label>
+        <button type="button" onclick="document.getElementById('controlMeter').value--;">
+          Bajar</button>
+        <button type="button" onclick="document.getElementById('controlMeter').value++;">
+          Subir</button>
+        <br>
+        <label for="controlProgress">Progreso:
+          <progress id="controlProgress" max="100" value="50">  
+        </progress></label>
+        <button type="button" onclick="document.getElementById('controlProgress').value+=5;">
+          Avanzar</button>
+    </fieldset>
+    <fieldset>
+        <legend>Nuevas variantes del control input</legend>
+        <label for="controlColor">Color:
+            <input id="controlColor" type="color" value="#ff00ff">  
+          </label>
+        <br>
+        <label for="controlDate">Date:
+            <input id="controlDate" type="date">  
+          </label>
+        <br>
+        <label for="controlDateTime">DateTime:
+            <input id="controlDateTime" type="datetime">  
+          </label>
+        <br>
+        <label for="controlDateTimeLocal">DateTimeLocal:
+            <input id="controlDateTimeLocal" type="datetime-local">  
+          </label>
+        <br>
+        <label for="controEmail">Email:
+            <input id="controEmail" type="email" autofocus="" required="">  
+          </label>
+        <br>
+        <label for="controMonth">Month:
+            <input id="controMonth" type="month">  
+          </label>
+        <br>
+        <label for="controNumber">Number:
+            <input id="controNumber" type="number" min="0" max="100" step="0.01">  
+          </label>
+        <br>
+        <label for="controRange">Range:
+            <input id="controRange" type="range" min="0" max="100" step="0.01">  
+          </label>
+        <br>
+        <label for="controSearch">Search:
+            <input id="controSearch" type="search">  
+          </label>
+        <br>
+        <label for="controTel">Tel:
+            <input id="controSearch" type="tel" pattern="\d\d\d\d\d\d\d\d\d" placeholder="912345678">  
+          </label>
+        <br>
+        <label for="controTime">Range:
+            <input id="controTime" type="time">  
+          </label>
+        <br>
+        <label for="controURL">URL:
+            <input id="controURL" type="url">  
+          </label>
+        <br>
+        <label for="controWeek">Week:
+            <input id="controWeek" type="week">  
+          </label>
+        <br>
+    </fieldset>
+    <input type="submit" value="Enviar">
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+// EJERCICIO 7: crea una función que muestre una imagen del tamaño de la pantalla function mostrarImagen() { document.write("
+
+<img src="imagen.jpg" width=" + screen.width + " height=" + screen.height + ">"); } mostrarImagen(); // EJERCICIO 8: crea una función que abra 4 ventanas nuevas, deben ocupar toda // la pantalla, por lo tanto tendrán un cuarto del tamaño total de la pantalla
+var ventana1 = window.open("http://www.rtve.es","_blank","width="+ (screen.width/2) + ", height=" + (screen.height/2) + ", top=0,left=0"); var ventana2 = window.open("http://www.rtve.es","_blank","width="+ (screen.width/2) + ", height=" + (screen.height/2)
++ ", top=0,left=" + (screen.width/2)); var ventana3 = window.open("http://www.rtve.es","_blank","width="+ (screen.width/2) + ", height=" + (screen.height/2) + ", top=" + (screen.height/2) + ",left=0"); var ventana4 = window.open("http://www.rtve.es","_blank","width="+
+(screen.width/2) + ", height=" + (screen.height/2) + ", top=" + (screen.height/2) + ",left=" + (screen.width/2)); // también se puede crear una lista de ventanas var listaVentanas = []; listaVentanas[1] = ventana1; listaVentanas[2] = ventana2; listaVentanas[3]
+= ventana3; listaVentanas[4] = ventana4; // EJERCICIO 8: modifica el ejercicio anterior y añade una función que le solicite al usuario que ventana desea // recargar de las cuatro abiertas y la recarge con la página www.madrid.org function recargarVentana
+() { var opcion=parseInt(prompt("Escoge que ventana quieres recargar (1/2/3/4):")); if (opcion == 1 || opcion == 2 || opcion== 3 || opcion==4) listaVentanas[opcion].location.href="http://www.madrid.org"; else alert("Opción invalida"); } recargarVentana();
+// EJERCICIO 9: modifica el ejercicio anterior y añade una función que le solicite al usuario que ventana desea // cerrar de las cuatro abiertas. Debe controlar que este abierta. function cerrarVentana() { var opcion=prompt("Escoge que ventana quieres
+cerrar (1/2/3/4):"); switch (opcion) { case "1": if (!ventana1.closed) ventana1.close(); break; case "2": if (!ventana2.closed) ventana2.close(); break; case "3": if (!ventana3.closed) ventana3.close(); break; case "4": if (!ventana4.closed) ventana4.close();
+break; default: alert("Opción invalida"); } } // EJERCICIO 10: modifica el ejercicio anterior y añade una función que le solicite al usuario que ventana desea // que tenga el foco function enfocarVentana() { var opcion=prompt("Escoge que ventana quieres
+cerrar (1/2/3/4):"); switch (opcion) { case "1": if (!ventana1.closed) ventana1.focus(); break; case "2": if (!ventana2.closed) ventana2.focus(); break; case "3": if (!ventana3.closed) ventana3.focus(); break; case "4": if (!ventana4.closed) ventana4.focus();
+break; default: alert("Opción invalida"); } } // EJERCICIO 11: modifica el ejercicio anterior y añade una función que reciba una ventana y un parámetro que puede tener 3 valores: // MOVER: en ese caso debe mover la ventana a la misma posición que la ventana
+1 // AGRANDAR: en ese caso debe hacer la ventana el doble de grande // REDUCIR: en ese caso debe hacer la ventana la mitad de grande function modificarVentana(ventana,opcion) { if (opcion == "MOVER") { ventana.moveTo(ventana1.top,ventana1.left); } if
+(opcion == "AGRANDAR") { ventana.resizeTo((ventana.width*2),(ventana.height*2)); } if (opcion == "REDUCIR") { ventana.resizeTo((ventana.width/2),(ventana.height/2)); } } modificarVentana(ventana3,"REDUCIR"); // EJERCICIO 12: ejemplo de popup // prueba
+este código en IE y en Firefox
+
+<script>
+    function show_popup() {
+
+        var p = window.createPopup();
+
+        var pbody = p.document.body;
+
+        pbody.style.backgroundColor = "lime";
+
+        pbody.style.border = "solid black 1px";
+
+        pbody.innerHTML = "This is a pop-up! Click outside to close.";
+
+        p.show(150, 150, 200, 50, document.body);
+
+    }
+
+    show_popup();
+</script>

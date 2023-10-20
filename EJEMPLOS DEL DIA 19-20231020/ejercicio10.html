@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript">
+      function enfocarVentana() {
+        var opcion = prompt('Escoge que ventana quieres cerrar (1/2/3/4):')
+        switch (opcion) {
+          case '1':
+            if (!ventana1.closed) ventana1.focus()
+            break
+          case '2':
+            if (!ventana2.closed) ventana2.focus()
+            break
+          case '3':
+            if (!ventana3.closed) ventana3.focus()
+            break
+          case '4':
+            if (!ventana4.closed) ventana4.focus()
+            break
+          default:
+            alert('Opción invalida')
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

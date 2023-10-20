@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function cambiarLocation(texto) {
+            switch (texto) {
+                case "NUEVO":
+                    location.assign("http://www.madrid.org");
+                    break;
+                case "RECARGAR":
+                    location.reload();
+                    break;
+                case "OTRA":
+                    location.replace("http://www.madrid.org");
+                    break;
+                default:
+                    alert("Opción invalida");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <button type="button" onclick="cambiarLocation()">EJERCICIO</button>
+</body>
+
+</html>

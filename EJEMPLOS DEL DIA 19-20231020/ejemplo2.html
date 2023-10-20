@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        var ventana;
+
+        function verSize() {
+            alert("Altura " + ventana.innerHeight + " y anchura " + ventana.innerWidth);
+        }
+
+        function abrir() {
+            ventana = window.open('', '', 'width=200, height=100');
+            var h1 = ventana.document.createElement("h1");
+            h1.appendChild(ventana.document.createTextNode("HOLA"));
+            ventana.document.body.appendChild(h1);
+        }
+
+        function cerrar() {
+            ventana.close();
+        }
+
+        function mover() {
+            ventana.moveTo(500, 100);
+            ventana.focus()
+        }
+
+        function agrandar() {
+            ventana.resizeTo(250, 250)
+            ventana.focus();
+        }
+    </script>
+</head>
+
+<body>
+    <button type="button" onclick="verSize()">VER TAMAÑO</button>
+    <button type="button" onclick="abrir()">ABRIR</button>
+    <button type="button" onclick="cerrar()">CERRAR</button>
+    <button type="button" onclick="mover()">MOVER</button>
+    <button type="button" onclick="agrandar()">AGRANDAR</button>
+</body>
+
+</html>
