@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        onload = () => {
+            console.log(document.images)
+            console.log(document.cookie)
+            console.log(document.head)
+            console.log(document.body)
+            console.log(document.title)
+            // let div1 = document.body.getElementsByTagName("div")[0];
+            let div1 = document.body.children[0];
+            [...div1.children].forEach((hijo) => {
+                hijo.innerHTML = hijo.innerHTML.toUpperCase();
+            })
+
+            let listaParrafos = document.body.getElementsByTagName("div")[0].getElementsByTagName("p");
+            console.log(listaParrafos);
+
+            // parentNode para subir, localizar al padre
+
+            console.log(document.querySelectorAll("img[alt]"));
+            console.log(document.querySelectorAll("img[alt='bang']"));
+            console.log(document.querySelectorAll('img[alt="bang"]'));
+            console.log(document.querySelectorAll("img[alt='bang']"));
+            // que acabe en g
+            console.log(document.querySelectorAll("img[alt$=g]"));
+
+            document.querySelector("p").outerHTML = '<h1>DIAS<h1>';
+            // como he eliminado el p y lo he cambiado por un h1 ahora [1] es el trecero y no el sugundo
+            document.querySelectorAll("p")[1].innerHTML = '<h1>NOCHES<h1>';
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <p>buenos dias</p>
+        <p>buenas tardes</p>
+        <p>buenas noches</p>
+    </div>
+    <div style="position: absolute; top: 200px;">
+        <img src="../PROYECTO_ALONSO_FLORES/IMG/IMG-JUEGOS/azul.jpg" alt="" style="max-width: 200px;">
+        <p>AZUL</p>
+    </div>
+    <div style="position: absolute; top: 200px; left: 300px;">
+        <img src="../PROYECTO_ALONSO_FLORES/IMG/IMG-JUEGOS/bang.jpg" alt="bang" style="max-width: 200px;">
+        <p>BANG</p>
+    </div>
+    <div style="position: absolute; top: 200px; left: 600px;">
+        <img src="../PROYECTO_ALONSO_FLORES/IMG/IMG-JUEGOS/dixit.jpg" style="max-width: 200px;">
+        <p>DIXIT</p>
+    </div>
+    <button type="button">PULSAME</button>
+</body>
+</html>
