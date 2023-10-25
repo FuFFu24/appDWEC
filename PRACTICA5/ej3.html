@@ -10,6 +10,12 @@ function anade() {
     let nuevoLi = document.createElement("li");
     nuevoLi.innerHTML = contenido;
     elementoUl.appendChild(nuevoLi);
+
+    // elementoUl.insertBefore(nuevoLi, elementoUl.firstElementChild); // Para añadir en el principio
+
+    // elementoUl.insertAdjacentHTML("beforebegin", `<li>${contenido}</li>`); // Igual que el anterior y con beforeend al final
+
+    // elementoUl.insertAdjacentElement("beforeend", contenido);
 }
 </script>
 </head>

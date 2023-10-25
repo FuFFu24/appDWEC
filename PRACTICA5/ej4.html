@@ -25,7 +25,7 @@ el centro de la pantalla y si se pulsa el enlace se debe ocultar la capa. La fun
     <script type="text/javascript">
         onload = () => {
             console.log(document.querySelectorAll("p > img").length);
-            console.log(document.querySelectorAll("select")[2].length);
+            console.log(document.querySelectorAll("select")[2].querySelectorAll("option").length);
             console.log(document.querySelectorAll("p.ejercicio4").length);
             console.log(document.querySelectorAll("table")[1].querySelectorAll("td").length);
             console.log(document.querySelectorAll("p").length);
@@ -36,17 +36,24 @@ el centro de la pantalla y si se pulsa el enlace se debe ocultar la capa. La fun
             document.getElementById("anadir").addEventListener("click", function () {
                 let divPublicidad = document.querySelector("#publicidad");
                 let inputValue = document.querySelectorAll("input[type='text']")[0].value;
+                let patron = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
 
-                let divImagen = document.createElement("div");
-                divImagen.style.width = "200px";
-                divImagen.style.height = "200px";
+                if (patron.test(inputValue) || inputValue.match(patron)) {
+                    let divImagen = document.createElement("div");
+                    divImagen.style.width = "200px";
+                    divImagen.style.height = "200px";
 
-                let imagen = document.createElement("img");
-                imagen.src = inputValue;
-                imagen.alt = inputValue;
+                    let imagen = document.createElement("img");
+                    imagen.src = inputValue;
+                    imagen.alt = inputValue;
+                    imagen.style.width = "200px";
+                    imagen.style.height = "200px";
 
-                divImagen.appendChild(imagen);
-                divPublicidad.appendChild(divImagen);
+                    divImagen.appendChild(imagen);
+                    divPublicidad.appendChild(divImagen);
+                } else {
+                    alert("URL no valida");
+                }
             });
 
             document.getElementById("cambiar").addEventListener("click", function () {
@@ -58,34 +65,36 @@ el centro de la pantalla y si se pulsa el enlace se debe ocultar la capa. La fun
             });
 
             document.querySelectorAll("button")[2].addEventListener("click", function () {
-                let divCentrado = document.createElement("div");
-                divCentrado.className = "divCentrado";
-                divCentrado.style.position = "absolute";
-                divCentrado.style.width = "300px";
-                divCentrado.style.height = "300px";
-                divCentrado.style.textAlign = "center";
-                divCentrado.style.backgroundColor = "red";
-                divCentrado.style.left = "50%";
-                divCentrado.style.top = "50%";
-                divCentrado.style.transform = "translate(-50%, -50%)";
+                if (!document.querySelector(".divCentrado")) {
+                    let divCentrado = document.createElement("div");
+                    divCentrado.className = "divCentrado";
+                    divCentrado.style.position = "absolute";
+                    divCentrado.style.width = "300px";
+                    divCentrado.style.height = "300px";
+                    divCentrado.style.textAlign = "center";
+                    divCentrado.style.backgroundColor = "red";
+                    divCentrado.style.left = "50%";
+                    divCentrado.style.top = "50%";
+                    divCentrado.style.transform = "translate(-50%, -50%)";
 
-                let imagen = document.createElement("img");
-                imagen.src = "../PROYECTO_ALONSO_FLORES/IMG/IMG-JUEGOS/azul.jpg";
-                imagen.style.width = "100px";
-                imagen.style.height = "100px";
-                let enlace = document.createElement("a");
-                enlace.className = "cerrar";
-                enlace.href = "#";
-                enlace.textContent = "CERRAR";
+                    let imagen = document.createElement("img");
+                    imagen.src = "../PROYECTO_ALONSO_FLORES/IMG/IMG-JUEGOS/azul.jpg";
+                    imagen.style.width = "100px";
+                    imagen.style.height = "100px";
+                    let enlace = document.createElement("a");
+                    enlace.className = "cerrar";
+                    enlace.href = "javascript:ocultarDiv()";
+                    enlace.textContent = "CERRAR";
 
-                divCentrado.addEventListener("click", function () {
-                    divCentrado.remove();
-                });
-
-                divCentrado.appendChild(imagen);
-                divCentrado.appendChild(enlace);
-                document.body.appendChild(divCentrado);
+                    divCentrado.appendChild(imagen);
+                    divCentrado.appendChild(enlace);
+                    document.body.appendChild(divCentrado);
+                }
             });
+        }
+
+        function ocultarDiv() {
+            document.querySelector(".divCentrado").remove();
         }
 
         function borrarElemento() {

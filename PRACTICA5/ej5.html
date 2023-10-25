@@ -1,0 +1,104 @@
+<!-- Crea una función que abra una ventana  de 300x300 con un párrafo  y un enlace con el texto Cerrar.
+La ventana se mostrará en el centro de la pantalla y si se pulsa el enlace se debe cerrar la ventana.
+La función se ejecutará al cargar la página -->
+
+<!-- Modifica el ejercicio 5 para que la ventana se abra cada 15 segundos y se cierre 5 segundos después. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Ejercicio 4</title>
+<style>
+    #caja {
+        width: 300px;
+        height: 300px;
+        background-color: aquamarine;
+        border: 2px solid black;
+        position: absolute;
+        text-align: center;
+        font-size: 40px;
+        top: 0;
+        left: 0;
+    }
+    
+    #caja1 {
+        width: 300px;
+        height: 300px;
+        background-color: aquamarine;
+        border: 2px solid black;
+        position: absolute;
+        text-align: center;
+        font-size: 40px;
+        top: 0;
+        right: 0;
+    }
+</style>
+<script type="text/javascript">
+    function abrirVentana() {
+        const ventana = document.createElement("div");
+        ventana.style.width = "300px";
+        ventana.style.height = "300px";
+        ventana.style.backgroundColor = "green";
+
+        const parrafo = document.createElement("p");
+        parrafo.textContent = "Soy un parrafo";
+
+        const enlace = document.createElement("a");
+        enlace.href = "#";
+        enlace.textContent = "cerrar";
+
+        ventana.appendChild(parrafo);
+        ventana.appendChild(enlace);
+        document.body.appendChild(ventana);
+    }
+
+    onload = () => {
+        abrirVentana();
+
+        document.querySelector("a").addEventListener("click", function()  {
+            document.querySelector("div").style.display = "none";
+        })
+    }
+
+    var otraVentana;
+        onload = () => {
+        document.getElementsByTagName("button")[0]
+            .addEventListener("click",abrirVentana);
+        document.getElementsByTagName("button")[1]
+            .addEventListener("click",cerrarVentana);
+        }
+        function cerrarVentana() {
+            window.close();
+        }
+        function abrirVentana() {
+            otraVentana = window.open("");
+            otraVentana.document.write = '<h1>HOLA</h1>';
+        }
+
+    let contador = 0;
+    let intervalo = setInterval(cambiarPosicion, 10);
+
+    function cambiarPosicion() {
+        const caja = document.querySelector("#caja");
+        const caja1 = document.querySelector("#caja1");
+        caja.style.top = `${contador}px`;
+        caja1.style.top = `${contador}px`;
+        caja.style.left = `${contador}px`;
+        caja1.style.right = `${contador}px`;
+        contador += 10;
+        if (contador == 660) {
+            clearInterval(intervalo);
+        }
+    }
+</script>
+</head>
+<body>
+    <div id="caja">
+        <p>SERGIO</p>
+    </div>
+    <div id="caja1">
+        <p>SUBNORMAL</p>
+    </div>
+</body>
+</html>
