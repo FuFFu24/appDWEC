@@ -1,0 +1,185 @@
+<!-- 
+EJERCICIO 1: Modifica el código de la página de forma que si se pulsa el botón “CONTRATAR” se muestre un mensaje si en
+la caja de texto “DIA INICIO” no hay un día de la semana válido (da igual minúscula o mayúscula e inglés que español).
+Ten en cuenta que puede estar vacío. 
+
+EJERCICIO 2: Añade al código anterior  que se muestre un mensaje si en la caja de texto “MES” no hay un mes válido (da 
+igual minúscula o mayúscula e inglés que español).
+
+
+EJERCICIO 3: Añade al código anterior  que se muestre un mensaje si en la caja de texto “NUMERO DE DIAS” no hay un día 
+del mes válido (entre 1 y 31) .
+
+
+EJERCICIO 4: Añade al código anterior  que se muestre un mensaje si en la caja de texto “RUTA” no hay nada escrito y otro 
+mensaje si hay alguna ciudad repetida
+
+
+EJERCICIO 5: Añade al código anterior  que si todo es correcto se muestre una tabla en la capa “AGENDA” con tantas filas 
+como número de días haya y tantas celdas por fila como ciudades haya en la ruta
+
+
+EJERCICIO 6: Modifica el código anterior para que la capa “AGENDA” tenga color de fondo amarillo y la tabla borde de 2 
+pixeles de color  oliva.
+
+
+EJERCICIO 7: Modifica el código anterior para que las filas pares de la tabla anterior tengan fondo verde oscuro y las 
+impares tenga fondo verde claro.
+
+	
+EJERCICIO 8: Modifica el código anterior para que se añada una celda más en cada fila (al principio) con un checkbox y 
+otra celda al final con un botón con el texto “INCLUIR”. Cada elemento anterior debe tener un identificador diferente.
+
+
+EJERCICIO 9: Modifica el código de la página de forma que si se pulsa el botón “SORPRESA” se grabe en la caja “NUMERO DE 
+DIAS” un valor entero aleatorio entre 1 y 31 y además dicha caja no se podrá modificar (PISTA: busca la propiedad html 
+para impedir modificar una caja de texto).
+
+
+EJERCICIO 10: Modifica el código del ejercicio 1 de forma que en caso de valor invalido en la caja “DIA INICIO” se le 
+pida al usuario un nuevo valor mientras este no sea válido. 
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        onload = () => {
+            document.querySelector("input[value='CONTRATAR']").addEventListener("click", function () {
+                const dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo",
+                    "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+                const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+                    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+                    "january", "february", "march", "april", "may", "june",
+                    "july", "august", "september", "october", "november", "december"
+                ];
+
+                function comprobarRutaRepe(ruta) {
+                    for (let i = 0; i < ruta.length; i++) {
+                        for (let j = i + 1; j < ruta.length; j++) {
+                            if (ruta[i].toLowerCase() === ruta[j].toLowerCase()) {
+                                return true;
+                            }
+                        }
+
+                    }
+                    return false;
+                }
+
+                let dia = document.querySelector("#diaInicio").value;
+                let mes = document.querySelector("#mes").value;
+                let numero = document.querySelector("#numeroDias").value;
+                let ruta = document.querySelector("#ruta").value.trim().split(",");
+                let contDias = 0;
+                let contMeses = 0;
+                let contNumero = 0;
+                let contRuta = 0;
+
+                console.log(ruta);
+
+                dias.forEach(element => {
+                    if (dia.toLowerCase() === element) {
+                        alert(dia.toLowerCase());
+                        contDias++;
+                    }
+                });
+                meses.forEach(element => {
+                    if (mes.toLowerCase() === element) {
+                        alert(mes.toLowerCase());
+                        contMeses++;
+                    }
+                });
+                if (!isNaN(numero) && numero >= 1 && numero <= 31) {
+                    alert(numero);
+                    contNumero++;
+                }
+                if (ruta == "") {
+                    alert("ruta vacio");
+                } else if (comprobarRutaRepe(ruta) == true) {
+                    alert("ruta repetida");
+                } else {
+                    alert("todo bien");
+                    contRuta++;
+                }
+
+                if (contDias == 0) {
+                    alert("no hay un día válido");
+                    prompt("escribe un numero valido");
+                    dias.forEach(element => {
+                        if (dia.toLowerCase() === element) {
+                            alert(dia.toLowerCase());
+                            contDias++;
+                        }
+                    });
+                }
+                if (contMeses == 0) {
+                    alert("no hay un mes válido");
+                }
+                if (contNumero == 0) {
+                    alert("no hay un numero válido");
+                }
+
+                if (contDias != 0 && contMeses != 0 && contNumero != 0 && contRuta != 0) {
+                    let agenda = document.querySelector("#AGENDA");
+                    let tabla = document.createElement("table");
+                    tabla.style.backgroundColor = "yellow";
+                    tabla.style.border = "2px solid olive";
+                    for (let i = 1; i <= numero; i++) {
+                        let trs = document.createElement("tr");
+
+                        let tds = document.createElement("td");
+                        let checkbox = document.createElement("input");
+                        checkbox.id = "checkboxx";
+                        checkbox.type = "checkbox";
+                        tds.appendChild(checkbox);
+                        trs.appendChild(tds);
+
+                        if (i % 2 == 0) {
+                            trs.style.backgroundColor = "green";
+                        } else {
+                            trs.style.backgroundColor = "greenyellow";
+                        }
+
+                        tds = document.createElement("td");
+                        tds.textContent = `${ruta[i - 1]}`;
+                        tds.style.width = "100px";
+                        trs.appendChild(tds);
+
+
+                        tds = document.createElement("td");
+                        let boton = document.createElement("input");
+                        boton.id = "botonn";
+                        boton.type = "button";
+                        boton.value = "INCLUIR";
+                        tds.appendChild(boton);
+                        trs.appendChild(tds);
+
+                        tabla.appendChild(trs);
+                    }
+                    agenda.appendChild(tabla);
+                }
+            });
+
+            document.querySelector("input[value='SORPRESA']").addEventListener("click", function () {
+                let numeroRand = Math.floor(Math.random() * (31 - 1 + 1) + 1);
+                let numero = document.querySelector("#numeroDias");
+                numero.value = numeroRand;
+                numero.disabled = true;
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <H1> PRACTICA 1: AGENCIA DE VIAJES</H1>
+    <span>DIA INICIO: </span><input type="Text" id="diaInicio"><br />
+    <span>MES: </span><input type="Text" id="mes"><br />
+    <span>NUMERO DE DIAS: </span><input type="Text" id="numeroDias"><br />
+    <span>RUTA(lista ciudades separadas por coma)): </span><textarea id="ruta"></textarea><br />
+    <input type="button" value="CONTRATAR"><br />
+    <input type="button" value="SORPRESA"><br />
+    <div id="AGENDA"></div>
+</body>
+
+</html>

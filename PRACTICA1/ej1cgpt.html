@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #AGENDA {
+            background-color: yellow;
+        }
+
+        table {
+            border: 2px solid olive;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: lightgreen;
+        }
+
+        table tr:nth-child(even) {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <H1> PRACTICA 1: AGENCIA DE VIAJES</H1>
+    <span>DIA INICIO: </span><input type="Text" id="diaInicio"><br />
+    <span>MES: </span><input type="Text" id="mes"><br />
+    <span>NUMERO DE DIAS: </span><input type="Text" id="numeroDias" readonly><br />
+    <span>RUTA (lista ciudades separadas por coma)): </span><textarea id="ruta"></textarea><br />
+    <input type="button" value="CONTRATAR" onclick="contratarViaje()"><br />
+    <input type="button" value="SORPRESA" onclick="generarNumeroAleatorio()"><br />
+    <div id="AGENDA"></div>
+
+    <script>
+        function contratarViaje() {
+            const diaInicioInput = document.getElementById("diaInicio");
+            const mesInput = document.getElementById("mes");
+            const numeroDiasInput = document.getElementById("numeroDias");
+            const rutaInput = document.getElementById("ruta");
+
+            const diaInicio = diaInicioInput.value.trim().toLowerCase();
+            const mes = mesInput.value.trim().toLowerCase();
+            const numeroDias = numeroDiasInput.value.trim();
+            const ruta = rutaInput.value.split(",").map(city => city.trim());
+
+            if (diaInicio === "") {
+                alert("El campo DIA INICIO está vacío.");
+                return;
+            }
+
+            const diasValidos = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"];
+            if (!diasValidos.includes(diaInicio)) {
+                alert("DIA INICIO no es un día de la semana válido.");
+                return;
+            }
+
+            const mesesValidos = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+            if (!mesesValidos.includes(mes)) {
+                alert("MES no es un mes válido.");
+                return;
+            }
+
+            if (numeroDias === "" || isNaN(numeroDias) || parseInt(numeroDias) < 1 || parseInt(numeroDias) > 31) {
+                alert("NUMERO DE DIAS no es un número de día del mes válido (entre 1 y 31).");
+                return;
+            }
+
+            if (ruta === "") {
+                alert("El campo RUTA está vacío.");
+                return;
+            }
+
+            if (tieneCiudadRepetida(ruta)) {
+                alert("Hay ciudades repetidas en la ruta.");
+                return;
+            }
+
+            // Crear la tabla en la capa "AGENDA"
+            crearTablaAgenda(numeroDias, ruta);
+        }
+
+        function generarNumeroAleatorio() {
+            const numeroDiasInput = document.getElementById("numeroDias");
+            const numeroAleatorio = Math.floor(Math.random() * 31) + 1;
+            numeroDiasInput.value = numeroAleatorio;
+        }
+
+        function tieneCiudadRepetida(ruta) {
+            const ciudadSet = new Set();
+            for (const ciudad of ruta) {
+                if (ciudadSet.has(ciudad)) {
+                    return true;
+                }
+                ciudadSet.add(ciudad);
+            }
+            return false;
+        }
+
+        function crearTablaAgenda(numeroDias, ruta) {
+            const agendaDiv = document.getElementById("AGENDA");
+            agendaDiv.innerHTML = "";
+
+            const table = document.createElement("table");
+
+            for (let i = 0; i < numeroDias; i++) {
+                const row = table.insertRow();
+
+                const checkboxCell = row.insertCell(0);
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkboxCell.appendChild(checkbox);
+
+                for (let j = 0; j < ruta.length; j++) {
+                    const cell = row.insertCell(j + 1);
+                    cell.textContent = ruta[j];
+                }
+
+                const incluirCell = row.insertCell(ruta.length + 1);
+                const incluirButton = document.createElement("button");
+                incluirButton.textContent = "INCLUIR";
+                incluirCell.appendChild(incluirButton);
+            }
+
+            agendaDiv.appendChild(table);
+        }
+    </script>
+</body>
+
+</html>
