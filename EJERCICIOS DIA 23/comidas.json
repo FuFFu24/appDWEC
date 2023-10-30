@@ -1,0 +1,32 @@
+[
+    {
+        "idComida": 1,
+        "nombreCorto": "Lentejas",
+        "descripcion": "Lentejas con chorizo",
+        "precio": 7.50
+    },
+    {
+        "idComida": 2,
+        "nombreCorto": "Pollo asado",
+        "descripcion": "Pollo asado con patatas",
+        "precio": 4.50
+    },
+    {
+        "idComida": 3,
+        "nombreCorto": "Fabada",
+        "descripcion": "Fabada asturiana",
+        "precio": 8.50
+    },
+    {
+        "idComida": 4,
+        "nombreCorto": "Albondigas",
+        "descripcion": "Albondigas en salsa",
+        "precio": 6.00
+    },
+    {
+        "idComida": 5,
+        "nombreCorto": "Empanada",
+        "descripcion": "Empanada de zamburiñas",
+        "precio": 12.00
+    }
+]
