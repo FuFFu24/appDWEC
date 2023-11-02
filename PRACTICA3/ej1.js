@@ -1,5 +1,42 @@
 var listaCiudades = [];
-var ciudad0 = new Array(
+
+class Ciudad {
+  constructor(nombre, pais, distancia, precio, descripcion, imagen) {
+    this.nombre = nombre;
+    this.pais = pais;
+    this.distancia = distancia;
+    this.precio = precio;
+    this.descripcion = descripcion;
+    this.imagen = imagen;
+  }
+}
+
+class Mapa {
+  constructor() {
+    this.listaCiudades = [];
+  }
+
+  addCiudad(ciudad) {
+    this.listaCiudades.push(ciudad);
+  }
+
+  eliminarCiudad(ciudad) {
+    const index = this.listaCiudades.indexOf(ciudad);
+    if (index !== -1) {
+      this.listaCiudades.splice(index, 1);
+    }
+  }
+
+  mostrarLista() {}
+
+  ordenarLista() {}
+
+  filtrarLista() {}
+}
+
+const mapa = new Mapa();
+
+var ciudad0 = new Ciudad(
   "MADRID",
   "34ESPA&Ntilde;A",
   756,
@@ -7,7 +44,8 @@ var ciudad0 = new Array(
   "CAPITAL DEL PAIS CON UNA GRAN CANTIDAD DE MUSEOS",
   "madrid.gif"
 );
-var ciudad1 = new Array(
+mapa.addCiudad(ciudad0);
+var ciudad1 = new Ciudad(
   "BARCELONA",
   "34ESPA&Ntilde;A",
   236,
@@ -15,7 +53,8 @@ var ciudad1 = new Array(
   "CIUDAD COSTERA DEL MEDITERRANEO.",
   "barcelona.gif"
 );
-var ciudad2 = new Array(
+mapa.addCiudad(ciudad1);
+var ciudad2 = new Ciudad(
   "VALENCIA",
   "34ESPA&Ntilde;A",
   324,
@@ -23,7 +62,8 @@ var ciudad2 = new Array(
   "CAPITAL COSTERA. CIUDAD DE LAS ARTES Y LAS CIENCIAS",
   "valencia.gif"
 );
-var ciudad3 = new Array(
+mapa.addCiudad(ciudad2);
+var ciudad3 = new Ciudad(
   "LISBOA",
   "33PORTUGAL",
   756,
@@ -31,7 +71,8 @@ var ciudad3 = new Array(
   "CAPITAL DEL PAIS. CIUDAD COSTERA ATLANTICO",
   "lisboa.gif"
 );
-var ciudad4 = new Array(
+mapa.addCiudad(ciudad3);
+var ciudad4 = new Ciudad(
   "PARIS",
   "31FRANCIA",
   1556,
@@ -39,7 +80,8 @@ var ciudad4 = new Array(
   "CAPITAL DEL PAIS CON UNA GRAN CANTIDAD DE MUSEOS",
   "paris.gif"
 );
-var ciudad5 = new Array(
+mapa.addCiudad(ciudad4);
+var ciudad5 = new Ciudad(
   "LONDRES",
   "3OREINO UNIDO",
   2256,
@@ -47,7 +89,8 @@ var ciudad5 = new Array(
   "CAPITAL DEL PAIS. MUSEOS. BIG BEN",
   "londres.gif"
 );
-var ciudad6 = new Array(
+mapa.addCiudad(ciudad5);
+var ciudad6 = new Ciudad(
   "BERLIN",
   "35ALEMANIA",
   1234,
@@ -55,7 +98,8 @@ var ciudad6 = new Array(
   "CAPITAL DEL PAIS. ZOO.AVENIDAS",
   "berlin.gif"
 );
-var ciudad7 = new Array(
+mapa.addCiudad(ciudad6);
+var ciudad7 = new Ciudad(
   "BERNA",
   "36SUIZA",
   6345,
@@ -63,7 +107,8 @@ var ciudad7 = new Array(
   "CAPITAL DEL PAIS.MUSEOS, RESTAURANTES, PARQUES",
   "berna.gif"
 );
-var ciudad8 = new Array(
+mapa.addCiudad(ciudad7);
+var ciudad8 = new Ciudad(
   "ROMA",
   "37ITALIA",
   956,
@@ -71,7 +116,8 @@ var ciudad8 = new Array(
   "CAPITAL DEL PAIS. HISTORIA. MUSEOS. IGLESIAS",
   "roma.gif"
 );
-var ciudad9 = new Array(
+mapa.addCiudad(ciudad8);
+var ciudad9 = new Ciudad(
   "AMSTERDAM",
   "38HOLANDA",
   2756,
@@ -79,7 +125,8 @@ var ciudad9 = new Array(
   "CAPITAL DEL PAIS. ",
   "amsterdam.gif"
 );
-var ciudad10 = new Array(
+mapa.addCiudad(ciudad9);
+var ciudad10 = new Ciudad(
   "VIENA",
   "39AUSTRIA",
   1756,
@@ -87,7 +134,8 @@ var ciudad10 = new Array(
   "CAPITAL DEL PAIS. OPERA. MUSEOS.",
   "viena.gif"
 );
-var ciudad11 = new Array(
+mapa.addCiudad(ciudad10);
+var ciudad11 = new Ciudad(
   "BRUSELAS",
   "40BELGICA",
   1056,
@@ -95,7 +143,8 @@ var ciudad11 = new Array(
   "CAPITAL DEL PAIS. PUERTO.",
   "bruselas.gif"
 );
-var ciudad12 = new Array(
+mapa.addCiudad(ciudad11);
+var ciudad12 = new Ciudad(
   "COPENAGUE",
   "41DINAMARCA",
   1556,
@@ -103,7 +152,8 @@ var ciudad12 = new Array(
   "CAPITAL DEL PAIS CON UNA GRAN CANTIDAD DE MUSEOS",
   "copenague.gif"
 );
-var ciudad13 = new Array(
+mapa.addCiudad(ciudad12);
+var ciudad13 = new Ciudad(
   "OSLO",
   "42NORUEGA",
   856,
@@ -111,66 +161,53 @@ var ciudad13 = new Array(
   "CAPITAL DEL PAIS. PAISAJES.",
   "oslo.gif"
 );
-listaCiudades[0] = ciudad0;
-listaCiudades.push(ciudad1);
-listaCiudades.push(ciudad2);
-listaCiudades.push(ciudad3);
-listaCiudades.push(ciudad4);
-listaCiudades.push(ciudad5);
-listaCiudades.push(ciudad6);
-listaCiudades.push(ciudad7);
-listaCiudades.push(ciudad8);
-listaCiudades.push(ciudad9);
-listaCiudades.push(ciudad10);
-listaCiudades.push(ciudad11);
-listaCiudades.push(ciudad12);
-listaCiudades.push(ciudad13);
+mapa.addCiudad(ciudad13);
 
-function cargarTabla(lista) {
+function cargarTabla() {
   const tablaCiudades = document.querySelector("#tablaCiudades");
   tablaCiudades.innerHTML = "";
   const tabla = document.createElement("table");
   tabla.style.border = "2px solid black";
   tabla.innerHTML = `
-    <tr>
-        <th></th>
-        <th>CIUDAD</th>
-        <th>PAIS</th>
-        <th>DISTANCIA</th>
-        <th>PRECIO</th>
-        <th>DESCRIPCION</th>
-    </tr>
-`;
-
-  lista.forEach((element) => {
-    tabla.innerHTML += `
-        <tr>
-            <td><input type="text" name="cajaTexto" id="cajaTexto" style="width: 10px"></td>
-            <td>${element[0]}</td>
-            <td>${element[1].slice(2)}</td>
-            <td>${element[2]}</td>
-            <td>${element[3]}</td>
-            <td>${element[4].substr(0, 20)}</td>
-        </tr>
+      <tr>
+          <th></th>
+          <th>CIUDAD</th>
+          <th>PAIS</th>
+          <th>DISTANCIA</th>
+          <th>PRECIO</th>
+          <th>DESCRIPCION</th>
+      </tr>
     `;
+
+  mapa.listaCiudades.forEach((element) => {
+    tabla.innerHTML += `
+          <tr>
+              <td><input type="text" name="cajaTexto" id="cajaTexto" style="width: 10px"></td>
+              <td>${element.nombre}</td>
+              <td>${element.pais.slice(2)}</td>
+              <td>${element.distancia}</td>
+              <td>${element.precio}</td>
+              <td>${element.descripcion.substr(0, 20)}</td>
+          </tr>
+      `;
   });
 
   tablaCiudades.appendChild(tabla);
 }
 
 function ordenarPorNombre() {
-  listaCiudades.sort((a, b) => a[0].localeCompare(b[0]));
-  cargarTabla(listaCiudades);
+  mapa.listaCiudades.sort((a, b) => a.nombre.localeCompare(b.nombre));
+  cargarTabla();
 }
 
 function ordenarPorPrecioAsc() {
-  listaCiudades.sort((a, b) => a[3] - b[3]);
-  cargarTabla(listaCiudades);
+  mapa.listaCiudades.sort((a, b) => a.precio - b.precio);
+  cargarTabla();
 }
 
 function ordenarPorPrecioDesc() {
-  listaCiudades.sort((a, b) => b[3] - a[3]);
-  cargarTabla(listaCiudades);
+  mapa.listaCiudades.sort((a, b) => b.precio - a.precio);
+  cargarTabla();
 }
 
 function filtrar(params) {
@@ -228,9 +265,9 @@ function mostrarRuta() {
     if (element.value !== "" && !isNaN(element.value)) {
       rutas.push({
         id: element.value,
-        ciudad: listaCiudades[index][0],
-        distancia: listaCiudades[index][2],
-        precio: listaCiudades[index][3],
+        ciudad: mapa.listaCiudades[index].nombre,
+        distancia: mapa.listaCiudades[index].distancia,
+        precio: mapa.listaCiudades[index].precio,
       });
     }
   });
@@ -246,16 +283,16 @@ function mostrarRuta() {
     totalKm += parseInt(element.distancia);
     totalPrecio += parseInt(element.precio);
     tabla.innerHTML += `
-      <tr>
-        <td>${element.id}<td>
-        <td>${element.ciudad}<td>
-      </tr>
-    `;
+        <tr>
+          <td>${element.id}</td>
+          <td>${element.ciudad}</td>
+        </tr>
+      `;
   });
   parrafo.innerHTML += `
-    TOTAL KILOMETROS: ${totalKm} Km<br>
-    TOTAL PRECIO: ${totalPrecio} €
-  `;
+      TOTAL KILOMETROS: ${totalKm} Km<br>
+      TOTAL PRECIO: ${totalPrecio} €
+    `;
   divRutaCiudades.appendChild(tabla);
   divRutaCiudades.appendChild(parrafo);
 }
@@ -323,5 +360,5 @@ function calcularDiferenciaDias(fecha1, fecha2) {
 }
 
 window.onload = function () {
-  cargarTabla(listaCiudades);
+  cargarTabla();
 };
