@@ -1,0 +1,148 @@
+<!-- EJERCICIO 1: Escribe una función que reciba un texto y devuelva true si el texto es un número de más de 3 dígitos y
+menos de 9, o false en caso contrario
+
+
+EJERCICIO 2: Escribe una función que reciba un texto y devuelva true si el texto es una fecha válida en formato
+aaaa:dd:mm, o false en caso contrario
+
+
+EJERCICIO 3: Escribe una función que reciba un nombre de checkbox y devuelva true si hay alguno seleccionado o false en
+caso contrario
+
+
+EJERCICIO 4: Escribe una función que reciba un nombre de radiobutton y devuelva true si hay alguno seleccionado o false
+en caso contrario. Ten en cuenta que puede haber varios radiobutton con el mismo nombre.
+
+
+EJERCICIO 5: Crea un html que tenga un formulario con 3 cajas de texto (identificador,fechaAlta,clave), un select
+(perfil), un conjunto de 5 radiobutton (nacionalidad), un textarea (comentario) y un botón de “Submit”. El formulario
+solo podrá enviarse al servidor si es válido, es decir:
+Identificador debe ser un número de menos de 10 dígitos.
+FechaAlta debe ser una fecha válida en formato aaaa-dd-mm.
+Clave debe ser un texto de no más de 7 caracteres todas consonantes.
+En el perfil debe haber algún elemento seleccionado.
+En el radiobutton debe haber algún elemento seleccionado.
+En el comentario no puede aparecer ninguna palabra repetida
+
+
+EJERCICIO 6: Modifica la página anterior de manera que en la caja Clave nunca se muestre una vocal (si se pulsa una
+vocal no debe mostrarse)
+
+
+EJERCICIO 7: Añade una capa con color de fondo rojo y color de texto blanco, con el texto ERROR al lado de cada elemento
+del formulario. Inicialmente estas capas no deben mostrarse. Al pulsar el botón de submit se debe mostrar la capa de
+cada elemento no válido. Cuándo un elemento reciba el foco la capa de error asociada debe ocultarse.
+
+
+EJERCICIO 8: Modifica la página añadiendo un iframe en el centro de la página de 100x100 pixeles y un botón con el texto
+“Cargar iframe”. El iframe no debe mostrarse. Crea una función de nombre cargarIFrame que reciba como parámetro una url,
+cargue en el iframe la url recibida y muestre el iframe. Al hacer click en el botón se debe cargar en el iframe la
+página www.madrid.org utilizando la función anterior.
+
+
+EJERCICIO 9: Modifica la página añadiendo un botón con el texto “Quitar/poner”. Al hacer click debe
+añadir el evento onmousein (debe cambiar el color de fondo del body a rojo) y onmouseout (debe cambiar el color de fondo
+del body a blanco) al iframe del ejercicio 8. Si se pulsa click otra vez debe quitar ambos eventos.
+
+
+EJERCICIO 10: Añade una capa a la página anterior. Al mover el ratón en cualquier punto de la ventana del navegador, se
+debe mostrar la posición del puntero respecto del navegador y respecto de la página en dicha capa.
+NOTA: investiga las propiedades evento.screenX, evento.screenY, evento.pageX y evento.pageY -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 10px;
+        }
+    </style>
+    <script>
+        function ejercicioUno() {
+            let texto = prompt("EJ1 // Escribe un texto: ");
+            texto = texto.trim();
+
+            if (!isNaN(texto)) {
+                const numero = parseFloat(texto);
+
+                if (numero >= 1000 && numero < 1e9) {
+                    return true;
+                }
+            }
+        }
+
+        /* if (ejercicioUno()) {
+            alert("El texto es un número de más de 3 dígitos y menos de 9.");
+        } */
+
+        function ejercicioDos() {
+            let texto = prompt("EJ2 // Escribe un texto: ");
+            var patron = /^\d{4}:\d{2}:\d{2}$/;
+
+            if (patron.test(texto)) {
+                var partes = texto.split(":");
+                var anio = parseInt(partes[0], 10);
+                var dia = parseInt(partes[1], 10);
+                var mes = parseInt(partes[2], 10);
+
+                if (
+                    anio >= 1000 && anio <= 9999 &&
+                    mes >= 1 && mes <= 12 &&
+                    dia >= 1 && dia <= 31
+                ) {
+                    return true;
+                }
+            }
+        }
+
+        /* if (ejercicioDos()) {
+            alert("El texto es una fecha válida en formato aaaa:dd:mm.");
+        } */
+
+        function ejercicioTres() {
+            let texto = prompt("EJ3 // Escribe un texto: ");
+            let checkboxLista = document.querySelectorAll(`input[type='checkbox'][name='${texto}']`);
+
+            checkboxLista.forEach(element => {
+                if (element.checked) {
+                    return true;
+                }
+            });
+        }
+
+        function ejercicioCuatro() {
+            let texto = prompt("EJ4 // Escribe un texto: ");
+            let radioLista = document.querySelectorAll(`input[type='radio'][name='${texto}']`);
+
+            radioLista.forEach(element => {
+                if (element.checked) {
+                    return true;
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <input type="checkbox" name="uno" id="uno">
+    <input type="checkbox" name="dos" id="dos">
+    <input type="checkbox" name="tres" id="tres">
+    <input type="checkbox" name="cuatro" id="cuatro">
+    <input type="checkbox" name="cinco" id="cinco">
+    <button onclick="ejercicioTres()">EJ3</button>
+
+    <br>
+
+    <input type="radio" name="num" id="uno">
+    <input type="radio" name="num" id="dos">
+    <input type="radio" name="num" id="tres">
+    <input type="radio" name="num" id="cuatro">
+    <input type="radio" name="num" id="cinco">
+    <button onclick="ejercicioCuatro()">EJ4</button>
+</body>
+
+</html>
