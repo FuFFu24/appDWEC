@@ -37,8 +37,8 @@ function comprar(idComida) {
     };
     carrito.push(compra);
   }
-  document.cookie = "carrito=" + JSON.stringify(carrito);
-  document.querySelector("#contCarrito").innerHTML = carrito.length;
+
+  actualizarCarrito();
 
   if (document.querySelector("#carrito").style.display === "block") {
     divCarritoF();
@@ -52,23 +52,34 @@ function eliminar(idComida) {
   } else if (posicion !== -1 && carrito[posicion].cantidad === 1) {
     carrito.splice(posicion, 1);
   }
-  document.cookie = "carrito=" + JSON.stringify(carrito);
-  document.querySelector("#contCarrito").innerHTML = carrito.length;
+  
+  actualizarCarrito();
 
   if (document.querySelector("#carrito").style.display === "block") {
     divCarritoF();
   }
 }
 
-function leerCarritoCookie() {
-  let datosCookie = document.cookie.split(";");
+function actualizarCarrito() {
+  // document.cookie = "carrito=" + JSON.stringify(carrito);
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  document.querySelector("#contCarrito").innerHTML = carrito.length;
+}
+
+function leerCarritoInicial() {
+  /* let datosCookie = document.cookie.split(";");
   datosCookie.forEach((element) => {
     let nombre = element.trim().split("=")[0];
     let valor = element.trim().split("=")[1];
     if (nombre === "carrito") {
       carrito = JSON.parse(valor);
     }
-  });
+  }); */
+
+  if (localStorage.getItem("carrito")) {
+    carrito = JSON.parse(localStorage.getItem("carrito"));
+  }
+
   document.querySelector("#contCarrito").innerHTML = carrito.length;
 }
 
@@ -106,7 +117,7 @@ function divCarritoF() {
 }
 
 window.onload = function () {
-  leerCarritoCookie();
+  leerCarritoInicial();
 
   document
     .querySelector("img[alt='carrito']")
