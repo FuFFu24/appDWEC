@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   var listaJuegosMesa = [];
   var listaAccesorios = [];
+  var listaCarrito = [];
 
   // Función para cargar los datos de juegos de mesa y accesorios
   function cargarJuegosMesa() {
@@ -99,7 +100,9 @@ document.addEventListener("DOMContentLoaded", function () {
           </p>
         </div>
       </a>
-      <a href="#" class="btn-anadir-carrito">Añadir al carrito</a>
+      <button class="btn-anadir-listaCarrito" onclick="anadirAlCarrito(${
+        producto.idProducto
+      })>Añadir al listaCarrito</button>
     `;
 
         // Agrega el contenido al juego destacado
@@ -185,4 +188,106 @@ document.addEventListener("DOMContentLoaded", function () {
     destacados.innerHTML =
       '<h2>Juegos en oferta</h2><div class="product-grid"></div>';
   }
+
+  function anadirAlCarrito(idProducto) {
+    let posicion = listaCarrito.findIndex(
+      (compra) => compra.idProducto === idProducto
+    );
+    if (posicion !== -1) {
+      listaCarrito[posicion].cantidad++;
+    } else {
+      let compra = {
+        idProducto: idProducto,
+        cantidad: 1,
+      };
+      listaCarrito.push(compra);
+    }
+
+    actualizarListaCarrito();
+
+    if (document.querySelector(".cart-content").style.display === "block") {
+      mostrarListaCarrito();
+    }
+  }
+
+  function eliminarDeCarrito(idProducto) {
+    let posicion = listaCarrito.findIndex(
+      (compra) => compra.idProducto === idProducto
+    );
+    if (posicion !== -1 && listaCarrito[posicion].cantidad > 1) {
+      listaCarrito[posicion].cantidad--;
+    } else if (posicion !== -1 && listaCarrito[posicion].cantidad === 1) {
+      listaCarrito.splice(posicion, 1);
+    }
+
+    actualizarListaCarrito();
+
+    if (document.querySelector(".cart-content").style.display === "block") {
+      mostrarListaCarrito();
+    }
+  }
+
+  function actualizarListaCarrito() {
+    localStorage.setItem("listaCarrito", JSON.stringify(listaCarrito));
+    document.querySelector(".cart-count").innerHTML = listaCarrito.length;
+  }
+
+  function leerListaCarritoInicial() {
+    if (localStorage.getItem("listaCarrito")) {
+      listaCarrito = JSON.parse(localStorage.getItem("listaCarrito"));
+    }
+
+    document.querySelector(".cart-count").innerHTML = listaCarrito.length;
+  }
+
+  function mostrarListaCarrito() {
+    let desplegableCarrito = document.querySelector(".cart-content");
+    desplegableCarrito.innerHTML = "";
+    desplegableCarrito.style.display = "block";
+    let tabla = document.createElement("table");
+    let precioTotal = 0;
+
+    listaCarrito.forEach((element) => {
+      let producto = listaJuegosMesa.find(
+        (producto) => producto.idProducto === element.idProducto
+      );
+      if (producto) {
+        let nombre = producto.nombre;
+        let subtotal = producto.precio * element.cantidad;
+        precioTotal += subtotal;
+        tabla.innerHTML += `
+                  <tr>
+                      <td>${nombre}</td>
+                      <td>${element.cantidad}</td>
+                      <td>${subtotal} €</td>
+                      <td><button type="button" onclick="eliminar(${element.idProducto})" class="botonEliminar">X</button></td>
+                  </tr>
+              `;
+      }
+    });
+    tabla.innerHTML += `
+      <tr>
+        <td colspan="4">Total: ${precioTotal} €</td>
+      </tr>
+    `;
+    desplegableCarrito.appendChild(tabla);
+  }
+
+  window.onload = function () {
+    leerListaCarritoInicial();
+
+    document
+      .querySelector("img[alt='Carrito']")
+      .addEventListener("click", function () {
+        let desplegableCarrito = document.querySelector(".cart-content");
+        if (
+          desplegableCarrito.style.display === "none" ||
+          desplegableCarrito.style.display === ""
+        ) {
+          mostrarListaCarrito();
+        } else {
+          desplegableCarrito.style.display = "none";
+        }
+      });
+  };
 });

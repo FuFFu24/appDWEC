@@ -109,26 +109,127 @@ nav ul.menu li a:hover {
   opacity: 0.8;
 }
 
-/* Carrito de Compras Icon */
-.cart-icon img {
+/* Estilo para el contenedor del carrito */
+.cart-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+/* Estilo para el área del carrito desplegable (modifica según tus necesidades) */
+.cart-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-dropdown a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.cart-dropdown a img {
   width: 30px;
   height: auto;
   position: relative;
   transition: opacity 0.3s ease-in-out;
 }
 
-.cart-icon:hover img {
+.cart-dropdown a img:hover img {
   content: url(../IMG/LOGOS/cart-verde.png);
   opacity: 0.8;
 }
 
 .cart-count {
-  background-color: #4bcbaf;
-  color: #184941;
+  background: rgb(24, 137, 116);
+  background: radial-gradient(
+    circle,
+    rgba(24, 137, 116, 1) 0%,
+    rgba(24, 137, 116, 1) 35%,
+    rgba(75, 203, 175, 1) 100%
+  );
+  color: #f1fcf8;
   border-radius: 50%;
-  font-size: 12px;
-  padding: 2px 6px;
+  padding: 4px 10px;
+}
+
+.cart-content {
+  display: none;
   position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 200px; /* Ajusta según tus necesidades */
+  /* Otras propiedades de estilo, como ancho y altura, según tus necesidades */
+}
+
+/* Estilo para los productos en el carrito (modifica según tus necesidades) */
+.cart-items {
+  max-height: 300px; /* Ajusta según tus necesidades */
+  overflow-y: auto; /* Agrega una barra de desplazamiento si es necesario */
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.cart-item img {
+  max-width: 50px;
+  max-height: 50px;
+  margin-right: 10px;
+}
+
+.cart-item .info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item .info .name {
+  font-weight: bold;
+}
+
+.cart-item .info .price {
+  color: #ff5733;
+}
+
+.cart-item .controls {
+  display: flex;
+  align-items: center;
+}
+
+.cart-item .controls .quantity {
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.cart-item .controls .delete {
+  cursor: pointer;
+  color: #ff5733;
+}
+
+/* Estilo para el botón de tramitar pedido (modifica según tus necesidades) */
+#checkout-button {
+  background-color: #ff5733;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilo para el subtotal (modifica según tus necesidades) */
+#subtotal {
+  font-weight: bold;
+  color: #ff5733;
 }
 
 /* Estilos para la sección de Destacados de Juegos */
@@ -220,6 +321,7 @@ nav ul.menu li a:hover {
 /* Estilos para el botón "Añadir al carrito" */
 .btn-anadir-carrito {
   display: none;
+  max-width: 50%;
   padding: 5px 10px;
   background-color: #184941;
   color: #ffffff;
