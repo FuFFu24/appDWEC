@@ -1,25 +1,28 @@
 window.onload = function () {
-    const table = document.querySelector("#ruta");
+    const listaTds = [...document.getElementById("ruta").getElementsByTagName("td")]
+    listaTds.forEach((celda) => {
+        celda.addEventListener("click",pintar);
+    })
+}
 
-    table.addEventListener("click", function (event) {
-        if (event.target.tagName === "TD") {
-            const columna = event.target.cellIndex;
-            const fila = event.target.parentElement;
+function pintar(evento) {
+    /* const listaEntera = [...document.getElementById("ruta").getElementsByTagName("td")]
+    listaEntera.forEach((fila => {
+        fila.style.backgroundColor = "white";
+    })) */
 
-            const filas = document.querySelectorAll("#ruta tr");
+    evento.target.parentNode.style.backgroundColor = "red";
 
+    let columna = evento.target.cellIndex;
 
-            for (let fila of filas) {
-                fila.cells[columna].style.backgroundColor = "red";
-            }
+    /* let contador = 0;
+    while (contador < evento.target.parentNode.children.length && 
+        evento.target.parentNode.children[contador] != evento.target) {
+        contador++;
+    } */
 
-            for (let celda of fila.cells) {
-                celda.style.backgroundColor = "red";
-            }
-        }
-    });
-
-    let eliminarFilaColumna = setTimeout(function () {
-        
-    }, 3000)
+    const listaTrs = [...document.getElementById("ruta").getElementsByTagName("tr")]
+    listaTrs.forEach((fila => {
+        fila.children[columna].style.backgroundColor = "red";
+    }))
 }
