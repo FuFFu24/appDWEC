@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>HTML5</title>
+<style>
+    .error {
+        border: 2px solid red;
+    }
+
+    .errorVisible {
+        display: block;
+    }
+
+    .errorOculto {
+        display: none;
+    }
+</style>
+<script>
+    function quitarErrores() {
+        let listaElementos = [...document.querySelectorAll(".error,.errorVisible")];
+        listaElementos.forEach(element => {
+            if (element.className == "errorVisible") {
+                element.className = "errorOculto";
+            } else {
+                element.className = "";
+            }
+        });
+    }
+
+    function esFechaValida(fecha) {
+        let dia = fecha.split("-")[0];
+        let mes = fecha.split("-")[1]-1;
+        let ano = fecha.split("-")[2];
+
+        let fechaNueva = new Date(ano,mes,dia);
+        if (dia == fechaNueva.getDate() && mes == fechaNueva.getMonth() && ano == fechaNueva.getFullYear()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function esMayorEdad(fechaNacimiento) {
+        let dia = fechaNacimiento.split("-")[0];
+        let mes = fechaNacimiento.split("-")[1]-1;
+        let ano = fechaNacimiento.split("-")[2];
+
+        let fecha = new Date(ano,mes,dia);
+
+        fecha.setFullYear(fecha.getFullYear()+18);
+
+        let hoy= new Date();
+        if (fecha < hoy) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function validar() {
+        let noHayError = true;
+
+        let cajaNombre = document.querySelector("#nombre");
+        let cajaClave = document.querySelector("#clave");
+        let cajaFecha2 = document.querySelector("#fecha2");
+        let radiosOpciones = document.getElementsByName("radio");
+
+        quitarErrores();
+
+        if (cajaNombre.value.trim().length < 3) {
+            noHayError = false;
+            cajaNombre.className = "error";
+            document.querySelector("#errorNombre").className = "errorVisible";
+        }
+
+        if (cajaClave.value.trim().length < 8) {
+            noHayError = false;
+            cajaClave.className = "error";
+            let mensaje = document.createElement("span");
+            mensaje.className = "errorVisible";
+            mensaje.textContent = "No ha puesto bien la contraseña";
+            cajaClave.insertAdjacentElement("afterend", mensaje);
+        }
+
+        if (!/^\d{2}-\d{2}-\d{4}$/.test(cajaFecha2.value) || !esFechaValida(cajaFecha2.value)) {
+            noHayError = false;
+            cajaFecha2.className = "error";
+            let mensaje = document.createElement("span");
+            mensaje.className = "errorVisible";
+            mensaje.textContent = "No ha puesto bien la fecha";
+            cajaFecha2.insertAdjacentElement("afterend", mensaje);
+        }
+
+        let contador = 0;
+
+        [...radiosOpciones].forEach(element => {
+            if (!element.checked) {
+                contador ++;
+            }
+        });
+
+        if (contador == 0) {
+            noHayError = false;
+            cajaClave.className = "error";
+            let mensaje = document.createElement("span");
+            mensaje.className = "errorVisible";
+            mensaje.textContent = "No ha puesto bien la contraseña";
+            cajaClave.insertAdjacentElement("afterend", mensaje);
+        }
+
+        return noHayError;
+    }
+
+    onload = () => {
+        document.getElementsByTagName("button")[0].type="submit";
+    }
+</script>
+</head>
+<body>
+<form method="POST" onsubmit="return validar()" action="novale.php">
+nombre:<input type="text" name="nombre" id="nombre"><span id="errorNombre" class="errorOculto">Mas de dos caracteres</span><br>
+clave:<input type="password" name="clave" id="clave"><br>
+edad:<input type="number" name="edad" id="edad"><br>
+edad2:<input type="text" name="edad2" id="edad2"><br>
+fecha:<input type="date" name="fecha" id="fecha"><br>
+fecha2:<input type="text" placeholder="dd-mm-aaaa" name="fecha2" id="fecha2"><br>
+ciudad:<input type="text" name="ciudad" id="ciudad"><br>
+ciudad2:<select name="ciudad2" id="ciudad2">
+<option>Escoge una ciudad</option>
+<option>Madrid</option>
+<option>Burgos</option>
+<option>Valencia</option>
+</select><br>
+<div id="opciones">opciones:
+opcion1<input type="radio" id="radio1" name="radio" value=1>
+opcion2<input type="radio" id="radio2" name="radio" value=2>
+opcion3<input type="radio" id="radio3" name="radio" value=3>
+</div>
+<br>
+<button type="button">ENVIAR</button>
+</form>
+</body>
+</html>
