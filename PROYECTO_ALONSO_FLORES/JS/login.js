@@ -28,3 +28,37 @@ document.addEventListener("DOMContentLoaded", function () {
   // Llama a la función para mostrar uno de los formularios al cargar la página
   toggleForms(new Event("click"));
 });
+
+// Array en el que vamos a guardar todos los datos del JSON
+let listaUsuarios = [];
+
+// Función para cargar los usuarios desde el JSON
+function cargarUsuarios() {
+  $.getJSON("../JSON/clienteJSON.json", function (datos) {
+    listaUsuarios = datos;
+  });
+}
+
+cargarUsuarios();
+
+// Función para realizar el inicio de sesión
+function iniciarSesion() {
+  const email = document.getElementById("login-correo").value;
+  const password = document.getElementById("login-contrasena").value;
+
+  // Lógica de inicio de sesión
+  const usuario = listaUsuarios.find(
+    (user) => user.correo === email && user.contraseña === password
+  );
+
+  if (usuario) {
+    // Inicio de sesión exitoso
+    alert(`¡Bienvenido, ${usuario.nombre} ${usuario.apellidos}!`);
+    // Puedes redirigir a otra página o realizar acciones adicionales aquí
+  } else {
+    // Inicio de sesión fallido
+    alert(
+      "Correo electrónico o contraseña incorrectos. Por favor, inténtalo de nuevo."
+    );
+  }
+}

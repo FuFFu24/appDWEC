@@ -1,3 +1,18 @@
+/* Paleta de colores */
+:root {
+  --puerto-rico-50: #f1fcf8;
+  --puerto-rico-100: #d0f7eb;
+  --puerto-rico-200: #a1eed8;
+  --puerto-rico-300: #69dfc1;
+  --puerto-rico-400: #4bcbaf;
+  --puerto-rico-500: #21ab8e;
+  --puerto-rico-600: #188974;
+  --puerto-rico-700: #176e5f;
+  --puerto-rico-800: #17584e;
+  --puerto-rico-900: #184941;
+  --puerto-rico-950: #082b28;
+}
+
 /* Reset de estilos y estilos generales */
 * {
   margin: 0;
@@ -7,7 +22,7 @@
 
 body {
   font-family: "PT Sans";
-  background-color: #f4f4f4;
+  background-color: var(--puerto-rico-50);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -36,7 +51,7 @@ body {
   top: -80px;
   margin-bottom: -50px;
   font-weight: bold;
-  color: #455a64;
+  color: var(--puerto-rico-900);
 }
 
 /* Formulario */
@@ -60,7 +75,7 @@ body {
 }
 
 .input-flotante label {
-  color: #455a64;
+  color: var(--puerto-rico-900);
   font-size: 11px;
   text-transform: uppercase;
   position: absolute;
@@ -74,11 +89,11 @@ body {
 
 .input-flotante input {
   font-size: 13px;
-  color: #455a64;
+  color: var(--puerto-rico-900);
   background-color: transparent;
   outline: none;
   width: 240px;
-  border: 1px solid #455a64;
+  border: 1px solid var(--puerto-rico-900);
   padding: 12px;
   margin: 0 0 15px;
   position: relative;
@@ -90,11 +105,11 @@ body {
 }
 
 .input-flotante input:focus {
-  border-color: #4ccbaf;
+  border-color: var(--puerto-rico-500);
 }
 
 .input-flotante input:focus + label {
-  color: #455a64;
+  color: var(--puerto-rico-900);
   transform: translateY(-20px);
 }
 
@@ -102,7 +117,7 @@ body {
 .form button {
   text-transform: uppercase;
   outline: 0;
-  background: #455a64;
+  background: var(--puerto-rico-900);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -116,20 +131,20 @@ body {
 .form button:hover,
 .form button:active,
 .form button:focus {
-  background: #4ccbaf;
+  background: var(--puerto-rico-500);
 }
 
 /* Estilos para los mensajes y enlaces */
 .form .message-register,
 .form .message-login {
   margin: 20px 0 -10px;
-  color: #455a64;
+  color: var(--puerto-rico-900);
   font-size: 12px;
 }
 
 .form .message-register a,
 .form .message-login a {
-  color: #4ccbaf;
+  color: var(--puerto-rico-500);
   text-decoration: none;
 }
 
@@ -140,7 +155,7 @@ body {
 
 /* Estilos para la parte inferior del formulario */
 .form .login-bottom {
-  color: #455a64;
+  color: var(--puerto-rico-900);
   font-size: 12px;
 }
 
@@ -153,6 +168,6 @@ body {
 }
 
 .form .login-bottom a {
-  color: #4ccbaf;
+  color: var(--puerto-rico-500);
   text-decoration: none;
 }
