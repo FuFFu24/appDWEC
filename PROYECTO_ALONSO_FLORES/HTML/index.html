@@ -15,7 +15,7 @@
 <body>
     <!-- Encabezado -->
     <header>
-        <div class="logo">
+        <div class="logo-pagina">
             <a href="index.html">
                 <img src="../IMG/LOGOS/logo-gris.png" alt="Monstruo de los Juegos" />
             </a>
@@ -25,28 +25,27 @@
                 <li><a href="juegos.html">JUEGOS</a></li>
                 <li><a href="#">CARTAS</a></li>
                 <li><a href="#">MINIATURAS</a></li>
-                <li><a href="accesorios.html">ACCESORIOS</a></li>
+                <li><a href="#">ACCESORIOS</a></li>
                 <li><a href="ofertas.html">¡OFERTAS!</a></li>
             </ul>
         </nav>
-        <div class="user-actions">
+        <div class="acciones-del-usuario">
             <div>
-                <input type="text" id="search-input" placeholder="¿Qué estás buscando?" />
+                <input type="text" id="input-buscar" placeholder="¿Qué estás buscando?" />
             </div>
-            <div class="user-icon" id="user-icon">
+            <div class="icono-usuario" id="icono-usuario">
                 <a href="login.html">
                     <img src="../IMG/LOGOS/user-gris.png" alt="Usuario" />
                 </a>
             </div>
-            <div class="cart-container">
-                <div class="cart-dropdown">
-                    <a href="#">
-                        <img src="../IMG/LOGOS/cart-gris.png" alt="Carrito" />
-                        <span class="cart-count">0</span>
-                    </a>
-                    <div class="cart-content">
-                        <!-- Contenido del carrito -->
-                    </div>
+            <div class="icono-carrito">
+                <img src="../IMG/LOGOS/cart-gris.png" alt="Carrito de compras">
+                <span class="contador-carrito">0</span>
+                <div class="contenido-carrito">
+                    <div class="cart-items" id="cart-items"></div>
+                    <div class="subtotal" id="subtotal"></div>
+                    <button class="boton-tramitar">Tramitar pedido</button>
+                    <span id="carrito-vacio">No tienes ningún artículo en tu carrito.</span>
                 </div>
             </div>
         </div>
@@ -57,6 +56,7 @@
     <!-- Contenido principal -->
     <main>
         <section class="mejor-valorados">
+            <h2>Juegos mejor valorados</h2>
             <!-- Contenido de la sección de juegos mejor valorados -->
         </section>
         <div class="mesaje-main">
@@ -67,13 +67,15 @@
             <p>Llevamos los juegos a tu casa o puedes pasar a visitarnos a nuestras tiendas físicas.</p>
         </div>
         <section class="novedades">
-            <!-- Contenido de la sección de novedades -->
+            <h2>Novedades</h2>
+            <!-- Contenido de la sección de juegos en novedad -->
         </section>
         <div class="mesaje-main">
             <h2>· Hazte MONSTRUSOCIO ·</h2>
             <p>Te enterarás de nuestras novedades, lanzamientos, eventos, descuentos especiales y más sorpresas.</p>
         </div>
         <section class="en-oferta">
+            <h2>Juegos en oferta</h2>
             <!-- Contenido de la sección de juegos en oferta -->
         </section>
     </main>
@@ -83,7 +85,7 @@
         <h2>Suscríbete a nuestro Newsletter</h2>
         <form id="newsletter-form">
             <input type="email" id="email" name="email" autocomplete="off" placeholder="Correo electrónico*" required>
-            <button type="submit">Suscribirse</button>
+            <button type="submit" class="suscribirse">Suscribirse</button>
             <br>
             <input type="checkbox" id="acepto" name="acepto" required>
             <label for="acepto">Acepto la <a href="#">Política de Privacidad</a> y el <a href="#">Aviso
@@ -114,7 +116,7 @@
         <div class="footer-column">
             <h3>Encuéntranos</h3>
             <p><strong>Dirección:</strong> Calle Principal, Ciudad</p>
-            <p><strong>Horario:</strong> Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+            <p><strong>Horario:</strong> Lunes a Viernes: 9:00 - 18:00</p>
             <p><strong>Sábados y Domingos:</strong> Cerrado</p>
         </div>
     </footer>

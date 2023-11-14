@@ -1,142 +1,157 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var listaJuegosMesa = [];
-  var listaAccesorios = [];
-  var listaCarrito = [];
+  // Array en el que vamos a guardar todos los datos del JSON
+  let listaJuegosMesa = [];
 
-  // Función para cargar los datos de juegos de mesa y accesorios
+  // Con esta funcion cargaremos los datos del JSON en la lista de juegos mesa y tambien mostraremos los datos en la pagina
   function cargarJuegosMesa() {
-    // Cargar datos de juegos de mesa desde productoJSON.json
     $.getJSON("../JSON/productoJSON.json", function (datos) {
       listaJuegosMesa = datos;
-      // Ordenar y mostrar productos de juegos de mesa
-      ordenarPorDescuento(listaJuegosMesa);
-      mostrarJuegosMesa(listaJuegosMesa);
-      ordenarPorFecha(listaJuegosMesa);
-      mostrarJuegosMesa(listaJuegosMesa);
-      ordenarPorNota(listaJuegosMesa);
-      mostrarJuegosMesa(listaJuegosMesa);
-    });
 
-    // Cargar datos de accesorios desde accesorioJSON.json
-    $.getJSON("../JSON/accesorioJSON.json", function (datos) {
-      listaAccesorios = datos;
+      mostrarJuegosMesa(getMejorValorados(), ".mejor-valorados");
+      mostrarJuegosMesa(getNovedades(), ".novedades");
+      mostrarJuegosMesa(getEnOferta(), ".en-oferta");
+
+      // Esto es solo para que al recargar la pagina se actualice el carrito y con ello su contador
+      mostrarCarrito();
     });
   }
 
   cargarJuegosMesa();
 
-  // Obtener el campo de búsqueda por su selector
-  const busquedaInput = document.querySelector("input[type='text']");
+  const searchInput = document.getElementById("input-buscar");
 
-  // Función para buscar productos en ambas listas
-  function buscarProductos(termino) {
-    const resultadosJuegosMesa = buscarEnLista(termino, listaJuegosMesa);
-    const resultadosAccesorios = buscarEnLista(termino, listaAccesorios);
-
-    // Combinar los resultados de ambas listas
-    const resultadosCombinados =
-      resultadosJuegosMesa.concat(resultadosAccesorios);
-
+  // Función para mostrar los resultados de búsqueda en el desplegable
+  function mostrarResultados(resultados) {
     const resultadosDesplegable = document.querySelector(
       ".resultados-busqueda"
     );
-    resultadosDesplegable.innerHTML = `
-      <p class="sin-resultados"></p>
-      <div class="product-grid"></div>`;
 
-    return resultadosCombinados.slice(0, 5); // Limitar a mostrar un máximo de 5 resultados.
-  }
+    resultadosDesplegable.innerHTML = "";
 
-  // Función para buscar en una lista
-  function buscarEnLista(termino, lista) {
-    return lista.filter((producto) =>
-      producto.nombre.toLowerCase().includes(termino.toLowerCase())
-    );
-  }
+    const resultadosMostrar = resultados.slice(0, 5);
 
-  // Función para mostrar los juegos de mesa
-  function mostrarJuegosMesa(lista) {
-    const mensaje = document.querySelector(".sin-resultados");
-    const productGrid = document.querySelector(".product-grid");
-
-    // Limpiar el contenido actual
-    productGrid.innerHTML = "";
-
-    if (lista.length === 0) {
-      // Si la lista está vacía, mostrar un mensaje
-      mensaje.innerHTML = `😔 No hemos encontrado nada para <strong>"${busquedaInput.value}"</strong>`;
+    if (resultadosMostrar.length === 0) {
+      const mensaje = document.createElement("p");
+      mensaje.classList.add("sin-resultados");
+      mensaje.innerHTML = `😔 No hemos encontrado nada para <strong>"${searchInput.value}"</strong>`;
+      resultadosDesplegable.appendChild(mensaje);
+    } else if (!searchInput.value.trim()) {
+      resultadosDesplegable.style.display = "none";
     } else {
-      lista.forEach((producto, index) => {
-        if (index >= 5) {
-          return; // Sal del bucle si se han procesado 5 elementos
-        }
+      resultadosDesplegable.innerHTML = '<div class="producto-grid"></div>';
 
-        // Crea un nuevo juego destacado
-        const juegoDestacado = document.createElement("div");
-        juegoDestacado.className = "juego-destacado";
+      mostrarJuegosMesa(
+        resultadosMostrar,
+        ".resultados-busqueda .producto-grid"
+      );
 
-        if (producto.descuento) {
-          // Calcula el precio con descuento
-          valorDescuento =
-            (producto.precio * producto.porcentajeDescuento) / 100;
-          precioVenta = (producto.precio - valorDescuento).toFixed(2);
-        }
-
-        // Crea el contenido del juego destacado
-        const contenidoHTML = `
-      <a href="#" class="web-page">
-        <div class="img-juego">
-          <img src="${producto.imagenURL}" alt="${producto.nombre}" />
-        </div>
-        <div class="datos-juego">
-          <p>${producto.nombre}</p>
-          <p>
-            <span class="precio-con-descuento">${
-              producto.descuento ? precioVenta : producto.precio
-            } €</span>
-            <span class="precio-original">${
-              producto.descuento ? " Antes " + producto.precio + " €" : ""
-            }</span>
-          </p>
-        </div>
-      </a>
-      <button class="btn-anadir-listaCarrito" onclick="anadirAlCarrito(${
-        producto.idProducto
-      })>Añadir al listaCarrito</button>
-    `;
-
-        // Agrega el contenido al juego destacado
-        juegoDestacado.innerHTML = contenidoHTML;
-
-        // Agrega el juego destacado al contenedor .product-grid
-        productGrid.appendChild(juegoDestacado);
-      });
+      resultadosDesplegable.style.display = "block";
     }
   }
 
-  // Escuchar el evento "input" en el campo de búsqueda
-  busquedaInput.addEventListener("input", function () {
-    const terminoBusqueda = busquedaInput.value;
+  function mostrarJuegosMesa(productos, seccion) {
+    const seccionMostrar = document.querySelector(`${seccion}`);
 
-    // Realiza la búsqueda y muestra los resultados
-    const resultados = buscarProductos(terminoBusqueda);
-    mostrarJuegosMesa(resultados);
-  });
+    productos.forEach((producto) => {
+      const juegoDestacado = document.createElement("div");
+      juegoDestacado.classList.add("juego-destacado");
 
-  // Escuchar el evento "blur" para ocultar el desplegable cuando el campo pierde el foco
-  busquedaInput.addEventListener("blur", function () {
-    const resultadosDesplegable = document.querySelector(
-      ".resultados-busqueda"
+      const imagen = document.createElement("img");
+      imagen.src = producto.imagenURL;
+      imagen.alt = producto.nombre;
+
+      const datosJuego = document.createElement("div");
+      datosJuego.classList.add("datos-juego");
+
+      const nombre = document.createElement("h3");
+      nombre.textContent = producto.nombre;
+
+      const descripcion = document.createElement("p");
+      descripcion.classList.add("descripcion-hover");
+      descripcion.textContent = producto.descripcion;
+
+      const precio = document.createElement("p");
+
+      if (producto.descuento) {
+        const precioConDescuento =
+          producto.precio * (1 - producto.porcentajeDescuento / 100);
+        precio.innerHTML = `<strong>${precioConDescuento.toFixed(
+          2
+        )} €</strong> <span class="precio-original">Antes ${producto.precio.toFixed(
+          2
+        )} €</span>`;
+      } else {
+        precio.innerHTML = `<strong>${producto.precio.toFixed(2)} €</strong>`;
+      }
+
+      const btnAnadirCarrito = document.createElement("button");
+      btnAnadirCarrito.textContent = "Añadir al carrito";
+      btnAnadirCarrito.classList.add("btn-anadir-carrito");
+      btnAnadirCarrito.addEventListener("click", () =>
+        agregarAlCarrito(producto)
+      );
+
+      datosJuego.appendChild(nombre);
+      datosJuego.appendChild(descripcion);
+      datosJuego.appendChild(precio);
+      datosJuego.appendChild(btnAnadirCarrito);
+
+      juegoDestacado.appendChild(imagen);
+      juegoDestacado.appendChild(datosJuego);
+      juegoDestacado.appendChild(btnAnadirCarrito);
+
+      seccionMostrar.appendChild(juegoDestacado);
+    });
+  }
+
+  // Tres funciones para ordenar la lista segun las tres secciones que hay en el codigo main
+  function getMejorValorados() {
+    return listaJuegosMesa
+      .filter((producto) => producto.nota)
+      .sort((a, b) => b.nota - a.nota)
+      .slice(0, 5);
+  }
+
+  function getNovedades() {
+    return listaJuegosMesa
+      .filter((producto) => producto.fecha)
+      .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+      .slice(0, 5);
+  }
+
+  function getEnOferta() {
+    return listaJuegosMesa
+      .filter((producto) => producto.descuento)
+      .sort((a, b) => b.porcentajeDescuento - a.porcentajeDescuento)
+      .slice(0, 5);
+  }
+
+  // Evento para buscar juegos de mesa en la lista desde un input con keyup
+  searchInput.addEventListener("keyup", function () {
+    const busqueda = searchInput.value.toLowerCase().trim();
+
+    const resultados = listaJuegosMesa.filter((producto) =>
+      producto.nombre.toLowerCase().includes(busqueda)
     );
-    resultadosDesplegable.innerHTML = ""; // Elimina el contenido del desplegable
+    mostrarResultados(resultados);
   });
 
-  // Escuchar el evento "keyup" para redirigir a la página de resultados
-  busquedaInput.addEventListener("keyup", function (event) {
+  // Evento para ocultar el desplegable de la busqueda cuando se pulsa fuera
+  document.addEventListener("click", function (event) {
+    const esClickeado = event.target.closest(".resultados-busqueda");
+
+    if (!esClickeado) {
+      const resultadosDesplegable = document.querySelector(
+        ".resultados-busqueda"
+      );
+      resultadosDesplegable.style.display = "none";
+    }
+  });
+
+  searchInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-      const query = busquedaInput.value;
+      const query = searchInput.value;
       if (query.trim() !== "") {
-        // Redirigir a la página de resultados con la consulta en los parámetros de la URL
         window.location.href = `resultados.html?query=${encodeURIComponent(
           query
         )}`;
@@ -144,150 +159,178 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Función para ordenar la lista por la propiedad "nota"
-  function ordenarPorNota(lista) {
-    lista.sort((a, b) => {
-      const notaA = parseFloat(a.nota);
-      const notaB = parseFloat(b.nota);
-      return notaB - notaA; // Ordena de mayor a menor nota
-    });
+  // A partir de aqui tenemos unas cuantas lineas de codigo sobre el carrito de la compra
+  function agregarAlCarrito(producto) {
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    const destacados = document.querySelector(".mejor-valorados");
-    destacados.innerHTML =
-      '<h2>Juegos mejor valorados</h2><div class="product-grid"></div>';
-  }
-
-  // Función para ordenar la lista por la propiedad "fecha"
-  function ordenarPorFecha(lista) {
-    lista.sort((a, b) => {
-      const fechaA = new Date(b.fecha);
-      const fechaB = new Date(a.fecha);
-      return fechaA - fechaB;
-    });
-
-    const destacados = document.querySelector(".novedades");
-    destacados.innerHTML =
-      '<h2>Destacados</h2><div class="product-grid"></div>';
-  }
-
-  // Función para ordenar la lista por la propiedad "descuento"
-  function ordenarPorDescuento(lista) {
-    lista.sort((a, b) => {
-      // Compara el atributo "descuento"
-      if (a.descuento && !b.descuento) {
-        return -1; // a viene primero (tiene descuento)
-      } else if (!a.descuento && b.descuento) {
-        return 1; // b viene primero (tiene descuento)
-      } else {
-        // Si tienen el mismo estado de "descuento", compara "porcentajeDescuento"
-        return b.porcentajeDescuento - a.porcentajeDescuento;
-      }
-    });
-
-    const destacados = document.querySelector(".en-oferta");
-    destacados.innerHTML =
-      '<h2>Juegos en oferta</h2><div class="product-grid"></div>';
-  }
-
-  function anadirAlCarrito(idProducto) {
-    let posicion = listaCarrito.findIndex(
-      (compra) => compra.idProducto === idProducto
+    const productoExistenteIndex = carrito.findIndex(
+      (item) => item.id === producto.idProducto
     );
-    if (posicion !== -1) {
-      listaCarrito[posicion].cantidad++;
+
+    if (productoExistenteIndex !== -1) {
+      const carritoActualizado = [...carrito];
+      carritoActualizado[productoExistenteIndex].cantidad++;
+      localStorage.setItem("carrito", JSON.stringify(carritoActualizado));
     } else {
-      let compra = {
-        idProducto: idProducto,
-        cantidad: 1,
-      };
-      listaCarrito.push(compra);
+      const nuevoCarrito = [
+        ...carrito,
+        {
+          id: producto.idProducto,
+          nombre: producto.nombre,
+          imagenURL: producto.imagenURL,
+          precio: producto.precio,
+          cantidad: 1,
+          descuento: producto.descuento,
+          porcentajeDescuento: producto.porcentajeDescuento || 0,
+        },
+      ];
+      localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
     }
 
-    actualizarListaCarrito();
-
-    if (document.querySelector(".cart-content").style.display === "block") {
-      mostrarListaCarrito();
-    }
+    mostrarCarrito();
   }
 
-  function eliminarDeCarrito(idProducto) {
-    let posicion = listaCarrito.findIndex(
-      (compra) => compra.idProducto === idProducto
-    );
-    if (posicion !== -1 && listaCarrito[posicion].cantidad > 1) {
-      listaCarrito[posicion].cantidad--;
-    } else if (posicion !== -1 && listaCarrito[posicion].cantidad === 1) {
-      listaCarrito.splice(posicion, 1);
-    }
+  function mostrarCarrito() {
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const contadorCarrito = document.querySelector(".contador-carrito");
+    const carritoVacioMensaje = document.getElementById("carrito-vacio");
+    const cartItemsContainer = document.getElementById("cart-items");
+    const subtotalContainer = document.getElementById("subtotal");
+    const botonTramitarPedido = document.querySelector(".boton-tramitar");
 
-    actualizarListaCarrito();
+    carritoVacioMensaje.style.display = "none";
+    cartItemsContainer.style.display = "block";
+    subtotalContainer.style.display = "block";
+    botonTramitarPedido.style.display = "block";
 
-    if (document.querySelector(".cart-content").style.display === "block") {
-      mostrarListaCarrito();
-    }
-  }
+    cartItemsContainer.innerHTML = "";
 
-  function actualizarListaCarrito() {
-    localStorage.setItem("listaCarrito", JSON.stringify(listaCarrito));
-    document.querySelector(".cart-count").innerHTML = listaCarrito.length;
-  }
+    if (carrito.length === 0) {
+      carritoVacioMensaje.style.display = "block";
+      cartItemsContainer.style.display = "none";
+      subtotalContainer.style.display = "none";
+      botonTramitarPedido.style.display = "none";
+    } else {
+      carrito.forEach((item) => {
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
 
-  function leerListaCarritoInicial() {
-    if (localStorage.getItem("listaCarrito")) {
-      listaCarrito = JSON.parse(localStorage.getItem("listaCarrito"));
-    }
+        const imagen = document.createElement("img");
+        imagen.src = item.imagenURL || "";
+        imagen.alt = item.nombre;
+        imagen.className = "imagen-carrito";
 
-    document.querySelector(".cart-count").innerHTML = listaCarrito.length;
-  }
+        const detalles = document.createElement("div");
+        detalles.classList.add("cart-item-details");
 
-  function mostrarListaCarrito() {
-    let desplegableCarrito = document.querySelector(".cart-content");
-    desplegableCarrito.innerHTML = "";
-    desplegableCarrito.style.display = "block";
-    let tabla = document.createElement("table");
-    let precioTotal = 0;
+        const nombre = document.createElement("h4");
+        nombre.textContent = item.nombre;
 
-    listaCarrito.forEach((element) => {
-      let producto = listaJuegosMesa.find(
-        (producto) => producto.idProducto === element.idProducto
-      );
-      if (producto) {
-        let nombre = producto.nombre;
-        let subtotal = producto.precio * element.cantidad;
-        precioTotal += subtotal;
-        tabla.innerHTML += `
-                  <tr>
-                      <td>${nombre}</td>
-                      <td>${element.cantidad}</td>
-                      <td>${subtotal} €</td>
-                      <td><button type="button" onclick="eliminar(${element.idProducto})" class="botonEliminar">X</button></td>
-                  </tr>
-              `;
-      }
-    });
-    tabla.innerHTML += `
-      <tr>
-        <td colspan="4">Total: ${precioTotal} €</td>
-      </tr>
-    `;
-    desplegableCarrito.appendChild(tabla);
-  }
-
-  window.onload = function () {
-    leerListaCarritoInicial();
-
-    document
-      .querySelector("img[alt='Carrito']")
-      .addEventListener("click", function () {
-        let desplegableCarrito = document.querySelector(".cart-content");
-        if (
-          desplegableCarrito.style.display === "none" ||
-          desplegableCarrito.style.display === ""
-        ) {
-          mostrarListaCarrito();
+        const precio = document.createElement("p");
+        if (item.precio && item.descuento) {
+          const precioConDescuento =
+            item.precio * (1 - item.porcentajeDescuento / 100);
+          precio.textContent = `${precioConDescuento.toFixed(2)} € (Descuento ${
+            item.porcentajeDescuento
+          }%)`;
+        } else if (item.precio) {
+          precio.textContent = `${item.precio.toFixed(2)} €`;
         } else {
-          desplegableCarrito.style.display = "none";
+          precio.textContent = "Precio no disponible";
         }
+
+        const cantidad = document.createElement("p");
+        cantidad.textContent = `Cantidad: ${item.cantidad}`;
+
+        // Aqui he querido crear y modificar el hover del boton para eliminar los productos por ver como se haria en JavaScript
+        const botonBorrar = document.createElement("img");
+        botonBorrar.src = "../IMG/LOGOS/basura-gris.png";
+        botonBorrar.alt = "Borrar";
+        botonBorrar.classList.add("boton-borrar");
+        botonBorrar.addEventListener("click", () => borrarDelCarrito(item.id));
+
+        botonBorrar.addEventListener("mouseover", () => {
+          botonBorrar.src = "../IMG/LOGOS/basura-verde.png";
+        });
+
+        botonBorrar.addEventListener("mouseout", () => {
+          botonBorrar.src = "../IMG/LOGOS/basura-gris.png";
+        });
+
+        detalles.appendChild(nombre);
+        detalles.appendChild(precio);
+        detalles.appendChild(cantidad);
+        detalles.appendChild(botonBorrar);
+
+        cartItem.appendChild(imagen);
+        cartItem.appendChild(detalles);
+
+        cartItemsContainer.appendChild(cartItem);
       });
-  };
+
+      const subtotal = carrito.reduce((total, item) => {
+        const precioUnitario = item.descuento
+          ? item.precio * (1 - item.porcentajeDescuento / 100)
+          : item.precio;
+
+        return total + (precioUnitario || 0) * item.cantidad;
+      }, 0);
+
+      subtotalContainer.innerHTML = `<p>Subtotal: <strong>${subtotal.toFixed(
+        2
+      )} €</strong></p>`;
+    }
+
+    // Esta parte es la que va a actualizar el contador del carrito cada vez que se introduzca un nuevo juego
+    const totalProductos = carrito.reduce(
+      (total, item) => total + item.cantidad,
+      0
+    );
+    contadorCarrito.textContent = totalProductos.toString();
+  }
+
+  function borrarDelCarrito(id) {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    const index = carrito.findIndex((item) => item.id === id);
+
+    if (index !== -1) {
+      if (carrito[index].cantidad > 1) {
+        carrito[index].cantidad--;
+      } else {
+        carrito.splice(index, 1);
+      }
+
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+
+      mostrarCarrito();
+    }
+  }
+
+  // Evento que escucha si hago click en la imagen del carrito y lanza la funcion
+  document
+    .querySelector('img[alt="Carrito de compras"]')
+    .addEventListener("click", () => {
+      mostrarCarrito();
+      mostrarOcultarDesplegableCarrito();
+    });
+
+  // Función para mostrar u ocultar el desplegable del carrito
+  function mostrarOcultarDesplegableCarrito() {
+    const contenidoCarrito = document.querySelector(".contenido-carrito");
+    contenidoCarrito.style.display =
+      contenidoCarrito.style.display === "block" ? "none" : "block";
+  }
+
+  // Evento al hacer clic fuera del desplegable del carrito
+  document.addEventListener("click", function (event) {
+    const esClickeadoIconoCarrito = event.target.closest(".icono-carrito");
+    const esClickeadoContenidoCarrito =
+      event.target.closest(".contenido-carrito");
+
+    if (!esClickeadoIconoCarrito && !esClickeadoContenidoCarrito) {
+      const contenidoCarrito = document.querySelector(".contenido-carrito");
+      contenidoCarrito.style.display = "none";
+    }
+  });
 });

@@ -1,3 +1,18 @@
+/* Paleta de colores */
+:root {
+  --puerto-rico-50: #f1fcf8;
+  --puerto-rico-100: #d0f7eb;
+  --puerto-rico-200: #a1eed8;
+  --puerto-rico-300: #69dfc1;
+  --puerto-rico-400: #4bcbaf;
+  --puerto-rico-500: #21ab8e;
+  --puerto-rico-600: #188974;
+  --puerto-rico-700: #176e5f;
+  --puerto-rico-800: #17584e;
+  --puerto-rico-900: #184941;
+  --puerto-rico-950: #082b28;
+}
+
 /* Reset de estilos y estilos generales */
 * {
   margin: 0;
@@ -7,25 +22,25 @@
 
 body {
   font-family: "PT Sans";
-  background-color: #f1fcf8;
-  color: #184941;
+  background-color: var(--puerto-rico-50);
+  color: var(--puerto-rico-900);
 }
 
 /* Encabezado */
 header {
   background-color: #ffffff;
-  color: #184941;
+  color: var(--puerto-rico-900);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 40px;
-  border-bottom: 1px solid #082b28;
+  border-bottom: 1px solid var(--puerto-rico-950);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
-  z-index: 1; /* Capa superior */
+  z-index: 1;
 }
 
 /* Logo */
-.logo img {
+.logo-pagina img {
   max-width: 144px;
 }
 
@@ -41,26 +56,26 @@ nav ul.menu li {
 
 nav ul.menu li a {
   text-decoration: none;
-  color: #184941;
+  color: var(--puerto-rico-900);
   font-weight: bold;
   transition: all 0.3s ease;
 }
 
 nav ul.menu li a:hover {
-  color: #4bcbaf;
+  color: var(--puerto-rico-400);
 }
 
-/* User Actions */
-.user-actions {
+/* Acciones del usuario */
+.acciones-del-usuario {
   display: flex;
   align-items: center;
 }
 
-.user-actions input[type="text"] {
+.acciones-del-usuario input[type="text"] {
   width: 300px;
   height: 30px;
   padding: 5px;
-  border: 1px solid #082b28;
+  border: 1px solid var(--puerto-rico-950);
   margin: 0 5px;
   background-image: url(../IMG/LOGOS/search-gris.png);
   background-size: 24px 24px;
@@ -68,26 +83,27 @@ nav ul.menu li a:hover {
   background-position: right center;
 }
 
-.user-actions input[type="text"]:focus {
-  border: 1px solid #4bcbaf;
+.acciones-del-usuario input[type="text"]:focus {
+  border: 1px solid var(--puerto-rico-400);
   outline: none;
   background-image: url(../IMG/LOGOS/search-verde.png);
 }
 
-.user-actions a {
+.acciones-del-usuario a {
   text-decoration: none;
-  color: #184941;
+  color: var(--puerto-rico-900);
   margin: 0 5px;
 }
 
+/* Resultados de búsqueda */
 .resultados-busqueda {
   position: absolute;
-  top: 80px; /* Ajusta la posición vertical según tu diseño */
+  top: 80px;
   left: 0;
   width: 100%;
-  background-color: #ffffff; /* Fondo blanco o el color que desees */
+  background-color: #ffffff;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
-  z-index: 999; /* Asegura que esté por encima de otros elementos */
+  z-index: 999;
 }
 
 .sin-resultados {
@@ -96,143 +112,125 @@ nav ul.menu li a:hover {
   font-size: 18px;
 }
 
-/* User Icon */
-.user-icon img {
+/* Icono de usuario */
+.icono-usuario img {
   width: 30px;
   height: auto;
   position: relative;
   transition: opacity 0.3s ease-in-out;
 }
 
-.user-icon:hover img {
+.icono-usuario:hover img {
   content: url(../IMG/LOGOS/user-verde.png);
   opacity: 0.8;
 }
 
-/* Estilo para el contenedor del carrito */
-.cart-container {
+/* Contenedor del carrito */
+.icono-carrito {
   position: relative;
   display: inline-block;
   margin-right: 20px;
 }
 
-/* Estilo para el área del carrito desplegable (modifica según tus necesidades) */
-.cart-dropdown {
-  position: relative;
-  display: inline-block;
+/* Contador del carrito */
+.icono-carrito .contador-carrito {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--puerto-rico-900);
+  color: #ffffff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
 }
 
-.cart-dropdown a {
-  text-decoration: none;
-  color: #333;
-  display: flex;
-  align-items: center;
-}
-
-.cart-dropdown a img {
+/* Icono del carrito */
+.icono-carrito img {
   width: 30px;
   height: auto;
   position: relative;
   transition: opacity 0.3s ease-in-out;
 }
 
-.cart-dropdown a img:hover img {
+.icono-carrito:hover img[alt="Carrito de compras"] {
   content: url(../IMG/LOGOS/cart-verde.png);
   opacity: 0.8;
 }
 
-.cart-count {
-  background: rgb(24, 137, 116);
-  background: radial-gradient(
-    circle,
-    rgba(24, 137, 116, 1) 0%,
-    rgba(24, 137, 116, 1) 35%,
-    rgba(75, 203, 175, 1) 100%
-  );
-  color: #f1fcf8;
-  border-radius: 50%;
-  padding: 4px 10px;
-}
-
-.cart-content {
+/* Área del carrito desplegable */
+.contenido-carrito {
   display: none;
   position: absolute;
   top: 100%;
   right: 0;
   background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  min-width: 200px; /* Ajusta según tus necesidades */
-  /* Otras propiedades de estilo, como ancho y altura, según tus necesidades */
+  min-width: 340px;
+  transition: opacity 0.3s ease, height 0.3s ease;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-/* Estilo para los productos en el carrito (modifica según tus necesidades) */
+/* Productos en el carrito */
 .cart-items {
-  max-height: 300px; /* Ajusta según tus necesidades */
-  overflow-y: auto; /* Agrega una barra de desplazamiento si es necesario */
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .cart-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #ccc;
-  padding: 10px 0;
+  border-bottom: 1px solid var(--puerto-rico-950);
+  padding: 10px;
 }
 
-.cart-item img {
-  max-width: 50px;
-  max-height: 50px;
+.cart-item:last-child {
+  background-color: var(--puerto-rico-50);
+  border-bottom: none;
+}
+
+.cart-item .imagen-carrito {
+  width: 40%;
+  aspect-ratio: 4/5;
+  object-fit: contain;
   margin-right: 10px;
 }
 
-.cart-item .info {
-  flex-grow: 1;
+/* Estilos para el botón de borrar en el carrito */
+.boton-borrar img {
+  cursor: pointer;
+  max-width: 20px;
+  margin-left: 10px;
+}
+
+.subtotal {
   display: flex;
   flex-direction: column;
-}
-
-.cart-item .info .name {
-  font-weight: bold;
-}
-
-.cart-item .info .price {
-  color: #ff5733;
-}
-
-.cart-item .controls {
-  display: flex;
   align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  border-top: 1px solid var(--puerto-rico-950);
+  padding: 10px;
 }
 
-.cart-item .controls .quantity {
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  padding: 5px;
-}
-
-.cart-item .controls .delete {
-  cursor: pointer;
-  color: #ff5733;
-}
-
-/* Estilo para el botón de tramitar pedido (modifica según tus necesidades) */
-#checkout-button {
-  background-color: #ff5733;
-  color: #fff;
-  padding: 10px 20px;
+.boton-tramitar {
+  background-color: var(--puerto-rico-900);
+  color: #ffffff;
   border: none;
-  border-radius: 5px;
+  padding: 10px;
   cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 10px;
+  box-sizing: border-box;
 }
 
-/* Estilo para el subtotal (modifica según tus necesidades) */
-#subtotal {
-  font-weight: bold;
-  color: #ff5733;
+.boton-tramitar:hover {
+  background-color: var(--puerto-rico-400);
 }
 
-/* Estilos para la sección de Destacados de Juegos */
+/* Sección de Destacados de Juegos */
 .mesaje-main {
   margin: 40px 0;
 }
@@ -264,16 +262,16 @@ nav ul.menu li a:hover {
   display: flex;
   position: absolute;
   margin: -50px 0 0 20px;
-  color: #184941;
+  color: var(--puerto-rico-900);
 }
 
-/* Estilos para cada juego destacado */
+/* Estilo para cada juego destacado */
 .juego-destacado {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 100%; /* Aumenta este valor para hacer los productos más grandes */
+  width: 100%;
   padding: 10px;
   background-color: #ffffff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -312,22 +310,35 @@ nav ul.menu li a:hover {
   font-size: 14px;
 }
 
-/* Estilos para la cuadrícula de productos */
-.product-grid {
+/* Cuadrícula de productos */
+.producto-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Muestra 5 columnas por fila */
+  grid-template-columns: repeat(5, 1fr);
 }
 
-/* Estilos para el botón "Añadir al carrito" */
+/* Estilo inicial para la descripción que estará oculta */
+.descripcion-hover {
+  display: none;
+  font-size: 14px;
+  transition: font-size 0.3s ease, opacity 0.3s ease;
+}
+
+.juego-destacado:hover .descripcion-hover {
+  display: block;
+  font-size: 12px;
+}
+
+/* Botón "Añadir al carrito" */
 .btn-anadir-carrito {
   display: none;
   max-width: 50%;
   padding: 5px 10px;
-  background-color: #184941;
+  background-color: var(--puerto-rico-900);
   color: #ffffff;
   text-decoration: none;
   position: absolute;
   bottom: 10px;
+  border: none;
   left: 50%;
   transform: translateX(-50%);
   transition: all 0.3s ease;
@@ -338,20 +349,20 @@ nav ul.menu li a:hover {
 }
 
 .btn-anadir-carrito:hover {
-  background-color: #4bcbaf;
+  background-color: var(--puerto-rico-400);
 }
 
-/* Estilos para la sección de Newsletter */
+/* Sección de Newsletter */
 .newsletter {
   text-align: center;
   margin: 20px;
   padding: 20px;
-  background-color: #f1fcf8;
+  background-color: var(--puerto-rico-50);
 }
 
 .newsletter h2 {
   display: inline-block;
-  color: #184941;
+  color: var(--puerto-rico-900);
 }
 
 .newsletter img {
@@ -368,7 +379,7 @@ form {
 }
 
 label a {
-  color: #4bcbaf;
+  color: var(--puerto-rico-400);
   text-decoration: none;
 }
 
@@ -377,12 +388,12 @@ input[type="email"] {
   width: 100%;
   max-width: 300px;
   height: 30px;
-  border: 1px solid #082b28;
+  border: 1px solid var(--puerto-rico-950);
   margin: 0 5px;
 }
 
 input[type="email"]:focus {
-  border: 1px solid #4bcbaf;
+  border: 1px solid var(--puerto-rico-400);
   outline: none;
 }
 
@@ -390,35 +401,35 @@ input[type="checkbox"] {
   margin-top: 10px;
 }
 
-button {
+.suscribirse {
   margin-top: 10px;
   padding: 5px;
   width: 100%;
   max-width: 100px;
   height: 30px;
-  background-color: #184941;
+  background-color: var(--puerto-rico-900);
   color: #ffffff;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-button:hover {
-  background-color: #4bcbaf;
+.suscribirse:hover {
+  background-color: var(--puerto-rico-400);
 }
 
-/* Estilos para el footer */
+/* Footer */
 footer {
   background-color: #ffffff;
-  color: #184941;
+  color: var(--puerto-rico-900);
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #082b28;
-  border-top: 1px solid #082b28;
+  border-bottom: 1px solid var(--puerto-rico-950);
+  border-top: 1px solid var(--puerto-rico-950);
 }
 
-/* Estilos para cada columna del footer */
+/* Columnas del Footer */
 .footer-column {
   flex: 1;
   margin-right: 20px;
@@ -451,17 +462,17 @@ footer {
   transition: all 0.3s ease-in-out;
 }
 
-/* Línea divisoria entre columnas */
+/* Línea divisoria entre columnas del Footer */
 .footer-column:not(:last-child)::after {
   content: "";
   position: absolute;
   top: 20px;
   right: 0;
   height: calc(100% - 40px);
-  border-right: 1px solid #082b28;
+  border-right: 1px solid var(--puerto-rico-950);
 }
 
-/* Iconos de redes sociales en el footer */
+/* Iconos de redes sociales en el Footer */
 .footer-column .facebook-icon:hover {
   content: url(../IMG/LOGOS/facebook-verde.png);
   display: inline-block;

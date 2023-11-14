@@ -15,7 +15,7 @@
 <body>
     <!-- Encabezado -->
     <header>
-        <div class="logo">
+        <div class="logo-pagina">
             <a href="index.html">
                 <img src="../IMG/LOGOS/logo-gris.png" alt="Monstruo de los Juegos" />
             </a>
@@ -25,31 +25,28 @@
                 <li><a href="juegos.html">JUEGOS</a></li>
                 <li><a href="#">CARTAS</a></li>
                 <li><a href="#">MINIATURAS</a></li>
-                <li><a href="accesorios.html">ACCESORIOS</a></li>
+                <li><a href="#">ACCESORIOS</a></li>
                 <li><a href="ofertas.html"><span style="color: #4ccbaf;">¡OFERTAS!</span></a></li>
             </ul>
         </nav>
-        <div class="user-actions">
+        <div class="acciones-del-usuario">
             <div>
-                <input type="text" id="search-input" placeholder="¿Qué estás buscando?" />
+                <input type="text" id="input-buscar" placeholder="¿Qué estás buscando?" />
             </div>
-            <div class="user-icon" id="user-icon">
+            <div class="icono-usuario" id="icono-usuario">
                 <a href="login.html">
                     <img src="../IMG/LOGOS/user-gris.png" alt="Usuario" />
                 </a>
-                <!-- Comentado por si se volviera a usar en un futuro -->
-                <!-- <div class="user-dropdown" id="user-dropdown">
-                    <ul>
-                        <li><a href="login.html">Iniciar sesión</a></li>
-                        <li><a href="#">Registrarse</a></li>
-                    </ul>
-                </div> -->
             </div>
-            <div class="cart-icon">
-                <a href="#">
-                    <img src="../IMG/LOGOS/cart-gris.png" alt="Carrito de compras" />
-                    <span class="cart-count">0</span>
-                </a>
+            <div class="icono-carrito">
+                <img src="../IMG/LOGOS/cart-gris.png" alt="Carrito de compras">
+                <span class="contador-carrito">0</span>
+                <div class="contenido-carrito">
+                    <div class="cart-items" id="cart-items"></div>
+                    <div class="subtotal" id="subtotal"></div>
+                    <button class="boton-tramitar">Tramitar pedido</button>
+                    <span id="carrito-vacio">No tienes ningún artículo en tu carrito.</span>
+                </div>
             </div>
         </div>
         <div class="resultados-busqueda">
@@ -60,9 +57,8 @@
     <!-- Contenido principal -->
     <main>
         <div class="destacados-header">
-            <h2 class="titulo">¡Ofertas!</h2>
-            <p class="introduccion">Te presentamos nuestro catalogo de ofertas. ¡Descubre este listado de productos con
-                descuentos!</p>
+            <h2 class="titulo">Juegos de mesa</h2>
+            <p class="introduccion">¡Encuentra tu <strong>juego de mesa</strong> perfecto en este listado!</p>
             <p class="filtrar-ordenar">
                 <label for="filtrar-ordenar">Ordenar por </label>
                 <select name="filtrar-ordenar" id="filtrar-ordenar">
@@ -76,12 +72,13 @@
             </p>
         </div>
         <section class="destacados">
-
+            <!-- El contenido de los juegos de mesa se mostrará aquí -->
         </section>
         <div class="destacados-footer">
             <!-- Selector de Página -->
             <div class="page-selector">
                 <ul>
+                    <!-- Aquí se mostrará la paginación -->
                 </ul>
             </div>
 
@@ -103,14 +100,13 @@
         <h2>Suscríbete a nuestro Newsletter</h2>
         <form id="newsletter-form">
             <input type="email" id="email" name="email" autocomplete="off" placeholder="Correo electrónico*" required>
-            <button type="submit">Suscribirse</button>
+            <button type="submit" class="suscribirse">Suscribirse</button>
             <br>
             <input type="checkbox" id="acepto" name="acepto" required>
             <label for="acepto">Acepto la <a href="#">Política de Privacidad</a> y el <a href="#">Aviso
                     Legal</a></label>
         </form>
     </div>
-
     <!-- Pie de página -->
     <footer>
         <div class="footer-column">
