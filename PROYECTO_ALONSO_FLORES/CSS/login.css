@@ -81,7 +81,7 @@ body {
   position: absolute;
   z-index: 2;
   left: 20px;
-  top: 14px;
+  top: -6px;
   padding: 0 2px;
   background-color: #ffffff;
   transition: transform 0.2s ease;
@@ -100,17 +100,12 @@ body {
   box-sizing: border-box;
 }
 
-.input-flotante input:invalid + label {
-  transform: translateY(0);
-}
-
 .input-flotante input:focus {
   border-color: var(--puerto-rico-500);
 }
 
 .input-flotante input:focus + label {
   color: var(--puerto-rico-900);
-  transform: translateY(-20px);
 }
 
 /* Estilos para el botón */
@@ -170,4 +165,25 @@ body {
 .form .login-bottom a {
   color: var(--puerto-rico-500);
   text-decoration: none;
+}
+
+.correo-existente {
+  display: none;
+  color: red;
+  font-size: 12px;
+  padding-bottom: 16px;
+}
+
+.campos-vacios {
+  display: none;
+  color: red;
+  font-size: 12px;
+  padding-bottom: 16px;
+}
+
+.login-error {
+  display: none;
+  color: red;
+  font-size: 12px;
+  padding-bottom: 16px;
 }

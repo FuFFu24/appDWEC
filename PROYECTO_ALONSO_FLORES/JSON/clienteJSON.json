@@ -6,7 +6,7 @@
     "direccion": "123 Main St",
     "correo": "johndoe@example.com",
     "telefono": 5555555555,
-    "contraseña": "password"
+    "contrasena": "password"
   },
   {
     "idCliente": 2,
@@ -15,7 +15,7 @@
     "direccion": "456 Elm St",
     "correo": "janesmith@example.com",
     "telefono": 5555555556,
-    "contraseña": "password123"
+    "contrasena": "password123"
   },
   {
     "idCliente": 3,
@@ -24,7 +24,7 @@
     "direccion": "789 Oak St",
     "correo": "michaeljohnson@example.com",
     "telefono": 5555555557,
-    "contraseña": "securepassword"
+    "contrasena": "securepassword"
   },
   {
     "idCliente": 4,
@@ -33,7 +33,7 @@
     "direccion": "321 Maple St",
     "correo": "emilywilliams@example.com",
     "telefono": 5555555558,
-    "contraseña": "password456"
+    "contrasena": "password456"
   },
   {
     "idCliente": 5,
@@ -42,7 +42,7 @@
     "direccion": "654 Pine St",
     "correo": "danielbrown@example.com",
     "telefono": 5555555559,
-    "contraseña": "mypassword"
+    "contrasena": "mypassword"
   },
   {
     "idCliente": 6,
@@ -51,7 +51,7 @@
     "direccion": "987 Cedar St",
     "correo": "sophiajones@example.com",
     "telefono": 5555555560,
-    "contraseña": "password789"
+    "contrasena": "password789"
   },
   {
     "idCliente": 7,
@@ -60,7 +60,7 @@
     "direccion": "135 Birch St",
     "correo": "daviddavis@example.com",
     "telefono": 5555555561,
-    "contraseña": "password1234"
+    "contrasena": "password1234"
   },
   {
     "idCliente": 8,
@@ -69,7 +69,7 @@
     "direccion": "864 Walnut St",
     "correo": "oliviataylor@example.com",
     "telefono": 5555555562,
-    "contraseña": "password567"
+    "contrasena": "password567"
   },
   {
     "idCliente": 9,
@@ -78,7 +78,7 @@
     "direccion": "279 Cherry St",
     "correo": "jamesanderson@example.com",
     "telefono": 5555555563,
-    "contraseña": "mypassword123"
+    "contrasena": "mypassword123"
   },
   {
     "idCliente": 10,
@@ -87,6 +87,15 @@
     "direccion": "608 Spruce St",
     "correo": "isabellamartin@example.com",
     "telefono": 5555555564,
-    "contraseña": "password890"
+    "contrasena": "password890"
+  },
+  {
+    "idCliente": 11,
+    "nombre": "Alonso",
+    "apellidos": "",
+    "direccion": "",
+    "correo": "alonso@gmail.com",
+    "telefono": "",
+    "contrasena": "1234"
   }
 ]

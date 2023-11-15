@@ -1,80 +1,64 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Array en el que vamos a guardar todos los datos del JSON
+  let listaClientes = [];
   let listaJuegosMesa = [];
+
+  // Con esta función cargaremos los datos del JSON en la lista de juegos de mesa y también mostraremos los datos en la página
+  function cargarDatosClientes() {
+    $.getJSON("../JSON/clienteJSON.json", function (datos) {
+      listaClientes = datos;
+      mostrarDatosUsuario();
+    });
+  }
+
+  cargarDatosClientes();
 
   // Con esta funcion cargaremos los datos del JSON en la lista de juegos mesa y tambien mostraremos los datos en la pagina
   function cargarJuegosMesa() {
     $.getJSON("../JSON/productoJSON.json", function (datos) {
       listaJuegosMesa = datos;
-
-      mostrarJuegosMesa(getMejorValorados(), ".mejor-valorados");
-      mostrarJuegosMesa(getNovedades(), ".novedades");
-      mostrarJuegosMesa(getEnOferta(), ".en-oferta");
-
-      // Esto es solo para que al recargar la pagina se actualice el carrito y con ello su contador
       mostrarCarrito();
     });
   }
 
   cargarJuegosMesa();
 
-  const datosURL = new URLSearchParams(window.location.search);
-  const nombreUsuario = datosURL.get("nombre");
-  const correoUsuario = datosURL.get("correo");
+  function mostrarDatosUsuario() {
+    // Obtener datos del localStorage después de cargar los datos del JSON
+    const datosUsuarioString = localStorage.getItem("datosUsuario");
+    const datosUsuario = datosUsuarioString
+      ? JSON.parse(datosUsuarioString)
+      : null;
 
-  // Muestra el mensaje de bienvenida si es necesario
-  if (nombreUsuario && correoUsuario) {
-    const datosUsuario = {
-      nombreUsuario: nombreUsuario,
-      correoUsuario: correoUsuario,
-    };
+    const datosUsuarioDiv = document.getElementById("datos-usuario");
+    const iconoUsuario = document.querySelector(".icono-usuario a");
 
-    localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
-  }
+    if (datosUsuario) {
+      // Obtener el correo del usuario desde los datos de localStorage
+      const correoUsuario = datosUsuario.correoUsuario;
 
-  // Obtener datos del localStorage
-  const datosUsuarioString = localStorage.getItem("datosUsuario");
-  const datosUsuario = datosUsuarioString
-    ? JSON.parse(datosUsuarioString)
-    : null;
+      // Buscar al usuario en la lista de clientes
+      const usuarioEnLista = listaClientes.find(
+        (user) => user.correo === correoUsuario
+      );
 
-  const mensajeContainer = document.getElementById("mensajeContainer");
-  const bienvenidaMensaje = document.getElementById("bienvenidaMensaje");
-  const iconoUsuario = document.querySelector(".icono-usuario a");
+      if (usuarioEnLista) {
+        // Mostrar todos los datos del usuario excepto la contraseña
+        Object.keys(usuarioEnLista).forEach((key) => {
+          // Excluir la contraseña e idCliente
+          if (key !== "contrasena" && key !== "idCliente") {
+            const nuevoDato = document.createElement("p");
+            nuevoDato.innerHTML = `${usuarioEnLista[key]}`;
+            datosUsuarioDiv.appendChild(nuevoDato);
+          }
+        });
 
-  if (datosUsuario) {
-    // Si hay un usuario logueado, mostrar mensaje de bienvenida
-    bienvenidaMensaje.textContent = `Hola, ${datosUsuario.nombreUsuario}!`;
-
-    // Verificar si hay elementos en el carrito
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    if (carrito.length > 0) {
-      // Mostrar el mensaje sobre el carrito si hay elementos
-      mensajeContainer.style.display = "flex";
-    } else {
-      mensajeContainer.style.display = "none";
+        iconoUsuario.href = "../HTML/cuenta.html";
+      } else {
+        alert("¿Todavía no tienes cuenta? Crea una cuenta o inicia sesión.");
+      }
     }
-
-    iconoUsuario.href = "../HTML/cuenta.html";
-
-    setTimeout(function () {
-      mensajeContainer.style.display = "none";
-    }, 10000);
-  } else {
-    mensajeContainer.style.display = "none";
   }
-
-  const graciasBtn = document.getElementById("graciasBtn");
-  const verCarritoBtn = document.getElementById("verCarritoBtn");
-  const mensajeContenedor = document.getElementById("mensajeContainer");
-
-  graciasBtn.addEventListener("click", function () {
-    mensajeContenedor.style.display = "none";
-  });
-
-  verCarritoBtn.addEventListener("click", function () {
-    mensajeContenedor.style.display = "none";
-  });
 
   const searchInput = document.getElementById("input-buscar");
 
@@ -160,31 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       seccionMostrar.appendChild(juegoDestacado);
     });
-  }
-
-  // Tres funciones para ordenar la lista segun las tres secciones que hay en el codigo main
-  function getMejorValorados() {
-    return listaJuegosMesa
-      .filter((producto) => producto.nota)
-      .sort((a, b) => b.nota - a.nota)
-      .slice(0, 5);
-  }
-
-  function getNovedades() {
-    return listaJuegosMesa
-      .filter((producto) => producto.fecha)
-      .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
-      .slice(0, 5);
-  }
-
-  function getEnOferta() {
-    return listaJuegosMesa
-      .filter((producto) => producto.descuento)
-      .sort((a, b) => b.porcentajeDescuento - a.porcentajeDescuento)
-      .slice(0, 5);
-  }
-
-  // Evento para buscar juegos de mesa en la lista desde un input con keyup
+  } // Evento para buscar juegos de mesa en la lista desde un input con keyup
   searchInput.addEventListener("keyup", function () {
     const busqueda = searchInput.value.toLowerCase().trim();
 

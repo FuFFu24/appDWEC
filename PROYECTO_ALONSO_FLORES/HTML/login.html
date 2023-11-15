@@ -16,7 +16,7 @@
   <div class="login-page">
     <div class="form">
       <!-- Formulario de registro -->
-      <form class="register-form" action="registro.php" method="POST">
+      <form class="register-form" action="../PHP/anadirCliente.php" method="POST">
         <div class="logo-480">
           <a href="index.html">
             <img src="../IMG/LOGOS/prodigy-480.png" alt="Logo monstruo">
@@ -25,16 +25,18 @@
         </div>
         <!-- Campos de registro -->
         <div class="input-flotante">
-          <input type="text" id="register-nombre" />
+          <input type="text" id="register-nombre" name="register-nombre" />
           <label for="register-nombre">Nombre</label>
         </div>
         <div class="input-flotante">
-          <input type="email" id="register-correo" />
+          <input type="email" id="register-correo" name="register-correo" />
           <label for="register-correo">Correo electrónico</label>
+          <span id="correo-existente" class="correo-existente">El correo ya esta registrado.</span>
         </div>
         <div class="input-flotante">
-          <input type="password" id="register-contrasena" />
+          <input type="password" id="register-contrasena" name="register-contrasena" />
           <label for="register-contrasena">Contraseña</label>
+          <span id="campos-vacios" class="campos-vacios">Tiene que rellenar todos los campos.</span>
         </div>
         <button>Registrarse</button>
         <p class="message-register">¿Ya tienes cuenta? <a href="#">Inicia sesión</a></p>
@@ -56,8 +58,9 @@
         <div class="input-flotante">
           <input type="password" id="login-contrasena" />
           <label for="login-contrasena">Contraseña</label>
+          <span id="login-error" class="login-error">Correo o contraseña incorrectos.</span>
         </div>
-        <button>Iniciar sesión</button>
+        <button type="button" onclick="iniciarSesion()">Iniciar sesión</button>
         <!-- Opciones de inicio de sesión -->
         <div class="login-bottom">
           <input type="checkbox" id="recuerdame" name="recuerdame">

@@ -1,0 +1,564 @@
+/* Paleta de colores */
+:root {
+  --puerto-rico-50: #f1fcf8;
+  --puerto-rico-100: #d0f7eb;
+  --puerto-rico-200: #a1eed8;
+  --puerto-rico-300: #69dfc1;
+  --puerto-rico-400: #4bcbaf;
+  --puerto-rico-500: #21ab8e;
+  --puerto-rico-600: #188974;
+  --puerto-rico-700: #176e5f;
+  --puerto-rico-800: #17584e;
+  --puerto-rico-900: #184941;
+  --puerto-rico-950: #082b28;
+}
+
+/* Reset de estilos y estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "PT Sans";
+  background-color: var(--puerto-rico-50);
+  color: var(--puerto-rico-900);
+}
+
+/* Encabezado */
+header {
+  background-color: #ffffff;
+  color: var(--puerto-rico-900);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  border-bottom: 1px solid var(--puerto-rico-950);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Logo */
+.logo-pagina img {
+  max-width: 144px;
+}
+
+/* Menú de navegación */
+nav ul.menu {
+  list-style: none;
+  display: flex;
+}
+
+nav ul.menu li {
+  margin: 0 20px;
+}
+
+nav ul.menu li a {
+  text-decoration: none;
+  color: var(--puerto-rico-900);
+  font-weight: bold;
+}
+
+nav ul.menu li a:hover {
+  color: var(--puerto-rico-400);
+}
+
+/* Acciones del usuario */
+.acciones-del-usuario {
+  display: flex;
+  align-items: center;
+}
+
+.acciones-del-usuario input[type="text"] {
+  width: 300px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid var(--puerto-rico-950);
+  margin: 0 5px;
+  background-image: url(../IMG/LOGOS/search-gris.png);
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.acciones-del-usuario input[type="text"]:focus {
+  border: 1px solid var(--puerto-rico-400);
+  outline: none;
+  background-image: url(../IMG/LOGOS/search-verde.png);
+}
+
+.acciones-del-usuario a {
+  text-decoration: none;
+  color: var(--puerto-rico-900);
+  margin: 0 5px;
+}
+
+/* Resultados de búsqueda */
+.resultados-busqueda {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.sin-resultados {
+  padding: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Icono de usuario */
+.icono-usuario img {
+  width: 30px;
+  height: auto;
+  position: relative;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.icono-usuario:hover img {
+  content: url(../IMG/LOGOS/user-verde.png);
+  opacity: 0.8;
+}
+
+/* Contenedor del carrito */
+.icono-carrito {
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+/* Contador del carrito */
+.icono-carrito .contador-carrito {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--puerto-rico-900);
+  color: #ffffff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* Icono del carrito */
+.icono-carrito img {
+  width: 30px;
+  height: auto;
+  position: relative;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.icono-carrito:hover img[alt="Carrito de compras"] {
+  content: url(../IMG/LOGOS/cart-verde.png);
+  opacity: 0.8;
+}
+
+/* Área del carrito desplegable */
+.contenido-carrito {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 340px;
+  transition: opacity 0.3s ease, height 0.3s ease;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Productos en el carrito */
+.cart-items {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--puerto-rico-950);
+  padding: 10px;
+}
+
+.cart-item:last-child {
+  background-color: var(--puerto-rico-50);
+  border-bottom: none;
+}
+
+.cart-item .imagen-carrito {
+  width: 40%;
+  aspect-ratio: 4/5;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+/* Estilos para el botón de borrar en el carrito */
+.boton-borrar img {
+  cursor: pointer;
+  max-width: 20px;
+  margin-left: 10px;
+}
+
+.subtotal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  border-top: 1px solid var(--puerto-rico-950);
+  padding: 10px;
+}
+
+.boton-tramitar {
+  background-color: var(--puerto-rico-900);
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 10px;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.boton-tramitar:hover {
+  background-color: var(--puerto-rico-400);
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Sección de Destacados de Juegos */
+.mesaje-main {
+  margin: 40px 0;
+}
+
+.mesaje-main h2 {
+  margin-bottom: 20px;
+}
+
+.mesaje-main h2,
+.mesaje-main p {
+  text-align: center;
+}
+
+.mejor-valorados,
+.novedades,
+.en-oferta {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  top: -100px;
+  padding-top: 60px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.mejor-valorados h2,
+.novedades h2,
+.en-oferta h2 {
+  display: flex;
+  position: absolute;
+  margin: -50px 0 0 20px;
+  color: var(--puerto-rico-900);
+}
+
+/* Estilos para la sección de cuenta */
+.cuenta-section {
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cuenta-section h1 {
+  color: var(--puerto-rico-950);
+}
+
+/* Estilos para la información de cuenta */
+.info-cuenta {
+  padding: 20px;
+}
+
+.info-cuenta h3 {
+  color: var(--puerto-rico-900);
+  margin-bottom: 20px;
+}
+
+.info-cuenta p {
+  color: var(--puerto-rico-700);
+  margin-bottom: 10px;
+}
+
+.info-cuenta > p:first-child {
+  font-size: 24px;
+  border-bottom: 1px solid var(--puerto-rico-900);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.info-cuenta span {
+  font-weight: bold;
+}
+
+.info-cuenta a {
+  color: var(--puerto-rico-500);
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.info-cuenta a:hover {
+  text-decoration: none;
+}
+
+#editarNombre {
+  padding-right: 10px;
+  border-right: 1px solid var(--puerto-rico-900);
+}
+
+#datos-usuario {
+  padding-bottom: 10px;
+}
+
+/* Estilo para cada juego destacado */
+.juego-destacado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.juego-destacado:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  padding-bottom: 40px;
+  z-index: 1;
+}
+
+.juego-destacado .web-page {
+  color: #184941;
+  text-decoration: none;
+}
+
+.juego-destacado img {
+  width: 80%;
+  aspect-ratio: 4/5;
+  object-fit: contain;
+}
+
+.juego-destacado .datos-juego {
+  margin: 10px 0;
+}
+
+.precio-con-descuento {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.precio-original {
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+/* Cuadrícula de productos */
+.producto-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* Estilo inicial para la descripción que estará oculta */
+.descripcion-hover {
+  display: none;
+  font-size: 14px;
+  transition: font-size 0.3s ease, opacity 0.3s ease;
+}
+
+.juego-destacado:hover .descripcion-hover {
+  display: block;
+  font-size: 12px;
+}
+
+/* Botón "Añadir al carrito" */
+.btn-anadir-carrito {
+  display: none;
+  max-width: 50%;
+  padding: 5px 10px;
+  background-color: var(--puerto-rico-900);
+  color: #ffffff;
+  text-decoration: none;
+  position: absolute;
+  bottom: 10px;
+  border: none;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+}
+
+.juego-destacado:hover .btn-anadir-carrito {
+  display: inline-block;
+}
+
+.btn-anadir-carrito:hover {
+  background-color: var(--puerto-rico-400);
+}
+
+/* Sección de Newsletter */
+.newsletter {
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: var(--puerto-rico-50);
+}
+
+.newsletter h2 {
+  display: inline-block;
+  color: var(--puerto-rico-900);
+}
+
+.newsletter img {
+  display: inline-block;
+  width: 28px;
+  height: auto;
+  bottom: -6px;
+  position: relative;
+}
+
+form {
+  flex-direction: column;
+  align-items: center;
+}
+
+label a {
+  color: var(--puerto-rico-400);
+  text-decoration: none;
+}
+
+input[type="email"] {
+  padding: 5px;
+  width: 100%;
+  max-width: 300px;
+  height: 30px;
+  border: 1px solid var(--puerto-rico-950);
+  margin: 0 5px;
+}
+
+input[type="email"]:focus {
+  border: 1px solid var(--puerto-rico-400);
+  outline: none;
+}
+
+input[type="checkbox"] {
+  margin-top: 10px;
+}
+
+.suscribirse {
+  margin-top: 10px;
+  padding: 5px;
+  width: 100%;
+  max-width: 100px;
+  height: 30px;
+  background-color: var(--puerto-rico-900);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.suscribirse:hover {
+  background-color: var(--puerto-rico-400);
+}
+
+/* Footer */
+footer {
+  background-color: #ffffff;
+  color: var(--puerto-rico-900);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--puerto-rico-950);
+  border-top: 1px solid var(--puerto-rico-950);
+}
+
+/* Columnas del Footer */
+.footer-column {
+  flex: 1;
+  margin-right: 20px;
+  position: relative;
+}
+
+.footer-column h3 {
+  font-size: 1.2rem;
+  margin: 0 0 10px;
+}
+
+.footer-column p {
+  font-size: 0.9rem;
+  margin: 0 0 5px;
+}
+
+.footer-column ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin: 0 0 5px;
+}
+
+.footer-column img {
+  display: inline-block;
+  width: 28px;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Línea divisoria entre columnas del Footer */
+.footer-column:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: 0;
+  height: calc(100% - 40px);
+  border-right: 1px solid var(--puerto-rico-950);
+}
+
+/* Iconos de redes sociales en el Footer */
+.footer-column .facebook-icon:hover {
+  content: url(../IMG/LOGOS/facebook-verde.png);
+  display: inline-block;
+  width: 28px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.footer-column .twitter-icon:hover {
+  content: url(../IMG/LOGOS/twitter-verde.png);
+  display: inline-block;
+  width: 28px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.footer-column .instagram-icon:hover {
+  content: url(../IMG/LOGOS/instagram-verde.png);
+  display: inline-block;
+  width: 28px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.footer-column .youtube-icon:hover {
+  content: url(../IMG/LOGOS/youtube-verde.png);
+  display: inline-block;
+  width: 28px;
+  height: auto;
+  opacity: 0.8;
+}

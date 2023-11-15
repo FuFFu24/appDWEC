@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans" />
+    <link rel="icon" type="image/x-icon" href="../IMG/LOGOS/prodigy-48.png" />
+    <link rel="stylesheet" href="../CSS/stylesCuenta.css" />
+    <script src="../JS/jquery.js"></script>
+    <script src="../JS/scriptsCuenta.js"></script>
+    <title>Monstruo de los Juegos</title>
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="logo-pagina">
+            <a href="index.html">
+                <img src="../IMG/LOGOS/logo-gris.png" alt="Monstruo de los Juegos" />
+            </a>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="juegos.html">JUEGOS</a></li>
+                <li><a href="#">CARTAS</a></li>
+                <li><a href="#">MINIATURAS</a></li>
+                <li><a href="#">ACCESORIOS</a></li>
+                <li><a href="ofertas.html">¡OFERTAS!</a></li>
+            </ul>
+        </nav>
+        <div class="acciones-del-usuario">
+            <div>
+                <input type="text" id="input-buscar" placeholder="¿Qué estás buscando?" />
+            </div>
+            <div class="icono-usuario" id="icono-usuario">
+                <a href="login.html">
+                    <img src="../IMG/LOGOS/user-gris.png" alt="Usuario" />
+                </a>
+            </div>
+            <div class="icono-carrito">
+                <img src="../IMG/LOGOS/cart-gris.png" alt="Carrito de compras">
+                <span class="contador-carrito">0</span>
+                <div class="contenido-carrito">
+                    <div class="cart-items" id="cart-items"></div>
+                    <div class="subtotal" id="subtotal"></div>
+                    <button class="boton-tramitar">Tramitar pedido</button>
+                    <span id="carrito-vacio">No tienes ningún artículo en tu carrito.</span>
+                </div>
+            </div>
+        </div>
+        <div class="resultados-busqueda">
+            <!-- Aquí se mostrarán los resultados de búsqueda -->
+        </div>
+    </header>
+    <!-- Contenido principal -->
+    <main>
+        <section class="cuenta-section">
+            <h1>Tu cuenta</h1>
+
+            <!-- Información de cuenta -->
+            <section class="info-cuenta">
+                <p>Información de cuenta</p>
+                <h3>Tus datos de contacto</h3>
+                <div id="datos-usuario">
+                </div>
+                <p><a href="#" id="editarNombre">Editar</a> <a href="#" id="cambiarContrasena">Cambiar la contraseña</a>
+                </p>
+            </section>
+        </section>
+    </main>
+    <!-- Formulario de suscripción al Newsletter -->
+    <div class="newsletter">
+        <img src="../IMG/LOGOS/email-gris.png" alt="Email">
+        <h2>Suscríbete a nuestro Newsletter</h2>
+        <form id="newsletter-form">
+            <input type="email" id="email" name="email" autocomplete="off" placeholder="Correo electrónico*" required>
+            <button type="submit" class="suscribirse">Suscribirse</button>
+            <br>
+            <input type="checkbox" id="acepto" name="acepto" required>
+            <label for="acepto">Acepto la <a href="#">Política de Privacidad</a> y el <a href="#">Aviso
+                    Legal</a></label>
+        </form>
+    </div>
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-column">
+            <h3>Sobre Nosotros</h3>
+            <p>Somos una tienda de juegos de mesa comprometida con brindar la mejor selección de juegos para entusiastas
+                de todo tipo. Nuestra pasión es ofrecer experiencias divertidas y memorables a través de juegos de
+                calidad.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Contacto</h3>
+            <p><strong>Correo Electrónico:</strong> info@monstruodelosjuegos.com</p>
+            <p><strong>Teléfono:</strong> +34 xxx xxx xxx</p>
+            <p><strong>WhatsApp:</strong> +34 xxx xxx xxx</p>
+        </div>
+        <div class="footer-column">
+            <h3>Síguenos</h3>
+            <a href="#" class="facebook-icon"><img src="../IMG/LOGOS/facebook-gris.png" alt="facebook"></a>
+            <a href="#" class="twitter-icon"><img src="../IMG/LOGOS/twitter-gris.png" alt="twitter"></a>
+            <a href="#" class="instagram-icon"><img src="../IMG/LOGOS/instagram-gris.png" alt="instagram"></a>
+            <a href="#" class="youtube-icon"><img src="../IMG/LOGOS/youtube-gris.png" alt="youtube"></a>
+        </div>
+        <div class="footer-column">
+            <h3>Encuéntranos</h3>
+            <p><strong>Dirección:</strong> Calle Principal, Ciudad</p>
+            <p><strong>Horario:</strong> Lunes a Viernes: 9:00 - 18:00</p>
+            <p><strong>Sábados y Domingos:</strong> Cerrado</p>
+        </div>
+    </footer>
+</body>
+
+</html>

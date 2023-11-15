@@ -1,4 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Obtén el parámetro 'error' de la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const error = urlParams.get("error");
+  const vacio = urlParams.get("vacio");
+
+  // Verifica si hay un error de 'correo_existente' y muestra el mensaje correspondiente
+  const mensajeError = document.getElementById("correo-existente");
+  if (error === "correo_existente") {
+    mensajeError.style.display = "block";
+  } else {
+    mensajeError.style.display = "none";
+  }
+
+  const mensajeVacio = document.getElementById("campos-vacios");
+  if (vacio === "campos_vacios") {
+    mensajeVacio.style.display = "block";
+  } else {
+    mensajeVacio.style.display = "none";
+  }
+
   // Obtén los elementos del formulario de registro, formulario de inicio de sesión y los enlaces de mensaje
   var registerForm = document.querySelector(".register-form");
   var loginForm = document.querySelector(".login-form");
@@ -46,19 +66,23 @@ function iniciarSesion() {
   const email = document.getElementById("login-correo").value;
   const password = document.getElementById("login-contrasena").value;
 
-  // Lógica de inicio de sesión
   const usuario = listaUsuarios.find(
-    (user) => user.correo === email && user.contraseña === password
+    (user) => user.correo === email && user.contrasena === password
   );
 
+  const mensajeError = document.getElementById("login-error");
+  mensajeError.style.display = "none";
+
   if (usuario) {
-    // Inicio de sesión exitoso
-    alert(`¡Bienvenido, ${usuario.nombre} ${usuario.apellidos}!`);
-    // Puedes redirigir a otra página o realizar acciones adicionales aquí
+    const datosUsuario = {
+      nombreUsuario: usuario.nombre,
+      correoUsuario: usuario.correo,
+    };
+
+    localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
+
+    window.location.href = `../HTML/index.html`;
   } else {
-    // Inicio de sesión fallido
-    alert(
-      "Correo electrónico o contraseña incorrectos. Por favor, inténtalo de nuevo."
-    );
+    mensajeError.style.display = "block";
   }
 }
