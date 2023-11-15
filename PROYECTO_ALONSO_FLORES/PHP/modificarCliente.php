@@ -8,44 +8,47 @@ $apellidos = $_POST['apellidos'];
 $direccion = $_POST['direccion'];
 $correo = $_POST['correo'];
 $telefono = $_POST['telefono'];
-$telefcontrasenaActualono = $_POST['contrasenaActual'];
+$contrasenaActual = $_POST['contrasenaActual'];
 $nuevaContrasena = $_POST['nuevaContrasena'];
 $confirmarContrasena = $_POST['confirmarContrasena'];
 
 // Lee el contenido actual del archivo JSON
 $clientes = json_decode(file_get_contents($rutaJSON), true);
 
-// Verifica si el correo ya está registrado
-$clienteExistente = array_filter($clientes, function($cliente) use ($correo) {
-    return $cliente['correo'] === $correo;
-});
+// Busca el cliente correspondiente al correo
+$clienteIndex = array_search($correo, array_column($clientes, 'correo'));
 
-if (!empty($clienteExistente)) {
-    header('Location: ../HTML/login.html?error=correo_existente');
+// Verifica si el cliente existe
+if ($clienteIndex !== false) {
+
+    if (isset($_POST['guardarDatos'])) {
+        $clientes[$clienteIndex]['nombre'] = $nombre;
+        $clientes[$clienteIndex]['apellidos'] = $apellidos;
+        $clientes[$clienteIndex]['direccion'] = $direccion;
+        $clientes[$clienteIndex]['telefono'] = $telefono;
+    }
+    
+    if (isset($_POST['guardarContrasena'])) {
+        // Compara la contraseña actual del formulario con la almacenada en el JSON
+    if ($clientes[$clienteIndex]['contrasena'] === $contrasenaActual) {
+        // Actualiza la contraseña si se proporciona una nueva y coincide con la confirmación
+        if (!empty($nuevaContrasena) && $nuevaContrasena === $confirmarContrasena) {
+            $clientes[$clienteIndex]['contrasena'] = $nuevaContrasena;
+        }
+    } else {
+        // Contraseña incorrecta
+        header('Location: ../HTML/cuenta.html?error=contrasena_incorrecta');
+        exit;
+    }
+    }
+    
+    // Guarda los cambios en el archivo JSON
+    file_put_contents($rutaJSON, json_encode($clientes));
+
+    header('Location: ../HTML/cuenta.html?exito=datos_modificados');
     exit;
-} else if (empty($nombre) || empty($correo) || empty($contrasena)) {
-    header('Location: ../HTML/login.html?vacio=campos_vacios');
+} else {
+    header('Location: ../HTML/cuenta.html?error=cliente_no_encontrado');
     exit;
 }
-
-// Crea un nuevo cliente
-$nuevoCliente = array(
-    'idCliente' => count($clientes) + 1, // Asigna un nuevo ID único
-    'nombre' => $nombre,
-    'apellidos' => "",
-    'direccion' => "",
-    'correo' => $correo,
-    'telefono' => "",
-    'contrasena' => $contrasena
-);
-
-// Agrega el nuevo cliente al array existente
-$clientes[] = $nuevoCliente;
-
-// Escribe el contenido actualizado al archivo JSON
-file_put_contents($rutaJSON, json_encode($clientes));
-
-// Redirige a la página de inicio con el correo como parámetro
-header('Location: ../HTML/index.html?nombre=' . $nombre . '&correo=' . $correo);
-exit;
 ?>

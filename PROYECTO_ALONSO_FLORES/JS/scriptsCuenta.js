@@ -3,17 +3,17 @@ document.addEventListener("DOMContentLoaded", function () {
   let listaClientes = [];
   let listaJuegosMesa = [];
 
-  // Con esta función cargaremos los datos del JSON en la lista de juegos de mesa y también mostraremos los datos en la página
   function cargarDatosClientes() {
     $.getJSON("../JSON/clienteJSON.json", function (datos) {
       listaClientes = datos;
       mostrarDatosUsuario();
+
+      cargarDatosUsuarioInput();
     });
   }
 
   cargarDatosClientes();
 
-  // Con esta funcion cargaremos los datos del JSON en la lista de juegos mesa y tambien mostraremos los datos en la pagina
   function cargarJuegosMesa() {
     $.getJSON("../JSON/productoJSON.json", function (datos) {
       listaJuegosMesa = datos;
@@ -22,6 +22,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   cargarJuegosMesa();
+
+  function cargarDatosUsuarioInput() {
+    const datosUsuarioString = localStorage.getItem("datosUsuario");
+    const datosUsuario = datosUsuarioString
+        ? JSON.parse(datosUsuarioString)
+        : null;
+
+    if (datosUsuario) {
+        document.getElementById("nombre").value = datosUsuario.nombreUsuario || "";
+        document.getElementById("apellidos").value = datosUsuario.apellidoUsuario || "";
+        document.getElementById("direccion").value = datosUsuario.direccionUsuario || "";
+        document.getElementById("correo").value = datosUsuario.correoUsuario || "";
+        document.getElementById("telefono").value = datosUsuario.telefonoUsuario || "";
+    }
+  }
 
   function mostrarDatosUsuario() {
     // Obtener datos del localStorage después de cargar los datos del JSON
@@ -70,6 +85,21 @@ document.addEventListener("DOMContentLoaded", function () {
   linkEditarContrasena.addEventListener("click", function() {
     seccionEditarContrasena.style.display = seccionEditarContrasena.style.display === "block" ? "none" : "block";
   });
+
+  function enviarDatosUsuario() {
+    // Obtener datos del localStorage
+    const datosUsuarioString = localStorage.getItem("datosUsuario");
+    const datosUsuario = datosUsuarioString ? JSON.parse(datosUsuarioString) : null;
+
+    // Agregar un campo oculto al formulario con los datos del usuario
+    if (datosUsuario) {
+        const hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "datosUsuario";
+        hiddenInput.value = JSON.stringify(datosUsuario);
+        document.forms[0].appendChild(hiddenInput);
+    }
+}
 
   const searchInput = document.getElementById("input-buscar");
 

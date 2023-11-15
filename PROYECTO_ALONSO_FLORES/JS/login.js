@@ -68,8 +68,12 @@ function iniciarSesion() {
 
   if (usuario) {
     const datosUsuario = {
+      idUsuario: usuario.id,
       nombreUsuario: usuario.nombre,
+      apellidoUsuario: usuario.apellidos,
+      direccionUsuario: usuario.direccion,
       correoUsuario: usuario.correo,
+      telefonoUsuario: usuario.telefono,
     };
 
     localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
