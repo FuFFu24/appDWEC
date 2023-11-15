@@ -224,10 +224,12 @@ nav ul.menu li a:hover {
   width: 100%;
   margin-top: 10px;
   box-sizing: border-box;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .boton-tramitar:hover {
   background-color: var(--puerto-rico-400);
+  transition: opacity 0.3s ease-in-out;
 }
 
 /* Estilos para la sección de Destacados de Juegos */

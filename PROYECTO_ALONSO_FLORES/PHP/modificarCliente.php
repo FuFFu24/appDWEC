@@ -3,9 +3,14 @@
 $rutaJSON = '../JSON/clienteJSON.json';
 
 // Obtén los datos del cliente desde la solicitud POST
-$nombre = $_POST['register-nombre'];
-$correo = $_POST['register-correo'];
-$contrasena = $_POST['register-contrasena'];
+$nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$direccion = $_POST['direccion'];
+$correo = $_POST['correo'];
+$telefono = $_POST['telefono'];
+$telefcontrasenaActualono = $_POST['contrasenaActual'];
+$nuevaContrasena = $_POST['nuevaContrasena'];
+$confirmarContrasena = $_POST['confirmarContrasena'];
 
 // Lee el contenido actual del archivo JSON
 $clientes = json_decode(file_get_contents($rutaJSON), true);

@@ -43,9 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       if (usuarioEnLista) {
-        // Mostrar todos los datos del usuario excepto la contraseña
         Object.keys(usuarioEnLista).forEach((key) => {
-          // Excluir la contraseña e idCliente
           if (key !== "contrasena" && key !== "idCliente") {
             const nuevoDato = document.createElement("p");
             nuevoDato.innerHTML = `${usuarioEnLista[key]}`;
@@ -59,6 +57,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
+
+  const linkEditarDatos = document.getElementById("editarNombre");
+  const linkEditarContrasena = document.getElementById("cambiarContrasena");
+  const seccionEditarDatos = document.querySelector(".editar-cuenta");
+  const seccionEditarContrasena = document.querySelector(".editar-contrasena");
+
+  linkEditarDatos.addEventListener("click", function() {
+    seccionEditarDatos.style.display = seccionEditarDatos.style.display === "block" ? "none" : "block";
+  });
+
+  linkEditarContrasena.addEventListener("click", function() {
+    seccionEditarContrasena.style.display = seccionEditarContrasena.style.display === "block" ? "none" : "block";
+  });
 
   const searchInput = document.getElementById("input-buscar");
 

@@ -55,18 +55,87 @@
     </header>
     <!-- Contenido principal -->
     <main>
+        <!-- Información de cuenta -->
         <section class="cuenta-section">
-            <h1>Tu cuenta</h1>
+            <div class="datos-grid">
+                <section class="info-cuenta">
+                    <h1>Tu cuenta</h1>
+                    <p>Información de cuenta</p>
+                    <h3>Tus datos de contacto</h3>
+                    <div id="datos-usuario">
+                    </div>
+                    <p><a href="#" id="editarNombre">Editar</a> <a href="#" id="cambiarContrasena">Cambiar la contraseña</a>
+                    </p>
+                </section>
 
-            <!-- Información de cuenta -->
-            <section class="info-cuenta">
-                <p>Información de cuenta</p>
-                <h3>Tus datos de contacto</h3>
-                <div id="datos-usuario">
-                </div>
-                <p><a href="#" id="editarNombre">Editar</a> <a href="#" id="cambiarContrasena">Cambiar la contraseña</a>
-                </p>
-            </section>
+                <section class="editar-cuenta">
+                    <h1>Editar informacion de la cuenta</h1>
+                    <form action="../PHP/modificarCliente.php" method="post">
+                        <p>Información de cuenta</p>
+                        <h4>
+                            <label for="nombre">Nombre </label>
+                        </h4>
+                        <p>
+                            <input type="text" name="nombre" id="nombre">
+                        </p>
+                        <h4>
+                            <label for="apellidos">Apellidos </label>
+                        </h4>
+                        <p>
+                            <input type="text" name="apellidos" id="apellidos">
+                        </p>
+                        <h4>
+                            <label for="direccion">Direccion </label>
+                        </h4>
+                        <p>
+                            <input type="text" name="direccion" id="direccion">
+                        </p>
+                        <h4>
+                            <label for="correo">Correo </label>
+                        </h4>
+                        <p>
+                            <input type="email" name="correo" id="correo">
+                        </p>
+                        <h4>
+                            <label for="telefono">Telefono </label>
+                        </h4>
+                        <p>
+                            <input type="text" name="telefono" id="telefono">
+                        </p>
+                        <p>
+                            <input type="submit" value="Guardar" name="guardarDatos">
+                        </p>
+                    </form>
+                </section>
+
+                <section class="editar-contrasena">
+                    <h1>Editar informacion de la cuenta</h1>
+                    <form action="../PHP/modificarCliente.php" method="post">
+                        <p>Cambiar contraseña</p>
+                        <h4>
+                            <label for="contrasenaActual">Contraseña actual </label>
+                        </h4>
+                        <p>
+                            <input type="text" name="contrasenaActual" id="contrasenaActual">
+                        </p>
+                        <h4>
+                            <label for="nuevaContrasena">Nueva contraseña </label>
+                        </h4>
+                        <p>
+                            <input type="text" name="nuevaContrasena" id="nuevaContrasena">
+                        </p>
+                        <h4>
+                            <label for="confirmarContrasena">Confirmar contraseña nueva </label>
+                        </h4>
+                        <p>
+                            <input type="text" name="confirmarContrasena" id="confirmarContrasena">
+                        </p>
+                        <p>
+                            <input type="submit" value="Guardar" name="guardarContrasena">
+                        </p>
+                    </form>
+                </section>
+            </div>
         </section>
     </main>
     <!-- Formulario de suscripción al Newsletter -->
@@ -74,7 +143,7 @@
         <img src="../IMG/LOGOS/email-gris.png" alt="Email">
         <h2>Suscríbete a nuestro Newsletter</h2>
         <form id="newsletter-form">
-            <input type="email" id="email" name="email" autocomplete="off" placeholder="Correo electrónico*" required>
+            <input type="email" id="email" name="email" class="email-newsletter" autocomplete="off" placeholder="Correo electrónico*" required>
             <button type="submit" class="suscribirse">Suscribirse</button>
             <br>
             <input type="checkbox" id="acepto" name="acepto" required>

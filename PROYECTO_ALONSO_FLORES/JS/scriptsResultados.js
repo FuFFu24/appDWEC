@@ -33,6 +33,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cargarYMostrarJuegosMesa();
 
+  // Obtener datos del localStorage
+  const datosUsuarioString = localStorage.getItem("datosUsuario");
+  const datosUsuario = datosUsuarioString
+    ? JSON.parse(datosUsuarioString)
+    : null;
+
+  const iconoUsuario = document.querySelector(".icono-usuario a");
+
+  if (datosUsuario) {
+    iconoUsuario.href = "../HTML/cuenta.html";
+  }
+
   var juegosPorPagina = 12;
   var paginaActual = 1;
 

@@ -274,8 +274,10 @@ nav ul.menu li a:hover {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
-.cuenta-section h1 {
+.datos-grid h1 {
+  font-size: 24px;
   color: var(--puerto-rico-950);
+  padding-bottom: 10px;
 }
 
 /* Estilos para la información de cuenta */
@@ -283,24 +285,38 @@ nav ul.menu li a:hover {
   padding: 20px;
 }
 
-.info-cuenta h3 {
+.editar-cuenta,
+.editar-contrasena {
+  padding: 20px;
+  display: none;
+}
+
+.info-cuenta h3,
+.editar-cuenta h3,
+.editar-contrasena h3 {
   color: var(--puerto-rico-900);
   margin-bottom: 20px;
 }
 
-.info-cuenta p {
+.info-cuenta p,
+.editar-cuenta p,
+.editar-contrasena p {
   color: var(--puerto-rico-700);
   margin-bottom: 10px;
 }
 
-.info-cuenta > p:first-child {
-  font-size: 24px;
+.info-cuenta > p:first-of-type,
+.editar-cuenta form > p:first-child,
+.editar-contrasena form > p:first-child {
+  font-size: 22px;
   border-bottom: 1px solid var(--puerto-rico-900);
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
 
-.info-cuenta span {
+.info-cuenta span,
+.editar-cuenta span,
+.editar-contrasena span {
   font-weight: bold;
 }
 
@@ -321,6 +337,43 @@ nav ul.menu li a:hover {
 
 #datos-usuario {
   padding-bottom: 10px;
+}
+
+.editar-cuenta input,
+.editar-contrasena input {
+  padding: 5px;
+  width: 100%;
+  max-width: 300px;
+  height: 30px;
+  border: 1px solid var(--puerto-rico-950);
+  margin: 5px 0;
+}
+
+.editar-cuenta input:focus,
+.editar-contrasena input:focus {
+  border: 1px solid var(--puerto-rico-400);
+  outline: none;
+}
+
+input[type="submit"] {
+  width: 100%;
+  max-width: 100px;
+  padding: 5px 10px;
+  background-color: var(--puerto-rico-900);
+  color: #ffffff;
+  text-decoration: none;
+  border: none;
+  margin-left: 100px;
+  transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: var(--puerto-rico-400);
+}
+
+.datos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 /* Estilo para cada juego destacado */
@@ -441,7 +494,7 @@ label a {
   text-decoration: none;
 }
 
-input[type="email"] {
+.email-newsletter {
   padding: 5px;
   width: 100%;
   max-width: 300px;
@@ -450,7 +503,7 @@ input[type="email"] {
   margin: 0 5px;
 }
 
-input[type="email"]:focus {
+.email-newsletter:focus {
   border: 1px solid var(--puerto-rico-400);
   outline: none;
 }
