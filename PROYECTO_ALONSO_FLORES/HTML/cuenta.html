@@ -44,7 +44,7 @@
                 <div class="contenido-carrito">
                     <div class="cart-items" id="cart-items"></div>
                     <div class="subtotal" id="subtotal"></div>
-                    <button class="boton-tramitar">Tramitar pedido</button>
+                    <a href="tramitarPedido.html"><button class="boton-tramitar">Tramitar pedido</button></a>
                     <span id="carrito-vacio">No tienes ningún artículo en tu carrito.</span>
                 </div>
             </div>
@@ -64,13 +64,14 @@
                     <h3>Tus datos de contacto</h3>
                     <div id="datos-usuario">
                     </div>
-                    <p><a href="#" id="editarNombre">Editar</a> <a href="#" id="cambiarContrasena">Cambiar la contraseña</a>
+                    <p><a href="#" id="editarNombre">Editar</a> <a href="#" id="cambiarContrasena">Cambiar la
+                            contraseña</a>
                     </p>
                 </section>
 
                 <section class="editar-cuenta">
                     <h1>Editar informacion de la cuenta</h1>
-                    <form action="../PHP/modificarCliente.php" method="post" onsubmit="enviarDatosUsuario()">
+                    <form action="../PHP/modificarCliente.php" method="post">
                         <p>Información de cuenta</p>
                         <h4>
                             <label for="nombre">Nombre </label>
@@ -91,10 +92,16 @@
                             <input type="text" name="direccion" id="direccion">
                         </p>
                         <h4>
-                            <label for="correo">Correo </label>
+                            <label for="correoAntiguo">Correo actual </label>
                         </h4>
                         <p>
-                            <input type="email" name="correo" id="correo">
+                            <input type="email" name="correoAntiguo" id="correoAntiguo" required>
+                        </p>
+                        <h4>
+                            <label for="correoNuevo">Correo nuevo </label>
+                        </h4>
+                        <p>
+                            <input type="email" name="correoNuevo" id="correoNuevo">
                         </p>
                         <h4>
                             <label for="telefono">Telefono </label>
@@ -112,6 +119,12 @@
                     <h1>Editar informacion de la cuenta</h1>
                     <form action="../PHP/modificarCliente.php" method="post">
                         <p>Cambiar contraseña</p>
+                        <h4>
+                            <label for="correo">Correo </label>
+                        </h4>
+                        <p>
+                            <input type="email" name="correo" id="correo" required>
+                        </p>
                         <h4>
                             <label for="contrasenaActual">Contraseña actual </label>
                         </h4>
@@ -136,6 +149,23 @@
                     </form>
                 </section>
             </div>
+            <section class="pedidos-recientes">
+                <p>Pedidos recientes</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pedido nº</th>
+                            <th>Fecha</th>
+                            <th>Total del Pedido</th>
+                            <th>Lista de Artículos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPedidosBody">
+                        <!-- La información de los pedidos se llenará aquí con JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+            <button id="cerrar-sesion-btn">Cerrar Sesión</button>
         </section>
     </main>
     <!-- Formulario de suscripción al Newsletter -->
@@ -143,7 +173,8 @@
         <img src="../IMG/LOGOS/email-gris.png" alt="Email">
         <h2>Suscríbete a nuestro Newsletter</h2>
         <form id="newsletter-form">
-            <input type="email" id="email" name="email" class="email-newsletter" autocomplete="off" placeholder="Correo electrónico*" required>
+            <input type="email" id="email" name="email" class="email-newsletter" autocomplete="off"
+                placeholder="Correo electrónico*" required>
             <button type="submit" class="suscribirse">Suscribirse</button>
             <br>
             <input type="checkbox" id="acepto" name="acepto" required>

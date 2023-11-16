@@ -13,15 +13,38 @@
 </head>
 
 <body>
+    <!-- Mensajes para el usuario de agradecimiento -->
     <div class="mensaje-container" id="mensajeContainer">
         <div class="logo">
             <img src="../IMG/LOGOS/prodigy-480.png" alt="Monstruo de los Juegos">
         </div>
         <div class="mensaje">
-            <p id="bienvenidaMensaje"></p>
-            <p>¡Ojo! Te has dejado algunos juegos en tu carrito de compra.</p>
+            <h3 id="bienvenidaMensaje"></h3>
+            <p>🛒 ¡Ojo! Te has dejado algunos juegos en tu carrito de compra.</p>
             <button id="graciasBtn">¡Gracias!</button>
             <button id="verCarritoBtn">Ver carrito</button>
+        </div>
+    </div>
+    <div class="primera-compra-container" id="primeraCompraContainer">
+        <div class="logo">
+            <img src="../IMG/LOGOS/prodigy-480.png" alt="Monstruo de los Juegos">
+        </div>
+        <div class="mensaje">
+            <h3 id="felicidadesMensaje"></h3>
+            <p>¡Gracias por comprar en Monstruo de los Juegos!</p>
+            <p>¡Aqui tienes un codigo de descuento como agradecimiento! 🎁</p>
+            <h3 class="codigoDescuento">PRIMERACOMPRA15</h3>
+            <button id="aceptarBtnFelicidades">¡Gracias!</button>
+        </div>
+    </div>
+    <div class="exito-compra-container" id="exitoCompraContainer">
+        <div class="logo">
+            <img src="../IMG/LOGOS/prodigy-480.png" alt="Monstruo de los Juegos">
+        </div>
+        <div class="mensaje">
+            <h3 id="graciasMensaje"></h3>
+            <p>¡Gracias por comprar en Monstruo de los Juegos!</p>
+            <button id="aceptarBtnExito">¡Gracias!</button>
         </div>
     </div>
     <!-- Encabezado -->
@@ -55,7 +78,7 @@
                 <div class="contenido-carrito">
                     <div class="cart-items" id="cart-items"></div>
                     <div class="subtotal" id="subtotal"></div>
-                    <button class="boton-tramitar">Tramitar pedido</button>
+                    <a href="tramitarPedido.html"><button class="boton-tramitar">Tramitar pedido</button></a>
                     <span id="carrito-vacio">No tienes ningún artículo en tu carrito.</span>
                 </div>
             </div>
@@ -67,7 +90,7 @@
     <!-- Contenido principal -->
     <main>
         <section class="mejor-valorados">
-            <h2>Juegos mejor valorados</h2>
+            <h2>Juegos mejor valorados 🌟</h2>
             <!-- Contenido de la sección de juegos mejor valorados -->
         </section>
         <div class="mesaje-main">
@@ -78,7 +101,7 @@
             <p>Llevamos los juegos a tu casa o puedes pasar a visitarnos a nuestras tiendas físicas.</p>
         </div>
         <section class="novedades">
-            <h2>Novedades</h2>
+            <h2>Novedades 🆕</h2>
             <!-- Contenido de la sección de juegos en novedad -->
         </section>
         <div class="mesaje-main">
@@ -86,7 +109,7 @@
             <p>Te enterarás de nuestras novedades, lanzamientos, eventos, descuentos especiales y más sorpresas.</p>
         </div>
         <section class="en-oferta">
-            <h2>Juegos en oferta</h2>
+            <h2>Juegos en oferta 💸</h2>
             <!-- Contenido de la sección de juegos en oferta -->
         </section>
     </main>

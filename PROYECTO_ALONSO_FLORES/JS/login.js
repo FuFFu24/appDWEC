@@ -1,10 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Recoger datos de la URL
+  // Array en el que vamos a guardar todos los datos del JSON
+  let listaUsuarios = [];
+
+  function cargarUsuarios() {
+    $.getJSON("../JSON/clienteJSON.json", function (datos) {
+      listaUsuarios = datos;
+    });
+  }
+
+  cargarUsuarios();
+
+  // Recoger datos de la URL, donde se envian los errores producidos
   const urlParams = new URLSearchParams(window.location.search);
   const error = urlParams.get("error");
   const vacio = urlParams.get("vacio");
 
-  // Verifica si hay un error de 'correo_existente' y muestra el mensaje correspondiente
+  // Verifica si hay un error de correo existente o de campos vacios y muestra el mensaje correspondiente
   const mensajeError = document.getElementById("correo-existente");
   if (error === "correo_existente") {
     mensajeError.style.display = "block";
@@ -19,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mensajeVacio.style.display = "none";
   }
 
-  // Obtén los elementos del formulario de registro
+  // Esta parte es para cambiar entre crear cuenta y hacer login pulsando el link correspondiente
   var registerForm = document.querySelector(".register-form");
   var loginForm = document.querySelector(".login-form");
   var messageLinkRegister = document.querySelector(".message-register a");
@@ -43,17 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleForms(new Event("click"));
 });
-
-// Array en el que vamos a guardar todos los datos del JSON
-let listaUsuarios = [];
-
-function cargarUsuarios() {
-  $.getJSON("../JSON/clienteJSON.json", function (datos) {
-    listaUsuarios = datos;
-  });
-}
-
-cargarUsuarios();
 
 function iniciarSesion() {
   const email = document.getElementById("login-correo").value;

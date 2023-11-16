@@ -23,36 +23,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cargarJuegosMesa();
 
-  function cargarDatosUsuarioInput() {
-    const datosUsuarioString = localStorage.getItem("datosUsuario");
-    const datosUsuario = datosUsuarioString
-        ? JSON.parse(datosUsuarioString)
-        : null;
+  // Recogida de datos del localStorage comun para muchas funciones
+  const datosUsuarioString = localStorage.getItem("datosUsuario");
+  const datosUsuario = datosUsuarioString
+    ? JSON.parse(datosUsuarioString)
+    : null;
 
+  function cargarDatosUsuarioInput() {
     if (datosUsuario) {
-        document.getElementById("nombre").value = datosUsuario.nombreUsuario || "";
-        document.getElementById("apellidos").value = datosUsuario.apellidoUsuario || "";
-        document.getElementById("direccion").value = datosUsuario.direccionUsuario || "";
-        document.getElementById("correo").value = datosUsuario.correoUsuario || "";
-        document.getElementById("telefono").value = datosUsuario.telefonoUsuario || "";
+      document.getElementById("nombre").value =
+        datosUsuario.nombreUsuario || "";
+      document.getElementById("apellidos").value =
+        datosUsuario.apellidoUsuario || "";
+      document.getElementById("direccion").value =
+        datosUsuario.direccionUsuario || "";
+      document.getElementById("correoAntiguo").value =
+        datosUsuario.correoUsuario || "";
+      document.getElementById("telefono").value =
+        datosUsuario.telefonoUsuario || "";
+      document.getElementById("correo").value =
+        datosUsuario.correoUsuario || "";
     }
   }
 
   function mostrarDatosUsuario() {
-    // Obtener datos del localStorage después de cargar los datos del JSON
-    const datosUsuarioString = localStorage.getItem("datosUsuario");
-    const datosUsuario = datosUsuarioString
-      ? JSON.parse(datosUsuarioString)
-      : null;
-
     const datosUsuarioDiv = document.getElementById("datos-usuario");
     const iconoUsuario = document.querySelector(".icono-usuario a");
 
     if (datosUsuario) {
-      // Obtener el correo del usuario desde los datos de localStorage
       const correoUsuario = datosUsuario.correoUsuario;
 
-      // Buscar al usuario en la lista de clientes
       const usuarioEnLista = listaClientes.find(
         (user) => user.correo === correoUsuario
       );
@@ -67,9 +67,37 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         iconoUsuario.href = "../HTML/cuenta.html";
-      } else {
-        alert("¿Todavía no tienes cuenta? Crea una cuenta o inicia sesión.");
       }
+    } else {
+      const seccionCuenta = document.querySelector(".cuenta-section");
+      seccionCuenta.innerHTML = "";
+      const noTienesCuenta = document.createElement("p");
+      noTienesCuenta.textContent = "Todavia no tienes cuenta";
+      const noEresMonstrusocio = document.createElement("h3");
+      noEresMonstrusocio.textContent = "¿Aun no eres Monstrusocio?";
+      const textoVentajas = document.createElement("p");
+      textoVentajas.innerHTML = `
+        <p>→ Teniendo una cuenta de Monstrusocio te enterarás antes que nadie de las novedades semanales, promociones exclusivas, invitaciones a eventos, regalos y sorteos.</p>
+
+        <p>→ Podrás disfrutar de un descuento en nuestras tiendas físicas de juegos de multitud de editoriales. Pregunta en la tienda los juegos con promociones disponibles.</p>
+        
+        <p>→ Acumularás Fichas cada vez que compres en Monstruo de los Juegos. Las Fichas te permiten obtener descuentos en tus siguientes compras.</p>
+        
+        <p>→ Tendrás acceso a tu Panel de Cliente y podrás almacenar las compras que has hecho, descargar facturas, guardar tus direcciones, tramitar devoluciones y podrás tener tu Lista de deseos de los productos que quieres guardar para ver en otro momento.</p>
+        
+        <p>→ También, dentro del Panel y, si haces una compra en la web, te aparecerá en tu Panel de cliente un código personal en la sección “Invitaciones”. Tus amigos tendrán descuento y tú podrás ganar Fichas con sus compras.</p>
+      `;
+      const enlaceCrearCuenta = document.createElement("a");
+      enlaceCrearCuenta.href = "../HTML/login.html";
+      const botonCrearCuenta = document.createElement("button");
+      botonCrearCuenta.className = "boton-crear-cuenta";
+      botonCrearCuenta.textContent = "Crear una cuenta";
+
+      seccionCuenta.appendChild(noTienesCuenta);
+      seccionCuenta.appendChild(noEresMonstrusocio);
+      seccionCuenta.appendChild(textoVentajas);
+      enlaceCrearCuenta.appendChild(botonCrearCuenta);
+      seccionCuenta.appendChild(enlaceCrearCuenta);
     }
   }
 
@@ -78,32 +106,83 @@ document.addEventListener("DOMContentLoaded", function () {
   const seccionEditarDatos = document.querySelector(".editar-cuenta");
   const seccionEditarContrasena = document.querySelector(".editar-contrasena");
 
-  linkEditarDatos.addEventListener("click", function() {
-    seccionEditarDatos.style.display = seccionEditarDatos.style.display === "block" ? "none" : "block";
+  linkEditarDatos.addEventListener("click", function () {
+    seccionEditarDatos.style.display =
+      seccionEditarDatos.style.display === "block" ? "none" : "block";
   });
 
-  linkEditarContrasena.addEventListener("click", function() {
-    seccionEditarContrasena.style.display = seccionEditarContrasena.style.display === "block" ? "none" : "block";
+  linkEditarContrasena.addEventListener("click", function () {
+    seccionEditarContrasena.style.display =
+      seccionEditarContrasena.style.display === "block" ? "none" : "block";
   });
 
+  // Esta funcion se llama en el formulario del HTML onload
   function enviarDatosUsuario() {
-    // Obtener datos del localStorage
     const datosUsuarioString = localStorage.getItem("datosUsuario");
-    const datosUsuario = datosUsuarioString ? JSON.parse(datosUsuarioString) : null;
+    const datosUsuario = datosUsuarioString
+      ? JSON.parse(datosUsuarioString)
+      : null;
 
-    // Agregar un campo oculto al formulario con los datos del usuario
     if (datosUsuario) {
-        const hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "datosUsuario";
-        hiddenInput.value = JSON.stringify(datosUsuario);
-        document.forms[0].appendChild(hiddenInput);
+      const hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "datosUsuario";
+      hiddenInput.value = JSON.stringify(datosUsuario);
+      document.forms[0].appendChild(hiddenInput);
     }
-}
+  }
 
+  const totalPedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+  const correoUsuario = datosUsuario.correoUsuario;
+  const tablaPedidosBody = document.getElementById("tablaPedidosBody");
+  const seccionPedidosRecientes = document.querySelector(".pedidos-recientes");
+
+  let seEncontroPedido = false;
+
+  totalPedidos.forEach((pedido) => {
+    if (pedido.correoUsuario === correoUsuario) {
+      seEncontroPedido = true;
+      const fila = document.createElement("tr");
+
+      const columnaNumeroPedido = document.createElement("td");
+      columnaNumeroPedido.textContent = pedido.numero;
+
+      const columnaFechaPedido = document.createElement("td");
+      columnaFechaPedido.textContent = pedido.fecha;
+
+      const columnaTotalPedido = document.createElement("td");
+      columnaTotalPedido.textContent = `${pedido.total.toFixed(2)} €`;
+
+      const columnaListaArticulos = document.createElement("td");
+      const listaArticulos = pedido.articulos
+        .map((articulo) => `${articulo.nombre} (${articulo.cantidad}x)`)
+        .join(", ");
+      columnaListaArticulos.textContent = listaArticulos;
+
+      fila.appendChild(columnaNumeroPedido);
+      fila.appendChild(columnaFechaPedido);
+      fila.appendChild(columnaTotalPedido);
+      fila.appendChild(columnaListaArticulos);
+
+      tablaPedidosBody.appendChild(fila);
+    }
+  });
+
+  if (!seEncontroPedido) {
+    seccionPedidosRecientes.style.display = "none";
+  }
+
+  const cerrarSesionBtn = document.getElementById("cerrar-sesion-btn");
+
+  // Esta parte sirver como intento de cierre de sesion, que aqui seria eliminando los datosUsuario del localStorage
+  cerrarSesionBtn.addEventListener("click", function () {
+    localStorage.removeItem("datosUsuario");
+    location.reload();
+  });
+
+  // A partir de aqui es comun para todos los codigos pero lo queria añadir
   const searchInput = document.getElementById("input-buscar");
 
-  // Función para mostrar los resultados de búsqueda en el desplegable
   function mostrarResultados(resultados) {
     const resultadosDesplegable = document.querySelector(
       ".resultados-busqueda"
@@ -185,7 +264,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       seccionMostrar.appendChild(juegoDestacado);
     });
-  } // Evento para buscar juegos de mesa en la lista desde un input con keyup
+  }
+
+  // Evento para buscar juegos de mesa en la lista desde un input con keyup
   searchInput.addEventListener("keyup", function () {
     const busqueda = searchInput.value.toLowerCase().trim();
 
@@ -220,7 +301,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // A partir de aqui tenemos unas cuantas lineas de codigo sobre el carrito de la compra
   function agregarAlCarrito(producto) {
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const carrito =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
 
     const productoExistenteIndex = carrito.findIndex(
       (item) => item.id === producto.idProducto
@@ -229,7 +315,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (productoExistenteIndex !== -1) {
       const carritoActualizado = [...carrito];
       carritoActualizado[productoExistenteIndex].cantidad++;
-      localStorage.setItem("carrito", JSON.stringify(carritoActualizado));
+      localStorage.setItem(
+        `carrito${
+          datosUsuario && datosUsuario.correoUsuario
+            ? datosUsuario.correoUsuario
+            : ""
+        }`,
+        JSON.stringify(carritoActualizado)
+      );
     } else {
       const nuevoCarrito = [
         ...carrito,
@@ -243,14 +336,26 @@ document.addEventListener("DOMContentLoaded", function () {
           porcentajeDescuento: producto.porcentajeDescuento || 0,
         },
       ];
-      localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+      localStorage.setItem(
+        `carrito${
+          datosUsuario && datosUsuario.correoUsuario
+            ? datosUsuario.correoUsuario
+            : ""
+        }`,
+        JSON.stringify(nuevoCarrito)
+      );
     }
 
     mostrarCarrito();
   }
 
   function mostrarCarrito() {
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const carrito =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
     const contadorCarrito = document.querySelector(".contador-carrito");
     const carritoVacioMensaje = document.getElementById("carrito-vacio");
     const cartItemsContainer = document.getElementById("cart-items");
@@ -349,7 +454,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function borrarDelCarrito(id) {
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let carrito =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
 
     const index = carrito.findIndex((item) => item.id === id);
 
@@ -360,7 +470,14 @@ document.addEventListener("DOMContentLoaded", function () {
         carrito.splice(index, 1);
       }
 
-      localStorage.setItem("carrito", JSON.stringify(carrito));
+      localStorage.setItem(
+        `carrito${
+          datosUsuario && datosUsuario.correoUsuario
+            ? datosUsuario.correoUsuario
+            : ""
+        }`,
+        JSON.stringify(carrito)
+      );
 
       mostrarCarrito();
     }

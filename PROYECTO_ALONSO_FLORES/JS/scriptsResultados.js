@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let resultados = [];
 
   // Recupera la consulta de la URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const query = urlParams.get("query");
+  const parametrosURL = new URLSearchParams(window.location.search);
+  const query = parametrosURL.get("query");
 
   // Con esta funcion cargaremos los datos del JSON en la lista de juegos mesa y tambien mostraremos los datos en la pagina
   function cargarYMostrarJuegosMesa() {
@@ -21,13 +21,16 @@ document.addEventListener("DOMContentLoaded", function () {
           actualizarVista(resultados);
           actualizarSelectorPagina(resultados);
         } else {
-          const resultadosDiv = document.querySelector(".resultados-busqueda");
-          resultadosDiv.innerHTML =
-            '<p class="sin-resultados">No se encontraron resultados.</p>';
+          const mainDiv = document.getElementsByTagName("main")[0];
+          mainDiv.innerHTML = `<p class="sin-resultados">No se encontraron resultados para <strong>"${query}"</strong>.</p>`;
         }
 
         mostrarCarrito();
       });
+    } else {
+      const mainDiv = document.getElementsByTagName("main")[0];
+      mainDiv.innerHTML =
+        '<p class="sin-resultados">No se encontraron resultados.</p>';
     }
   }
 
@@ -230,6 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
     actualizarSelectorPagina();
   });
 
+  // Esto lo queria añadir en la pagina por estetica y tube que buscar como hacerlo ya que no sabia
   function actualizarSelectorPagina() {
     const selectorPagina = document.querySelector(".page-selector ul");
     selectorPagina.innerHTML = "";
@@ -286,7 +290,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // A partir de aqui tenemos unas cuantas lineas de codigo sobre el carrito de la compra
   function agregarAlCarrito(producto) {
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const carrito =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
 
     const productoExistenteIndex = carrito.findIndex(
       (item) => item.id === producto.idProducto
@@ -296,7 +305,14 @@ document.addEventListener("DOMContentLoaded", function () {
       // Si el producto ya está en el carrito, aumentar la cantidad
       const carritoActualizado = [...carrito];
       carritoActualizado[productoExistenteIndex].cantidad++;
-      localStorage.setItem("carrito", JSON.stringify(carritoActualizado));
+      localStorage.setItem(
+        `carrito${
+          datosUsuario && datosUsuario.correoUsuario
+            ? datosUsuario.correoUsuario
+            : ""
+        }`,
+        JSON.stringify(carritoActualizado)
+      );
     } else {
       const nuevoCarrito = [
         ...carrito,
@@ -310,14 +326,26 @@ document.addEventListener("DOMContentLoaded", function () {
           porcentajeDescuento: producto.porcentajeDescuento || 0,
         },
       ];
-      localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+      localStorage.setItem(
+        `carrito${
+          datosUsuario && datosUsuario.correoUsuario
+            ? datosUsuario.correoUsuario
+            : ""
+        }`,
+        JSON.stringify(nuevoCarrito)
+      );
     }
 
     mostrarCarrito();
   }
 
   function mostrarCarrito() {
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const carrito =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
     const contadorCarrito = document.querySelector(".contador-carrito");
     const carritoVacioMensaje = document.getElementById("carrito-vacio");
     const cartItemsContainer = document.getElementById("cart-items");
@@ -416,7 +444,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function borrarDelCarrito(id) {
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let carrito =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
 
     const index = carrito.findIndex((item) => item.id === id);
 
@@ -427,7 +460,14 @@ document.addEventListener("DOMContentLoaded", function () {
         carrito.splice(index, 1);
       }
 
-      localStorage.setItem("carrito", JSON.stringify(carrito));
+      localStorage.setItem(
+        `carrito${
+          datosUsuario && datosUsuario.correoUsuario
+            ? datosUsuario.correoUsuario
+            : ""
+        }`,
+        JSON.stringify(carrito)
+      );
 
       mostrarCarrito();
     }

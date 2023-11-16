@@ -41,6 +41,6 @@ $clientes[] = $nuevoCliente;
 file_put_contents($rutaJSON, json_encode($clientes));
 
 // Redirige a la página de inicio con el correo como parámetro
-header('Location: ../HTML/index.html?nombre=' . $nombre . '&correo=' . $correo);
+header('Location: ../HTML/index.html?correo=' . $correo);
 exit;
 ?>

@@ -1,6 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Array en el que vamos a guardar todos los datos del JSON
   let listaJuegosMesa = [];
+  let listaClientes = [];
+
+  function cargarDatosClientes() {
+    $.getJSON("../JSON/clienteJSON.json", function (datos) {
+      listaClientes = datos;
+
+      procesarDatosURL();
+    });
+  }
+
+  cargarDatosClientes();
 
   // Con esta funcion cargaremos los datos del JSON en la lista de juegos mesa y tambien mostraremos los datos en la pagina
   function cargarJuegosMesa() {
@@ -18,18 +29,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cargarJuegosMesa();
 
-  const datosURL = new URLSearchParams(window.location.search);
-  const nombreUsuario = datosURL.get("nombre");
-  const correoUsuario = datosURL.get("correo");
+  function procesarDatosURL() {
+    // Obtén los parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const correo = urlParams.get("correo");
 
-  // Muestra el mensaje de bienvenida si es necesario
-  if (nombreUsuario && correoUsuario) {
-    const datosUsuario = {
-      nombreUsuario: nombreUsuario,
-      correoUsuario: correoUsuario,
-    };
+    // Busca el usuario en la lista de clientes por correo
+    const usuario = listaClientes.find((user) => user.correo === correo);
 
-    localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
+    if (usuario) {
+      const datosUsuario = {
+        idUsuario: usuario.id,
+        nombreUsuario: usuario.nombre,
+        apellidoUsuario: usuario.apellidos,
+        direccionUsuario: usuario.direccion,
+        correoUsuario: usuario.correo,
+        telefonoUsuario: usuario.telefono,
+      };
+
+      localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
+    }
   }
 
   // Obtener datos del localStorage
@@ -42,21 +61,28 @@ document.addEventListener("DOMContentLoaded", function () {
   const bienvenidaMensaje = document.getElementById("bienvenidaMensaje");
   const iconoUsuario = document.querySelector(".icono-usuario a");
 
+  // Si no hay datosUsuario, es decir, si no estas logeado no te muestra el mensaje del carrito
   if (datosUsuario) {
     // Si hay un usuario logueado, mostrar mensaje de bienvenida
     bienvenidaMensaje.textContent = `Hola, ${datosUsuario.nombreUsuario}!`;
 
     // Verificar si hay elementos en el carrito
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    if (carrito.length > 0) {
-      // Mostrar el mensaje sobre el carrito si hay elementos
+    const carritoUsuario =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
+    if (carritoUsuario.length > 0) {
       mensajeContainer.style.display = "flex";
     } else {
       mensajeContainer.style.display = "none";
     }
 
+    // Si entra aqui quiere decir que hay alguien logeado asique cambia el href del icono de asuario pra que ahora reenvia a las opciones de cuenta
     iconoUsuario.href = "../HTML/cuenta.html";
 
+    // Un timer para cerrar la pestaña y no sea incomo y tambien por poner un poco de todo
     setTimeout(function () {
       mensajeContainer.style.display = "none";
     }, 10000);
@@ -66,15 +92,75 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const graciasBtn = document.getElementById("graciasBtn");
   const verCarritoBtn = document.getElementById("verCarritoBtn");
-  const mensajeContenedor = document.getElementById("mensajeContainer");
 
   graciasBtn.addEventListener("click", function () {
-    mensajeContenedor.style.display = "none";
+    mensajeContainer.style.display = "none";
   });
 
+  // Te reenvia a la pagina de tramitar pedidio para que finalices la compra o recuerdes lo que metiste
   verCarritoBtn.addEventListener("click", function () {
-    mensajeContenedor.style.display = "none";
+    window.location.href = `tramitarPedido.html`;
+    mensajeContainer.style.display = "none";
   });
+
+  // Recoge los datos enviados en la URL
+  const parametrosURL = new URLSearchParams(window.location.search);
+  const siMensaje = parametrosURL.get("mensaje") ?? "";
+
+  const primeraCompraContainer = document.getElementById(
+    "primeraCompraContainer"
+  );
+  const exitoCompraContainer = document.getElementById("exitoCompraContainer");
+  const felicidadesMensaje = document.getElementById("felicidadesMensaje");
+  const graciasMensaje = document.getElementById("graciasMensaje");
+
+  // Si no hay datosUsuario, es decir, si no estas logeado no te da el codigo
+  if (datosUsuario) {
+    if (siMensaje === "primera_compra") {
+      const codigosDescuento =
+        JSON.parse(
+          localStorage.getItem(`codigosDescuento${datosUsuario.correoUsuario}`)
+        ) || [];
+
+      if (!codigosDescuento.includes("PRIMERACOMPRA15")) {
+        codigosDescuento.push("PRIMERACOMPRA15");
+
+        localStorage.setItem(
+          `codigosDescuento${datosUsuario.correoUsuario}`,
+          JSON.stringify(codigosDescuento)
+        );
+      }
+
+      felicidadesMensaje.textContent = `¡Felicidades, ${datosUsuario.nombreUsuario}! 🎉`;
+      exitoCompraContainer.style.display = "none";
+    } else if (siMensaje === "compra_realizada") {
+      graciasMensaje.textContent = `¡Gracias, ${datosUsuario.nombreUsuario}! 😊`;
+      primeraCompraContainer.style.display = "none";
+    } else {
+      primeraCompraContainer.style.display = "none";
+      exitoCompraContainer.style.display = "none";
+    }
+  } else {
+    primeraCompraContainer.style.display = "none";
+    exitoCompraContainer.style.display = "none";
+  }
+
+  const aceptarBtnFelicidades = document.getElementById(
+    "aceptarBtnFelicidades"
+  );
+  const aceptarBtnExito = document.getElementById("aceptarBtnExito");
+
+  if (aceptarBtnFelicidades) {
+    aceptarBtnFelicidades.addEventListener("click", function () {
+      primeraCompraContainer.style.display = "none";
+    });
+  }
+
+  if (aceptarBtnFelicidades) {
+    aceptarBtnExito.addEventListener("click", function () {
+      exitoCompraContainer.style.display = "none";
+    });
+  }
 
   const searchInput = document.getElementById("input-buscar");
 
@@ -219,19 +305,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // A partir de aqui tenemos unas cuantas lineas de codigo sobre el carrito de la compra
   function agregarAlCarrito(producto) {
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const carritoUsuario =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
 
-    const productoExistenteIndex = carrito.findIndex(
+    const productoExistenteIndex = carritoUsuario.findIndex(
       (item) => item.id === producto.idProducto
     );
 
     if (productoExistenteIndex !== -1) {
-      const carritoActualizado = [...carrito];
+      const carritoActualizado = [...carritoUsuario];
       carritoActualizado[productoExistenteIndex].cantidad++;
-      localStorage.setItem("carrito", JSON.stringify(carritoActualizado));
+      localStorage.setItem(
+        `carrito${
+          datosUsuario && datosUsuario.correoUsuario
+            ? datosUsuario.correoUsuario
+            : ""
+        }`,
+        JSON.stringify(carritoActualizado)
+      );
     } else {
       const nuevoCarrito = [
-        ...carrito,
+        ...carritoUsuario,
         {
           id: producto.idProducto,
           nombre: producto.nombre,
@@ -242,14 +340,26 @@ document.addEventListener("DOMContentLoaded", function () {
           porcentajeDescuento: producto.porcentajeDescuento || 0,
         },
       ];
-      localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+      localStorage.setItem(
+        `carrito${
+          datosUsuario && datosUsuario.correoUsuario
+            ? datosUsuario.correoUsuario
+            : ""
+        }`,
+        JSON.stringify(nuevoCarrito)
+      );
     }
 
     mostrarCarrito();
   }
 
   function mostrarCarrito() {
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const carritoUsuario =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
     const contadorCarrito = document.querySelector(".contador-carrito");
     const carritoVacioMensaje = document.getElementById("carrito-vacio");
     const cartItemsContainer = document.getElementById("cart-items");
@@ -263,13 +373,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cartItemsContainer.innerHTML = "";
 
-    if (carrito.length === 0) {
+    if (carritoUsuario.length === 0) {
       carritoVacioMensaje.style.display = "block";
       cartItemsContainer.style.display = "none";
       subtotalContainer.style.display = "none";
       botonTramitarPedido.style.display = "none";
     } else {
-      carrito.forEach((item) => {
+      carritoUsuario.forEach((item) => {
         const cartItem = document.createElement("div");
         cartItem.classList.add("cart-item");
 
@@ -326,7 +436,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cartItemsContainer.appendChild(cartItem);
       });
 
-      const subtotal = carrito.reduce((total, item) => {
+      const subtotal = carritoUsuario.reduce((total, item) => {
         const precioUnitario = item.descuento
           ? item.precio * (1 - item.porcentajeDescuento / 100)
           : item.precio;
@@ -340,7 +450,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Esta parte es la que va a actualizar el contador del carrito cada vez que se introduzca un nuevo juego
-    const totalProductos = carrito.reduce(
+    const totalProductos = carritoUsuario.reduce(
       (total, item) => total + item.cantidad,
       0
     );
@@ -348,18 +458,30 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function borrarDelCarrito(id) {
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const carritoUsuario =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`));
 
-    const index = carrito.findIndex((item) => item.id === id);
+    const index = carritoUsuario.findIndex((item) => item.id === id);
 
     if (index !== -1) {
-      if (carrito[index].cantidad > 1) {
-        carrito[index].cantidad--;
+      if (carritoUsuario[index].cantidad > 1) {
+        carritoUsuario[index].cantidad--;
       } else {
-        carrito.splice(index, 1);
+        carritoUsuario.splice(index, 1);
       }
 
-      localStorage.setItem("carrito", JSON.stringify(carrito));
+      localStorage.setItem(
+        `carrito${
+          datosUsuario && datosUsuario.correoUsuario
+            ? datosUsuario.correoUsuario
+            : ""
+        }`,
+        JSON.stringify(carritoUsuario)
+      );
 
       mostrarCarrito();
     }

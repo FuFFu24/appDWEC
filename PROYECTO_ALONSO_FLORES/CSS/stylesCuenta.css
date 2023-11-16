@@ -281,7 +281,9 @@ nav ul.menu li a:hover {
 }
 
 /* Estilos para la información de cuenta */
-.info-cuenta {
+.info-cuenta,
+.pedidos-recientes,
+.cuenta-section {
   padding: 20px;
 }
 
@@ -293,21 +295,26 @@ nav ul.menu li a:hover {
 
 .info-cuenta h3,
 .editar-cuenta h3,
-.editar-contrasena h3 {
+.editar-contrasena h3,
+.cuenta-section h3 {
   color: var(--puerto-rico-900);
   margin-bottom: 20px;
 }
 
 .info-cuenta p,
 .editar-cuenta p,
-.editar-contrasena p {
+.editar-contrasena p,
+.pedidos-recientes p,
+.cuenta-section p {
   color: var(--puerto-rico-700);
   margin-bottom: 10px;
 }
 
 .info-cuenta > p:first-of-type,
 .editar-cuenta form > p:first-child,
-.editar-contrasena form > p:first-child {
+.editar-contrasena form > p:first-child,
+.pedidos-recientes > p:first-of-type,
+.cuenta-section > p:first-of-type {
   font-size: 22px;
   border-bottom: 1px solid var(--puerto-rico-900);
   padding-bottom: 10px;
@@ -320,7 +327,8 @@ nav ul.menu li a:hover {
   font-weight: bold;
 }
 
-.info-cuenta a {
+.info-cuenta a,
+.cuenta-section a {
   color: var(--puerto-rico-500);
   text-decoration: none;
   margin-left: 5px;
@@ -367,13 +375,57 @@ input[type="submit"] {
   transition: all 0.3s ease;
 }
 
-input[type="submit"]:hover {
+.boton-crear-cuenta,
+#cerrar-sesion-btn {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px 10px;
+  background-color: var(--puerto-rico-900);
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  margin: 10px auto;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover,
+.boton-crear-cuenta:hover {
   background-color: var(--puerto-rico-400);
 }
 
 .datos-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+/* Estilos para la tabla de pedidos */
+.pedidos-recientes table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Estilos para las celdas (th y td) */
+.pedidos-recientes th {
+  padding: 10px;
+  text-align: left;
+}
+
+.pedidos-recientes td {
+  padding: 10px;
+  text-align: left;
+  border-top: 1px solid var(--puerto-rico-900);
+}
+
+/* Estilos adicionales para mejorar la legibilidad y apariencia */
+.pedidos-recientes tbody tr:nth-child(even) {
+  background-color: var(--puerto-rico-50);
+}
+
+.pedidos-recientes tbody tr:hover {
+  background-color: var(--puerto-rico-50);
 }
 
 /* Estilo para cada juego destacado */

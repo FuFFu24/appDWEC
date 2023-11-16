@@ -1,20 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Array en el que vamos a guardar todos los datos del JSON
-  var listaJuegosMesa = [];
+  let listaJuegosMesa = [];
 
   // Con esta funcion cargaremos los datos del JSON en la lista de juegos mesa y tambien mostraremos los datos en la pagina
-  function cargarYMostrarJuegosMesa() {
+  function cargarJuegosMesa() {
     $.getJSON("../JSON/productoJSON.json", function (datos) {
       listaJuegosMesa = datos;
-      ordenarJuegos("masVendidos");
-      actualizarVista();
-      actualizarSelectorPagina();
 
+      // Esto es solo para que al recargar la pagina se actualice el carrito y con ello su contador
       mostrarCarrito();
     });
   }
 
-  cargarYMostrarJuegosMesa();
+  cargarJuegosMesa();
 
   // Obtener datos del localStorage
   const datosUsuarioString = localStorage.getItem("datosUsuario");
@@ -22,30 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
     ? JSON.parse(datosUsuarioString)
     : null;
 
-  const iconoUsuario = document.querySelector(".icono-usuario a");
-
-  // Esto es para que cambie el href si estas logeado
-  if (datosUsuario) {
-    iconoUsuario.href = "../HTML/cuenta.html";
-  }
-
-  var juegosPorPagina = 12;
-  var paginaActual = 1;
-
-  const selectOrdenar = document.getElementById("filtrar-ordenar");
-  const productosPorPage = document.getElementById("productosPorPage");
   const searchInput = document.getElementById("input-buscar");
 
-  function mostrarJuegosMesa(lista) {
-    const destacados = document.querySelector(".destacados");
-    destacados.innerHTML = `<div class="product-grid"></div>`;
-    const productGrid = document.querySelector(".product-grid");
-
-    mostrarCadaJuegoMesaEstructuraGeneral(lista, productGrid);
-  }
-
   // Función para mostrar los resultados de búsqueda en el desplegable
-  function mostrarResultadosBusquedaEnDesplegable(resultados) {
+  function mostrarResultados(resultados) {
     const resultadosDesplegable = document.querySelector(
       ".resultados-busqueda"
     );
@@ -62,21 +40,21 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (!searchInput.value.trim()) {
       resultadosDesplegable.style.display = "none";
     } else {
-      resultadosDesplegable.innerHTML =
-        '<div class="product-grid-desplegable"></div>';
-      const productGrid = resultadosDesplegable.querySelector(
-        ".product-grid-desplegable"
-      );
+      resultadosDesplegable.innerHTML = '<div class="producto-grid"></div>';
 
-      mostrarCadaJuegoMesaEstructuraGeneral(resultadosMostrar, productGrid);
+      mostrarJuegosMesa(
+        resultadosMostrar,
+        ".resultados-busqueda .producto-grid"
+      );
 
       resultadosDesplegable.style.display = "block";
     }
   }
 
-  // Esta funcion la creo ya que tiene codigo en comun entre la busqueda y los prodcutos mostrados en la pagina
-  function mostrarCadaJuegoMesaEstructuraGeneral(lista, dondeMostrar) {
-    lista.forEach((producto) => {
+  function mostrarJuegosMesa(productos, seccion) {
+    const seccionMostrar = document.querySelector(`${seccion}`);
+
+    productos.forEach((producto) => {
       const juegoDestacado = document.createElement("div");
       juegoDestacado.classList.add("juego-destacado");
 
@@ -124,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
       juegoDestacado.appendChild(datosJuego);
       juegoDestacado.appendChild(btnAnadirCarrito);
 
-      dondeMostrar.appendChild(juegoDestacado);
+      seccionMostrar.appendChild(juegoDestacado);
     });
   }
 
@@ -135,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultados = listaJuegosMesa.filter((producto) =>
       producto.nombre.toLowerCase().includes(busqueda)
     );
-    mostrarResultadosBusquedaEnDesplegable(resultados);
+    mostrarResultados(resultados);
   });
 
   // Evento para ocultar el desplegable de la busqueda cuando se pulsa fuera
@@ -161,135 +139,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  function ordenarJuegos(criterio) {
-    switch (criterio) {
-      case "masVendidos":
-        listaJuegosMesa.sort((a, b) => b.nota - a.nota);
-        break;
-      case "precioAltoBajo":
-        listaJuegosMesa.sort((a, b) => b.precio - a.precio);
-        break;
-      case "precioBajoAlto":
-        listaJuegosMesa.sort((a, b) => a.precio - b.precio);
-        break;
-      case "nuevo":
-        listaJuegosMesa.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-        break;
-      case "ordenAlfabetico":
-        listaJuegosMesa.sort((a, b) => a.nombre.localeCompare(b.nombre));
-        break;
-      default:
-        break;
-    }
-  }
-
-  function actualizarVista() {
-    mostrarJuegosMesa(
-      listaJuegosMesa.slice(
-        (paginaActual - 1) * juegosPorPagina,
-        paginaActual * juegosPorPagina
-      )
-    );
-  }
-
-  selectOrdenar.addEventListener("change", function () {
-    const opcionSeleccionada = selectOrdenar.value;
-    ordenarJuegos(opcionSeleccionada);
-    paginaActual = 1;
-    actualizarVista();
-    actualizarSelectorPagina();
-  });
-
-  productosPorPage.addEventListener("change", function () {
-    juegosPorPagina = parseInt(this.value);
-    paginaActual = 1;
-    actualizarVista();
-    actualizarSelectorPagina();
-  });
-
-  // Esto lo queria añadir en la pagina por estetica y tube que buscar como hacerlo ya que no sabia
-  function actualizarSelectorPagina() {
-    const selectorPagina = document.querySelector(".page-selector ul");
-    selectorPagina.innerHTML = "";
-
-    const numPaginas = Math.ceil(listaJuegosMesa.length / juegosPorPagina);
-    const numBotones = 5;
-    let inicio = Math.max(1, paginaActual - Math.floor(numBotones / 2));
-    let fin = inicio + numBotones - 1;
-
-    if (fin > numPaginas) {
-      fin = numPaginas;
-      inicio = Math.max(1, fin - numBotones + 1);
-    }
-
-    if (paginaActual > 1) {
-      const botonPaginaAnterior = document.createElement("li");
-      botonPaginaAnterior.className = "page-anterior";
-      botonPaginaAnterior.innerHTML =
-        '<img src="../IMG/LOGOS/left-arrow-verde.png" alt="">';
-      botonPaginaAnterior.addEventListener("click", function () {
-        paginaActual--;
-        actualizarVista();
-        actualizarSelectorPagina();
-      });
-      selectorPagina.appendChild(botonPaginaAnterior);
-    }
-
-    for (let i = inicio; i <= fin; i++) {
-      const botonNumero = document.createElement("li");
-      botonNumero.className =
-        "page-numero" + (i === paginaActual ? " current-page" : "");
-      botonNumero.textContent = i;
-      botonNumero.addEventListener("click", function () {
-        paginaActual = i;
-        actualizarVista();
-        actualizarSelectorPagina();
-      });
-      selectorPagina.appendChild(botonNumero);
-    }
-
-    if (paginaActual < numPaginas) {
-      const botonPaginaSiguiente = document.createElement("li");
-      botonPaginaSiguiente.className = "page-siguiente";
-      botonPaginaSiguiente.innerHTML =
-        '<img src="../IMG/LOGOS/right-arrow-verde.png" alt="">';
-      botonPaginaSiguiente.addEventListener("click", function () {
-        paginaActual++;
-        actualizarVista();
-        actualizarSelectorPagina();
-      });
-      selectorPagina.appendChild(botonPaginaSiguiente);
-    }
-  }
-
   // A partir de aqui tenemos unas cuantas lineas de codigo sobre el carrito de la compra
   function agregarAlCarrito(producto) {
-    const carrito =
-      datosUsuario && datosUsuario.correoUsuario
-        ? JSON.parse(
-            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-          ) || []
-        : JSON.parse(localStorage.getItem(`carrito`));
+    const carritoUsuario =
+      JSON.parse(
+        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+      ) || [];
 
-    const productoExistenteIndex = carrito.findIndex(
+    const productoExistenteIndex = carritoUsuario.findIndex(
       (item) => item.id === producto.idProducto
     );
 
     if (productoExistenteIndex !== -1) {
-      // Si el producto ya está en el carrito, aumentar la cantidad
-      const carritoActualizado = [...carrito];
+      const carritoActualizado = [...carritoUsuario];
       carritoActualizado[productoExistenteIndex].cantidad++;
       localStorage.setItem(
-        `carrito${
-          datosUsuario && datosUsuario.correoUsuario
-            ? datosUsuario.correoUsuario
-            : ""
-        }`,
+        `carrito${datosUsuario.correoUsuario}`,
         JSON.stringify(carritoActualizado)
       );
     } else {
       const nuevoCarrito = [
-        ...carrito,
+        ...carritoUsuario,
         {
           id: producto.idProducto,
           nombre: producto.nombre,
@@ -301,25 +171,21 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       ];
       localStorage.setItem(
-        `carrito${
-          datosUsuario && datosUsuario.correoUsuario
-            ? datosUsuario.correoUsuario
-            : ""
-        }`,
+        `carrito${datosUsuario.correoUsuario}`,
         JSON.stringify(nuevoCarrito)
       );
     }
 
     mostrarCarrito();
+    mostrarCarritoDetallado();
+    mostrarResumenPedido(carritoUsuario);
   }
 
   function mostrarCarrito() {
-    const carrito =
-      datosUsuario && datosUsuario.correoUsuario
-        ? JSON.parse(
-            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-          ) || []
-        : JSON.parse(localStorage.getItem(`carrito`));
+    const carritoUsuario =
+      JSON.parse(
+        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+      ) || [];
     const contadorCarrito = document.querySelector(".contador-carrito");
     const carritoVacioMensaje = document.getElementById("carrito-vacio");
     const cartItemsContainer = document.getElementById("cart-items");
@@ -333,13 +199,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cartItemsContainer.innerHTML = "";
 
-    if (carrito.length === 0) {
+    if (carritoUsuario.length === 0) {
       carritoVacioMensaje.style.display = "block";
       cartItemsContainer.style.display = "none";
       subtotalContainer.style.display = "none";
       botonTramitarPedido.style.display = "none";
     } else {
-      carrito.forEach((item) => {
+      carritoUsuario.forEach((item) => {
         const cartItem = document.createElement("div");
         cartItem.classList.add("cart-item");
 
@@ -396,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cartItemsContainer.appendChild(cartItem);
       });
 
-      const subtotal = carrito.reduce((total, item) => {
+      const subtotal = carritoUsuario.reduce((total, item) => {
         const precioUnitario = item.descuento
           ? item.precio * (1 - item.porcentajeDescuento / 100)
           : item.precio;
@@ -410,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Esta parte es la que va a actualizar el contador del carrito cada vez que se introduzca un nuevo juego
-    const totalProductos = carrito.reduce(
+    const totalProductos = carritoUsuario.reduce(
       (total, item) => total + item.cantidad,
       0
     );
@@ -418,32 +284,28 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function borrarDelCarrito(id) {
-    let carrito =
-      datosUsuario && datosUsuario.correoUsuario
-        ? JSON.parse(
-            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-          ) || []
-        : JSON.parse(localStorage.getItem(`carrito`));
+    let carritoUsuario =
+      JSON.parse(
+        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+      ) || [];
 
-    const index = carrito.findIndex((item) => item.id === id);
+    const index = carritoUsuario.findIndex((item) => item.id === id);
 
     if (index !== -1) {
-      if (carrito[index].cantidad > 1) {
-        carrito[index].cantidad--;
+      if (carritoUsuario[index].cantidad > 1) {
+        carritoUsuario[index].cantidad--;
       } else {
-        carrito.splice(index, 1);
+        carritoUsuario.splice(index, 1);
       }
 
       localStorage.setItem(
-        `carrito${
-          datosUsuario && datosUsuario.correoUsuario
-            ? datosUsuario.correoUsuario
-            : ""
-        }`,
-        JSON.stringify(carrito)
+        `carrito${datosUsuario.correoUsuario}`,
+        JSON.stringify(carritoUsuario)
       );
 
       mostrarCarrito();
+      mostrarCarritoDetallado();
+      mostrarResumenPedido(carritoUsuario);
     }
   }
 
@@ -473,4 +335,229 @@ document.addEventListener("DOMContentLoaded", function () {
       contenidoCarrito.style.display = "none";
     }
   });
+
+  const detalleCarritoBody = document.getElementById("detalle-carrito-body");
+  const totalEnvioSpan = document.getElementById("total-envio");
+  const totalFinalSpan = document.getElementById("total-final");
+  const tramitarPedidoBtn = document.getElementById("tramitar-pedido");
+
+  tramitarPedidoBtn.addEventListener("click", function () {
+    // Obtener el número del pedido (puedes utilizar la longitud del total de pedidos)
+    const totalPedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+    const numeroPedido = totalPedidos.length + 1;
+
+    // Obtener la fecha actual en el formato deseado
+    const fechaActual = new Date();
+    const fechaPedido = `${fechaActual.getDate()}/${
+      fechaActual.getMonth() + 1
+    }/${fechaActual.getFullYear()}`;
+
+    // Obtener el correo del usuario logeado
+    const correoUsuario = datosUsuario.correoUsuario;
+
+    // Comprobar cuántas veces aparece el correo del usuario en los pedidos
+    const vecesCorreoAparece = totalPedidos.reduce(
+      (count, pedido) =>
+        pedido.correoUsuario === correoUsuario ? count + 1 : count,
+      0
+    );
+
+    // Establecer el mensaje según la cantidad de veces que aparece el correo
+    const mensaje =
+      vecesCorreoAparece === 0 ? "primera_compra" : "compra_realizada";
+
+    // Calcular el total del pedido
+    const totalPedido = parseFloat(totalFinalSpan.textContent);
+
+    // Obtener la lista de artículos comprados con su nombre, cantidad y subtotal
+    const carrito =
+      JSON.parse(
+        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+      ) || [];
+    const listaArticulos = carrito.map((item) => ({
+      nombre: item.nombre,
+      cantidad: item.cantidad,
+      subtotal:
+        (item.descuento
+          ? item.precio * (1 - item.porcentajeDescuento / 100)
+          : item.precio) * item.cantidad,
+    }));
+
+    // Guardar la información en localStorage
+    const pedido = {
+      numero: numeroPedido,
+      fecha: fechaPedido,
+      correoUsuario: correoUsuario,
+      total: totalPedido,
+      articulos: listaArticulos,
+    };
+
+    totalPedidos.push(pedido);
+    localStorage.setItem("pedidos", JSON.stringify(totalPedidos));
+
+    // Limpiar el carrito en localStorage
+    localStorage.removeItem(`carrito${datosUsuario.correoUsuario}`);
+
+    // Redireccionar a index.html con un mensaje en la URL
+    window.location.href = `index.html?mensaje=${mensaje}`;
+  });
+
+  function mostrarCarritoDetallado() {
+    const carrito =
+      JSON.parse(
+        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+      ) || [];
+
+    // Limpiamos el contenido actual del detalle del carrito
+    detalleCarritoBody.innerHTML = "";
+
+    // Iteramos sobre los productos en el carrito y los mostramos detalladamente
+    carrito.forEach((item) => {
+      const fila = document.createElement("tr");
+
+      // Columna para la imagen del juego y el nombre
+      const columnaImagenYNombre = document.createElement("td");
+      const imagen = document.createElement("img");
+      imagen.src = item.imagenURL; // Asegúrate de que item tenga la propiedad imagenURL
+      imagen.alt = item.nombre;
+      imagen.classList.add("imagen-carrito");
+
+      const nombreJuego = document.createElement("h3");
+      nombreJuego.textContent = item.nombre;
+
+      columnaImagenYNombre.appendChild(imagen);
+      columnaImagenYNombre.appendChild(nombreJuego);
+
+      // Columna para el precio
+      const columnaPrecio = document.createElement("td");
+      columnaPrecio.textContent = item.descuento
+        ? (item.precio * (1 - item.porcentajeDescuento / 100)).toFixed(2) + " €"
+        : item.precio.toFixed(2) + " €";
+
+      // Columna para la cantidad
+      const columnaCantidad = document.createElement("td");
+      const inputCantidad = document.createElement("input");
+      inputCantidad.type = "text";
+      inputCantidad.value = item.cantidad;
+      inputCantidad.addEventListener("keyup", function () {
+        actualizarCantidad(item.id, parseInt(inputCantidad.value));
+      });
+      columnaCantidad.appendChild(inputCantidad);
+
+      // Columna para el subtotal
+      const columnaSubtotal = document.createElement("td");
+      const subtotal =
+        (item.descuento
+          ? item.precio * (1 - item.porcentajeDescuento / 100)
+          : item.precio) * item.cantidad;
+      columnaSubtotal.textContent = subtotal.toFixed(2) + " €";
+
+      // Columna para quitar el artículo
+      const columnaQuitar = document.createElement("td");
+      const imagenQuitar = document.createElement("img");
+      imagenQuitar.src = "../IMG/LOGOS/basura-gris.png";
+      imagenQuitar.alt = "Quitar artículo";
+      imagenQuitar.classList.add("imagen-quitar");
+      imagenQuitar.addEventListener("click", function () {
+        quitarDelCarrito(item.id);
+      });
+      columnaQuitar.appendChild(imagenQuitar);
+
+      // Agregar las columnas a la fila
+      fila.appendChild(columnaImagenYNombre);
+      fila.appendChild(columnaPrecio);
+      fila.appendChild(columnaCantidad);
+      fila.appendChild(columnaSubtotal);
+      fila.appendChild(columnaQuitar);
+
+      // Agregar la fila al cuerpo de la tabla
+      detalleCarritoBody.appendChild(fila);
+    });
+
+    // Calculamos y mostramos el resumen del pedido
+    mostrarResumenPedido(carrito);
+  }
+
+  const tipoEnvioRadios = document.querySelectorAll('input[name="tipo-envio"]');
+
+  // Añade un evento change a cada radio button
+  tipoEnvioRadios.forEach((radio) => {
+    radio.addEventListener("change", function () {
+      const carrito =
+        JSON.parse(
+          localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+        ) || [];
+      // Llama a la función para actualizar el resumen del pedido
+      mostrarResumenPedido(carrito);
+    });
+  });
+
+  function mostrarResumenPedido(carrito) {
+    // Calculamos el subtotal
+    const subtotal = carrito.reduce(
+      (total, item) =>
+        total +
+        (item.descuento
+          ? item.precio * (1 - item.porcentajeDescuento / 100)
+          : item.precio) *
+          item.cantidad,
+      0
+    );
+
+    // Obtener el tipo de envío seleccionado
+    const tipoEnvioSelect = document.querySelector(
+      'input[name="tipo-envio"]:checked'
+    );
+    const tipoEnvio = tipoEnvioSelect ? tipoEnvioSelect.value : "tienda";
+
+    // Calcular el total por envío
+    const totalEnvio = tipoEnvio === "casa" ? 3.9 : 0;
+
+    // Mostrar el subtotal y total
+    totalEnvioSpan.textContent = `${totalEnvio.toFixed(2)} €`;
+
+    // Calcular el total final
+    const totalFinal = subtotal + totalEnvio;
+    totalFinalSpan.textContent = `${totalFinal.toFixed(2)} €`;
+  }
+
+  function actualizarCantidad(id, nuevaCantidad) {
+    let carrito =
+      JSON.parse(
+        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+      ) || [];
+
+    const index = carrito.findIndex((item) => item.id === id);
+
+    if (index !== -1) {
+      carrito[index].cantidad = nuevaCantidad;
+      localStorage.setItem(
+        `carrito${datosUsuario.correoUsuario}`,
+        JSON.stringify(carrito)
+      );
+      mostrarCarritoDetallado();
+      mostrarCarrito();
+    }
+  }
+
+  function quitarDelCarrito(id) {
+    let carrito =
+      JSON.parse(
+        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+      ) || [];
+
+    const index = carrito.findIndex((item) => item.id === id);
+
+    if (index !== -1) {
+      carrito.splice(index, 1);
+      localStorage.setItem(
+        `carrito${datosUsuario.correoUsuario}`,
+        JSON.stringify(carrito)
+      );
+      mostrarCarritoDetallado();
+      mostrarCarrito();
+    }
+  }
+
+  mostrarCarritoDetallado();
 });
