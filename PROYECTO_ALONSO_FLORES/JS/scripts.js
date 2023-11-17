@@ -1,7 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Array en el que vamos a guardar todos los datos del JSON
-  let listaJuegosMesa = [];
-  let listaClientes = [];
+let listaClientes = [];
 
   function cargarDatosClientes() {
     $.getJSON("../JSON/clienteJSON.json", function (datos) {
@@ -12,22 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   cargarDatosClientes();
-
-  // Con esta funcion cargaremos los datos del JSON en la lista de juegos mesa y tambien mostraremos los datos en la pagina
-  function cargarJuegosMesa() {
-    $.getJSON("../JSON/productoJSON.json", function (datos) {
-      listaJuegosMesa = datos;
-
-      mostrarJuegosMesa(getMejorValorados(), ".mejor-valorados");
-      mostrarJuegosMesa(getNovedades(), ".novedades");
-      mostrarJuegosMesa(getEnOferta(), ".en-oferta");
-
-      // Esto es solo para que al recargar la pagina se actualice el carrito y con ello su contador
-      mostrarCarrito();
-    });
-  }
-
-  cargarJuegosMesa();
 
   function procesarDatosURL() {
     // Obtén los parámetros de la URL
@@ -49,7 +30,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
       localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
     }
+    pintarPagina();
+
   }
+
+function pintarPagina(){
+  // Array en el que vamos a guardar todos los datos del JSON
+  let listaJuegosMesa = [];
+
+  // Con esta funcion cargaremos los datos del JSON en la lista de juegos mesa y tambien mostraremos los datos en la pagina
+  function cargarJuegosMesa() {
+    $.getJSON("../JSON/productoJSON.json", function (datos) {
+      listaJuegosMesa = datos;
+
+      mostrarJuegosMesa(getMejorValorados(), ".mejor-valorados");
+      mostrarJuegosMesa(getNovedades(), ".novedades");
+      mostrarJuegosMesa(getEnOferta(), ".en-oferta");
+
+      // Esto es solo para que al recargar la pagina se actualice el carrito y con ello su contador
+      mostrarCarrito();
+    });
+  }
+
+  cargarJuegosMesa();
 
   // Obtener datos del localStorage
   const datosUsuarioString = localStorage.getItem("datosUsuario");
@@ -513,4 +516,4 @@ document.addEventListener("DOMContentLoaded", function () {
       contenidoCarrito.style.display = "none";
     }
   });
-});
+}

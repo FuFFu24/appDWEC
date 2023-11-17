@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
   // Array en el que vamos a guardar todos los datos del JSON
   let listaUsuarios = [];
 
@@ -9,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   cargarUsuarios();
-
+  document.addEventListener("DOMContentLoaded", function () {
+    
   // Recoger datos de la URL, donde se envian los errores producidos
   const urlParams = new URLSearchParams(window.location.search);
   const error = urlParams.get("error");
@@ -33,14 +33,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Esta parte es para cambiar entre crear cuenta y hacer login pulsando el link correspondiente
   var registerForm = document.querySelector(".register-form");
   var loginForm = document.querySelector(".login-form");
-  var messageLinkRegister = document.querySelector(".message-register a");
-  var messageLinkLogin = document.querySelector(".message-login a");
+  var mensajeLinkRegister = document.querySelector(".message-register a");
+  var mensajeLinkLogin = document.querySelector(".message-login a");
 
   // Agrega un evento de clic a los enlaces de mensaje para alternar entre los formularios
-  messageLinkRegister.addEventListener("click", toggleForms);
-  messageLinkLogin.addEventListener("click", toggleForms);
+  mensajeLinkRegister.addEventListener("click", cambiarFormulario);
+  mensajeLinkLogin.addEventListener("click", cambiarFormulario);
 
-  function toggleForms(event) {
+  function cambiarFormulario(event) {
     event.preventDefault();
 
     if (registerForm.style.display === "block") {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  toggleForms(new Event("click"));
+  cambiarFormulario(new Event("click"));
 });
 
 function iniciarSesion() {

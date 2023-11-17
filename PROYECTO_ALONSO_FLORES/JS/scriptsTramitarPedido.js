@@ -342,34 +342,27 @@ document.addEventListener("DOMContentLoaded", function () {
   const tramitarPedidoBtn = document.getElementById("tramitar-pedido");
 
   tramitarPedidoBtn.addEventListener("click", function () {
-    // Obtener el número del pedido (puedes utilizar la longitud del total de pedidos)
     const totalPedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
     const numeroPedido = totalPedidos.length + 1;
 
-    // Obtener la fecha actual en el formato deseado
     const fechaActual = new Date();
     const fechaPedido = `${fechaActual.getDate()}/${
       fechaActual.getMonth() + 1
     }/${fechaActual.getFullYear()}`;
 
-    // Obtener el correo del usuario logeado
     const correoUsuario = datosUsuario.correoUsuario;
 
-    // Comprobar cuántas veces aparece el correo del usuario en los pedidos
     const vecesCorreoAparece = totalPedidos.reduce(
       (count, pedido) =>
         pedido.correoUsuario === correoUsuario ? count + 1 : count,
       0
     );
 
-    // Establecer el mensaje según la cantidad de veces que aparece el correo
     const mensaje =
       vecesCorreoAparece === 0 ? "primera_compra" : "compra_realizada";
 
-    // Calcular el total del pedido
     const totalPedido = parseFloat(totalFinalSpan.textContent);
 
-    // Obtener la lista de artículos comprados con su nombre, cantidad y subtotal
     const carrito =
       JSON.parse(
         localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
@@ -383,7 +376,6 @@ document.addEventListener("DOMContentLoaded", function () {
           : item.precio) * item.cantidad,
     }));
 
-    // Guardar la información en localStorage
     const pedido = {
       numero: numeroPedido,
       fecha: fechaPedido,
@@ -395,10 +387,8 @@ document.addEventListener("DOMContentLoaded", function () {
     totalPedidos.push(pedido);
     localStorage.setItem("pedidos", JSON.stringify(totalPedidos));
 
-    // Limpiar el carrito en localStorage
     localStorage.removeItem(`carrito${datosUsuario.correoUsuario}`);
 
-    // Redireccionar a index.html con un mensaje en la URL
     window.location.href = `index.html?mensaje=${mensaje}`;
   });
 
