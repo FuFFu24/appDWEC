@@ -30,11 +30,11 @@ let listaClientes = [];
 
       localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
     }
-    pintarPagina();
+    pintarPaginaEntera();
 
   }
 
-function pintarPagina(){
+function pintarPaginaEntera(){
   // Array en el que vamos a guardar todos los datos del JSON
   let listaJuegosMesa = [];
 
@@ -516,4 +516,51 @@ function pintarPagina(){
       contenidoCarrito.style.display = "none";
     }
   });
+
+  const newsletterContainer = document.getElementById("newsletterContainer");
+  newsletterContainer.style.display = "none";
+  const checkboxPolitica = document.getElementById("acepto");
+  const btnSuscribirse = document.querySelector(".suscribirse");
+  const graciasMensajeNewsletter = document.getElementById("graciasMensajeNewsletter");
+
+  const errorCorreo = document.getElementById("error-correo");
+  const errorPolitica = document.getElementById("error-politica");
+
+  btnSuscribirse.addEventListener("click", function() {
+    errorCorreo.style.display = "none";
+    errorPolitica.style.display = "none";
+    let valorInputCorreo = document.getElementById("email").value;
+    if (valorInputCorreo != "" && datosUsuario && datosUsuario.correoUsuario == valorInputCorreo) {
+      if (checkboxPolitica.checked) {
+        const codigosDescuento =
+        JSON.parse(
+          localStorage.getItem(`codigosDescuento${datosUsuario.correoUsuario}`)
+        ) || [];
+
+      if (!codigosDescuento.includes("NEWSLETTER20")) {
+        codigosDescuento.push("NEWSLETTER20");
+
+        localStorage.setItem(
+          `codigosDescuento${datosUsuario.correoUsuario}`,
+          JSON.stringify(codigosDescuento)
+        );
+      }
+
+      graciasMensajeNewsletter.textContent = `¡Felicidades, ${datosUsuario.nombreUsuario}! 🎉`;
+      newsletterContainer.style.display = "flex";
+      } else {
+        errorPolitica.style.display = "block";
+      }
+    } else {
+      errorCorreo.style.display = "block";
+    }
+  });
+
+  const aceptarBtnNewsletter = document.getElementById("aceptarBtnNewsletter");
+
+  if (aceptarBtnNewsletter) {
+    aceptarBtnNewsletter.addEventListener("click", function () {
+      newsletterContainer.style.display = "none";
+    });
+  }
 }

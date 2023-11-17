@@ -231,6 +231,37 @@ nav ul.menu li a:hover {
   transition: opacity 0.3s ease-in-out;
 }
 
+/* Errores */
+.datos-modificados {
+  color: green;
+  padding-top: 10px;
+}
+
+.cliente-no-encontrado-datos {
+  color: red;
+  padding-top: 10px;
+}
+
+.correo-no-coincide-datos {
+  color: red;
+  padding-top: 10px;
+}
+
+.cliente-no-encontrado-contrasena {
+  color: red;
+  padding-top: 10px;
+}
+
+.correo-no-coincide-contrasena {
+  color: red;
+  padding-top: 10px;
+}
+
+.contrasena-incorrecta {
+  color: red;
+  padding-top: 10px;
+}
+
 /* Sección de Destacados de Juegos */
 .mesaje-main {
   margin: 40px 0;

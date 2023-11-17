@@ -47,6 +47,18 @@
             <button id="aceptarBtnExito">¡Gracias!</button>
         </div>
     </div>
+    <div class="newsletter-container" id="newsletterContainer">
+        <div class="logo">
+            <img src="../IMG/LOGOS/prodigy-480.png" alt="Monstruo de los Juegos">
+        </div>
+        <div class="mensaje">
+            <h3 id="graciasMensajeNewsletter"></h3>
+            <p>¡Gracias por suscribirte a nuestro Newsletter!</p>
+            <p>¡Aqui tienes un codigo de descuento como agradecimiento! 🎁</p>
+            <h3 class="codigoDescuento">NEWSLETTER20</h3>
+            <button id="aceptarBtnNewsletter">¡Gracias!</button>
+        </div>
+    </div>
     <!-- Encabezado -->
     <header>
         <div class="logo-pagina">
@@ -90,7 +102,7 @@
     <!-- Contenido principal -->
     <main>
         <section class="mejor-valorados">
-            <h2>Juegos mejor valorados 🌟</h2>
+            <h2>Juegos mejor valorados</h2>
             <!-- Contenido de la sección de juegos mejor valorados -->
         </section>
         <div class="mesaje-main">
@@ -101,7 +113,7 @@
             <p>Llevamos los juegos a tu casa o puedes pasar a visitarnos a nuestras tiendas físicas.</p>
         </div>
         <section class="novedades">
-            <h2>Novedades 🆕</h2>
+            <h2>Novedades</h2>
             <!-- Contenido de la sección de juegos en novedad -->
         </section>
         <div class="mesaje-main">
@@ -109,7 +121,7 @@
             <p>Te enterarás de nuestras novedades, lanzamientos, eventos, descuentos especiales y más sorpresas.</p>
         </div>
         <section class="en-oferta">
-            <h2>Juegos en oferta 💸</h2>
+            <h2>Juegos en oferta</h2>
             <!-- Contenido de la sección de juegos en oferta -->
         </section>
     </main>
@@ -117,14 +129,17 @@
     <div class="newsletter">
         <img src="../IMG/LOGOS/email-gris.png" alt="Email">
         <h2>Suscríbete a nuestro Newsletter</h2>
-        <form id="newsletter-form">
+        <div id="newsletter-form">
             <input type="email" id="email" name="email" autocomplete="off" placeholder="Correo electrónico*" required>
-            <button type="submit" class="suscribirse">Suscribirse</button>
+            <button class="suscribirse">Suscribirse</button>
             <br>
             <input type="checkbox" id="acepto" name="acepto" required>
-            <label for="acepto">Acepto la <a href="#">Política de Privacidad</a> y el <a href="#">Aviso
+            <label for="acepto">Acepto la <a href="https://www.aepd.es/politica-de-privacidad-y-aviso-legal" target="_blank">Política de Privacidad</a> y el <a href="https://www.aepd.es/politica-de-privacidad-y-aviso-legal" target="_blank">Aviso
                     Legal</a></label>
-        </form>
+            <br>
+            <span id="error-correo" class="error-correo">Correo no valido.</span>
+            <span id="error-politica" class="error-politica">Marque esta casilla si desea continuar.</span>
+            </div>
     </div>
     <!-- Pie de página -->
     <footer>

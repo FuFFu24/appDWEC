@@ -8,8 +8,9 @@
   }
 
   cargarUsuarios();
+  
   document.addEventListener("DOMContentLoaded", function () {
-    
+
   // Recoger datos de la URL, donde se envian los errores producidos
   const urlParams = new URLSearchParams(window.location.search);
   const error = urlParams.get("error");

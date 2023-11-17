@@ -1,16 +1,12 @@
 <?php
-// Ruta al archivo JSON de clientes
 $rutaJSON = '../JSON/clienteJSON.json';
 
-// Obtén los datos del cliente desde la solicitud POST
 $nombre = $_POST['register-nombre'];
 $correo = $_POST['register-correo'];
 $contrasena = $_POST['register-contrasena'];
 
-// Lee el contenido actual del archivo JSON
 $clientes = json_decode(file_get_contents($rutaJSON), true);
 
-// Verifica si el correo ya está registrado
 $clienteExistente = array_filter($clientes, function($cliente) use ($correo) {
     return $cliente['correo'] === $correo;
 });
@@ -23,9 +19,8 @@ if (!empty($clienteExistente)) {
     exit;
 }
 
-// Crea un nuevo cliente
 $nuevoCliente = array(
-    'idCliente' => count($clientes) + 1, // Asigna un nuevo ID único
+    'idCliente' => count($clientes) + 1,
     'nombre' => $nombre,
     'apellidos' => "",
     'direccion' => "",
@@ -34,13 +29,10 @@ $nuevoCliente = array(
     'contrasena' => $contrasena
 );
 
-// Agrega el nuevo cliente al array existente
 $clientes[] = $nuevoCliente;
 
-// Escribe el contenido actualizado al archivo JSON
 file_put_contents($rutaJSON, json_encode($clientes));
 
-// Redirige a la página de inicio con el correo como parámetro
 header('Location: ../HTML/index.html?correo=' . $correo);
 exit;
 ?>

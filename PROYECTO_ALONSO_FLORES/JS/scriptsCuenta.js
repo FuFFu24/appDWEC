@@ -116,20 +116,48 @@ document.addEventListener("DOMContentLoaded", function () {
       seccionEditarContrasena.style.display === "block" ? "none" : "block";
   });
 
-  // Esta funcion se llama en el formulario del HTML onload
-  function enviarDatosUsuario() {
-    const datosUsuarioString = localStorage.getItem("datosUsuario");
-    const datosUsuario = datosUsuarioString
-      ? JSON.parse(datosUsuarioString)
-      : null;
+  // Recoger datos de la URL, donde se envian los errores producidos
+  const urlParams = new URLSearchParams(window.location.search);
+  const exito = urlParams.get("exito");
+  const error = urlParams.get("error");
 
-    if (datosUsuario) {
-      const hiddenInput = document.createElement("input");
-      hiddenInput.type = "hidden";
-      hiddenInput.name = "datosUsuario";
-      hiddenInput.value = JSON.stringify(datosUsuario);
-      document.forms[0].appendChild(hiddenInput);
-    }
+  // Verifica si hay un error 
+  const datosModificados = document.getElementById("datos-modificados");
+  const noEncontradoDatos = document.getElementById("cliente-no-encontrado-datos");
+  const noCoincideDatos = document.getElementById("correo-no-coincide-datos");
+  const noEncontradoContrasena = document.getElementById("cliente-no-encontrado-contrasena");
+  const noCoincideContrasena = document.getElementById("correo-no-coincide-contrasena");
+  const contrasenaIncorrecta = document.getElementById("contrasena-incorrecta");
+
+  if (exito === "datos_modificados") {
+    datosModificados.style.display = "block";
+  } else {
+    datosModificados.style.display = "none";
+  }
+  if (error === "cliente_no_encontrado_datos") {
+    noEncontradoDatos.style.display = "block";
+  } else {
+    noEncontradoDatos.style.display = "none";
+  }
+  if (error === "correo_no_coincide_datos") {
+    noCoincideDatos.style.display = "block";
+  } else {
+    noCoincideDatos.style.display = "none";
+  }
+  if (error === "cliente_no_encontrado_contrasena") {
+    noEncontradoContrasena.style.display = "block";
+  } else {
+    noEncontradoContrasena.style.display = "none";
+  }
+  if (error === "correo_no_coincide_contrasena") {
+    noCoincideContrasena.style.display = "block";
+  } else {
+    noCoincideContrasena.style.display = "none";
+  }
+  if (error === "contrasena_incorrecta") {
+    contrasenaIncorrecta.style.display = "block";
+  } else {
+    contrasenaIncorrecta.style.display = "none";
   }
 
   const totalPedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
