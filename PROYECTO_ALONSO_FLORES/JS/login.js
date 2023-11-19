@@ -1,16 +1,15 @@
-  // Array en el que vamos a guardar todos los datos del JSON
-  let listaUsuarios = [];
+// Array en el que vamos a guardar todos los datos del JSON
+let listaUsuarios = [];
 
-  function cargarUsuarios() {
-    $.getJSON("../JSON/clienteJSON.json", function (datos) {
-      listaUsuarios = datos;
-    });
-  }
+function cargarUsuarios() {
+  $.getJSON("../JSON/clienteJSON.json", function (datos) {
+    listaUsuarios = datos;
+  });
+}
 
-  cargarUsuarios();
-  
-  document.addEventListener("DOMContentLoaded", function () {
+cargarUsuarios();
 
+document.addEventListener("DOMContentLoaded", function () {
   // Recoger datos de la URL, donde se envian los errores producidos
   const urlParams = new URLSearchParams(window.location.search);
   const error = urlParams.get("error");
@@ -56,6 +55,7 @@
   cambiarFormulario(new Event("click"));
 });
 
+// Esto es una simple comprobacion de si el correo y la contraseña se encuentan en el JSON para iniciar sesion
 function iniciarSesion() {
   const email = document.getElementById("login-correo").value;
   const password = document.getElementById("login-contrasena").value;

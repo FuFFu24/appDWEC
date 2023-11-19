@@ -13,6 +13,19 @@
 </head>
 
 <body>
+    <!-- Mensajes para el usuario -->
+    <div class="newsletter-container" id="newsletterContainer">
+        <div class="logo">
+            <img src="../IMG/LOGOS/prodigy-480.png" alt="Monstruo de los Juegos">
+        </div>
+        <div class="mensaje">
+            <h3 id="graciasMensajeNewsletter"></h3>
+            <p>¡Gracias por suscribirte a nuestro Newsletter!</p>
+            <p>¡Aqui tienes un codigo de descuento como agradecimiento! 🎁</p>
+            <h3 class="codigoDescuento">NEWSLETTER20</h3>
+            <button id="aceptarBtnNewsletter">¡Gracias!</button>
+        </div>
+    </div>
     <!-- Encabezado -->
     <header>
         <div class="logo-pagina">
@@ -68,10 +81,14 @@
                             contraseña</a>
                     </p>
                     <span id="datos-modificados" class="datos-modificados">Datos modificados con exito.</span>
-                    <span id="cliente-no-encontrado-datos" class="cliente-no-encontrado-datos">Usuario no encontrado.</span>
-                    <span id="correo-no-coincide-datos" class="correo-no-coincide-datos">El correo actual no es valido.</span>
-                    <span id="cliente-no-encontrado-contrasena" class="cliente-no-encontrado-contrasena">Datos modificados con exito.</span>
-                    <span id="correo-no-coincide-contrasena" class="correo-no-coincide-contrasena">El correo no es valido.</span>
+                    <span id="cliente-no-encontrado-datos" class="cliente-no-encontrado-datos">Usuario no
+                        encontrado.</span>
+                    <span id="correo-no-coincide-datos" class="correo-no-coincide-datos">El correo actual no es
+                        valido.</span>
+                    <span id="cliente-no-encontrado-contrasena" class="cliente-no-encontrado-contrasena">Datos
+                        modificados con exito.</span>
+                    <span id="correo-no-coincide-contrasena" class="correo-no-coincide-contrasena">El correo no es
+                        valido.</span>
                     <span id="contrasena-incorrecta" class="contrasena-incorrecta">Contraseña incorrecta.</span>
                 </section>
 
@@ -162,6 +179,8 @@
                         <tr>
                             <th>Pedido nº</th>
                             <th>Fecha</th>
+                            <th>Tipo de Envio</th>
+                            <th>Descuento Usado</th>
                             <th>Total del Pedido</th>
                             <th>Lista de Artículos</th>
                         </tr>
@@ -181,12 +200,18 @@
         <form id="newsletter-form">
             <input type="email" id="email" name="email" class="email-newsletter" autocomplete="off"
                 placeholder="Correo electrónico*" required>
-            <button type="submit" class="suscribirse">Suscribirse</button>
+            <button class="suscribirse">Suscribirse</button>
             <br>
             <input type="checkbox" id="acepto" name="acepto" required>
-            <label for="acepto">Acepto la <a href="#">Política de Privacidad</a> y el <a href="#">Aviso
+            <label for="acepto">Acepto la <a href="https://www.aepd.es/politica-de-privacidad-y-aviso-legal"
+                    target="_blank">Política de Privacidad</a> y el <a
+                    href="https://www.aepd.es/politica-de-privacidad-y-aviso-legal" target="_blank">Aviso
                     Legal</a></label>
-        </form>
+            <br>
+            <span id="error-correo" class="error-correo">Correo no valido.</span>
+            <span id="error-politica" class="error-politica">Marque esta casilla si desea continuar.</span>
+    </div>
+    </form>
     </div>
     <!-- Pie de página -->
     <footer>

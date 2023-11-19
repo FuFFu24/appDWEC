@@ -13,6 +13,32 @@
 </head>
 
 <body>
+    <!-- Mensajes para el usuario -->
+    <div class="no-cuenta-container" id="no-cuenta-container">
+        <div class="logo">
+            <img src="../IMG/LOGOS/prodigy-480.png" alt="Monstruo de los Juegos">
+        </div>
+        <div class="mensaje">
+            <h3>¡Hola! 👋</h3>
+            <p>Todavia no tienes cuenta</p>
+            <p>¿Aun no eres Monstrusocio?</p>
+            <a href="login.html">
+                <button id="crearCuentaBtn">Crear una cuenta</button>
+            </a>
+        </div>
+    </div>
+    <div class="newsletter-container" id="newsletterContainer">
+        <div class="logo">
+            <img src="../IMG/LOGOS/prodigy-480.png" alt="Monstruo de los Juegos">
+        </div>
+        <div class="mensaje">
+            <h3 id="graciasMensajeNewsletter"></h3>
+            <p>¡Gracias por suscribirte a nuestro Newsletter!</p>
+            <p>¡Aqui tienes un codigo de descuento como agradecimiento! 🎁</p>
+            <h3 class="codigoDescuento">NEWSLETTER20</h3>
+            <button id="aceptarBtnNewsletter">¡Gracias!</button>
+        </div>
+    </div>
     <!-- Encabezado -->
     <header>
         <div class="logo-pagina">
@@ -85,6 +111,11 @@
                 <input type="radio" id="envioACasa" name="tipo-envio" value="casa">
                 <label for="envioACasa">Envío a casa</label>
             </p>
+            <p>
+                <label for="codigo">¿Tienes un codigo de descuento sin usar?</label>
+                <input type="text" name="codigo" id="codigo" placeholder="Escribe el codigo aqui">
+                <button class="usar-codigo" id="usar-codigo">Usar</button>
+            </p>
             <div class="total-container">
                 <h3>Total por envío: </h3>
                 <span id="total-envio"></span>
@@ -94,6 +125,7 @@
                 <h3>Total: </h3>
                 <span id="total-final"></span>
             </div>
+            <span id="error-tramitar" class="error-tramitar">Tienes que iniciar sesion para tramitar pedido.</span>
             <button id="tramitar-pedido">Tramitar Pedido</button>
         </div>
 
@@ -104,12 +136,18 @@
         <h2>Suscríbete a nuestro Newsletter</h2>
         <form id="newsletter-form">
             <input type="email" id="email" name="email" autocomplete="off" placeholder="Correo electrónico*" required>
-            <button type="submit" class="suscribirse">Suscribirse</button>
+            <button class="suscribirse">Suscribirse</button>
             <br>
             <input type="checkbox" id="acepto" name="acepto" required>
-            <label for="acepto">Acepto la <a href="#">Política de Privacidad</a> y el <a href="#">Aviso
+            <label for="acepto">Acepto la <a href="https://www.aepd.es/politica-de-privacidad-y-aviso-legal"
+                    target="_blank">Política de Privacidad</a> y el <a
+                    href="https://www.aepd.es/politica-de-privacidad-y-aviso-legal" target="_blank">Aviso
                     Legal</a></label>
-        </form>
+            <br>
+            <span id="error-correo" class="error-correo">Correo no valido.</span>
+            <span id="error-politica" class="error-politica">Marque esta casilla si desea continuar.</span>
+    </div>
+    </form>
     </div>
     <!-- Pie de página -->
     <footer>

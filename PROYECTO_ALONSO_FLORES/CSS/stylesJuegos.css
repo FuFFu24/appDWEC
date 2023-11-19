@@ -545,6 +545,59 @@ input[type="checkbox"] {
 .suscribirse:hover {
   background-color: var(--puerto-rico-400);
 }
+.newsletter-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgb(255, 255, 255);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(241, 252, 248, 1) 30%,
+    rgba(208, 247, 235, 1) 100%
+  );
+  padding: 20px;
+  z-index: 999;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.logo img {
+  max-width: 200px;
+}
+
+.mensaje p {
+  margin: 10px 0;
+  color: var(--puerto-rico-900);
+}
+
+button {
+  background-color: var(--puerto-rico-900);
+  font-size: 16px;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--puerto-rico-400);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.error-correo,
+.error-politica {
+  display: none;
+  color: red;
+  padding-top: 10px;
+}
 
 /* Estilos para el footer */
 footer {

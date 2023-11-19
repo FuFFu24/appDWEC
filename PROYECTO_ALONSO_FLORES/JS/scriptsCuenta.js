@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ? JSON.parse(datosUsuarioString)
     : null;
 
+  // Con esto ponemos los datos que tiene el cliente guardos directamente
   function cargarDatosUsuarioInput() {
     if (datosUsuario) {
       document.getElementById("nombre").value =
@@ -101,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // COn esto mostramos los formularios para modificar los datos
   const linkEditarDatos = document.getElementById("editarNombre");
   const linkEditarContrasena = document.getElementById("cambiarContrasena");
   const seccionEditarDatos = document.querySelector(".editar-cuenta");
@@ -117,16 +119,22 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Recoger datos de la URL, donde se envian los errores producidos
-  const urlParams = new URLSearchParams(window.location.search);
-  const exito = urlParams.get("exito");
-  const error = urlParams.get("error");
+  const parametrosURL = new URLSearchParams(window.location.search);
+  const exito = parametrosURL.get("exito");
+  const error = parametrosURL.get("error");
 
-  // Verifica si hay un error 
+  // Verifica si hay un error
   const datosModificados = document.getElementById("datos-modificados");
-  const noEncontradoDatos = document.getElementById("cliente-no-encontrado-datos");
+  const noEncontradoDatos = document.getElementById(
+    "cliente-no-encontrado-datos"
+  );
   const noCoincideDatos = document.getElementById("correo-no-coincide-datos");
-  const noEncontradoContrasena = document.getElementById("cliente-no-encontrado-contrasena");
-  const noCoincideContrasena = document.getElementById("correo-no-coincide-contrasena");
+  const noEncontradoContrasena = document.getElementById(
+    "cliente-no-encontrado-contrasena"
+  );
+  const noCoincideContrasena = document.getElementById(
+    "correo-no-coincide-contrasena"
+  );
   const contrasenaIncorrecta = document.getElementById("contrasena-incorrecta");
 
   if (exito === "datos_modificados") {
@@ -160,15 +168,15 @@ document.addEventListener("DOMContentLoaded", function () {
     contrasenaIncorrecta.style.display = "none";
   }
 
+  // Aqui creamos una tabla para mostrar todos los pedidos realizados por el cliente
   const totalPedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-  const correoUsuario = datosUsuario.correoUsuario;
   const tablaPedidosBody = document.getElementById("tablaPedidosBody");
   const seccionPedidosRecientes = document.querySelector(".pedidos-recientes");
 
   let seEncontroPedido = false;
 
   totalPedidos.forEach((pedido) => {
-    if (pedido.correoUsuario === correoUsuario) {
+    if (datosUsuario && pedido.correoUsuario === datosUsuario.correoUsuario) {
       seEncontroPedido = true;
       const fila = document.createElement("tr");
 
@@ -177,6 +185,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const columnaFechaPedido = document.createElement("td");
       columnaFechaPedido.textContent = pedido.fecha;
+
+      const columnaTipoEnvio = document.createElement("td");
+      columnaTipoEnvio.textContent = pedido.tipoEnvio;
+
+      const columnaDescuentoUsado = document.createElement("td");
+      columnaDescuentoUsado.textContent = pedido.codigoUsado;
 
       const columnaTotalPedido = document.createElement("td");
       columnaTotalPedido.textContent = `${pedido.total.toFixed(2)} €`;
@@ -189,6 +203,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       fila.appendChild(columnaNumeroPedido);
       fila.appendChild(columnaFechaPedido);
+      fila.appendChild(columnaTipoEnvio);
+      fila.appendChild(columnaDescuentoUsado);
       fila.appendChild(columnaTotalPedido);
       fila.appendChild(columnaListaArticulos);
 
@@ -334,7 +350,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ? JSON.parse(
             localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
           ) || []
-        : JSON.parse(localStorage.getItem(`carrito`));
+        : JSON.parse(localStorage.getItem(`carrito`)) || [];
 
     const productoExistenteIndex = carrito.findIndex(
       (item) => item.id === producto.idProducto
@@ -383,7 +399,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ? JSON.parse(
             localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
           ) || []
-        : JSON.parse(localStorage.getItem(`carrito`));
+        : JSON.parse(localStorage.getItem(`carrito`)) || [];
     const contadorCarrito = document.querySelector(".contador-carrito");
     const carritoVacioMensaje = document.getElementById("carrito-vacio");
     const cartItemsContainer = document.getElementById("cart-items");
@@ -537,4 +553,60 @@ document.addEventListener("DOMContentLoaded", function () {
       contenidoCarrito.style.display = "none";
     }
   });
+
+  // Esta parte esta dedicada para el newsletter, te proporciona un codigo descuento si introduces los datos correctos
+  const newsletterContainer = document.getElementById("newsletterContainer");
+  newsletterContainer.style.display = "none";
+  const checkboxPolitica = document.getElementById("acepto");
+  const btnSuscribirse = document.querySelector(".suscribirse");
+  const graciasMensajeNewsletter = document.getElementById(
+    "graciasMensajeNewsletter"
+  );
+
+  const errorCorreo = document.getElementById("error-correo");
+  const errorPolitica = document.getElementById("error-politica");
+
+  btnSuscribirse.addEventListener("click", function () {
+    errorCorreo.style.display = "none";
+    errorPolitica.style.display = "none";
+    let valorInputCorreo = document.getElementById("email").value;
+    if (
+      valorInputCorreo != "" &&
+      datosUsuario &&
+      datosUsuario.correoUsuario == valorInputCorreo
+    ) {
+      if (checkboxPolitica.checked) {
+        const codigosDescuento =
+          JSON.parse(
+            localStorage.getItem(
+              `codigosDescuento${datosUsuario.correoUsuario}`
+            )
+          ) || [];
+
+        if (!codigosDescuento.includes("NEWSLETTER20")) {
+          codigosDescuento.push("NEWSLETTER20");
+
+          localStorage.setItem(
+            `codigosDescuento${datosUsuario.correoUsuario}`,
+            JSON.stringify(codigosDescuento)
+          );
+        }
+
+        graciasMensajeNewsletter.textContent = `¡Felicidades, ${datosUsuario.nombreUsuario}! 🎉`;
+        newsletterContainer.style.display = "flex";
+      } else {
+        errorPolitica.style.display = "block";
+      }
+    } else {
+      errorCorreo.style.display = "block";
+    }
+  });
+
+  const aceptarBtnNewsletter = document.getElementById("aceptarBtnNewsletter");
+
+  if (aceptarBtnNewsletter) {
+    aceptarBtnNewsletter.addEventListener("click", function () {
+      newsletterContainer.style.display = "none";
+    });
+  }
 });

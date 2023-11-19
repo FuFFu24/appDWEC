@@ -1,40 +1,41 @@
+// Array en el que vamos a guardar todos los datos del JSON
 let listaClientes = [];
 
-  function cargarDatosClientes() {
-    $.getJSON("../JSON/clienteJSON.json", function (datos) {
-      listaClientes = datos;
+function cargarDatosClientes() {
+  $.getJSON("../JSON/clienteJSON.json", function (datos) {
+    listaClientes = datos;
 
-      procesarDatosURL();
-    });
+    procesarDatosURL();
+  });
+}
+
+cargarDatosClientes();
+
+function procesarDatosURL() {
+  // Obtén los parámetros de la URL
+  const parametrosURL = new URLSearchParams(window.location.search);
+  const correo = parametrosURL.get("correo");
+
+  // Busca el usuario en la lista de clientes por correo
+  const usuario = listaClientes.find((user) => user.correo === correo);
+
+  if (usuario) {
+    const datosUsuario = {
+      idUsuario: usuario.id,
+      nombreUsuario: usuario.nombre,
+      apellidoUsuario: usuario.apellidos,
+      direccionUsuario: usuario.direccion,
+      correoUsuario: usuario.correo,
+      telefonoUsuario: usuario.telefono,
+    };
+
+    localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
   }
+  // Esto va a pintar la pagina entera para que intente cargar los datos del JSON antes que la pagina
+  pintarPaginaEntera();
+}
 
-  cargarDatosClientes();
-
-  function procesarDatosURL() {
-    // Obtén los parámetros de la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const correo = urlParams.get("correo");
-
-    // Busca el usuario en la lista de clientes por correo
-    const usuario = listaClientes.find((user) => user.correo === correo);
-
-    if (usuario) {
-      const datosUsuario = {
-        idUsuario: usuario.id,
-        nombreUsuario: usuario.nombre,
-        apellidoUsuario: usuario.apellidos,
-        direccionUsuario: usuario.direccion,
-        correoUsuario: usuario.correo,
-        telefonoUsuario: usuario.telefono,
-      };
-
-      localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
-    }
-    pintarPaginaEntera();
-
-  }
-
-function pintarPaginaEntera(){
+function pintarPaginaEntera() {
   // Array en el que vamos a guardar todos los datos del JSON
   let listaJuegosMesa = [];
 
@@ -66,10 +67,8 @@ function pintarPaginaEntera(){
 
   // Si no hay datosUsuario, es decir, si no estas logeado no te muestra el mensaje del carrito
   if (datosUsuario) {
-    // Si hay un usuario logueado, mostrar mensaje de bienvenida
     bienvenidaMensaje.textContent = `Hola, ${datosUsuario.nombreUsuario}!`;
 
-    // Verificar si hay elementos en el carrito
     const carritoUsuario =
       datosUsuario && datosUsuario.correoUsuario
         ? JSON.parse(
@@ -295,6 +294,7 @@ function pintarPaginaEntera(){
     }
   });
 
+  // Evento para enviar por URL el value del input
   searchInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
       const query = searchInput.value;
@@ -313,7 +313,7 @@ function pintarPaginaEntera(){
         ? JSON.parse(
             localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
           ) || []
-        : JSON.parse(localStorage.getItem(`carrito`));
+        : JSON.parse(localStorage.getItem(`carrito`)) || [];
 
     const productoExistenteIndex = carritoUsuario.findIndex(
       (item) => item.id === producto.idProducto
@@ -362,7 +362,7 @@ function pintarPaginaEntera(){
         ? JSON.parse(
             localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
           ) || []
-        : JSON.parse(localStorage.getItem(`carrito`));
+        : JSON.parse(localStorage.getItem(`carrito`)) || [];
     const contadorCarrito = document.querySelector(".contador-carrito");
     const carritoVacioMensaje = document.getElementById("carrito-vacio");
     const cartItemsContainer = document.getElementById("cart-items");
@@ -517,37 +517,46 @@ function pintarPaginaEntera(){
     }
   });
 
+  // Esta parte esta dedicada para el newsletter, te proporciona un codigo descuento si introduces los datos correctos
   const newsletterContainer = document.getElementById("newsletterContainer");
   newsletterContainer.style.display = "none";
   const checkboxPolitica = document.getElementById("acepto");
   const btnSuscribirse = document.querySelector(".suscribirse");
-  const graciasMensajeNewsletter = document.getElementById("graciasMensajeNewsletter");
+  const graciasMensajeNewsletter = document.getElementById(
+    "graciasMensajeNewsletter"
+  );
 
   const errorCorreo = document.getElementById("error-correo");
   const errorPolitica = document.getElementById("error-politica");
 
-  btnSuscribirse.addEventListener("click", function() {
+  btnSuscribirse.addEventListener("click", function () {
     errorCorreo.style.display = "none";
     errorPolitica.style.display = "none";
     let valorInputCorreo = document.getElementById("email").value;
-    if (valorInputCorreo != "" && datosUsuario && datosUsuario.correoUsuario == valorInputCorreo) {
+    if (
+      valorInputCorreo != "" &&
+      datosUsuario &&
+      datosUsuario.correoUsuario == valorInputCorreo
+    ) {
       if (checkboxPolitica.checked) {
         const codigosDescuento =
-        JSON.parse(
-          localStorage.getItem(`codigosDescuento${datosUsuario.correoUsuario}`)
-        ) || [];
+          JSON.parse(
+            localStorage.getItem(
+              `codigosDescuento${datosUsuario.correoUsuario}`
+            )
+          ) || [];
 
-      if (!codigosDescuento.includes("NEWSLETTER20")) {
-        codigosDescuento.push("NEWSLETTER20");
+        if (!codigosDescuento.includes("NEWSLETTER20")) {
+          codigosDescuento.push("NEWSLETTER20");
 
-        localStorage.setItem(
-          `codigosDescuento${datosUsuario.correoUsuario}`,
-          JSON.stringify(codigosDescuento)
-        );
-      }
+          localStorage.setItem(
+            `codigosDescuento${datosUsuario.correoUsuario}`,
+            JSON.stringify(codigosDescuento)
+          );
+        }
 
-      graciasMensajeNewsletter.textContent = `¡Felicidades, ${datosUsuario.nombreUsuario}! 🎉`;
-      newsletterContainer.style.display = "flex";
+        graciasMensajeNewsletter.textContent = `¡Felicidades, ${datosUsuario.nombreUsuario}! 🎉`;
+        newsletterContainer.style.display = "flex";
       } else {
         errorPolitica.style.display = "block";
       }

@@ -1,0 +1,32 @@
+[
+{   
+    "idProyecto":"1",
+	"idCliente":"1111122",
+    "nombre":"IBERDROLA 1",
+    "descripcion":"PROYECTO IBERDROLA asdasdsadadas",
+    "imagen":"",
+    "fechaInicio":"2023-10-1",
+    "fechaFin":"2024-10-1",
+	"presupuesto":100000
+},
+{   
+    "idProyecto":"2",
+	"idCliente":"1111122",
+    "nombre":"IBERDROLA 2",
+    "descripcion":"PROYECTO IBERDROLA asdsada asdasdsadadas",
+    "imagen":"",
+    "fechaInicio":"2023-11-1",
+    "fechaFin":"2024-11-1",
+	"presupuesto":200000
+},
+{   
+    "idProyecto":"3",
+	"idCliente":"1111124",
+    "nombre":"CLESA 1",
+    "descripcion":"PROYECTO CLESA asdasdsadadas",
+    "imagen":"",
+    "fechaInicio":"2023-10-1",
+    "fechaFin":"2024-10-1",
+	"presupuesto":300000
+}
+]

@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestiona IES</title>
-    <link rel="stylesheet" href="./css/aterrizaje.css">
+    <link rel="stylesheet" href="/GESTIONAIES/css/aterrizaje.css">
     <script src="./js/jquery.js"></script>
-    <script src="./js/Proyecto.js"></script>
-    <script src="./js/proyectos.js"></script>
+    <script src="./js/Empleado.js"></script>
+    <script src="./js/empleados.js"></script>
 </head>
 
 <body translate="no">
@@ -15,7 +15,7 @@
         <nav>
             <ul>
                 <li><a href="#">General</a></li>
-                <li><a href="empleados.html">Empleados <i class="down"></i></a>
+                <li><a href="#">Empleados <i class="down"></i></a>
                     <!-- Primer Menu Desplegable -->
                     <ul>
                         <li><a href="#">Alta</a></li>
@@ -28,7 +28,7 @@
                         <li><a href="#">Modificación</a></li>
                         <li><a href="#">Facturación</a></li>
                     </ul>
-                    <li><a href="#">Proyectos <i class="down"></i></a>
+                    <li><a href="proyectos.html">Proyectos <i class="down"></i></a>
                         <!-- Primer Menu Desplegable -->
                         <ul>
                             <li><a href="#">Alta</a></li>
@@ -57,12 +57,7 @@
         <div id="central">
         </div>
         <div id="acciones">
-            <input type="text" id="textoABuscar" onkeyup="filtrar()">
-            <button type="button" onclick="filtrar()">Filtrar</button><br>
-            <button type="button" onclick="abrirDivNuevoProyecto()">Nuevo</button>
             <button type="button" onclick="ordenar()">Ordenar</button>
-            <button type="button" onclick="imprimir()">Imprimir</button>
-            <button type="button" onclick="cancelar()">Cancelar</button>
         </div>
         <footer><a target="blank" href="https://www.educa2.madrid.org/web/iescanaveral">IES EL CAÑAVERAL</a></footer>
     </div>

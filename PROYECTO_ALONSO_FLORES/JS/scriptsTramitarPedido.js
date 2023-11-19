@@ -20,6 +20,30 @@ document.addEventListener("DOMContentLoaded", function () {
     ? JSON.parse(datosUsuarioString)
     : null;
 
+  const iconoUsuario = document.querySelector(".icono-usuario a");
+
+  // Esto es para que cambie el href si estas logeado
+  if (datosUsuario) {
+    iconoUsuario.href = "../HTML/cuenta.html";
+  }
+
+  // Esto muestra un mensaje si no estas logeado, es decir, si no encuentra datosUsuario en el localStorage
+  const noCuentaContainer = document.getElementById("no-cuenta-container");
+  noCuentaContainer.style.display = "none";
+
+  if (!datosUsuario) {
+    noCuentaContainer.style.display = "flex";
+  }
+
+  const crearCuentaBtn = document.getElementById("crearCuentaBtn");
+
+  if (crearCuentaBtn) {
+    crearCuentaBtn.addEventListener("click", function () {
+      noCuentaContainer.style.display = "none";
+    });
+  }
+
+  // Esta parte es un poco de codigo comun para todas las paginas
   const searchInput = document.getElementById("input-buscar");
 
   // Función para mostrar los resultados de búsqueda en el desplegable
@@ -183,9 +207,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function mostrarCarrito() {
     const carritoUsuario =
-      JSON.parse(
-        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-      ) || [];
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`)) || [];
     const contadorCarrito = document.querySelector(".contador-carrito");
     const carritoVacioMensaje = document.getElementById("carrito-vacio");
     const cartItemsContainer = document.getElementById("cart-items");
@@ -336,12 +362,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Parte del resumen del pedido, tiene algun error como que si meto un codigo descuento y cambio el radio del tipo de envio se reinician los precios pero ya es mucho lio en mi cabeza
   const detalleCarritoBody = document.getElementById("detalle-carrito-body");
   const totalEnvioSpan = document.getElementById("total-envio");
   const totalFinalSpan = document.getElementById("total-final");
   const tramitarPedidoBtn = document.getElementById("tramitar-pedido");
 
   tramitarPedidoBtn.addEventListener("click", function () {
+    // Verificar si hay un usuario logeado, si no encuentra datosUsuario muestra un mensaje
+    if (!datosUsuario || !datosUsuario.correoUsuario) {
+      const mensajeError = document.getElementById("error-tramitar");
+      mensajeError.style.display = "flex";
+      return;
+    }
+
+    // Mete en el localStorage informacion del pedido realizado
     const totalPedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
     const numeroPedido = totalPedidos.length + 1;
 
@@ -364,9 +399,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalPedido = parseFloat(totalFinalSpan.textContent);
 
     const carrito =
-      JSON.parse(
-        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-      ) || [];
+      JSON.parse(localStorage.getItem(`carrito${correoUsuario}`)) || [];
     const listaArticulos = carrito.map((item) => ({
       nombre: item.nombre,
       cantidad: item.cantidad,
@@ -376,114 +409,116 @@ document.addEventListener("DOMContentLoaded", function () {
           : item.precio) * item.cantidad,
     }));
 
+    const tipoEnvioSelect = document.querySelector(
+      'input[name="tipo-envio"]:checked'
+    );
+    const tipoEnvio = tipoEnvioSelect ? tipoEnvioSelect.value : "tienda";
+
+    const codigoInput = document.getElementById("codigo");
+    const codigoIngresado = codigoInput.value.trim();
+
+    const descuentoAplicado = aplicarDescuento(codigoIngresado);
+
+    const totalPedidoConDescuento = descuentoAplicado
+      ? totalPedido - totalPedido * (descuentoAplicado / 100)
+      : totalPedido;
+
     const pedido = {
       numero: numeroPedido,
       fecha: fechaPedido,
       correoUsuario: correoUsuario,
-      total: totalPedido,
+      tipoEnvio: tipoEnvio,
+      codigoUsado: codigoIngresado,
+      total: totalPedidoConDescuento,
       articulos: listaArticulos,
     };
 
     totalPedidos.push(pedido);
     localStorage.setItem("pedidos", JSON.stringify(totalPedidos));
 
-    localStorage.removeItem(`carrito${datosUsuario.correoUsuario}`);
+    localStorage.removeItem(`carrito${correoUsuario}`);
+
+    const codigosActual =
+      JSON.parse(localStorage.getItem(`codigosDescuento${correoUsuario}`)) ||
+      [];
+
+    const codigosActualizado = codigosActual.filter((item) => {
+      if (item.startsWith("APLICADO")) {
+        return false;
+      }
+      return item !== codigoIngresado;
+    });
+
+    localStorage.setItem(
+      `codigosDescuento${correoUsuario}`,
+      JSON.stringify(codigosActualizado)
+    );
 
     window.location.href = `index.html?mensaje=${mensaje}`;
   });
 
-  function mostrarCarritoDetallado() {
-    const carrito =
-      JSON.parse(
-        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-      ) || [];
+  function aplicarDescuento(codigo) {
+    const correoUsuario =
+      datosUsuario && datosUsuario.correoUsuario
+        ? datosUsuario.correoUsuario
+        : "";
 
-    // Limpiamos el contenido actual del detalle del carrito
-    detalleCarritoBody.innerHTML = "";
+    const descuentos =
+      JSON.parse(localStorage.getItem(`codigosDescuento${correoUsuario}`)) ||
+      [];
 
-    // Iteramos sobre los productos en el carrito y los mostramos detalladamente
-    carrito.forEach((item) => {
-      const fila = document.createElement("tr");
+    // Verificar si ya se aplicó un descuento
+    const descuentoAplicadoIndex = descuentos.findIndex((desc) =>
+      desc.startsWith("APLICADO")
+    );
 
-      // Columna para la imagen del juego y el nombre
-      const columnaImagenYNombre = document.createElement("td");
-      const imagen = document.createElement("img");
-      imagen.src = item.imagenURL; // Asegúrate de que item tenga la propiedad imagenURL
-      imagen.alt = item.nombre;
-      imagen.classList.add("imagen-carrito");
+    if (descuentoAplicadoIndex !== -1) {
+      descuentos.splice(descuentoAplicadoIndex, 1);
+    }
 
-      const nombreJuego = document.createElement("h3");
-      nombreJuego.textContent = item.nombre;
+    const nuevoDescuento = obtenerNuevoDescuento(codigo);
 
-      columnaImagenYNombre.appendChild(imagen);
-      columnaImagenYNombre.appendChild(nombreJuego);
+    if (nuevoDescuento !== 0) {
+      descuentos.push(nuevoDescuento);
+      localStorage.setItem(
+        `codigosDescuento${datosUsuario.correoUsuario}`,
+        JSON.stringify(descuentos)
+      );
 
-      // Columna para el precio
-      const columnaPrecio = document.createElement("td");
-      columnaPrecio.textContent = item.descuento
-        ? (item.precio * (1 - item.porcentajeDescuento / 100)).toFixed(2) + " €"
-        : item.precio.toFixed(2) + " €";
+      let porcentajeDescuento = parseInt(nuevoDescuento.slice(-2), 10);
 
-      // Columna para la cantidad
-      const columnaCantidad = document.createElement("td");
-      const inputCantidad = document.createElement("input");
-      inputCantidad.type = "text";
-      inputCantidad.value = item.cantidad;
-      inputCantidad.addEventListener("keyup", function () {
-        actualizarCantidad(item.id, parseInt(inputCantidad.value));
-      });
-      columnaCantidad.appendChild(inputCantidad);
-
-      // Columna para el subtotal
-      const columnaSubtotal = document.createElement("td");
-      const subtotal =
-        (item.descuento
-          ? item.precio * (1 - item.porcentajeDescuento / 100)
-          : item.precio) * item.cantidad;
-      columnaSubtotal.textContent = subtotal.toFixed(2) + " €";
-
-      // Columna para quitar el artículo
-      const columnaQuitar = document.createElement("td");
-      const imagenQuitar = document.createElement("img");
-      imagenQuitar.src = "../IMG/LOGOS/basura-gris.png";
-      imagenQuitar.alt = "Quitar artículo";
-      imagenQuitar.classList.add("imagen-quitar");
-      imagenQuitar.addEventListener("click", function () {
-        quitarDelCarrito(item.id);
-      });
-      columnaQuitar.appendChild(imagenQuitar);
-
-      // Agregar las columnas a la fila
-      fila.appendChild(columnaImagenYNombre);
-      fila.appendChild(columnaPrecio);
-      fila.appendChild(columnaCantidad);
-      fila.appendChild(columnaSubtotal);
-      fila.appendChild(columnaQuitar);
-
-      // Agregar la fila al cuerpo de la tabla
-      detalleCarritoBody.appendChild(fila);
-    });
-
-    // Calculamos y mostramos el resumen del pedido
-    mostrarResumenPedido(carrito);
+      return porcentajeDescuento;
+    } else {
+      return 0;
+    }
   }
 
-  const tipoEnvioRadios = document.querySelectorAll('input[name="tipo-envio"]');
+  // Función para obtener el porcentaje de descuento a partir del código
+  function obtenerNuevoDescuento(codigo) {
+    const porcentajeDescuento = parseInt(codigo.slice(-2), 10);
+    return porcentajeDescuento > 0 ? `APLICADO${codigo}` : 0;
+  }
 
-  // Añade un evento change a cada radio button
-  tipoEnvioRadios.forEach((radio) => {
-    radio.addEventListener("change", function () {
-      const carrito =
-        JSON.parse(
-          localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-        ) || [];
-      // Llama a la función para actualizar el resumen del pedido
-      mostrarResumenPedido(carrito);
-    });
-  });
+  const usarCodigoBtn = document.getElementById("usar-codigo");
 
-  function mostrarResumenPedido(carrito) {
-    // Calculamos el subtotal
+  usarCodigoBtn.addEventListener("click", function () {
+    const correoUsuario =
+      datosUsuario && datosUsuario.correoUsuario
+        ? datosUsuario.correoUsuario
+        : "";
+
+    const carrito = correoUsuario
+      ? JSON.parse(localStorage.getItem(`carrito${correoUsuario}`)) || []
+      : JSON.parse(localStorage.getItem(`carrito`)) || [];
+
+    const codigoInput = document.getElementById("codigo");
+    const codigoIngresado = codigoInput.value;
+
+    const descuentoAplicado = aplicarDescuento(codigoIngresado);
+
+    // Actualizar el total con el descuento
+    const totalFinalSpan = document.getElementById("total-final");
+
     const subtotal = carrito.reduce(
       (total, item) =>
         total +
@@ -494,60 +529,223 @@ document.addEventListener("DOMContentLoaded", function () {
       0
     );
 
-    // Obtener el tipo de envío seleccionado
+    const descuentoFinal = descuentoAplicado / 100;
+
+    const totalConDescuento = subtotal - subtotal * descuentoFinal;
+    totalFinalSpan.textContent = `${totalConDescuento.toFixed(2)} €`;
+  });
+
+  function mostrarCarritoDetallado() {
+    const carrito =
+      datosUsuario && datosUsuario.correoUsuario
+        ? JSON.parse(
+            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
+          ) || []
+        : JSON.parse(localStorage.getItem(`carrito`)) || [];
+
+    detalleCarritoBody.innerHTML = "";
+
+    carrito.forEach((item) => {
+      const fila = document.createElement("tr");
+
+      const columnaImagenYNombre = document.createElement("td");
+      const imagen = document.createElement("img");
+      imagen.src = item.imagenURL;
+      imagen.alt = item.nombre;
+      imagen.classList.add("imagen-carrito");
+
+      const nombreJuego = document.createElement("h3");
+      nombreJuego.textContent = item.nombre;
+
+      columnaImagenYNombre.appendChild(imagen);
+      columnaImagenYNombre.appendChild(nombreJuego);
+
+      const columnaPrecio = document.createElement("td");
+      columnaPrecio.textContent = item.descuento
+        ? (item.precio * (1 - item.porcentajeDescuento / 100)).toFixed(2) + " €"
+        : item.precio.toFixed(2) + " €";
+
+      const columnaCantidad = document.createElement("td");
+      const inputCantidad = document.createElement("input");
+      inputCantidad.type = "text";
+      inputCantidad.value = item.cantidad;
+      inputCantidad.addEventListener("keyup", function () {
+        actualizarCantidad(item.id, parseInt(inputCantidad.value));
+      });
+      columnaCantidad.appendChild(inputCantidad);
+
+      const columnaSubtotal = document.createElement("td");
+      const subtotal =
+        (item.descuento
+          ? item.precio * (1 - item.porcentajeDescuento / 100)
+          : item.precio) * item.cantidad;
+      columnaSubtotal.textContent = subtotal.toFixed(2) + " €";
+
+      const columnaQuitar = document.createElement("td");
+      const imagenQuitar = document.createElement("img");
+      imagenQuitar.src = "../IMG/LOGOS/basura-gris.png";
+      imagenQuitar.alt = "Quitar artículo";
+      imagenQuitar.classList.add("imagen-quitar");
+      imagenQuitar.addEventListener("click", function () {
+        quitarDelCarrito(item.id);
+      });
+      columnaQuitar.appendChild(imagenQuitar);
+
+      fila.appendChild(columnaImagenYNombre);
+      fila.appendChild(columnaPrecio);
+      fila.appendChild(columnaCantidad);
+      fila.appendChild(columnaSubtotal);
+      fila.appendChild(columnaQuitar);
+
+      detalleCarritoBody.appendChild(fila);
+    });
+
+    mostrarResumenPedido(carrito);
+  }
+
+  const tipoEnvioRadios = document.querySelectorAll('input[name="tipo-envio"]');
+
+  tipoEnvioRadios.forEach((radio) => {
+    radio.addEventListener("change", function () {
+      const correoUsuario =
+        datosUsuario && datosUsuario.correoUsuario
+          ? datosUsuario.correoUsuario
+          : "";
+
+      const carrito = correoUsuario
+        ? JSON.parse(localStorage.getItem(`carrito${correoUsuario}`)) || []
+        : JSON.parse(localStorage.getItem(`carrito`)) || [];
+      mostrarResumenPedido(carrito);
+    });
+  });
+
+  function mostrarResumenPedido(carrito) {
+    const subtotal = carrito.reduce(
+      (total, item) =>
+        total +
+        (item.descuento
+          ? item.precio * (1 - item.porcentajeDescuento / 100)
+          : item.precio) *
+          item.cantidad,
+      0
+    );
+
     const tipoEnvioSelect = document.querySelector(
       'input[name="tipo-envio"]:checked'
     );
     const tipoEnvio = tipoEnvioSelect ? tipoEnvioSelect.value : "tienda";
 
-    // Calcular el total por envío
     const totalEnvio = tipoEnvio === "casa" ? 3.9 : 0;
 
-    // Mostrar el subtotal y total
     totalEnvioSpan.textContent = `${totalEnvio.toFixed(2)} €`;
 
-    // Calcular el total final
     const totalFinal = subtotal + totalEnvio;
     totalFinalSpan.textContent = `${totalFinal.toFixed(2)} €`;
   }
 
   function actualizarCantidad(id, nuevaCantidad) {
-    let carrito =
-      JSON.parse(
-        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-      ) || [];
+    const correoUsuario =
+      datosUsuario && datosUsuario.correoUsuario
+        ? datosUsuario.correoUsuario
+        : "";
 
-    const index = carrito.findIndex((item) => item.id === id);
+    if (correoUsuario) {
+      const carrito =
+        JSON.parse(localStorage.getItem(`carrito${correoUsuario}`)) || [];
 
-    if (index !== -1) {
-      carrito[index].cantidad = nuevaCantidad;
-      localStorage.setItem(
-        `carrito${datosUsuario.correoUsuario}`,
-        JSON.stringify(carrito)
-      );
-      mostrarCarritoDetallado();
-      mostrarCarrito();
+      const index = carrito.findIndex((item) => item.id === id);
+
+      if (index !== -1) {
+        carrito[index].cantidad = nuevaCantidad;
+        localStorage.setItem(
+          `carrito${correoUsuario}`,
+          JSON.stringify(carrito)
+        );
+        mostrarCarritoDetallado();
+        mostrarCarrito();
+      }
     }
   }
 
   function quitarDelCarrito(id) {
-    let carrito =
-      JSON.parse(
-        localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-      ) || [];
+    const correoUsuario =
+      datosUsuario && datosUsuario.correoUsuario
+        ? datosUsuario.correoUsuario
+        : "";
 
-    const index = carrito.findIndex((item) => item.id === id);
+    if (correoUsuario) {
+      const carrito =
+        JSON.parse(localStorage.getItem(`carrito${correoUsuario}`)) || [];
 
-    if (index !== -1) {
-      carrito.splice(index, 1);
-      localStorage.setItem(
-        `carrito${datosUsuario.correoUsuario}`,
-        JSON.stringify(carrito)
-      );
-      mostrarCarritoDetallado();
-      mostrarCarrito();
+      const index = carrito.findIndex((item) => item.id === id);
+
+      if (index !== -1) {
+        carrito.splice(index, 1);
+        localStorage.setItem(
+          `carrito${datosUsuario.correoUsuario}`,
+          JSON.stringify(carrito)
+        );
+        mostrarCarritoDetallado();
+        mostrarCarrito();
+      }
     }
   }
 
   mostrarCarritoDetallado();
+
+  // Esta parte esta dedicada para el newsletter, te proporciona un codigo descuento si introduces los datos correctos
+  const newsletterContainer = document.getElementById("newsletterContainer");
+  newsletterContainer.style.display = "none";
+  const checkboxPolitica = document.getElementById("acepto");
+  const btnSuscribirse = document.querySelector(".suscribirse");
+  const graciasMensajeNewsletter = document.getElementById(
+    "graciasMensajeNewsletter"
+  );
+
+  const errorCorreo = document.getElementById("error-correo");
+  const errorPolitica = document.getElementById("error-politica");
+
+  btnSuscribirse.addEventListener("click", function () {
+    errorCorreo.style.display = "none";
+    errorPolitica.style.display = "none";
+    let valorInputCorreo = document.getElementById("email").value;
+    if (
+      valorInputCorreo != "" &&
+      datosUsuario &&
+      datosUsuario.correoUsuario == valorInputCorreo
+    ) {
+      if (checkboxPolitica.checked) {
+        const codigosDescuento =
+          JSON.parse(
+            localStorage.getItem(
+              `codigosDescuento${datosUsuario.correoUsuario}`
+            )
+          ) || [];
+
+        if (!codigosDescuento.includes("NEWSLETTER20")) {
+          codigosDescuento.push("NEWSLETTER20");
+
+          localStorage.setItem(
+            `codigosDescuento${datosUsuario.correoUsuario}`,
+            JSON.stringify(codigosDescuento)
+          );
+        }
+
+        graciasMensajeNewsletter.textContent = `¡Felicidades, ${datosUsuario.nombreUsuario}! 🎉`;
+        newsletterContainer.style.display = "flex";
+      } else {
+        errorPolitica.style.display = "block";
+      }
+    } else {
+      errorCorreo.style.display = "block";
+    }
+  });
+
+  const aceptarBtnNewsletter = document.getElementById("aceptarBtnNewsletter");
+
+  if (aceptarBtnNewsletter) {
+    aceptarBtnNewsletter.addEventListener("click", function () {
+      newsletterContainer.style.display = "none";
+    });
+  }
 });
