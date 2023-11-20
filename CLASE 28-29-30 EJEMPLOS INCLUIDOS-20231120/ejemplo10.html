@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        function mostrar() {
+            $('ol li').each(function(indice, elemento) {
+                console.log('El elemento con el índice ' + indice + ' contiene ' + $(elemento).text());
+            });
+        }
+        var vectorPersonas = ['Elena', 'Isabel', 'Ana'];
+        $.each(vectorPersonas, function(ind, elem) {
+            alert('¡Hola :' + elem + '!');
+        });
+        $(document).ready(function() {
+            mostrar();
+        });
+    </script>
+</head>
+
+<body>
+    <ol>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+    </ol>
+</body>
+
+</html>

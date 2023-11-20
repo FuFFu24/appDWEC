@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        var actuales;
+        $(document).ready(function() {
+            actuales = $('li:nth-child(3)');
+            actuales.css('color', 'red');
+        });
+    </script>
+</head>
+
+<body>
+    <ul>
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </ul>
+    <button onclick='actuales.css("color","black");actuales=actuales.prev();actuales.css("color","red");'>ANTERIOR</button>
+    <button onclick='actuales.css("color","black");actuales=actuales.next();actuales.css("color","red");'>SIQUIENTE</button>
+</body>
+
+</html>

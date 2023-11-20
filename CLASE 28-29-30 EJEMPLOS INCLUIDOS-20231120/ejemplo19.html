@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>HTML5</title>
+    <!--<link rel="stylesheet" href="css/main.css" type="text/css">-->
+    <style>
+        p {
+            border: 1px solid black;
+        }
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        var parrafos;
+        $(document).ready(function() {
+            parrafos = $('p');
+        });
+
+        function ocultarMostrarALaVez() {
+            parrafos.toggle(800, 'swing');
+        }
+
+        function ocultarMostrarSecuencialmente() {
+            if ($(this).is('p')) {
+                $(this).next().toggle(800, ocultarMostrarSecuencialmente);
+            } else {
+                parrafos.first().toggle(800, ocultarMostrarSecuencialmente);
+            }
+        }
+
+        function difuminar() {
+            parrafos.fadeToggle(800, 'swing');
+        }
+
+        function desplazar() {
+            parrafos.slideToggle(800, 'swing');
+        }
+
+        function ocultarMostrarOcultar() {
+            parrafos.toggle(800, 'swing')
+                .toggle(800, 'swing')
+                .toggle(800, 'swing');
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick='ocultarMostrarALaVez();'>Ocultar/Mostrar a la vez</button>
+    <button onclick='ocultarMostrarSecuencialmente();'>Ocultar/Mostrar secuencialmente</button>
+    <button onclick='difuminar();'>Difuminar dentro/fuera</button>
+    <button onclick='desplazar();'>Desplazar arriba/abajo</button>
+    <button onclick='ocultarMostrarOcultar();'>Ocultar/Mostrar/Ocultar</button>
+    <p>En un lugar de la Mancha</p>
+    <p>de cuyo nombre no quiero acordarme,</p>
+    <p>no ha mucho tiempo que viv&iacute;a un hidalgo de los de laza es astillero</p>
+</body>
+
+</html>

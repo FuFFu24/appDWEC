@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>How to duplicate an element with jQuery clone method</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: arial;
+        }
+        
+        .wrapper {
+            text-align: left;
+            width: 200px;
+            margin: 0 auto;
+        }
+        
+        .box {
+            padding: 10px;
+            background: orange;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .inner-content {
+            background: blue;
+            margin: 10px;
+            padding: 10px;
+        }
+        
+        .button {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="box">I'm a box
+            <div class="inner-content">this is inner content</div>
+        </div>
+        <input type="button" value="Clone box" class="button" />
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        //When DOM loaded we attach click event to button
+        $(document).ready(function() {
+            $('.button').click(function() {
+
+                //we select the box clone it and insert it after the box
+                $('.box').clone().insertAfter(".box");
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+        .exterior {
+            border: 1px solid red;
+            padding: 5px;
+        }
+        
+        #intermedio {
+            border: 1px solid green;
+        }
+        
+        .envolvente {
+            border: 5px solid blue;
+            background-color: yellow;
+        }
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        var exterior;
+        $(document).ready(function() {
+            exterior = $('.exterior');
+            envolvente = $('.envolvente');
+        });
+
+        function metodo_wrap() {
+            exterior.wrap(envolvente);
+        }
+
+        function metodo_unwrap() {
+            exterior.unwrap();
+        }
+
+        function metodo_wrapAll() {
+            exterior.wrapAll(envolvente);
+        }
+
+        function metodo_wrapInner() {
+            exterior.wrapInner(envolvente);
+        }
+    </script>
+</head>
+
+<body>
+    <div class='exterior'>Exterior</div>
+    <div class='exterior'>Exterior</div>
+    <div id='intermedio'>Intermedio</div>
+    <div class='exterior'>Exterior</div>
+    <div class='envolvente' class='envolvente'></div>
+    <button onclick='metodo_wrap();'>exterior.wrap(envolvente)</button>
+    <button onclick='metodo_unwrap();'>exterior.unwrap()</button>
+    <button onclick='metodo_wrapAll();'>exterior.wrapAll(envolvente)</button>
+    <button onclick='metodo_wrapInner();'>exterior.wrapInner(envolvente)</button>
+</body>
+
+</html>

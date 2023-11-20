@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+        div {
+            border: 1px solid black;
+        }
+        
+        .rojo {
+            background-color: red;
+        }
+        
+        .azul {
+            background-color: blue;
+        }
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+    </script>
+</head>
+
+<body>
+    <div>Soy una divisi&oacute;n manipulable</div>
+    <button onclick='$("div").prop("innerHTML","Me han cambiado")'>Propiedad innerHTML</button>
+    <button onclick='$("div").attr("dir","rtl")'>Atributo rtl</button>
+    <button onclick='$("div").addClass("rojo")'>addClass('rojo')</button>
+    <button onclick='$("div").toggleClass("azul")'>toggleClass('azul')</button>
+    <button onclick='$("div").css("border-width","5px")'>css("border-width","5px")</button>
+</body>
+
+</html>

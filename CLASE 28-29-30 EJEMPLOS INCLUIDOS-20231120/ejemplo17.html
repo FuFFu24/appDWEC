@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+        li.pregunta {
+            font-weight: bold;
+            color: navy;
+            margin: 10px 0 0 0;
+        }
+        
+        li.respuesta {
+            list-style-type: none;
+            background-color: yellow;
+        }
+        
+        li.plegada {
+            list-style-image: url('plegada.png');
+        }
+        
+        li.desplegada {
+            list-style-image: url('desplegada.png');
+            background-color: aqua;
+        }
+        
+        li.oculta {
+            display: none;
+        }
+        
+        li.visible {
+            display: list-item;
+        }
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        function plegarDesplegar(evento) {
+            var disparador = $(evento.target);
+            if (disparador.hasClass('pregunta')) {
+                disparador.toggleClass('plegada desplegada').next('li').toggleClass('oculta visible');
+            } else {
+                disparador.prev('li').toggleClass('plegada desplegada').end().toggleClass('oculta visible');
+            }
+        }
+
+        $(document).ready(function() {
+            $('ul').on('click', '.pregunta', plegarDesplegar);
+        });
+    </script>
+</head>
+
+<body>
+    <ul>
+        <li class='pregunta plegada'>&iquest;C&oacute;mo se llaman las 3 fases de comunicaci&oacute;n de los eventos?</li>
+        <li class='respuesta oculta'>Captura, destino y propagaci&oacute;n.</li>
+        <li class='pregunta plegada'>&iquest;En qu&eacute; propiedad del objeto de evento jQuery se recibe el objeto de datos enviado en el m&eacute;todo on()?</li>
+        <li class='respuesta oculta'>En la propiedad data.</li>
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+        h1 {
+            background: blue;
+            border: 1px solid black;
+        }
+        
+        p {
+            display: none;
+            background: yellow;
+            border: 1px solid black;
+        }
+    </style>
+    <script src='jquery.min.js'></script>
+    <script>
+        $(document).ready(function() {
+            $('#termino').click(desplegarSignificado);
+        });
+
+        function desplegarSignificado(evento) {
+            $('#significado').slideToggle(3000);
+        }
+    </script>
+</head>
+
+<body>
+    <div id='definicion'>
+        <h1 id='termino'>Idiosincrasia</h1>
+        <p id='significado'>Rasgos y car&aacute;cter propios y distintivos de un individuo o de una colectividad.</p>
+    </div>
+    <span>Haga clic sobre el t&eacute;rmino para desplegar su definici&oacute;n.</span>
+</body>
+
+</html>

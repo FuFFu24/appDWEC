@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+        #exterior {
+            border: 1px solid black;
+            position: relative;
+            background-color: pink;
+        }
+        
+        #interior {
+            border: 5px solid black;
+            padding: 10px;
+            margin: 5px;
+            background-color: blue;
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        var $interior;
+        var padre;
+        var tamagnoOriginal;
+
+        function cambiarPosicion(evento) {
+            var posicion = $interior.offset();
+            var posicionPadre = padre.offset();
+            posicion.left = posicionPadre.left + parseInt($interior.css('margin-left')) +
+                Math.floor((padre.width() - $interior.outerWidth(true)) * evento.target.value);
+            $interior.offset(posicion);
+        }
+
+        function cambiarTamagno(evento) {
+            $interior.width(Math.floor(tamagnoOriginal * (1 + Number(evento.target.value))));
+            $interior.height($interior.width());
+        }
+        $(document).ready(function() {
+            $interior = $('#interior');
+            padre = $interior.offsetParent();
+            tamagnoOriginal = $interior.width();
+            console.log(tamagnoOriginal);
+        });
+    </script>
+</head>
+
+<body>
+    <div id='exterior'>
+        <div id='interior'>jQuery</div>
+    </div>
+    <label for='posicion'>Posici&oacute;n: </label>
+    <input id='posicion' type='range' value='0' min='0' max='1' step='0.1' oninput='cambiarPosicion(event);' />
+    <label for='tamagno'>Tama&ntilde;o: </label>
+    <input id='tamagno' type='range' value='0' min='0' max='1' step='0.1' oninput='cambiarTamagno(event);' />
+</body>
+
+</html>

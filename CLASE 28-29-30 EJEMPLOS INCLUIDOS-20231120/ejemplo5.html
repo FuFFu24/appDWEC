@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        $(document).ready(function() {
+            var diaSemana = (new Date()).getDay() + 1;
+            console.log(diaSemana);
+            if (diaSemana > 1 && diaSemana < 7) {
+                $('td:nth-child(' + diaSemana + ')').css('background-color', 'red');
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Hora</th>
+                <th>L</th>
+                <th>M</th>
+                <th>X</th>
+                <th>J</th>
+                <th>V</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>9:00</td>
+                <td>Lenguaje</td>
+                <td>Matematicas</td>
+                <td>Ingles</td>
+                <td>Musica</td>
+                <td>Tecnologia</td>
+            </tr>
+            <tr>
+                <td>10:00</td>
+                <td>Matematicas</td>
+                <td>Ingles</td>
+                <td>Tecnologia</td>
+                <td>Tecnologia</td>
+                <td>Lenguaje</td>
+            </tr>
+            <tr>
+                <td>11:00</td>
+                <td>Ingles</td>
+                <td>Musica</td>
+                <td>Lenguaje</td>
+                <td>Ingles</td>
+                <td>Matematicas</td>
+            </tr>
+            <tr>
+                <td>12:00</td>
+                <td>Tecnologia</td>
+                <td>Lenguaje</td>
+                <td>Matematicas</td>
+                <td>Matematicas</td>
+                <td>Ingles</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

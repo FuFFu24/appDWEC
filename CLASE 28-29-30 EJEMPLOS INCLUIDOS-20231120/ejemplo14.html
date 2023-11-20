@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+        #exterior {
+            border: 1px solid red;
+            padding: 5px;
+        }
+        
+        .hermano {
+            border: 1px solid yellow;
+        }
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        var exterior;
+        $(document).ready(function() {
+            exterior = $('#exterior');
+        });
+
+        function metodo_after() {
+            var hermano = $("<div id='hermano' class='hermano'>Hermano m&oacute;vil</div>");
+            exterior.after(hermano);
+        }
+
+        function metodo_before() {
+            var hermano = $("<div id='hermano' class='hermano'>Hermano m&oacute;vil</div>");
+            exterior.before(hermano);
+        }
+    </script>
+</head>
+
+<body>
+    <div id='exterior'>Exterior</div>
+    <button onclick='metodo_after();'>exterior.after(hermano)</button>
+    <button onclick='metodo_before();'>exterior.before(hermano)</button>
+</body>
+
+</html>

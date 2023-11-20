@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+        div {
+            float: left;
+        }
+        
+        div.red {
+            background: red;
+        }
+        
+        div.yellow {
+            background: yellow;
+        }
+        
+        div.oculta {
+            display: none;
+        }
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+</head>
+
+<body>
+    <div class='visible red'>Visible</div>
+    <div class='visible yellow'>Visible</div>
+    <div class='oculta yellow'>Oculta</div>
+    <div class='visible red'>Visible</div>
+    <div style='clear: both'></div>
+    <button onclick='$("div:hidden").show();'>Mostrar ocultos</button>
+</body>
+
+</html>

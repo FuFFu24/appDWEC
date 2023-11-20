@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+        #exterior {
+            border: 1px solid red;
+            padding: 5px;
+        }
+        
+        #interior {
+            border: 1px solid blue;
+        }
+        
+        .nuevo {
+            border: 1px solid yellow;
+        }
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        var $exterior;
+        var interior;
+        $(document).ready(function() {
+            $exterior = $('#exterior');
+            interior = $('#interior');
+        });
+
+        function metodo_append() {
+            var nuevo = $("<div class='nuevo'>Nueva</div>")
+            $exterior.append(nuevo);
+        }
+
+        function metodo_prepend() {
+            var nuevo = $("<div class='nuevo'>Nueva</div>")
+            $exterior.prepend(nuevo);
+        }
+    </script>
+</head>
+
+<body>
+    <div id='exterior'>Exterior
+        <div id='interior'>Interior</div>
+    </div>
+    <button onclick='metodo_append();'>exterior.append(nuevo)</button>
+    <button onclick='metodo_prepend();'>exterior.prepend(nuevo)</button>
+</body>
+
+</html>
