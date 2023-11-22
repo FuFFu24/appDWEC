@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery</title>
+<style>
+div.extraido{
+	float: right;
+	width: 250px;
+	background-color: yellow;
+	font-style: italic;
+	padding: 10px;
+	margin: 5px;
+}
+</style>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+<script>
+    $(document).ready(function() {
+        $("p.parraforojo").clone().appendTo("div#interior");
+    });
+</script>
+</head>
+<body>
+<p class="parraforojo">
+<i>Hola</i> <b>esto</b> es un <b>párrafo</b> rojo <i>donde</i> he <b>puesto</b> unas <b>negritas</b>
+</p>
+<p class="parraforojo">Otro <b>con</b> clase class="parraforojo" <span class="unspan"><b>(esto está dentro de unspan B, no depende directamente -no child- del párrafo)</b></span></p>
+<p>Hola <b>esto</b> es otro <b>párrafo </b>para <i>poner</i> otras <b>negritas</b></p>
+<p>hola!!!</p>
+<div id=”exterior”>
+<div id=”interior”>
+</div>
+</div>
+</body>
+</html>

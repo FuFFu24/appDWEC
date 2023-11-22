@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery</title>
+<style>
+</style>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+<script>
+    $(document).ready(function() {
+        alert($("#puntuaciones tr, #datos tr").length);
+        });
+</script>
+</head>
+<body>
+<p>Parrafo 1</p>
+<p class=”ejercicio8”>Parrafo 2</p>
+<p>Parrafo 3</p>
+<p class=”ejercicio8”>Parrafo 4</p>
+<p>Parrafo 5</p>
+
+<table>
+<tr><th>NOMBRE</th><th>GRUPO</th><th>CLASE</th></tr>
+<tr><td>Juan</td><td></td><td></td></tr>
+<tr><td>Jose</td><td></td><td></td></tr>
+</table>
+<br>
+<table id=”puntuaciones>
+<tr><th>NOMBRE</th><th>NOTA</th><th>COMENTARIOS</th></tr>
+<tr><td>Juan</td><td>5</td><td></td></tr>
+<tr><td>Jose</td><td>1</td><td></td></tr>
+<tr><td>Javier</td><td>8</td><td></td></tr>
+</table>
+<br>
+<table id=”datos” class=”principal”>
+<tr><th>NOMBRE</th><th>ESTADO</th><th>EDAD</th></tr>
+<tr><td>Juan</td><td></td><td></td></tr>
+<tr><td>Jose</td><td></td><td></td></tr>
+</table>
+</body>
+</html>

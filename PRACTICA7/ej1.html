@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        onload = () => {
+            let contador = 9;
+            let table = document.createElement("table");
+            document.body.appendChild(table);
+            let tbody = document.createElement("tbody");
+            document.body.appendChild(tbody);
+            for (let i = 0; i < 10; i++) {
+                let tr = document.createElement("tr");
+                document.body.appendChild(tr);
+                for (let j = 0; j < 10; j++) {
+                    let td = document.createElement("td");
+                    td.style.border = "1px solid black";
+                    td.style.padding = "10px";
+                    if (j % 2 == 0) {
+                        td.style.backgroundColor = "blue";
+                    } else {
+                        td.style.backgroundColor = "yellow";
+                    }
+                    if (i == j) {
+                        td.textContent = "X";
+                        td.style.backgroundColor = "green";
+                    }
+                    if (contador == j) {
+                        td.textContent = "X";
+                        td.style.backgroundColor = "red";
+                    }
+                    document.body.appendChild(td);
+                }
+                contador--;
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
