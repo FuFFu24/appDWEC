@@ -665,6 +665,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mostrarCarrito();
       }
     }
+    pulsardescuento();
   }
 
   function quitarDelCarrito(id) {
@@ -747,5 +748,17 @@ document.addEventListener("DOMContentLoaded", function () {
     aceptarBtnNewsletter.addEventListener("click", function () {
       newsletterContainer.style.display = "none";
     });
+  }
+
+  $("#recogerEnTienda").click(function () {
+    setTimeout(pulsardescuento, 1000);
+  });
+
+  $("#envioACasa").click(function () {
+    setTimeout(pulsardescuento, 1000);
+  });
+
+  function pulsardescuento() {
+    $("#usar-codigo").trigger("click");
   }
 });
