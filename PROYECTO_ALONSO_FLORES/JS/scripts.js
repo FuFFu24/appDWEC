@@ -461,28 +461,20 @@ function pintarPaginaEntera() {
   }
 
   function borrarDelCarrito(id) {
-    const carritoUsuario =
+    const correoUsuario =
       datosUsuario && datosUsuario.correoUsuario
-        ? JSON.parse(
-            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-          ) || []
-        : JSON.parse(localStorage.getItem(`carrito`));
+        ? datosUsuario.correoUsuario
+        : "";
+    const carritoUsuario =
+      JSON.parse(localStorage.getItem(`carrito${correoUsuario}`)) || [];
 
     const index = carritoUsuario.findIndex((item) => item.id === id);
 
     if (index !== -1) {
-      if (carritoUsuario[index].cantidad > 1) {
-        carritoUsuario[index].cantidad--;
-      } else {
-        carritoUsuario.splice(index, 1);
-      }
+      carritoUsuario.splice(index, 1);
 
       localStorage.setItem(
-        `carrito${
-          datosUsuario && datosUsuario.correoUsuario
-            ? datosUsuario.correoUsuario
-            : ""
-        }`,
+        `carrito${correoUsuario}`,
         JSON.stringify(carritoUsuario)
       );
 

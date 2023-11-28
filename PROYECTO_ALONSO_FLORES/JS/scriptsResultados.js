@@ -445,29 +445,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function borrarDelCarrito(id) {
-    let carrito =
+    const correoUsuario =
       datosUsuario && datosUsuario.correoUsuario
-        ? JSON.parse(
-            localStorage.getItem(`carrito${datosUsuario.correoUsuario}`)
-          ) || []
-        : JSON.parse(localStorage.getItem(`carrito`));
+        ? datosUsuario.correoUsuario
+        : "";
+    const carritoUsuario =
+      JSON.parse(localStorage.getItem(`carrito${correoUsuario}`)) || [];
 
-    const index = carrito.findIndex((item) => item.id === id);
+    const index = carritoUsuario.findIndex((item) => item.id === id);
 
     if (index !== -1) {
-      if (carrito[index].cantidad > 1) {
-        carrito[index].cantidad--;
-      } else {
-        carrito.splice(index, 1);
-      }
+      carritoUsuario.splice(index, 1);
 
       localStorage.setItem(
-        `carrito${
-          datosUsuario && datosUsuario.correoUsuario
-            ? datosUsuario.correoUsuario
-            : ""
-        }`,
-        JSON.stringify(carrito)
+        `carrito${correoUsuario}`,
+        JSON.stringify(carritoUsuario)
       );
 
       mostrarCarrito();

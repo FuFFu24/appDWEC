@@ -11,9 +11,9 @@ cargarUsuarios();
 
 document.addEventListener("DOMContentLoaded", function () {
   // Recoger datos de la URL, donde se envian los errores producidos
-  const urlParams = new URLSearchParams(window.location.search);
-  const error = urlParams.get("error");
-  const vacio = urlParams.get("vacio");
+  const parametrosURL = new URLSearchParams(window.location.search);
+  const error = parametrosURL.get("error");
+  const vacio = parametrosURL.get("vacio");
 
   // Verifica si hay un error de correo existente o de campos vacios y muestra el mensaje correspondiente
   const mensajeError = document.getElementById("correo-existente");
