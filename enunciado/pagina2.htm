@@ -1,125 +1,139 @@
 <!DOCTYPE html>
-<html  lang="es-ES">
+<html lang="es-ES">
+
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>EJERCICIO 2</title>
-<meta name="theme-color" content="#175876">
-<script src="ejercicio2.js"></script>
-<style>
-#publicidad{
-width:600px;
-height:160px;
-background-color:white
-}
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>EJERCICIO 2</title>
+	<meta name="theme-color" content="#175876">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="ejercicio2.js"></script>
+	<style>
+		#publicidad {
+			width: 600px;
+			height: 160px;
+			background-color: white
+		}
 
-#botones{
-width:600px;
-height:40px;
-background-color:black;
-color:white
-}
+		#botones {
+			width: 600px;
+			height: 40px;
+			background-color: black;
+			color: white
+		}
 
-.claseBotonesD{
-width:100px;
-float:left;
-}
-div#publicidad{
-float:left;
-width: 650px;
-height:100px;
-}
-div#derecha{
-float:right;
-width: 150px;
-background-color:grey;
-height:100px;
-}
-div#superior{
-  width: 800px;
-  font-size: 12px;
-}
-div#central{
-  width: 800px;
-  font-size: 12px;
-background-color: #E65F00;
-}
+		.claseBotonesD {
+			width: 100px;
+			float: left;
+		}
 
-#exposicion img {
- max-width: 100px;
-}
-</style>
+		div#publicidad {
+			float: left;
+			width: 650px;
+			height: 100px;
+		}
+
+		div#derecha {
+			float: right;
+			width: 150px;
+			background-color: grey;
+			height: 100px;
+		}
+
+		div#superior {
+			width: 800px;
+			font-size: 12px;
+		}
+
+		div#central {
+			width: 800px;
+			font-size: 12px;
+			background-color: #E65F00;
+		}
+
+		#exposicion img {
+			max-width: 100px;
+		}
+	</style>
 </head>
-<body>
-<div id="botones">
- <input type="hidden" name="precioIn">
- <div class="claseBotonesD">&nbsp;</div>
- <div id="capa1" class="claseBotonesD">Todos</div>
- <div id="11capa2" class="claseBotonesD">Vinilos</div>
- <div id="capa3" class="claseBotonesD">Laminas</div>
- <input type="hidden" name="precioOut"> 
-</div>
-<div id="superior">
-  <div id="publicidad">PUBLICIDAD</div>
-  <div id="derecha">
-      <A href="">VER COMPRAS</A><br>
-	  <A href="">VER ALQUILERES</A><br>
-	  <A href="">VER TODAS LAS OPERACIONES</A><br>
-  </div>
-</div>
-<div>
-<div id="central">
-	FILTRAR CUADROS: <select>
-	<option>Escoge un valor</option>
-	<option>Vinilos</option>
-	<option>Laminas</option>
-	<option>Otros</option>
-	</select><br>
-	<div id="exposicion">
-		
-	</div>
-  </div>
 
-</div>
-</div>
-<br><br><br><br>
-<div class="footer-container">
-    <div class="footer-upper-links">
-            </div>
-    <div class="footer">
-        <div class="links">
-            <div class="footer-cms footer-cms-links">
-                <label class='footer-header'>Compra por teléfono</label>
-				<span class="footer-phone">+34 937 370 288  </span>
-				<p>¿Línea ocupada? Escríbenos: <a href=mailto: info@artgeist.es><span class="__cf_email__" data-cfemail="6900070f0629081b1d0e0c001a1d470c1a">[email&#160;protected]</span></a></p>
-				<p><strong> Nuestro personal de servicio al cliente está a tu disposición de lunes a viernes de 9.00 a 15.00. 
-				Cuando no estamos en línea, deja un mensaje - nos pondremos en contacto contigo lo antes posible.<br/></p>
-            </div>
-            <div class="footer-cms footer-cms-trusted">
-                <label class='footer-header'>Garantía de calidad</label>
-				<img src="//shark.bimago.com/artgeist2/footer/es_gwarancja_03.jpg">            
-            </div>
-            <div class="footer-cms footer-newsletter">
-                <div class="newsletter">
-				<form action="http://www.artgeist.es/newsletter/subscriber/process/" method="post" id="newsletter-validate-detail" onsubmit="return newsletterValidate();">
-				<input type="hidden" name="subscribers_list_hash" value="ey6fa6wjyn" />
-				<input type="hidden" name="freshmail_custom_field[3b91msnnrg]" id="newsletter-sex" />
-				<input type="checkbox" name="terms_accept" checked="checked" value="accepted" id="terms_accept" style="display: none;"/>
-				<label for="newsletter" class="newsletter-header">Newsletter</label>
-				<p>¡Suscríbete rápido para no perder las mejores ofertas promocionales!</p>
-				<div class="input-box">
-					<label class="newsletter-email">E-mail:</label>
-					<input type="text" name="freshmail_email" id="newsletter" class="input-text required-entry validate-email"
-					title="Sign up for our newsletter" />
+<body>
+	<div id="botones">
+		<input type="hidden" name="precioIn">
+		<div class="claseBotonesD">&nbsp;</div>
+		<div id="capa1" class="claseBotonesD">Todos</div>
+		<div id="11capa2" class="claseBotonesD">Vinilos</div>
+		<div id="capa3" class="claseBotonesD">Laminas</div>
+		<input type="hidden" name="precioOut">
+	</div>
+	<div id="superior">
+		<div id="publicidad">PUBLICIDAD</div>
+		<div id="derecha">
+			<A href="">VER COMPRAS</A><br>
+			<A href="">VER ALQUILERES</A><br>
+			<A href="">VER TODAS LAS OPERACIONES</A><br>
+		</div>
+	</div>
+	<div>
+		<div id="central">
+			FILTRAR CUADROS: <select>
+				<option>Escoge un valor</option>
+				<option>Vinilos</option>
+				<option>Laminas</option>
+				<option>Otros</option>
+			</select><br>
+			<div id="exposicion">
+
+			</div>
+		</div>
+
+	</div>
+	</div>
+	<br><br><br><br>
+	<div class="footer-container">
+		<div class="footer-upper-links">
+		</div>
+		<div class="footer">
+			<div class="links">
+				<div class="footer-cms footer-cms-links">
+					<label class='footer-header'>Compra por teléfono</label>
+					<span class="footer-phone">+34 937 370 288 </span>
+					<p>¿Línea ocupada? Escríbenos: <a href=mailto: info@artgeist.es><span class="__cf_email__"
+								data-cfemail="6900070f0629081b1d0e0c001a1d470c1a">[email&#160;protected]</span></a></p>
+					<p><strong> Nuestro personal de servicio al cliente está a tu disposición de lunes a viernes de 9.00
+							a 15.00.
+							Cuando no estamos en línea, deja un mensaje - nos pondremos en contacto contigo lo antes
+							posible.<br /></p>
 				</div>
-				<div class="actions">
-					<a href="#" title="" class="button" onclick="sendMale(); return false;">&nbsp;</a>
+				<div class="footer-cms footer-cms-trusted">
+					<label class='footer-header'>Garantía de calidad</label>
+					<img src="//shark.bimago.com/artgeist2/footer/es_gwarancja_03.jpg">
 				</div>
-				<p class="small">Tus datos personales se mantendrán confidenciales y no se divulgarán a terceros. Podrás darte de baja en cualquier momento.</p>
-				</form>
+				<div class="footer-cms footer-newsletter">
+					<div class="newsletter">
+						<form action="http://www.artgeist.es/newsletter/subscriber/process/" method="post"
+							id="newsletter-validate-detail" onsubmit="return newsletterValidate();">
+							<input type="hidden" name="subscribers_list_hash" value="ey6fa6wjyn" />
+							<input type="hidden" name="freshmail_custom_field[3b91msnnrg]" id="newsletter-sex" />
+							<input type="checkbox" name="terms_accept" checked="checked" value="accepted"
+								id="terms_accept" style="display: none;" />
+							<label for="newsletter" class="newsletter-header">Newsletter</label>
+							<p>¡Suscríbete rápido para no perder las mejores ofertas promocionales!</p>
+							<div class="input-box">
+								<label class="newsletter-email">E-mail:</label>
+								<input type="text" name="freshmail_email" id="newsletter"
+									class="input-text required-entry validate-email"
+									title="Sign up for our newsletter" />
+							</div>
+							<div class="actions">
+								<a href="#" title="" class="button" onclick="sendMale(); return false;">&nbsp;</a>
+							</div>
+							<p class="small">Tus datos personales se mantendrán confidenciales y no se divulgarán a
+								terceros. Podrás darte de baja en cualquier momento.</p>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </body>
 <html>
