@@ -239,7 +239,11 @@ document.addEventListener("DOMContentLoaded", function () {
         contratos.push(nuevoContrato);
 
         localStorage.setItem("contratos", JSON.stringify(contratos));
+      } else {
+        console.log("si")
       }
+    } else {
+      console.log("NO")
     }
   });
 

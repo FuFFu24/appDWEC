@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>QUIEN ES QUIEN EL CAÑAVERAL</title>
+  <link rel="stylesheet" href="./css/comun.css">
+  <link rel="shortcut icon" href="#">
+  <script>
+    function establecerPersonaABuscar(max) {
+      return Math.floor(Math.random() * max);
+    }
+
+    var codigoPersonaBuscada = establecerPersonaABuscar(24);
+    
+
+  </script>
+  <script src="personas.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body translate="no">
+  <div id="container">
+    <nav>
+      <ul>
+        <li><a href="index.html">General</a></li>
+        <li><a href="#">Opcion 1<i class="down"></i></a>
+          <!-- Primer Menu Desplegable -->
+          <ul>
+            <li><a href="#">Opcion 1</a></li>
+            <li><a href="#">Opcion 2</a></li>
+            <li><a href="#">Opcion 3</a></li>
+          </ul>
+        </li>
+        <li><a href="">Recarga</i></a>
+        <li><a href="#">Opcion <i class="down"></i></a>
+          <!-- Primer Menu Desplegable -->
+          <ul>
+            <li><a href="#">Opcion 1</a></li>
+            <li><a href="#">Opcion 2</a></li>
+            <li><a href="#">Opcion 3</a>
+              <!-- Segudo Menu Desplegable -->
+              <ul>
+                <li><a href="#">Ver</a></li>
+                <li><a href="#">Modificar</a></li>
+                <li><a href="#">Otros</a>
+                  <!-- Tercer Menu Desplegable -->
+                  <ul>
+                    <li><a href="#">opcion1</a></li>
+                    <li><a href="#">opcion2</a></li>
+                    <li><a href="#">opcion3</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#">Ayuda</i></a></li>
+        <li>
+          <div id="totalPreguntas">0</div>
+        </li>
+      </ul>
+    </nav>
+    <div>
+    </div>
+    <div id="divTablero">
+      <h1>QUIEN ES QUIEN</h1>
+      <table>
+        <tbody>
+          <tr>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+          </tr>
+          <tr>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+          </tr>
+          <tr>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+          </tr>
+          <tr>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="divPreguntas">
+      <div id="divDatosPersona" style="border: 1px solid white;">
+        <p><span>Es hombre:</span><br>
+          Y<input type="radio" value="y" name="esHombre">
+          N<input type="radio" value="n" name="esHombre">
+        </p>
+        <p>Nombre<input type="text" id="txtNombre"></p>
+        <p>Fecha nacimiento<input id="txtFechaNacimiento" type="text" class="fecha" placeholder="dd/mm/aaaa"></p>
+        <p>Color del pelo<input id="txtColorPelo" type="text" class="tarjeta"></p>
+        <p><button type="button" id="btnIntentar">INTENTAR</button></p>
+      </div>
+      <p>Preguntas:<select class="oculto"></select>
+        <select>
+          <option>Todas</option>
+        </select>
+      </p>
+      <p>Nacidos antes de:<input type="text" class="fecha" placeholder="dd/mm/aaaa"></p>
+      <p><button type="button" id="btnPreguntarFecha">Preguntar Fecha</button></p>
+    </div>
+  </div>
+</body>

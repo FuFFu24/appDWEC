@@ -102,7 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       btnAlquilar.addEventListener("click", function (event) {
-        const imagen = element;
+        const imagen = event.target.parentNode.children[0].src.split("/")[5];
+        console.log(imagen);
         const cantidad =
           event.target.nextSibling.nextSibling.nextSibling.nextSibling
             .nextSibling.nextSibling.value;
@@ -110,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
           event.target.nextSibling.nextSibling.nextSibling.nextSibling
             .nextSibling.nextSibling.nextSibling.nextSibling.nextSibling
             .nextSibling.nextSibling.nextSibling.value;
+            console.log(duracion);
         const operacion = event.target.innerText;
 
         if (imagen && cantidad && duracion) {
@@ -223,4 +225,25 @@ document.addEventListener("DOMContentLoaded", function () {
     <button onclick="window.close()">CERRAR</button>
   `);
   });
+
+  /* En la capa “publicidad” se  mostrará lentamente durante 3 segundos una de las imágenes de cuadro. Después,  la imagen se animará haciéndose 
+  100 pixeles más grande y se moverá 100pixeles a la derecha durante 5 segundos. Finalmente la imagen se ocultará lentamente durante 4 segundos */
+
+  const publicidad = $("#publicidad");
+
+// Clonar la primera imagen y agregarla a la capa de publicidad
+const imagen = $("img:first").clone().appendTo(publicidad);
+
+// Mostrar lentamente durante 3 segundos
+imagen.fadeIn(3000, function() {
+  // Animar el tamaño y la posición durante 5 segundos
+  imagen.animate({
+    position: "relative",
+    left: "+=100px",
+  }, 5000, function() {
+    // Ocultar lentamente durante 4 segundos al finalizar la animación
+    imagen.fadeOut(4000);
+  });
+});
+
 });
