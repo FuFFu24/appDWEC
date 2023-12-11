@@ -1,0 +1,15 @@
+                <?xml version="1.0" encoding="UTF-8" ?>
+
+                <estudiante>
+
+                    <nombre>Juan Félix Mateos</nombre>
+
+                    <calificaciones curso="11/12">
+
+                        <calificacion materia="Matemáticas" nota="7.5" />
+
+                        <calificacion materia="Lenguaje" nota="9" />
+
+                    </calificaciones>
+
+                </estudiante>

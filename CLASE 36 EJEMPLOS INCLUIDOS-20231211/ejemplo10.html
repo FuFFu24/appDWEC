@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AJAX</title>
+    <meta charset="utf-8" />
+    <style>
+
+    </style>
+    <script>
+        var xhr;
+
+        function enviarPeticionAJAX(evento) {
+            var datos = new FormData(document.forms[0]);
+            xhr = new XMLHttpRequest();
+            xhr.timeout = 2000;
+            xhr.upload.addEventListener('progress', gestionarProgreso);
+            xhr.upload.addEventListener('load', cargaCompletada);
+            xhr.upload.addEventListener('timeout', subidaLenta);
+            xhr.addEventListener('readystatechange', gestionarRespuesta);
+            xhr.open('POST', 'ajax10.php', true);
+            xhr.send(datos);
+        }
+
+        function gestionarRespuesta(evento) {
+            if (evento.target.readyState == 4 && evento.target.status == 200) {
+                var imagenAvatar = document.getElementById('imagenAvatar');
+                imagenAvatar.src = evento.target.responseText;
+            }
+        }
+
+        function gestionarProgreso(evento) {
+            document.getElementById('progreso').max = evento.total;
+            document.getElementById('progreso').value = evento.loaded;
+        }
+
+        function cargaCompletada(evento) {
+            document.getElementById('progreso').max = 1;
+            document.getElementById('progreso').value = 1;
+        }
+
+        function subidaLenta(evento) {
+            alert('Cancelado.Su velocidad de subida es demasiado lenta.')
+        }
+    </script>
+</head>
+
+<body>
+    <form id='formulario'>
+        <label for='avatar'>Avatar: </label>
+        <input type='file' id='avatar' name='avatar' accept='image/*' />
+        <br />
+        <button type='button' onclick='enviarPeticionAJAX(event);'>ENVIAR</button>
+        <br />
+        <progress id="progreso" value="0"></progress>
+    </form>
+    <img width='100' height='100' src='' id='imagenAvatar' />
+</body>
+
+</html>

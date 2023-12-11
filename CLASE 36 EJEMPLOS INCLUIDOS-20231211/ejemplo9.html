@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AJAX</title>
+    <style>
+
+    </style>
+    <script>
+        var xhr;
+        var alumno;
+        var materia;
+        var calificacion;
+        var objetoPeticion = new Object();
+        var objetoRespuesta;
+
+        function enviarPeticionAJAX(evento) {
+            if (alumno.value != '' && materia.value != '') {
+                objetoPeticion.alumno = alumno.value;
+                objetoPeticion.materia = materia.value;
+                alumno.disabled = true;
+                materia.disabled = true;
+                xhr = new XMLHttpRequest();
+                xhr.addEventListener('readystatechange', gestionarRespuesta, false);
+                xhr.open('POST', 'ajax9.php', true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify(objetoPeticion));
+            } else {
+                calificacion.value = '';
+            }
+        }
+
+        function gestionarRespuesta(evento) {
+            if (evento.target.readyState == 4 && evento.target.status == 200) {
+                alumno.disabled = false;
+                materia.disabled = false;
+                objetoRespuesta = JSON.parse(evento.target.responseText);
+                calificacion.value = objetoRespuesta.calificacion;
+            }
+        }
+        document.addEventListener('readystatechange', inicializar, false);
+
+        function inicializar() {
+            if (document.readyState == 'complete') {
+                alumno = document.getElementById('alumno');
+                materia = document.getElementById('materia');
+                calificacion = document.getElementById('calificacion');
+                alumno.addEventListener('change', enviarPeticionAJAX, false);
+                materia.addEventListener('change', enviarPeticionAJAX, false);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form id='formulario'>
+        <label for='alumno'>Alumno: </label>
+        <select id='alumno' name='alumno'>
+<option value='' selected='selected'>--Elija un alumno--</option>
+<option>Juan F&eacute;lix Mateos</option>
+<option>Ana Irene Palma</option>
+</select>
+        <label for='materia'>Materia: </label>
+        <select id='materia' name='materia'>
+<option value='' selected='selected'>--Elija una materia--</option>
+<option>Lenguaje</option>
+<option>Matem&aacute;ticas</option>
+</select>
+        <label for='calificacion'>Calificaci&oacute;n: </label>
+        <input type='text' readonly='readonly' id='calificacion' />
+    </form>
+</body>
+
+</html>
