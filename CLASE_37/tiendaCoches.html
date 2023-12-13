@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(pedirCoches);
+
+        function pedirCoches() {
+            $.getJSON("consultaCoches.php",{},pintarCoches);
+        }
+
+        function pintarCoches(lista) {
+            let tbody = document.querySelector("table tbody");
+
+            lista.forEach(element => {
+                tbody.innerHTML = `
+                    <td>${element.marca}</td>
+                    <td>${element.modelo}</td>
+                    <td>${element.cilindrada}</td>
+                    <td>${element.fecha}</td>
+                    <td>${element.foto}</td>
+                `;
+            });
+        }
+    </script>
+    <style>
+        #nuevoCoche {
+            border: 1px solid red;
+            background-color: aliceblue;
+            padding: 10px;
+        }
+    </style>
+</head>
+    <body>
+    <div id="nuevoCoche">
+        <p>Matricula <input type="text" name="matricula" id="matricula"></p>
+        <p>Marca <input type="text" name="marca" id="marca"></p>
+        <p>Modelo <input type="text" name="modelo" id="modelo"></p>
+        <p>Cilindrada <input type="text" name="cilindrada" id="cilindrada"></p>
+        <p>Fecha <input type="text" name="fecha" id="fecha"></p>
+        <p>Foto <input type="text" name="foto" id="foto"></p>
+        <button type="button">AÑADIR FOTO</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Cilindrada</th>
+                <th>Fecha</th>
+                <th>Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>

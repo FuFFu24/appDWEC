@@ -5,7 +5,7 @@
         $salida="";
         if ($operacion == "mostrar"){
             $salida=shell_exec("uname -v");
-        } 
+        }
         if ($operacion == "aleatorio") {
             $salida = rand(1,10);
         }
