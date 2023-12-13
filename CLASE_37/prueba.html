@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+
+    <script>
+        $(document).ready(() => {
+            $.getJSON("consultaEmpleados.php", {}, pintarEmpleados);
+        });
+
+        function pintarEmpleados(lista) {
+            $("table").remove();
+            let $tabla = $("<table></table>").appendTo(document.body);
+            $("<tr><th>Nombre</th><th>Apellidos</th><th>Web</th><th>Acción</th></tr>").appendTo($tabla);
+            $(lista).each((indice, valor) => {
+                let $fila = $("<tr></tr>").appendTo($tabla);
+                $("<td></td>").text(valor.nombre).appendTo($fila);
+                $("<td></td>").text(valor.apellido).appendTo($fila);
+                $("<td></td>").text(valor.web).appendTo($fila);
+                let $td = $("<td></td>").appendTo($fila);
+                $("<img src='papelera.png'>").appendTo($td).on("click", {
+                    "id": valor.identificador
+                }, borrarEmpleado).css({
+                    "height": "50px"
+                });
+            })
+        }
+
+        function borrarEmpleado(evento) {
+            alert(evento.data.id);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

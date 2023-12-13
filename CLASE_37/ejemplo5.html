@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            border: 4px solid black;
+            background-color: red;
+        }
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+        $.ajaxSetup({
+            cache: false
+        });
+
+        function enviarPeticion(evento) {
+            /* Con $.get(url,datos,funcion)
+            $.get("ejemploGetJson.php",
+                      {"operacion":evento.data.tipoOperacion},
+                       function(dato){
+                                    var datoJSON= JSON.parse(dato);
+                                    alert(datoJSON.respuesta);
+                       });
+            */
+
+            /* Con $.ajax()
+             $.ajax({
+                "url": "ejemploGetJson.php",
+                "method": "get",
+                "dataType": "json",
+                "data": {"operacion":evento.data.tipoOperacion},
+                "success": function(dato){
+                              alert(dato.respuesta);
+                         }    
+              });*/
+
+            $.getJSON("ejemploGetJson.php", {
+                    "operacion": evento.data.tipoOperacion
+                },
+                function(dato) {
+                    alert(dato.respuesta);
+                });
+        }
+        $(document).ready(function() {
+            $('#mostrar').on('click', {
+                tipoOperacion: 'mostrar'
+            }, enviarPeticion);
+            $('#aleatorio').on('click', {
+                tipoOperacion: 'aleatorio'
+            }, enviarPeticion);
+        });
+    </script>
+</head>
+
+<body>
+    <button id='mostrar'>MOSTRAR VERSION</button>
+    <button id='aleatorio'>VALOR ALEATORIO</button>
+    <div></div>
+</body>
+
+</html>
