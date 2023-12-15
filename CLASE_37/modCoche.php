@@ -7,15 +7,13 @@ if (isset($_POST["matricula"])) {
     $stmt->execute([$matricula]);
 
     if ($stmt->fetch()) {
-        echo '{"estado":"error","mensaje":"matricula existente"}';
-    } else {
         if (isset($_POST["marca"]) &&
         isset($_POST["modelo"]) &&
         isset($_POST["cilindrada"]) && 
         isset($_POST["fecha"]) && 
         isset($_POST["foto"])) {
 
-            error_log(print_r("INSERTADO COCHE CON MATRICULA" . $matricula,true));
+            error_log(print_r("MODIFICADO COCHE CON MATRICULA" . $matricula,true));
 
             $marca = htmlspecialchars($_POST["marca"]);
             $modelo = htmlspecialchars($_POST["modelo"]);
@@ -23,17 +21,19 @@ if (isset($_POST["matricula"])) {
             $fecha = htmlspecialchars($_POST["fecha"]);
             $foto = htmlspecialchars($_POST["foto"]);
 
-            $stmt = $dbh->prepare("INSERT INTO coches (matricula, marca, modelo, cilindrada, fecha, foto) VALUES (?,?,?,?,?,?)");
-            $stmt->execute([$matricula, $marca, $modelo, $cilindrada, $fecha, $foto]);
+            $stmt = $dbh->prepare("UPDATE coches SET marca = ?, modelo = ?, cilindrada = ?, fecha = ?, foto = ? WHERE matricula = ?");
+            $stmt->execute([$marca, $modelo, $cilindrada, $fecha, $foto, $matricula]);
 
             if ($stmt->rowCount()==0) {
-                echo '{"estado":"error","mensaje":"matricula existente"}';
+                echo '{"estado":"error","mensaje":"matricula no existente"}';
             } else {
                 echo '{"estado":"ok"}';
             }
         } else {
             echo '{"estado":"error","mensaje":"faltan datos"}';
         }
+    } else {
+        echo '{"estado":"error","mensaje":"matricula existente"}';
     }
 } else {
     echo '{"estado":"error","mensaje":"falta matricula"}';

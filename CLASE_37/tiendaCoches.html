@@ -7,24 +7,113 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-        $(document).ready(pedirCoches);
+        $(document).ready(()=>{
+            pedirCoches();
+            $("button").click(anadirCoches);
+        });
 
+        function anadirCoches() {
+            $.post("addCoche.php",{
+                "matricula": $("#matricula").val(),
+                "marca": $("#marca").val(),
+                "modelo": $("#modelo").val(),
+                "cilindrada": $("#cilindrada").val(),
+                "fecha": $("#fecha").val(),
+                "foto": $("#foto").val(),
+            },procesarRespuesta,"json")
+        }
+
+        function procesarRespuesta(respuesta) {
+            if (respuesta.estado == "ok") {
+                alert("Coche dado de alta");
+                pedirCoches();
+            } else {
+                alert(respuesta.mensaje);
+            }
+        }
+
+        function procesarRespuesta2(respuesta) {
+            if (respuesta.estado == "ok") {
+                alert("Operacion realizada con exito");
+                pedirCoches();
+            } else {
+                alert(respuesta.mensaje);
+            }
+        }
+
+        let listaCoches = [];
         function pedirCoches() {
-            $.getJSON("consultaCoches.php",{},pintarCoches);
+            $.getJSON("consultaCoches.php",{},(lista)=>{
+                listaCoches = lista;
+                pintarCoches(lista);
+            });
         }
 
         function pintarCoches(lista) {
             let tbody = document.querySelector("table tbody");
 
+            tbody.innerHTML = "";
+
             lista.forEach(element => {
-                tbody.innerHTML = `
+                let contenido = `<tr>
                     <td>${element.marca}</td>
                     <td>${element.modelo}</td>
                     <td>${element.cilindrada}</td>
                     <td>${element.fecha}</td>
-                    <td>${element.foto}</td>
+                    <td><img src="img/${element.foto}" alt="${element.foto}" width="100" height="100"></td>
+                    <td><button onclick="borrarCoche('${element.matricula}')">BORRAR</button></td>
+                    <td><button onclick="modificarCoche('${element.matricula}')">EDITAR</button></td>
+                    <tr>
                 `;
+
+                tbody.innerHTML += contenido;
             });
+        }
+
+        function borrarCoche(matricula) {
+            $.post("delCoche.php",{
+                "matricula": matricula,
+            },procesarRespuesta2,"json")
+        }
+
+        function modificarCoche(matricula) {
+            let posicion = listaCoches.findIndex((coche) => coche.matricula == matricula);
+            if (posicion != -1) {
+                document.getElementById("matricula").value = listaCoches[posicion].matricula;
+                document.getElementById("marca").value = listaCoches[posicion].marca;
+                document.getElementById("modelo").value = listaCoches[posicion].modelo;
+                document.getElementById("cilindrada").value = listaCoches[posicion].cilindrada;
+                document.getElementById("fecha").value = listaCoches[posicion].fecha;
+                document.getElementById("foto").value = listaCoches[posicion].foto;
+            }
+
+            let btn;
+
+            if (document.getElementById("modificar")) {
+                document.getElementById("modificar").remove();
+                btn = document.createElement("button");
+                btn.id = "modificar";
+                btn.type = "button";
+                btn.textContent = "EDITAR FOTO";
+                document.getElementById("nuevoCoche").appendChild(btn);
+            } else {
+                btn = document.createElement("button");
+                btn.id = "modificar";
+                btn.type = "button";
+                btn.textContent = "EDITAR FOTO";
+                document.getElementById("nuevoCoche").appendChild(btn);
+            }
+            
+            btn.addEventListener("click", function() {
+                $.post("modCoche.php",{
+                    "matricula": $("#matricula").val(),
+                    "marca": $("#marca").val(),
+                    "modelo": $("#modelo").val(),
+                    "cilindrada": $("#cilindrada").val(),
+                    "fecha": $("#fecha").val(),
+                    "foto": $("#foto").val(),
+                },procesarRespuesta2,"json")
+            });            
         }
     </script>
     <style>
