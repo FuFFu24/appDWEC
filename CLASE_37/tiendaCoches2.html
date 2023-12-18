@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(()=>{
+            pedirCoches();
+            $("button").click(anadirCoches);
+        });
+
+        async function anadirCoches() {
+            try {
+                let datos = {
+                    "matricula": $("#matricula").val(),
+                    "marca": $("#marca").val(),
+                    "modelo": $("#modelo").val(),
+                    "cilindrada": $("#cilindrada").val(),
+                    "fecha": $("#fecha").val(),
+                    "foto": $("#foto").val(),
+                }
+
+                let respuesta = await fetch("addCoche.php", {
+                    method: "POST",
+                    body: JSON.stringify(datos),
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                });
+
+                respuesta = await respuesta.json();
+
+                if (respuesta.estado == "ok") {
+                    alert("Coche dado de alta");
+                    pedirCoches();
+                } else {
+                    alert(respuesta.mensaje);
+                }
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        function procesarRespuesta(respuesta) {
+            if (respuesta.estado == "ok") {
+                alert("Coche dado de alta");
+                pedirCoches();
+            } else {
+                alert(respuesta.mensaje);
+            }
+        }
+
+        function procesarRespuesta2(respuesta) {
+            if (respuesta.estado == "ok") {
+                alert("Operacion realizada con exito");
+                pedirCoches();
+            } else {
+                alert(respuesta.mensaje);
+            }
+        }
+
+        let listaCoches = [];
+
+        async function pedirCoches() {
+            try {
+                let respuesta = await fetch("consultaCoches.php");
+                listaCoches = await respuesta.json();
+                pintarCoches(listaCoches);
+            } catch (error) {
+                console.log(error)
+            }
+
+            $.getJSON("consultaCoches.php",{},(lista)=>{
+                listaCoches = lista;
+                pintarCoches(lista);
+            });
+        }
+
+        function pintarCoches(lista) {
+            let tbody = document.querySelector("table tbody");
+
+            tbody.innerHTML = "";
+
+            lista.forEach(element => {
+                let contenido = `<tr>
+                    <td>${element.marca}</td>
+                    <td>${element.modelo}</td>
+                    <td>${element.cilindrada}</td>
+                    <td>${element.fecha}</td>
+                    <td><img src="img/${element.foto}" alt="${element.foto}" width="100" height="100"></td>
+                    <td><button onclick="borrarCoche('${element.matricula}')">BORRAR</button></td>
+                    <td><button onclick="modificarCoche('${element.matricula}')">EDITAR</button></td>
+                    <tr>
+                `;
+
+                tbody.innerHTML += contenido;
+            });
+        }
+
+        async function borrarCoche(matricula) {
+            try {
+                let respuesta = await fetch("delCoche.php", {
+                    method: "POST",
+                    body: JSON.stringify({"matricula":matricula}),
+                    headers:{
+                        'Content-type':'application/json'
+                    }
+                });
+
+                respuesta = await respuesta.json();
+
+                if (respuesta.estado == "ok") {
+                    alert("Coche dado de alta");
+                    pedirCoches();
+                } else {
+                    alert(respuesta.mensaje);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        function modificarCoche(matricula) {
+            let posicion = listaCoches.findIndex((coche) => coche.matricula == matricula);
+            if (posicion != -1) {
+                document.getElementById("matricula").value = listaCoches[posicion].matricula;
+                document.getElementById("marca").value = listaCoches[posicion].marca;
+                document.getElementById("modelo").value = listaCoches[posicion].modelo;
+                document.getElementById("cilindrada").value = listaCoches[posicion].cilindrada;
+                document.getElementById("fecha").value = listaCoches[posicion].fecha;
+                document.getElementById("foto").value = listaCoches[posicion].foto;
+            }
+
+            let btn;
+
+            if (document.getElementById("modificar")) {
+                document.getElementById("modificar").remove();
+                btn = document.createElement("button");
+                btn.id = "modificar";
+                btn.type = "button";
+                btn.textContent = "EDITAR FOTO";
+                document.getElementById("nuevoCoche").appendChild(btn);
+            } else {
+                btn = document.createElement("button");
+                btn.id = "modificar";
+                btn.type = "button";
+                btn.textContent = "EDITAR FOTO";
+                document.getElementById("nuevoCoche").appendChild(btn);
+            }
+            
+            btn.addEventListener("click", function() {
+                $.post("modCoche.php",{
+                    "matricula": $("#matricula").val(),
+                    "marca": $("#marca").val(),
+                    "modelo": $("#modelo").val(),
+                    "cilindrada": $("#cilindrada").val(),
+                    "fecha": $("#fecha").val(),
+                    "foto": $("#foto").val(),
+                },procesarRespuesta2,"json")
+            });            
+        }
+    </script>
+    <style>
+        #nuevoCoche {
+            border: 1px solid red;
+            background-color: aliceblue;
+            padding: 10px;
+        }
+    </style>
+</head>
+    <body>
+    <div id="nuevoCoche">
+        <p>Matricula <input type="text" name="matricula" id="matricula"></p>
+        <p>Marca <input type="text" name="marca" id="marca"></p>
+        <p>Modelo <input type="text" name="modelo" id="modelo"></p>
+        <p>Cilindrada <input type="text" name="cilindrada" id="cilindrada"></p>
+        <p>Fecha <input type="text" name="fecha" id="fecha"></p>
+        <p>Foto <input type="text" name="foto" id="foto"></p>
+        <button type="button">AÑADIR FOTO</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Cilindrada</th>
+                <th>Fecha</th>
+                <th>Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>

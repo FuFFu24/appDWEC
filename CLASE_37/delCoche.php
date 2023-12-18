@@ -1,5 +1,6 @@
 <?php
 require("acceso_mysql2.php");
+$_POST = json_decode(file_get_contents('php://input'),true);
 
 if (isset($_POST["matricula"])) {
     $matricula = $_POST["matricula"];

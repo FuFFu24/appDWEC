@@ -6,6 +6,12 @@ services:
       - 8080:80
     volumes:
        - $HOME/appDWEC:/var/www/html 
+    environment:
+      - BBDD_USER=usuario
+      - BBDD_PASSWORD=1234567
+      - BBDD_HOST=mysql
+      - BBDD_DATABASE=2daw
+      - BBDD_HOST_PORT=3306
   mysql:
     image: mysql:5.7.28
     ports:
@@ -17,6 +23,7 @@ services:
       - MYSQL_PASSWORD=password
     volumes:
       - $HOME/mysql-data:/var/lib/mysql
+      #command: --init-file Productos.sql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
