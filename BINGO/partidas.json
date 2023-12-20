@@ -1,0 +1,23 @@
+[
+    {
+        "IdPartida":1,
+        "Fecha":"2023-12-28",
+        "Hora":"15:00",
+        "NumCartones":"10",
+        "Premio":"9"
+    },
+    {
+        "IdPartida":2,
+        "Fecha":"2023-12-28",
+        "Hora":"16:00",
+        "NumCartones":"1",
+        "Premio":"0"
+    },
+    {
+        "IdPartida":3,
+        "Fecha":"2023-12-28",
+        "Hora":"17:00",
+        "NumCartones":"100",
+        "Premio":"90"
+    }
+]
