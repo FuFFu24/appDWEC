@@ -1,12 +1,13 @@
 onload = function () {
   anadirPersonasDesplegable();
   cargarTabla();
-  setInterval(mostrarDivOculto5Seg, 5000);
+  intervalo = setInterval(mostrarDivOculto5Seg, 100);
 
   let segundoDesplegable = document.querySelectorAll("#divPersonas select")[1];
   segundoDesplegable.addEventListener("change", pistaParaJugador);
 };
 
+let intervalo;
 function anadirPersonasDesplegable() {
   let segundoDesplegable = document.querySelectorAll("#divPersonas select")[1];
 
@@ -137,11 +138,11 @@ let contadorTablero = 0;
 
 function mostrarDivOculto5Seg() {
   let tds = document.querySelectorAll("#divTablero td");
-  tds[contadorTablero].childNodes[1].style.display = "block";
-  if (contadorTablero > tds.length) {
-    clearInterval(mostrarDivOculto5Seg, 5000);
-  } else {
+  if (contadorTablero < tds.length) {
+    tds[contadorTablero].childNodes[1].style.display = "block";
     contadorTablero++;
+  } else {
+    clearInterval(intervalo);
   }
 }
 

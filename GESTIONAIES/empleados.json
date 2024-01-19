@@ -1,26 +1,26 @@
 [
-{
-	"DNI":"12345678A", 
-    "nombre": "Fernando", 
-    "apellidos":"Garcia Jimenez", 
-    "edad":50, 
-    "antiguedad":2010, 
-    "puesto":Jefe"
-},
-{
-	"DNI":"44445678A", 
-    "nombre": "Fermin", 
-    "apellidos":"Gomez Jimenez", 
-    "edad":45, 
-    "antiguedad":2010, 
-    "puesto":Analista"
-},
-{
-	"DNI":"33345678A", 
-    "nombre": "Federico", 
-    "apellidos":"Roller Jimenez", 
-    "edad":40, 
-    "antiguedad":2020, 
-    "puesto":Contable"
-}
+  {
+    "DNI": "12345678A",
+    "nombre": "Fernando",
+    "apellidos": "Garcia Jimenez",
+    "edad": 50,
+    "antiguedad": 2010,
+    "puesto": "Jefe"
+  },
+  {
+    "DNI": "44445678A",
+    "nombre": "Fermin",
+    "apellidos": "Gomez Jimenez",
+    "edad": 45,
+    "antiguedad": 2010,
+    "puesto": "Analista"
+  },
+  {
+    "DNI": "33345678A",
+    "nombre": "Federico",
+    "apellidos": "Roller Jimenez",
+    "edad": 40,
+    "antiguedad": 2020,
+    "puesto": "Contable"
+  }
 ]
