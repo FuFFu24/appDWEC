@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <script>
+        $(document).ready(()=>{
+            let listaValores=[];
+            if (localStorage.getItem("clicks")){
+                listaValores = JSON.parse(localStorage.getItem("clicks"))
+            }
+            listaValores.foreach(element => {
+                
+            });
+            $(listavalores).each((posicion,elemento,)=>{
+                fila=$("<tr></tr>").appendTo("tbody");
+
+            })
+            
+            $("#clicks tr:odd img").css({"position":absolute})
+                                    .animate({"width":"150","left":"100"},5000)
+       
+            $("#principal button:hidden").show().css()
+            $("#principal button:eq(0)").click(f1)
+            $("#principal button:eq(1)").click(f2)
+        })
+
+        function validar(){
+            let error=false;
+            let caja1=
+
+            if (){
+                error=true
+            } else {
+
+            }
+
+            if (error){
+
+            } else {
+
+            }
+
+
+        }
+
+        function mostrarMensaje(evento){
+            
+        }
+        function rellenarTabla(){
+            let tbody=$("table tbody");
+            for(let i=0;i<10;i++){
+                let fila=$("<tr></tr>").appendTo(tbody);
+                for(let j=0;j<10;j++){
+                    let x=$("<td><button>PULSAME</button></td>")
+                             .on("click",muestraMensaje)
+                             .appendTo(fila);
+
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<button id="boton1">Pulsame</button> 
+<button id="boton2">Pulsame</button>    
+<table>
+    <thead>
+    </thead>
+    <tbody>        
+    </tbody>
+</table>
+</body>
+</html>
